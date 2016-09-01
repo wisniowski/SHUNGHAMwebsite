@@ -9,3 +9,5 @@ ShunghamWebsite/Build/
 ShunghamWebsite/obj/
 ShunghamWebsite/SitefinityWebApp.csproj.user
 ShunghamWebsite/UpgradeLog.htm
+ShunghamWebsite/packages/
+ShunghamWebsite/ResourcePackages/
