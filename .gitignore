@@ -1,0 +1,11 @@
+ShunghamWebsite/.vs/config/applicationhost.config
+ShunghamWebsite/.vs/SitefinityWebApp/v14/.suo
+ShunghamWebsite/App_Data/Sitefinity.mdf
+ShunghamWebsite/App_Data/Sitefinity/Logs/
+ShunghamWebsite/App_Data/Sitefinity_log.ldf
+ShunghamWebsite/Backup/
+ShunghamWebsite/bin/
+ShunghamWebsite/Build/
+ShunghamWebsite/obj/
+ShunghamWebsite/SitefinityWebApp.csproj.user
+ShunghamWebsite/UpgradeLog.htm
