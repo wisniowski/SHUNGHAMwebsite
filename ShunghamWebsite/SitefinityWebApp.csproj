@@ -835,6 +835,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureWebRole.cs" />
+    <Compile Include="Installer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShunghamResources.cs" />
   </ItemGroup>
