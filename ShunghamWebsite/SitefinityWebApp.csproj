@@ -834,7 +834,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="AzureWebRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -988,9 +987,6 @@
     <Content Include="App_Data\Sitefinity\Configuration\VirtualPathSettingsConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\WorkflowConfig.config" />
     <Content Include="packages.config" />
-    <Content Include="SampleTemplate.cshtml">
-      <Generator>RazorGenerator</Generator>
-    </Content>
     <Content Include="OpenAccessNuGet.targets" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
