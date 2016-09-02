@@ -836,6 +836,7 @@
   <ItemGroup>
     <Compile Include="AzureWebRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShunghamResources.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\Telerik.Sitefinity.Analytics.xap" />
