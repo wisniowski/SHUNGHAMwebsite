@@ -837,11 +837,24 @@
     <Compile Include="AzureWebRole.cs" />
     <Compile Include="Installer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\Shungham.Master.cs">
+      <DependentUpon>Shungham.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\Shungham.Master.designer.cs">
+      <DependentUpon>Shungham.Master</DependentUpon>
+    </Compile>
     <Compile Include="ShunghamResources.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\Global\print.css" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\Global\screen.css" />
     <Content Include="ClientBin\Telerik.Sitefinity.Analytics.xap" />
     <Content Include="ClientBin\Telerik.Sitefinity.Silverlight.xap" />
+    <Content Include="CustomResources\js\head.js" />
+    <Content Include="CustomResources\js\jquery.js" />
+    <Content Include="CustomResources\js\mobile.js" />
+    <Content Include="CustomResources\js\scripts.js" />
     <Content Include="Default.aspx" />
     <Content Include="Silverlight.js" />
     <Content Include="Sitefinity\Default.aspx" />
@@ -990,6 +1003,17 @@
     <Content Include="App_Data\Sitefinity\Configuration\WorkflowConfig.config" />
     <Content Include="packages.config" />
     <Content Include="OpenAccessNuGet.targets" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\Shungham.Master" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gb.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gbl.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gl.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gm.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gnb.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gnbi.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gnbk.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gnm.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gnmi.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.ttf" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="OpenAccessNuget.targets" />
