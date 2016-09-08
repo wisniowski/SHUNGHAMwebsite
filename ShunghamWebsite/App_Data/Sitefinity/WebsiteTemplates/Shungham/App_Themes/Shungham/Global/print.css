@@ -167,7 +167,7 @@ table {
 
 
 /*! Hiding --------- */
-#skip, nav, form, [class*="link"], [class*="social"], [class*="icon"] {
+#skip, nav, [class*="link"], [class*="social"], [class*="icon"] {
     left: -3000em;
     top: -3000em;
 }
