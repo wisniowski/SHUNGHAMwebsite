@@ -10,33 +10,22 @@
         <ul>
             <asp:PlaceHolder ID="NavItemsContainer" runat="server" />
             <li class="strong">
-                <asp:HyperLink ID="LogInLink" runat="server">
+                <asp:HyperLink ID="LogInLink" runat="server" Target="_blank">
                     <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, LogInLinkText%>' />
                 </asp:HyperLink>
             </li>
             <li class="btn invisible">
-                <asp:HyperLink ID="GetTrialLink" runat="server">
+                <asp:HyperLink ID="GetTrialLink" runat="server" Target="_blank">
                     <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, GetTrialButton%>' />
                 </asp:HyperLink>
             </li>
         </ul>
     </LayoutTemplate>
     <ItemTemplate>
-        <li>
-            <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>'>
+        <li id="itemTemplateLi" runat="server">
+            <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>' Target="_blank">
                 <asp:Literal runat="server" ID="titleLtl" Text='<%# Eval("Title") %>' />
             </asp:HyperLink>
-            <ul>
-                <asp:Repeater ID="submenuItemsRepeater" runat="server">
-                    <ItemTemplate>
-                        <li>
-                            <asp:HyperLink ID="careersLink" runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>'>
-                                <asp:Literal runat="server" ID="titleLtl" Text='<%# Eval("Title") %>' />
-                            </asp:HyperLink>
-                        </li>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </ul>
         </li>
     </ItemTemplate>
 </telerik:RadListView>
