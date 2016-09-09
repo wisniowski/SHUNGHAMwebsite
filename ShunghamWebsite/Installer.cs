@@ -27,6 +27,9 @@ namespace SitefinityWebApp
 
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName);
             RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName);
+
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/HeaderWidget/HeaderWidget.ascx", "Header Widget");
         }
 
         private static void RegisterSectionInBackend(string toolboxName, string sectionName)
