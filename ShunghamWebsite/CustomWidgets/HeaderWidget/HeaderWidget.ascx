@@ -10,10 +10,14 @@
         <ul>
             <asp:PlaceHolder ID="NavItemsContainer" runat="server" />
             <li class="strong">
-                <asp:HyperLink ID="LogInLink" runat="server">Log In</asp:HyperLink>
+                <asp:HyperLink ID="LogInLink" runat="server">
+                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, LogInLinkText%>' />
+                </asp:HyperLink>
             </li>
             <li class="btn invisible">
-                <asp:HyperLink ID="GetTrialLink" runat="server">Free Trial</asp:HyperLink>
+                <asp:HyperLink ID="GetTrialLink" runat="server">
+                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, GetTrialButton%>' />
+                </asp:HyperLink>
             </li>
         </ul>
     </LayoutTemplate>

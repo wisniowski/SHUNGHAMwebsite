@@ -49,5 +49,37 @@ namespace SitefinityWebApp
                 return this["ShunghamResourcesDescription"];
             }
         }
+
+        #region Header widget                
+        /// <summary>
+        /// Text on Get Free Trial Button.
+        /// </summary>
+        [ResourceEntry("GetTrialButton",
+                       Value = "Free Trial",
+                       Description = "The text on Get Trial Button.",
+                       LastModified = "2016/09/09")]
+        public string GetTrialButton
+        {
+            get
+            {
+                return this["GetTrialButton"];
+            }
+        }
+
+        /// <summary>
+        /// Text of "Log In" link.
+        /// </summary>
+        [ResourceEntry("LogInLinkText",
+                       Value = "Log In",
+                       Description = "The text on Log In link.",
+                       LastModified = "2016/09/09")]
+        public string LogInLinkText
+        {
+            get
+            {
+                return this["LogInLinkText"];
+            }
+        }
+        #endregion
     }
 }
