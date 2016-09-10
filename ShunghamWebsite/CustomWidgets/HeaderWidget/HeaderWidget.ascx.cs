@@ -39,7 +39,14 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
 
                 if (childNodes.Count > 0 && listItem != null)
                 {
-                    PopulateChildItems(listItem, childNodes);
+                    bool isUpperCase = false;
+
+                    if (pageNode.Title.ToLower().Contains("products"))
+                    {
+                        isUpperCase = true;
+                    }
+
+                    PopulateChildItems(listItem, childNodes, isUpperCase);
                 }
             }
         }
@@ -49,10 +56,16 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 var childPageNode = e.Item.DataItem as PageNode;
+                bool isUpperCase = false;
                 var li = new HtmlGenericControl("li");
 
                 string pageNodeText = childPageNode.Title;
-                if (pageNodeText.StartsWith("EU"))
+
+                if (pageNodeText.ToLower().Contains("products"))
+                {
+                    isUpperCase = true;
+                }
+                else if (pageNodeText.StartsWith("EU"))
                 {
                     HtmlGenericControl spanIn = new HtmlGenericControl("span");
                     string firstPart = pageNodeText.Substring(0, 2);
@@ -82,14 +95,20 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
 
                 if (childPageNode.Nodes.Count > 0)
                 {
-                    PopulateChildItems(li, childPageNode.Nodes);
+                    PopulateChildItems(li, childPageNode.Nodes, isUpperCase);
                 }
             }
         }
 
-        private void PopulateChildItems(Control item, IList<PageNode> childNodes)
+        private void PopulateChildItems(Control item, IList<PageNode> childNodes, bool isUpperCase)
         {
             var ul = new HtmlGenericControl("ul");
+
+            if (isUpperCase)
+            {
+                ul.Attributes.Add("class", "text-uppercase");
+            }
+
             Repeater repeater = new Repeater();
             repeater.ItemDataBound += Repeater_ItemDataBound;
             repeater.DataSource = childNodes;
