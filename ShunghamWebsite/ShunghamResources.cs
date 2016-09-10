@@ -81,5 +81,54 @@ namespace SitefinityWebApp
             }
         }
         #endregion
+
+        #region Footer widget
+
+        /// <summary>
+        /// Gets the LinkedIn Hyperlink text.
+        /// </summary>
+        [ResourceEntry("LinkedInText",
+                       Value = "LinkedIn",
+                       Description = "The text on LinkedIn Hyperlink.",
+                       LastModified = "2016/09/10")]
+        public string LinkedInText
+        {
+            get
+            {
+                return this["LinkedInText"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the Тwitter Hyperlink text.
+        /// </summary>
+        [ResourceEntry("TwitterText",
+                       Value = "Twitter",
+                       Description = "The text on Twitter Hyperlink.",
+                       LastModified = "2016/09/10")]
+        public string TwitterText
+        {
+            get
+            {
+                return this["TwitterText"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the Facebook Hyperlink text.
+        /// </summary>
+        [ResourceEntry("FacebookText",
+                       Value = "Facebook",
+                       Description = "The text on Facebook Hyperlink.",
+                       LastModified = "2016/09/10")]
+        public string FacebookText
+        {
+            get
+            {
+                return this["FacebookText"];
+            }
+        }
+
+        #endregion
     }
 }

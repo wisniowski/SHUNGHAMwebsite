@@ -835,6 +835,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureWebRole.cs" />
+    <Compile Include="CustomWidgets\FooterWidget\FooterWidget.ascx.cs">
+      <DependentUpon>FooterWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\FooterWidget\FooterWidget.ascx.designer.cs">
+      <DependentUpon>FooterWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\HeaderWidget\HeaderWidget.ascx.cs">
       <DependentUpon>HeaderWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -855,6 +862,7 @@
     <Content Include="CustomResources\js\jquery.js" />
     <Content Include="CustomResources\js\mobile.js" />
     <Content Include="CustomResources\js\scripts.js" />
+    <Content Include="CustomWidgets\FooterWidget\FooterWidget.ascx" />
     <Content Include="CustomWidgets\HeaderWidget\HeaderWidget.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
