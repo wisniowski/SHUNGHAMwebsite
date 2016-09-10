@@ -13,6 +13,11 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
 {
     public partial class HeaderWidget : System.Web.UI.UserControl
     {
+        public Guid LogInButtonLandingPage { get; set; }
+        public string LogInButtonExternalLink { get; set; }
+        public Guid TrialButtonLandingPage { get; set; }
+        public string TrialButtonExternalLink { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             this.PopulateNavigation();
@@ -26,6 +31,19 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
                 this.menuItemsList.ItemDataBound += MenuItemsList_ItemDataBound;
                 this.menuItemsList.DataSource = topLevelPages;
                 this.menuItemsList.DataBind();
+            }
+        }
+
+        private void SetButtonUrl(HyperLink hyperLink, Guid buttonLandingPage, string buttonExternalLink)
+        {
+            if (buttonLandingPage != null && buttonLandingPage != Guid.Empty)
+            {
+                var pageNodeUrl = PagesUtilities.GetPageUrlById(buttonLandingPage);
+                hyperLink.NavigateUrl = pageNodeUrl;
+            }
+            else if (!string.IsNullOrEmpty(buttonExternalLink))
+            {
+                hyperLink.NavigateUrl = buttonExternalLink;
             }
         }
 
@@ -48,6 +66,20 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
 
                     PopulateChildItems(listItem, childNodes, isUpperCase);
                 }
+            }
+
+            HyperLink logInLink = this.menuItemsList.FindControl("LogInLink") as HyperLink;
+
+            if (logInLink != null)
+            {
+                this.SetButtonUrl(logInLink, this.LogInButtonLandingPage, this.LogInButtonExternalLink);
+            }
+
+            HyperLink trialLink = this.menuItemsList.FindControl("GetTrialLink") as HyperLink;
+
+            if (trialLink != null)
+            {
+                this.SetButtonUrl(trialLink, this.TrialButtonLandingPage, this.TrialButtonExternalLink);
             }
         }
 

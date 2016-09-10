@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Telerik.Sitefinity.Data;
 using Telerik.Sitefinity.Modules.Pages;
 using Telerik.Sitefinity.Pages.Model;
@@ -25,6 +26,15 @@ namespace ShunghamUtilities
 
                 return pagesPublished;
             }
+        }
+
+        public static string GetPageUrlById(Guid pageNodeId)
+        {
+            PageManager pageManager = PageManager.GetManager();
+
+            string url = pageManager.GetPageNode(pageNodeId).GetUrl();
+
+            return url;
         }
 
         #region Private fields and constants

@@ -1005,7 +1005,9 @@
     <Content Include="App_Data\Sitefinity\Configuration\VersionConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\VirtualPathSettingsConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\WorkflowConfig.config" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="OpenAccessNuGet.targets" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\Shungham.Master" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gb.woff2" />
@@ -1018,12 +1020,16 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gnm.woff2" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gnmi.woff2" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.ttf" />
+    <Content Include="App_Data\Sitefinity\Configuration\AppearanceConfig.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShunghamUtilities\ShunghamUtilities.csproj">
       <Project>{a3288668-c100-43c4-a099-3e5204c6208c}</Project>
       <Name>ShunghamUtilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomWidgets\HeaderWidget\Designer\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="OpenAccessNuget.targets" />
