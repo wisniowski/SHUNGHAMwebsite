@@ -859,7 +859,6 @@
     <Content Include="ClientBin\Telerik.Sitefinity.Analytics.xap" />
     <Content Include="ClientBin\Telerik.Sitefinity.Silverlight.xap" />
     <Content Include="CustomResources\js\head.js" />
-    <Content Include="CustomResources\js\jquery.js" />
     <Content Include="CustomResources\js\mobile.js" />
     <Content Include="CustomResources\js\scripts.js" />
     <Content Include="CustomWidgets\FooterWidget\FooterWidget.ascx" />
