@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Telerik.Sitefinity.Data;
 using Telerik.Sitefinity.Modules.Pages;
@@ -21,6 +22,25 @@ namespace ShunghamUtilities
                 .Where(pt => pt.Parent.Title == frontendPagesParentName && pt.ShowInNavigation == shownInNavigation);
 
             return pagesPublished;
+        }
+
+        /// <summary>
+        /// Gets the page nodes by ids.
+        /// </summary>
+        /// <param name="pageNodeIds">The page node ids.</param>
+        /// <returns></returns>
+        public static IList<PageNode> GetPageNodesByIds(Guid[] pageNodeIds)
+        {
+            PageManager pageManager = PageManager.GetManager();
+            IList<PageNode> pageNodes = new List<PageNode>();
+
+            foreach (var pageNodeId in pageNodeIds)
+            {
+                PageNode node = pageManager.GetPageNode(pageNodeId);
+                pageNodes.Add(node);
+            }
+
+            return pageNodes;
         }
 
         /// <summary>

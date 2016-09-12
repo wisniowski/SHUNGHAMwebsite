@@ -33,7 +33,7 @@
             </div>
         </ItemTemplate>
     </telerik:RadListView>
-    <telerik:RadListView ID="siteMapList" ItemPlaceholderID="siteMapContainer" runat="server"
+    <telerik:RadListView ID="whoWeArePagesList" ItemPlaceholderID="siteMapContainer" runat="server"
         EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
         <LayoutTemplate>
             <div>
@@ -45,15 +45,11 @@
 
         </LayoutTemplate>
         <ItemTemplate>
-            <asp:Repeater ID="linksRepeater" runat="server">
-                <ItemTemplate>
-                    <li>
-                        <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>' Target="_blank">
-                            <asp:Literal runat="server" ID="titleLtl" Text='<%# Eval("Title") %>' />
-                        </asp:HyperLink>
-                    </li>
-                </ItemTemplate>
-            </asp:Repeater>
+            <li>
+                <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>' Target="_blank">
+                    <asp:Literal runat="server" ID="titleLtl" Text='<%# Eval("Title") %>' />
+                </asp:HyperLink>
+            </li>
         </ItemTemplate>
     </telerik:RadListView>
     <ul class="social-a">

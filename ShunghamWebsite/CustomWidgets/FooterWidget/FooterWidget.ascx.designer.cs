@@ -22,13 +22,13 @@ namespace SitefinityWebApp.CustomWidgets.FooterWidget {
         protected global::Telerik.Web.UI.RadListView productsList;
         
         /// <summary>
-        /// siteMapList control.
+        /// whoWeArePagesList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadListView siteMapList;
+        protected global::Telerik.Web.UI.RadListView whoWeArePagesList;
         
         /// <summary>
         /// LinkedInLink control.
