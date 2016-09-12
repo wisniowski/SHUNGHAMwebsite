@@ -11,6 +11,7 @@ using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.HeaderWidget
 {
+    [Telerik.Sitefinity.Web.UI.ControlDesign.ControlDesigner(typeof(Designer.HeaderWidgetDesigner))]
     public partial class HeaderWidget : System.Web.UI.UserControl
     {
         public Guid LogInButtonLandingPage { get; set; }

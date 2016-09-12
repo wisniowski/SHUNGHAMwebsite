@@ -842,6 +842,7 @@
     <Compile Include="CustomWidgets\FooterWidget\FooterWidget.ascx.designer.cs">
       <DependentUpon>FooterWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\HeaderWidget\Designer\HeaderWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\HeaderWidget\HeaderWidget.ascx.cs">
       <DependentUpon>HeaderWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -862,6 +863,8 @@
     <Content Include="CustomResources\js\mobile.js" />
     <Content Include="CustomResources\js\scripts.js" />
     <Content Include="CustomWidgets\FooterWidget\FooterWidget.ascx" />
+    <Content Include="CustomWidgets\HeaderWidget\Designer\HeaderWidgetDesigner.ascx" />
+    <Content Include="CustomWidgets\HeaderWidget\Designer\HeaderWidgetDesigner.js" />
     <Content Include="CustomWidgets\HeaderWidget\HeaderWidget.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -1036,9 +1039,7 @@
       <Name>ShunghamUtilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomWidgets\HeaderWidget\Designer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="OpenAccessNuget.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

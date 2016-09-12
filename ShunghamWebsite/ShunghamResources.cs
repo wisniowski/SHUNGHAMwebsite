@@ -80,6 +80,36 @@ namespace SitefinityWebApp
                 return this["LogInLinkText"];
             }
         }
+
+        /// <summary>
+        /// Gets the label for "Log in" landing page selector in designer.
+        /// </summary>
+        [ResourceEntry("LogInButtonLandingPageLabelInDesigner",
+                       Value = "'Log In' Button Landing Page",
+                       Description = "The label for 'Log In' Button Landing Page selector in designer.",
+                       LastModified = "2016/09/12")]
+        public string LogInButtonLandingPageLabelInDesigner
+        {
+            get
+            {
+                return this["LogInButtonLandingPageLabelInDesigner"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the label for "Trial" button landing page selector in designer.
+        /// </summary>
+        [ResourceEntry("TrialButtonLandingPageLabelInDesigner",
+                       Value = "'Free Trial' Button Landing Page",
+                       Description = "The label for 'Trial' Button Landing Page selector in designer.",
+                       LastModified = "2016/09/12")]
+        public string TrialButtonLandingPageLabelInDesigner
+        {
+            get
+            {
+                return this["TrialButtonLandingPageLabelInDesigner"];
+            }
+        }
         #endregion
 
         #region Footer widget
