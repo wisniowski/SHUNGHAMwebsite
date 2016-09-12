@@ -3,6 +3,7 @@ using System;
 using System.Web.UI.WebControls;
 using Telerik.Sitefinity.Pages.Model;
 using Telerik.Sitefinity.Modules.Pages;
+using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.FooterWidget
 {
@@ -18,12 +19,27 @@ namespace SitefinityWebApp.CustomWidgets.FooterWidget
             var childNodes = productsPage.Nodes;
             if (productsPage != null && childNodes.Count > 0)
             {
-                //this.productsList.ItemDataBound += MenuItemsList_ItemDataBound;
+                this.productsList.ItemDataBound += ProductsList_ItemDataBound; ;
                 this.productsList.DataSource = childNodes;
                 this.productsList.DataBind();
             }
 
             SetSocialShareButtonsDestination();
+        }
+
+        private void ProductsList_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
+        {
+            if (e.Item is RadListViewDataItem)
+            {
+                Repeater repeater = e.Item.FindControl("linksRepeater") as Repeater;
+
+                if (repeater != null)
+                {
+                    var pageNode = ((RadListViewDataItem)e.Item).DataItem as PageNode;
+                    repeater.DataSource = pageNode.Nodes;
+                    repeater.DataBind();
+                }
+            }
         }
 
         private void SetSocialShareButtonsDestination()

@@ -19,7 +19,7 @@
                 <h4>
                     <asp:Literal runat="server" ID="titleLtl" Text='<%# Eval("Title") %>' /></h4>
                 <ul>
-                    <asp:Repeater ID="companyLinkRepeater" runat="server">
+                    <asp:Repeater ID="linksRepeater" runat="server">
                         <ItemTemplate>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>' Target="_blank">
