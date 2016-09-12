@@ -8,7 +8,9 @@
         EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
         <LayoutTemplate>
             <div>
-                <h3>Our products</h3>
+                <h3>
+                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, ProductsTitleInFooter%>' />
+                </h3>
                 <div class="double">
                     <asp:PlaceHolder ID="productsContainer" runat="server" />
                 </div>
@@ -37,7 +39,9 @@
         EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
         <LayoutTemplate>
             <div>
-                <h3>Who we are</h3>
+                <h3>
+                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, WhoWeAreTitleInFooter%>' />
+                </h3>
                 <ul>
                     <asp:PlaceHolder ID="siteMapContainer" runat="server" />
                 </ul>
@@ -57,7 +61,7 @@
             <asp:HyperLink ID="LinkedInLink" runat="server" Target="_blank">
                 <i class="icon-linkedin"></i>
                 <span>
-                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, LinkedInText%>' />
+                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, LinkedInTextInFooter%>' />
                 </span>
             </asp:HyperLink>
         </li>
@@ -65,7 +69,7 @@
             <asp:HyperLink ID="TwitterLink" runat="server" Target="_blank">
                 <i class="icon-twitter"></i>
                 <span>
-                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, TwitterText%>' />
+                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, TwitterTextInFooter %>' />
                 </span>
             </asp:HyperLink>
         </li>
@@ -73,10 +77,16 @@
             <asp:HyperLink ID="FacebookLink" runat="server" Target="_blank">
                 <i class="icon-facebook"></i>
                 <span>
-                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, FacebookText%>' />
+                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, FacebookTextInFooter%>' />
                 </span>
             </asp:HyperLink>
         </li>
     </ul>
 </nav>
-<p>&copy; <span class="date">2016</span> Shungham. All Rights Reserved.</p>
+<p>&copy; 
+    <span class="date">
+        <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, Year %>' />
+    </span>
+    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, ShunghamCompanyName %>' />.
+    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, AllRightsReservedSign %>' />.
+</p>

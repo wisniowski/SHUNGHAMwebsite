@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Telerik.Sitefinity.Pages.Model;
-using Telerik.Sitefinity.Modules.Pages;
 using Telerik.Web.UI;
 using System.Collections.Generic;
 
@@ -51,15 +50,7 @@ namespace SitefinityWebApp.CustomWidgets.FooterWidget
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            PageNode productsPage = PagesUtilities.GetPageNodeByTitle("products");
-            var childNodes = productsPage.Nodes;
-            if (productsPage != null && childNodes.Count > 0)
-            {
-                this.productsList.ItemDataBound += ProductsList_ItemDataBound;
-                this.productsList.DataSource = childNodes;
-                this.productsList.DataBind();
-            }
-
+            PopilateProductsList();
             PopulateWhoWeAreLinksRepeater();
             SetSocialShareButtonsDestination();
         }
@@ -76,6 +67,18 @@ namespace SitefinityWebApp.CustomWidgets.FooterWidget
                     repeater.DataSource = pageNode.Nodes;
                     repeater.DataBind();
                 }
+            }
+        }
+
+        private void PopilateProductsList()
+        {
+            PageNode productsPage = PagesUtilities.GetPageNodeByTitle("products");
+            var childNodes = productsPage.Nodes;
+            if (productsPage != null && childNodes.Count > 0)
+            {
+                this.productsList.ItemDataBound += ProductsList_ItemDataBound;
+                this.productsList.DataSource = childNodes;
+                this.productsList.DataBind();
             }
         }
 

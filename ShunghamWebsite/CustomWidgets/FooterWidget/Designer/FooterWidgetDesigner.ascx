@@ -12,7 +12,9 @@
 <div id="designerLayoutRoot" class="sfContentViews sfSingleContentView" style="max-height: 400px; overflow: auto;">
     <ol>
         <li class="sfFormCtrl">
-            <label class="sfTxtLbl" for="selectedWhoWeArePageIdsLabel">Who We Are Links</label>
+            <label class="sfTxtLbl" for="selectedWhoWeArePageIdsLabel">
+                <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, WhoWeAreLinksLabelInDesigner%>' />
+            </label>
             <span style="display: none;" class="sfSelectedItem" id="selectedWhoWeArePageIdsLabel">
                 <asp:Literal runat="server" Text="" />
             </span>
@@ -29,19 +31,25 @@
         </li>
 
         <li class="sfFormCtrl">
-            <asp:Label runat="server" AssociatedControlID="LinkedInButtonExternalLink" CssClass="sfTxtLbl">LinkedIn Button Link</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="LinkedInButtonExternalLink" CssClass="sfTxtLbl">
+                <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, LinkedInLinkLabelInDesigner%>' />
+            </asp:Label>
             <asp:TextBox ID="LinkedInButtonExternalLink" runat="server" CssClass="sfTxt" />
             <div class="sfExample"></div>
         </li>
 
         <li class="sfFormCtrl">
-            <asp:Label runat="server" AssociatedControlID="TwitterButtonExternalLink" CssClass="sfTxtLbl">Twitter Button Link</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="TwitterButtonExternalLink" CssClass="sfTxtLbl">
+                <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, TwitterLinkLabelInDesigner%>' />
+            </asp:Label>
             <asp:TextBox ID="TwitterButtonExternalLink" runat="server" CssClass="sfTxt" />
             <div class="sfExample"></div>
         </li>
 
         <li class="sfFormCtrl">
-            <asp:Label runat="server" AssociatedControlID="FacebookButtonExternalLink" CssClass="sfTxtLbl">Facebook Button Link</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="FacebookButtonExternalLink" CssClass="sfTxtLbl">
+                <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, FacebookLinkLabelInDesigner%>' />
+            </asp:Label>
             <asp:TextBox ID="FacebookButtonExternalLink" runat="server" CssClass="sfTxt" />
             <div class="sfExample"></div>
         </li>

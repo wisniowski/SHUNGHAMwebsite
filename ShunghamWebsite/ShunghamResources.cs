@@ -39,7 +39,7 @@ namespace SitefinityWebApp
         /// The Shungham resources description.
         /// </value>
         [ResourceEntry("ShunghamResourcesDescription",
-                       Value = "Contains localisable resources for Shungham application.",
+                       Value = "Contains localizable resources for Shungham application.",
                        Description = "The description of this class.",
                        LastModified = "2016/09/02")]
         public string ShunghamResourcesDescription
@@ -47,6 +47,51 @@ namespace SitefinityWebApp
             get
             {
                 return this["ShunghamResourcesDescription"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the name of the shungham organization.
+        /// </summary>
+        [ResourceEntry("ShunghamCompanyName",
+                       Value = "Shungham",
+                       Description = "Name of the Shungham Organization.",
+                       LastModified = "2016/09/12")]
+        public string ShunghamCompanyName
+        {
+            get
+            {
+                return this["ShunghamCompanyName"];
+            }
+        }
+
+        /// <summary>
+        /// Gets all rights reserved text.
+        /// </summary>
+        [ResourceEntry("AllRightsReservedSign",
+                       Value = "All Rights Reserved",
+                       Description = "Name of the Shungham Organization.",
+                       LastModified = "2016/09/12")]
+        public string AllRightsReservedSign
+        {
+            get
+            {
+                return this["AllRightsReservedSign"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the year.
+        /// </summary>
+        [ResourceEntry("Year",
+                       Value = "2016",
+                       Description = "The current Year.",
+                       LastModified = "2016/09/12")]
+        public string Year
+        {
+            get
+            {
+                return this["Year"];
             }
         }
 
@@ -115,47 +160,137 @@ namespace SitefinityWebApp
         #region Footer widget
 
         /// <summary>
-        /// Gets the LinkedIn Hyperlink text.
+        /// Gets the products title in footer.
         /// </summary>
-        [ResourceEntry("LinkedInText",
-                       Value = "LinkedIn",
-                       Description = "The text on LinkedIn Hyperlink.",
-                       LastModified = "2016/09/10")]
-        public string LinkedInText
+        [ResourceEntry("ProductsTitleInFooter",
+                       Value = "Our Products",
+                       Description = "The Title for 'Products' section in footer.",
+                       LastModified = "2016/09/12")]
+        public string ProductsTitleInFooter
         {
             get
             {
-                return this["LinkedInText"];
+                return this["ProductsTitleInFooter"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the 'who we are' title in footer.
+        /// </summary>
+        [ResourceEntry("WhoWeAreTitleInFooter",
+                       Value = "Who We Are",
+                       Description = "The Title for 'Who we are' section in footer.",
+                       LastModified = "2016/09/12")]
+        public string WhoWeAreTitleInFooter
+        {
+            get
+            {
+                return this["WhoWeAreTitleInFooter"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the LinkedIn Hyperlink text.
+        /// </summary>
+        [ResourceEntry("LinkedInTextInFooter",
+                       Value = "LinkedIn",
+                       Description = "The text on LinkedIn Hyperlink.",
+                       LastModified = "2016/09/10")]
+        public string LinkedInTextInFooter
+        {
+            get
+            {
+                return this["LinkedInTextInFooter"];
             }
         }
 
         /// <summary>
         /// Gets the Тwitter Hyperlink text.
         /// </summary>
-        [ResourceEntry("TwitterText",
+        [ResourceEntry("TwitterTextInFooter",
                        Value = "Twitter",
                        Description = "The text on Twitter Hyperlink.",
                        LastModified = "2016/09/10")]
-        public string TwitterText
+        public string TwitterTextInFooter
         {
             get
             {
-                return this["TwitterText"];
+                return this["TwitterTextInFooter"];
             }
         }
 
         /// <summary>
         /// Gets the Facebook Hyperlink text.
         /// </summary>
-        [ResourceEntry("FacebookText",
+        [ResourceEntry("FacebookTextInFooter",
                        Value = "Facebook",
                        Description = "The text on Facebook Hyperlink.",
                        LastModified = "2016/09/10")]
-        public string FacebookText
+        public string FacebookTextInFooter
         {
             get
             {
-                return this["FacebookText"];
+                return this["FacebookTextInFooter"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the 'who we are' Pages Selector label in designer.
+        /// </summary>
+        [ResourceEntry("WhoWeAreLinksLabelInDesigner",
+                       Value = "'Who We Are' Pages",
+                       Description = "The label for 'Who We Are' Pages selector in the designer.",
+                       LastModified = "2016/09/12")]
+        public string WhoWeAreLinksLabelInDesigner
+        {
+            get
+            {
+                return this["WhoWeAreLinksLabelInDesigner"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the 'LinkedIn' link label in designer.
+        /// </summary>
+        [ResourceEntry("LinkedInLinkLabelInDesigner",
+                       Value = "'LinkedIn' Button Link",
+                       Description = "The label for 'LinkedIn' link textbox in the designer.",
+                       LastModified = "2016/09/12")]
+        public string LinkedInLinkLabelInDesigner
+        {
+            get
+            {
+                return this["LinkedInLinkLabelInDesigner"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the 'Twitter' link label in designer.
+        /// </summary>
+        [ResourceEntry("TwitterLinkLabelInDesigner",
+                       Value = "'Twitter' Button Link",
+                       Description = "The label for 'Twitter' link textbox in the designer.",
+                       LastModified = "2016/09/12")]
+        public string TwitterLinkLabelInDesigner
+        {
+            get
+            {
+                return this["TwitterLinkLabelInDesigner"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the 'Facebook' link label in designer.
+        /// </summary>
+        [ResourceEntry("FacebookLinkLabelInDesigner",
+                       Value = "'Facebook' Button Link",
+                       Description = "The label for 'Facebook' link textbox in the designer.",
+                       LastModified = "2016/09/12")]
+        public string FacebookLinkLabelInDesigner
+        {
+            get
+            {
+                return this["FacebookLinkLabelInDesigner"];
             }
         }
 
