@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ShunghamUtilities;
+using System;
 using System.Web.UI.WebControls;
+using Telerik.Sitefinity.Pages.Model;
+using Telerik.Sitefinity.Modules.Pages;
 
 namespace SitefinityWebApp.CustomWidgets.FooterWidget
 {
@@ -11,6 +14,15 @@ namespace SitefinityWebApp.CustomWidgets.FooterWidget
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            PageNode productsPage = PagesUtilities.GetPageNodeByTitle("products");
+            var childNodes = productsPage.Nodes;
+            if (productsPage != null && childNodes.Count > 0)
+            {
+                //this.productsList.ItemDataBound += MenuItemsList_ItemDataBound;
+                this.productsList.DataSource = childNodes;
+                this.productsList.DataBind();
+            }
+
             SetSocialShareButtonsDestination();
         }
 
