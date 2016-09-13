@@ -31,40 +31,13 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget {
         protected global::System.Web.UI.WebControls.Literal subTitleLtl;
         
         /// <summary>
-        /// firstBtnLink control.
+        /// btnParagraph control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink firstBtnLink;
-        
-        /// <summary>
-        /// firstBtnLtl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal firstBtnLtl;
-        
-        /// <summary>
-        /// secondBtnLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink secondBtnLink;
-        
-        /// <summary>
-        /// secondBtnLtl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal secondBtnLtl;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl btnParagraph;
         
         /// <summary>
         /// bgrImage control.
