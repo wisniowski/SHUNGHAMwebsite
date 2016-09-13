@@ -34,6 +34,8 @@ namespace SitefinityWebApp
                "~/CustomWidgets/FooterWidget/FooterWidget.ascx", "Footer Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/BannerWidget/BannerWidget.ascx", "Banner Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/TestimonialsRotatorWidget/TestimonialsRotatorWidget.ascx", "Testimonials Rotator Widget");
         }
 
         private static void RegisterSectionInBackend(string toolboxName, string sectionName)
