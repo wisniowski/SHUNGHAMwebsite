@@ -578,6 +578,14 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
         padding-bottom: 0;
     }
 
+#sfPageContainer #featured.sticky{
+    display: none;
+}
+
+#sfPageContainer #featured.regular{
+    opacity: 1;
+}
+
 #content {
     position: relative;
     z-index: 3;
