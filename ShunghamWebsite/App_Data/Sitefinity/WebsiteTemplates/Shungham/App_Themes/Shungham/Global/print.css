@@ -58,20 +58,6 @@ article, aside, div, details, figcaption, figure, footer, header, hgroup, menu, 
     text-decoration: none;
 }
 
-#content {
-}
-
-    #content a:after {
-        content: " (" attr(href) ") ";
-        color: #555;
-        font-size: 0.8em;
-        font-style: italic;
-    }
-
-    #content a[href^="#"]:after {
-        content: "";
-    }
-
 #footer {
     margin: 1em 0 0;
     padding: 1em 0 0;

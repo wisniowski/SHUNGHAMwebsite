@@ -595,7 +595,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     background: #fff;
 }
 
-    #content:after, #top:after, #footer:after, form p:after, #footer nav:after, .double:after, #footer ul:after, .social-a:after, #nav:after, #nav > ul:after, .module-a:after, .list-a:after, article:after, .news-a:after, .news-a article:after, .list-b:after, .popup-a header:after, .list-c:after, .module-b:after {
+    #content:after, #top:after, #footer:after, #footer nav:after, .double:after, #footer ul:after, .social-a:after, #nav:after, #nav > ul:after, .module-a:after, .list-a:after, article:after, .news-a:after, .news-a article:after, .list-b:after, .popup-a header:after, .list-c:after, .module-b:after {
         content: "";
         display: block;
         overflow: hidden;
@@ -2264,7 +2264,6 @@ label {
 
 form p {
     position: relative;
-    clear: both;
     margin-bottom: 20px;
 }
 
