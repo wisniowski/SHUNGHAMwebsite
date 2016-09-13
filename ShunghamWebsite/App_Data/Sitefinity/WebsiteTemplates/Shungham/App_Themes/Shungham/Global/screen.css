@@ -382,6 +382,8 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     left: 50%;
     top: 0;
     width: 50%;
+    height: 100%;
+    overflow: auto;
 }
 
 #top > .menu {
