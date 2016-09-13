@@ -1000,9 +1000,6 @@
     <Content Include="App_Data\RadSpell\fr-FR.tdf" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App_Data\GeoLocation\GeoLiteCity.dat" />
     <Content Include="App_Data\Sitefinity\Configuration\CatalogConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\CatalogConfig.contentViewControls.ProductsBackendDefinitionName.views.ProductsBackendMaster.config" />

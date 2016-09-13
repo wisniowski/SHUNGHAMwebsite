@@ -19,7 +19,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="ScriptManager1" runat="server"></telerik:RadScriptManager>
         <div id="root">
             <header id="top">
                 <div id="logo">
