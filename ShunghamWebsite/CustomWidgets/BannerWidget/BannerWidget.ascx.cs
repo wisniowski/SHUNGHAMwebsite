@@ -1,8 +1,5 @@
 ﻿using ShunghamUtilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -35,12 +32,12 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget
 
             if (!string.IsNullOrEmpty(FirstBtnText) || !string.IsNullOrEmpty(FirstBtnExternalLink))
             {
-                this.AddButton(this.btnParagraph, FirstBtnText, FirstBtnExternalLink);
+                this.AddButton(this.btnParagraph, FirstBtnText, FirstBtnLandingPage, FirstBtnExternalLink);
             }
 
             if (!string.IsNullOrEmpty(SecondBtnText) || !string.IsNullOrEmpty(SecondBtnExternalLink))
             {
-                this.AddButton(this.btnParagraph, FirstBtnText, FirstBtnExternalLink);
+                this.AddButton(this.btnParagraph, SecondBtnText, SecondBtnLandingPage, SecondBtnExternalLink);
             }
 
             if (BackgroundImageId != null && BackgroundImageId != Guid.Empty)
@@ -49,11 +46,17 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget
             }
         }
 
-        private void AddButton(Control parent, string btnText, string btnUrl)
+        private void AddButton(Control parent, string btnText, Guid landingPageId, string btnUrl)
         {
             HyperLink btnLink = new HyperLink();
             btnLink.Target = "_blank";
             btnLink.CssClass = "b";
+
+            if (landingPageId != null && landingPageId != Guid.Empty)
+            {
+                var pageNodeUrl = PagesUtilities.GetPageUrlById(landingPageId);
+                btnLink.NavigateUrl = pageNodeUrl;
+            }
 
             if (!string.IsNullOrEmpty(btnUrl))
             {

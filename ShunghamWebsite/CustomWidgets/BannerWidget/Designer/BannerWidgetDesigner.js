@@ -236,7 +236,16 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
                 }
             });
             pagesSelectorFirstBtnLandingPage.set_selectedItems([{ Id: controlData.FirstBtnLandingPage}]);
-        }        
+        }
+        else if (controlData.FirstBtnExternalLink && controlData.FirstBtnLandingPage !== "") {
+            var externalPagesSelector = this.get_pageSelectorFirstBtnLandingPage().get_extPagesSelector();
+            var selectedPageLabelFirstBtnLandingPage = this.get_selectedFirstBtnLandingPageLabel();
+            var selectedPageButtonFirstBtnLandingPage = this.get_pageSelectButtonFirstBtnLandingPage();
+
+            selectedPageLabelFirstBtnLandingPage.innerHTML = controlData.FirstBtnExternalLink;
+            jQuery(selectedPageLabelFirstBtnLandingPage).show();
+            selectedPageButtonFirstBtnLandingPage.innerHTML = '<span>Change</span>';
+        }
 
         /* RefreshUI SecondBtnText */
         jQuery(this.get_secondBtnText()).val(controlData.SecondBtnText);
@@ -255,7 +264,16 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
                 }
             });
             pagesSelectorSecondBtnLandingPage.set_selectedItems([{ Id: controlData.SecondBtnLandingPage}]);
-        }        
+        }
+        else if (controlData.SecondBtnExternalLink && controlData.SecondBtnLandingPage !== "") {
+            var externalPagesSelector = this.get_pageSelectorSecondBtnLandingPage().get_extPagesSelector();
+            var selectedPageLabelSecondBtnLandingPage = this.get_selectedSecondBtnLandingPageLabel();
+            var selectedPageButtonSecondBtnLandingPage = this.get_pageSelectButtonSecondBtnLandingPage();
+
+            selectedPageLabelSecondBtnLandingPage.innerHTML = controlData.SecondBtnExternalLink;
+            jQuery(selectedPageLabelSecondBtnLandingPage).show();
+            selectedPageButtonSecondBtnLandingPage.innerHTML = '<span>Change</span>';
+        }
     },
 
     /* Called when the "Save" button is clicked. Here you can transfer the settings from the designer to the control */
@@ -343,11 +361,16 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
     _showPageSelectorFirstBtnLandingPageHandler: function (selectedItem) {
         var controlData = this._propertyEditor.get_control();
         var pagesSelector = this.get_pageSelectorFirstBtnLandingPage().get_pageSelector();
+        var externalPagesSelector = this.get_pageSelectorFirstBtnLandingPage().get_extPagesSelector();
         if (controlData.FirstBtnLandingPage) {
             pagesSelector.set_selectedItems([{ Id: controlData.FirstBtnLandingPage }]);
         }
+        if (controlData.FirstBtnExternalLink) {
+            externalPagesSelector.get_urlTextBox().set_value(controlData.FirstBtnExternalLink);
+        }
         this._FirstBtnLandingPageDialog.dialog("open");
         jQuery("#designerLayoutRoot").hide();
+        jQuery(".sfTxtUrlSeletor").hide();
         this._FirstBtnLandingPageDialog.dialog().parent().css("min-width", "355px");
         dialogBase.resizeToContent();
     },
@@ -362,16 +385,31 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
             return;
         }
         var selectedPage = pagesSelector.get_selectedItem();
+        var externalPagesSelector = this.get_pageSelectorFirstBtnLandingPage().get_extPagesSelector();
+
         if (selectedPage) {
             this.get_selectedFirstBtnLandingPageLabel().innerHTML = selectedPage.Title.Value;
             jQuery(this.get_selectedFirstBtnLandingPageLabel()).show();
             this.get_pageSelectButtonFirstBtnLandingPage().innerHTML = '<span>Change</span>';
             controlData.FirstBtnLandingPage = selectedPage.Id;
+            controlData.FirstBtnExternalLink = "";
+            externalPagesSelector.get_urlTextBox().set_value("");
         }
-        else {
+        var externalUrl = externalPagesSelector.get_urlTextBox().get_value();
+
+        if (externalUrl && (externalUrl != "")) {
+            controlData.FirstBtnExternalLink = externalUrl;
+            this.get_selectedFirstBtnLandingPageLabel().innerHTML = externalUrl;
+
+            jQuery(this.get_selectedFirstBtnLandingPageLabel()).show();
+            this.get_pageSelectButtonFirstBtnLandingPage().innerHTML = '<span>Change</span>';
+            controlData.FirstBtnLandingPage = "00000000-0000-0000-0000-000000000000";
+        }
+        if (!selectedPage && !externalUrl) {
             jQuery(this.get_selectedFirstBtnLandingPageLabel()).hide();
             this.get_pageSelectButtonFirstBtnLandingPage().innerHTML = '<span>Select...</span>';
             controlData.FirstBtnLandingPage = "00000000-0000-0000-0000-000000000000";
+            controlData.FirstBtnExternalLink = "";
         }
     },
 
@@ -379,11 +417,16 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
     _showPageSelectorSecondBtnLandingPageHandler: function (selectedItem) {
         var controlData = this._propertyEditor.get_control();
         var pagesSelector = this.get_pageSelectorSecondBtnLandingPage().get_pageSelector();
+        var externalPagesSelector = this.get_pageSelectorSecondBtnLandingPage().get_extPagesSelector();
         if (controlData.SecondBtnLandingPage) {
             pagesSelector.set_selectedItems([{ Id: controlData.SecondBtnLandingPage }]);
         }
+        if (controlData.SecondBtnExternalLink) {
+            externalPagesSelector.get_urlTextBox().set_value(controlData.SecondBtnExternalLink);
+        }
         this._SecondBtnLandingPageDialog.dialog("open");
         jQuery("#designerLayoutRoot").hide();
+        jQuery(".sfTxtUrlSeletor").hide();
         this._SecondBtnLandingPageDialog.dialog().parent().css("min-width", "355px");
         dialogBase.resizeToContent();
     },
@@ -398,16 +441,30 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
             return;
         }
         var selectedPage = pagesSelector.get_selectedItem();
+        var externalPagesSelector = this.get_pageSelectorSecondBtnLandingPage().get_extPagesSelector();
         if (selectedPage) {
             this.get_selectedSecondBtnLandingPageLabel().innerHTML = selectedPage.Title.Value;
             jQuery(this.get_selectedSecondBtnLandingPageLabel()).show();
             this.get_pageSelectButtonSecondBtnLandingPage().innerHTML = '<span>Change</span>';
             controlData.SecondBtnLandingPage = selectedPage.Id;
+            controlData.SecondBtnExternalLink = "";
+            externalPagesSelector.get_urlTextBox().set_value("");
         }
-        else {
+        var externalUrl = externalPagesSelector.get_urlTextBox().get_value();
+
+        if (externalUrl && (externalUrl != "")) {
+            controlData.SecondBtnExternalLink = externalUrl;
+            this.get_selectedSecondBtnLandingPageLabel().innerHTML = externalUrl;
+
+            jQuery(this.get_selectedSecondBtnLandingPageLabel()).show();
+            this.get_pageSelectButtonSecondBtnLandingPage().innerHTML = '<span>Change</span>';
+            controlData.SecondBtnLandingPage = "00000000-0000-0000-0000-000000000000";
+        }
+        if (!selectedPage && !externalUrl) {
             jQuery(this.get_selectedSecondBtnLandingPageLabel()).hide();
             this.get_pageSelectButtonSecondBtnLandingPage().innerHTML = '<span>Select...</span>';
             controlData.SecondBtnLandingPage = "00000000-0000-0000-0000-000000000000";
+            controlData.SecondBtnExternalLink = "";
         }
     },
 
