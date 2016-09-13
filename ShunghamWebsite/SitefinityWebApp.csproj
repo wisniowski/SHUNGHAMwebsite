@@ -875,6 +875,7 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\Global\screen.css" />
     <Content Include="ClientBin\Telerik.Sitefinity.Analytics.xap" />
     <Content Include="ClientBin\Telerik.Sitefinity.Silverlight.xap" />
+    <Content Include="CustomLayouts\OneColumnGreyBGR.ascx" />
     <Content Include="CustomResources\js\head.js" />
     <Content Include="CustomResources\js\mobile.js" />
     <Content Include="CustomResources\js\scripts.js" />

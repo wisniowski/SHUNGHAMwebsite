@@ -28,6 +28,7 @@ namespace SitefinityWebApp
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName);
             RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName);
 
+            //Register widgets
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/HeaderWidget/HeaderWidget.ascx", "Header Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
@@ -36,6 +37,10 @@ namespace SitefinityWebApp
                "~/CustomWidgets/BannerWidget/BannerWidget.ascx", "Banner Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/TestimonialsRotatorWidget/TestimonialsRotatorWidget.ascx", "Testimonials Rotator Widget");
+
+            //Register Layout controls
+            RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
+                Installer.layoutControlTypeName, "OneColumnGreyBGR", "~/CustomLayouts/OneColumnGreyBGR.ascx");
         }
 
         private static void RegisterSectionInBackend(string toolboxName, string sectionName)
