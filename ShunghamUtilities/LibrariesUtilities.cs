@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Telerik.Sitefinity.GenericContent.Model;
+using Telerik.Sitefinity.Libraries.Model;
 using Telerik.Sitefinity.Modules.Libraries;
 
 namespace ShunghamUtilities
@@ -25,6 +24,16 @@ namespace ShunghamUtilities
             }
 
             return mediaUlr;
+        }
+
+        public static IQueryable<Image> GetImagesByAlbumNativeAPI(Guid albumId)
+        {
+            LibrariesManager librariesManager = LibrariesManager.GetManager();
+
+            Album album = librariesManager.GetAlbum(albumId);
+            IQueryable<Image> images = album.Images().Where(i => i.Status == ContentLifecycleStatus.Live);
+
+            return images;
         }
     }
 }
