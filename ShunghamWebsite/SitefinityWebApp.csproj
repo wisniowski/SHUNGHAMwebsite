@@ -843,6 +843,13 @@
       <DependentUpon>BannerWidget.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomWidgets\BannerWidget\Designer\BannerWidgetDesigner.cs" />
+    <Compile Include="CustomWidgets\CompaniesLogosRotatorWidget\CompaniesLogosRotatorWidget.ascx.cs">
+      <DependentUpon>CompaniesLogosRotatorWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\CompaniesLogosRotatorWidget\CompaniesLogosRotatorWidget.ascx.designer.cs">
+      <DependentUpon>CompaniesLogosRotatorWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\FooterWidget\Designer\FooterWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\FooterWidget\FooterWidget.ascx.cs">
       <DependentUpon>FooterWidget.ascx</DependentUpon>
@@ -882,6 +889,7 @@
     <Content Include="CustomWidgets\BannerWidget\BannerWidget.ascx" />
     <Content Include="CustomWidgets\BannerWidget\Designer\BannerWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\BannerWidget\Designer\BannerWidgetDesigner.js" />
+    <Content Include="CustomWidgets\CompaniesLogosRotatorWidget\CompaniesLogosRotatorWidget.ascx" />
     <Content Include="CustomWidgets\FooterWidget\Designer\FooterWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\FooterWidget\Designer\FooterWidgetDesigner.js" />
     <Content Include="CustomWidgets\FooterWidget\FooterWidget.ascx" />
