@@ -1844,7 +1844,6 @@ h1 + .list-a, h2 + .list-a {
 .list-c {
     list-style: none;
     margin: 0 0 80px -80px;
-    padding: 0 30px;
     text-align: center;
 }
 

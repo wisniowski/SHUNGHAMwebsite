@@ -45,6 +45,8 @@ namespace SitefinityWebApp
             //Register Layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
                 Installer.layoutControlTypeName, "OneColumnGreyBGR", "~/CustomLayouts/OneColumnGreyBGR.ascx");
+            RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
+                Installer.layoutControlTypeName, "InfoWidget_ThreeColumns", "~/CustomLayouts/InfoWidget_ThreeColumns.ascx");
         }
 
         private static void RegisterSectionInBackend(string toolboxName, string sectionName)
