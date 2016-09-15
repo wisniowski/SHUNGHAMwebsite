@@ -295,5 +295,54 @@ namespace SitefinityWebApp
         }
 
         #endregion
+
+        #region Info widget
+
+        /// <summary>
+        /// Gets the Info widget title label in designer.
+        /// </summary>
+        [ResourceEntry("InfoWidgetTitleLabelInDesigner",
+                       Value = "Title",
+                       Description = "The label for 'Title' textbox in the InfoWidget designer.",
+                       LastModified = "2016/09/15")]
+        public string InfoWidgetTitleLabelInDesigner
+        {
+            get
+            {
+                return this["InfoWidgetTitleLabelInDesigner"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the Info widget summary label in designer.
+        /// </summary>
+        [ResourceEntry("InfoWidgetSummaryLabelInDesigner",
+                       Value = "Summary",
+                       Description = "The label for 'Summary' textbox in the InfoWidget designer.",
+                       LastModified = "2016/09/15")]
+        public string InfoWidgetSummaryLabelInDesigner
+        {
+            get
+            {
+                return this["InfoWidgetSummaryLabelInDesigner"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the Info widget content label in designer.
+        /// </summary>
+        [ResourceEntry("InfoWidgetContentLabelInDesigner",
+                       Value = "Content",
+                       Description = "The label for 'Content' textbox in the InfoWidget designer.",
+                       LastModified = "2016/09/15")]
+        public string InfoWidgetContentLabelInDesigner
+        {
+            get
+            {
+                return this["InfoWidgetContentLabelInDesigner"];
+            }
+        }
+
+        #endregion
     }
 }

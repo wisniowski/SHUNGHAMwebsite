@@ -2,6 +2,7 @@
 
 namespace SitefinityWebApp.CustomWidgets.InfoWidget
 {
+    [Telerik.Sitefinity.Web.UI.ControlDesign.ControlDesigner(typeof(Designer.InfoWidgetDesigner))]
     public partial class InfoWidget : System.Web.UI.UserControl
     {
         public string Title { get; set; }

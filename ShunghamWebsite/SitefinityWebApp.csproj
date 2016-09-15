@@ -867,6 +867,7 @@
     <Compile Include="CustomWidgets\HeaderWidget\HeaderWidget.ascx.designer.cs">
       <DependentUpon>HeaderWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\InfoWidget\Designer\InfoWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\InfoWidget\InfoWidget.ascx.cs">
       <DependentUpon>InfoWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -908,6 +909,8 @@
     <Content Include="CustomWidgets\HeaderWidget\Designer\HeaderWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\HeaderWidget\Designer\HeaderWidgetDesigner.js" />
     <Content Include="CustomWidgets\HeaderWidget\HeaderWidget.ascx" />
+    <Content Include="CustomWidgets\InfoWidget\Designer\InfoWidgetDesigner.ascx" />
+    <Content Include="CustomWidgets\InfoWidget\Designer\InfoWidgetDesigner.js" />
     <Content Include="CustomWidgets\InfoWidget\InfoWidget.ascx" />
     <Content Include="CustomWidgets\TestimonialsRotatorWidget\TestimonialsRotatorWidget.ascx" />
     <Content Include="Default.aspx" />
