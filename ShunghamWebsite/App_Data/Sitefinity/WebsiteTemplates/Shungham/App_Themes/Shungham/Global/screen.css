@@ -3825,7 +3825,7 @@ svg:not(:root) {
         top: 0;
     }
 
-    #root .tablet-only, #root .mobile-hide, #root #nav > ul > li > ul:before, #map > img, .list-b > li > a.open-popup, #root > figure.has-background img, .list-c li.active .desc, #root .list-c .more, #root .list-c.a .link {
+    #root .tablet-only, #root .mobile-hide, #root #nav > ul > li > ul:before, #map > img, .list-b > li > a.open-popup, #root > figure.has-background img, .list-c li.active .desc, #root .list-c .more {
         position: absolute;
         left: -3000em;
         top: -3000em;
