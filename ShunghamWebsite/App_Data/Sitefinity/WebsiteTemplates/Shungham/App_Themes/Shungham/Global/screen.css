@@ -3856,3 +3856,11 @@ svg:not(:root) {
         bottom: 0;
     }
 }
+
+/*Sitefinity backend fixes*/
+
+.sfPageEditor div.RadWindow{
+    left: 0px !important;
+    right: 0px;
+    margin: auto;
+}
