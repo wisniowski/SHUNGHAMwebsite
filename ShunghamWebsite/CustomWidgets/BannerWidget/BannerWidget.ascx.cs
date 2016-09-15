@@ -20,6 +20,11 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.PopulateWidgetWithData();
+        }
+
+        private void PopulateWidgetWithData()
+        {
             if (!string.IsNullOrEmpty(Title))
             {
                 this.titleLtl.Text = Title;
@@ -30,12 +35,12 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget
                 this.subTitleLtl.Text = SubTitle;
             }
 
-            if (!string.IsNullOrEmpty(FirstBtnText) || !string.IsNullOrEmpty(FirstBtnExternalLink))
+            if (!string.IsNullOrEmpty(FirstBtnText))
             {
                 this.AddButton(this.btnParagraph, FirstBtnText, FirstBtnLandingPage, FirstBtnExternalLink);
             }
 
-            if (!string.IsNullOrEmpty(SecondBtnText) || !string.IsNullOrEmpty(SecondBtnExternalLink))
+            if (!string.IsNullOrEmpty(SecondBtnText))
             {
                 this.AddButton(this.btnParagraph, SecondBtnText, SecondBtnLandingPage, SecondBtnExternalLink);
             }
@@ -46,28 +51,24 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget
             }
         }
 
-        private void AddButton(Control parent, string btnText, Guid landingPageId, string btnUrl)
+        private void AddButton(Control parent, string btnText, Guid landingPageId, string btnExternalLink)
         {
             HyperLink btnLink = new HyperLink();
             btnLink.Target = "_blank";
             btnLink.CssClass = "b";
+
+            Literal btnTextLtl = new Literal();
+            btnTextLtl.Text = btnText;
+            btnLink.Controls.Add(btnTextLtl);
 
             if (landingPageId != null && landingPageId != Guid.Empty)
             {
                 var pageNodeUrl = PagesUtilities.GetPageUrlById(landingPageId);
                 btnLink.NavigateUrl = pageNodeUrl;
             }
-
-            if (!string.IsNullOrEmpty(btnUrl))
+            else if (!string.IsNullOrEmpty(btnExternalLink))
             {
-                btnLink.NavigateUrl = btnUrl;
-            }
-
-            if (!string.IsNullOrEmpty(btnText))
-            {
-                Literal btnTextLtl = new Literal();
-                btnTextLtl.Text = btnText;
-                btnLink.Controls.Add(btnTextLtl);
+                btnLink.NavigateUrl = btnExternalLink;
             }
 
             parent.Controls.Add(btnLink);
