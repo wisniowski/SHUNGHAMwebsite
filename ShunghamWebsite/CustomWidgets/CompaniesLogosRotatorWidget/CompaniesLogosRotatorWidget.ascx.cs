@@ -41,6 +41,7 @@ namespace SitefinityWebApp.CustomWidgets.CompaniesLogosSlider
                 {
                     Image imageControl = e.Item.FindControl("logoImg") as Image;
                     imageControl.ImageUrl = imageUrl;
+                    imageControl.AlternateText = image.AlternativeText;
                 }
             }
         }
