@@ -11,3 +11,7 @@ ShunghamWebsite/SitefinityWebApp.csproj.user
 ShunghamWebsite/UpgradeLog.htm
 ShunghamWebsite/packages/
 ShunghamWebsite/ResourcePackages/
+ShunghamWebsite/.vs/
+ShunghamUtilities/bin/
+ShunghamUtilities/obj/
+ShunghamUtilities/ShunghamUtilities.csproj.user
