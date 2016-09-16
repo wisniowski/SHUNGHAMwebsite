@@ -4,6 +4,7 @@ using System.Web.UI;
 using Telerik.Sitefinity.Web.UI;
 using Telerik.Sitefinity.Web.UI.ControlDesign;
 using System.Collections.Generic;
+using Telerik.Sitefinity.Web.UI.Fields;
 
 namespace SitefinityWebApp.CustomWidgets.InfoWidget.Designer
 {
@@ -76,11 +77,11 @@ namespace SitefinityWebApp.CustomWidgets.InfoWidget.Designer
         /// <summary>
         /// Gets the control that is bound to the Content property
         /// </summary>
-        protected virtual Control Content
+        protected virtual HtmlField Content
         {
             get
             {
-                return this.Container.GetControl<Control>("Content", true);
+                return this.Container.GetControl<HtmlField>("Content", true);
             }
         }
 

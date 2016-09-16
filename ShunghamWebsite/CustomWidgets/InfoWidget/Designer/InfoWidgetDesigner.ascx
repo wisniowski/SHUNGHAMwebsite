@@ -24,9 +24,13 @@
 
         <li class="sfFormCtrl">
             <asp:Label runat="server" AssociatedControlID="Content" CssClass="sfTxtLbl">
-        <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, InfoWidgetContentLabelInDesigner%>' />
+                <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, InfoWidgetContentLabelInDesigner%>' />
             </asp:Label>
-            <asp:TextBox ID="Content" runat="server" CssClass="sfTxt" TextMode="MultiLine" Rows="15" Width="600" Height="200" />
+            <sfFields:HtmlField ID="Content" runat="server" DisplayMode="Write" 
+                EditorToolsConfiguration="Standard" HtmlFieldEditModes="Design"
+                EditorContentFilters="DefaultFilters,RemoveScripts" 
+                EditorStripFormattingOptions="AllExceptNewLines" IsToOverrideDialogs="false"
+                Width="600" Height="200" />
         </li>
 
     </ol>
