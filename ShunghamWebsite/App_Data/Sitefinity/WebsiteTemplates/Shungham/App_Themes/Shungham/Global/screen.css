@@ -1672,7 +1672,7 @@ ul {
         position: relative;
     }
 
-        ul li:after {
+        ul.list-a li:after {
             content: "";
             display: block;
             position: absolute;
@@ -1681,6 +1681,7 @@ ul {
             width: 5px;
             height: 5px;
             border-radius: 9px;
+            background: #cb1010;
         }
 
 #top li:after, #footer li:after, .social-a li:after, .news-a header li:after, .vcard.a li:after, .list-b > li:after, .social-b li:after, .list-c li:after, .list-d li:after, .gallery-a li:after {
