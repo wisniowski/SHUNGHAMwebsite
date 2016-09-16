@@ -274,12 +274,14 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
             jQuery(selectedPageLabelSecondBtnLandingPage).show();
             selectedPageButtonSecondBtnLandingPage.innerHTML = '<span>Change</span>';
         }
+
+        this._resizeControlDesigner();
     },
 
     /* Called when the "Save" button is clicked. Here you can transfer the settings from the designer to the control */
     applyChanges: function () {
         var controlData = this._propertyEditor.get_control();
-
+        this._resizeControlDesigner();
         /* ApplyChanges Title */
         controlData.Title = jQuery(this.get_title()).val();
 
@@ -328,6 +330,10 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
     },
 
     /* --------------------------------- private methods --------------------------------- */
+
+    _resizeControlDesigner: function () {
+        setTimeout("dialogBase.setWndWidth(800)", 800);
+    },
 
     /* BackgroundImageId private methods */
     _selectorBackgroundImageIdInsertHandler: function (selectedItem) {

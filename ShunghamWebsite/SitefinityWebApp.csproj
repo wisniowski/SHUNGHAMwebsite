@@ -1076,6 +1076,12 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.ttf" />
     <Content Include="App_Data\Sitefinity\Configuration\AppearanceConfig.config" />
     <Content Include="SampleTemplate.cshtml" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gli.eot" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gbk.woff2" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gbk.woff" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gl.woff" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gbk.ttf" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gl.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShunghamUtilities\ShunghamUtilities.csproj">

@@ -39,7 +39,6 @@ SitefinityWebApp.CustomWidgets.FooterWidget.Designer.FooterWidgetDesigner.protot
             this._WhoWeArePageIdsDialog = jQuery(this._selectorTagWhoWeArePageIds).dialog({
                 autoOpen: false,
                 modal: false,
-                width: 395,
                 closeOnEscape: true,
                 resizable: false,
                 draggable: false,
@@ -82,12 +81,12 @@ SitefinityWebApp.CustomWidgets.FooterWidget.Designer.FooterWidgetDesigner.protot
             pagesSelectorWhoWeArePageIds.add_selectionApplied(function (o, args) {
                 var selectedPages = pagesSelectorWhoWeArePageIds.get_selectedItems();
                 if (selectedPages) {
-                    selectedPageLabelCareersPageId.innerHTML = selectedPages.map(function (a) { return a.Title.Value; }).join();
+                    selectedPageLabelWhoWeArePageIds.innerHTML = selectedPages.map(function (a) { return a.Title.Value; }).join();
                     jQuery(selectedPageLabelWhoWeArePageIds).show();
                     selectedPageButtonWhoWeArePageIds.innerHTML = '<span>Change</span>';
                 }
             });
-            pagesSelectorWhoWeArePageIds.set_selectedItems(controlData.WhoWeArePagesValue.split(","));
+            pagesSelectorWhoWeArePageIds.set_selectedItemIds(controlData.WhoWeArePagesValue.split(","));
         }        
 
         /* RefreshUI LinkedInButtonExternalLink */
@@ -124,9 +123,11 @@ SitefinityWebApp.CustomWidgets.FooterWidget.Designer.FooterWidgetDesigner.protot
     _showPageSelectorWhoWeArePageIdsHandler: function (selectedItem) {
         var controlData = this._propertyEditor.get_control();
         var pagesSelector = this.get_pageSelectorWhoWeArePageIds().get_pageSelector();
+
         if (controlData.WhoWeArePagesValue != null) {
             pagesSelector.set_selectedItems(controlData.WhoWeArePagesValue.split(","));
         }
+
         this._WhoWeArePageIdsDialog.dialog("open");
         jQuery("#designerLayoutRoot").hide();
         this._WhoWeArePageIdsDialog.dialog().parent().css("min-width", "355px");

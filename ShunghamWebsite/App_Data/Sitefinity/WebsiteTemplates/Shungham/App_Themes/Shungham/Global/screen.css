@@ -2473,7 +2473,7 @@ svg:not(:root) {
 @font-face {
     font-family: 'Gotham';
     src: url('../../fonts/gl.eot');
-    src: url('../../fonts/gl.eot?#iefix') format('embedded-opentype'), url('../../fonts/gl.woff2') format('woff2'), url('../fonts/gl.woff') format('woff'), url('../fonts/gl.ttf') format('truetype'), url('../fonts/gl.svg#gllight') format('svg');
+    src: url('../../fonts/gl.eot?#iefix') format('embedded-opentype'), url('../fonts/gl.woff2') format('woff2'), url('../fonts/gl.woff') format('woff'), url('../fonts/gl.ttf') format('truetype'), url('../fonts/gl.svg#gllight') format('svg');
     font-weight: 300;
     font-style: normal;
 }
@@ -3863,4 +3863,5 @@ svg:not(:root) {
     left: 0px !important;
     right: 0px;
     margin: auto;
+    width: 700px !important;
 }

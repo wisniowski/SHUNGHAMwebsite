@@ -43,7 +43,8 @@ SitefinityWebApp.CustomWidgets.InfoWidget.Designer.InfoWidgetDesigner.prototype 
         jQuery(this.get_summary()).val(controlData.Summary);
 
         /* RefreshUI Content */
-        jQuery(this.get_content()).val(controlData.Content);
+        var htmlText = controlData.Content ? controlData.Content : "";
+        this.get_content().control.set_value(htmlText);
 
         this._resizeControlDesigner();
     },
@@ -59,7 +60,7 @@ SitefinityWebApp.CustomWidgets.InfoWidget.Designer.InfoWidgetDesigner.prototype 
         controlData.Summary = jQuery(this.get_summary()).val();
 
         /* ApplyChanges Content */
-        controlData.Content = jQuery(this.get_content()).val();
+        controlData.Content = this.get_content().control.get_value();
     },
 
     /* --------------------------------- event handlers ---------------------------------- */
