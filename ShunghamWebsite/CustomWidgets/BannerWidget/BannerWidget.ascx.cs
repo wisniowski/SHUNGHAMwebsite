@@ -20,10 +20,10 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.PopulateWidgetWithData();
+            this.BindWidget();
         }
 
-        private void PopulateWidgetWithData()
+        private void BindWidget()
         {
             if (!string.IsNullOrEmpty(Title))
             {

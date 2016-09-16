@@ -3863,4 +3863,5 @@ svg:not(:root) {
     left: 0px !important;
     right: 0px;
     margin: auto;
+    width: 700px !important;
 }

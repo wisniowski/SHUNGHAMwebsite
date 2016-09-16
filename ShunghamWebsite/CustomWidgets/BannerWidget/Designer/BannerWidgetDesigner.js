@@ -281,7 +281,7 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
     /* Called when the "Save" button is clicked. Here you can transfer the settings from the designer to the control */
     applyChanges: function () {
         var controlData = this._propertyEditor.get_control();
-
+        this._resizeControlDesigner();
         /* ApplyChanges Title */
         controlData.Title = jQuery(this.get_title()).val();
 
