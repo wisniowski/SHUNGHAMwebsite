@@ -6,7 +6,7 @@
         <article class="module-a">
             <div>
                 <h2 class="text-center">
-                    <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, OurProductsHeader%>' />
+                    <span>Our</span> products
                 </h2>
                 <div class="news-a a">
                     <asp:PlaceHolder ID="ProductsContainer" runat="server" />
@@ -20,8 +20,7 @@
     <ItemTemplate>
         <article>
             <header>
-                <h3 class="stronger">
-                    <asp:Literal Text='<%# Eval("Title")%>' runat="server" />
+                <h3 id="ProductTitle" runat="server" class="stronger">
                 </h3>
             </header>
             <asp:Literal Text='<%# Eval("Summary")%>' runat="server" />
@@ -29,7 +28,7 @@
                 <asp:HyperLink NavigateUrl='<%# Eval("PolicyCoverageLandingPage")%>' runat="server">
                     <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, PolicyCoverageButtonText%>' />
                 </asp:HyperLink>
-                <asp:HyperLink NavigateUrl='<%# Eval("ReadMoreLandingPage")%>' runat="server">
+                <asp:HyperLink NavigateUrl='<%# Eval("ReadMoreLandingPage")%>' runat="server" CssClass="a">
                     <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, ReadMoreButtonText%>' />
                 </asp:HyperLink>
             </p>

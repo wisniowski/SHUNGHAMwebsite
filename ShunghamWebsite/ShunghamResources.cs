@@ -348,21 +348,6 @@ namespace SitefinityWebApp
         #region Our Products widget
 
         /// <summary>
-        /// Gets our products header text.
-        /// </summary>
-        [ResourceEntry("OurProductsHeader",
-                       Value = "Our Products",
-                       Description = "The text on 'Our Products' header in 'Our Products' widget.",
-                       LastModified = "2016/09/18")]
-        public string OurProductsHeader
-        {
-            get
-            {
-                return this["OurProductsHeader"];
-            }
-        }
-
-        /// <summary>
         /// Gets the policy coverage button text.
         /// </summary>
         [ResourceEntry("PolicyCoverageButtonText",
