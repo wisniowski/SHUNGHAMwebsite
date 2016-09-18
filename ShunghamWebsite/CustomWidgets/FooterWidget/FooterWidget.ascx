@@ -24,7 +24,7 @@
                     <asp:Repeater ID="linksRepeater" runat="server">
                         <ItemTemplate>
                             <li>
-                                <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>' Target="_blank">
+                                <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>'>
                                     <asp:Literal runat="server" ID="titleLtl" Text='<%# Eval("Title") %>' />
                                 </asp:HyperLink>
                             </li>
@@ -50,7 +50,7 @@
         </LayoutTemplate>
         <ItemTemplate>
             <li>
-                <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>' Target="_blank">
+                <asp:HyperLink runat="server" NavigateUrl='<%# (Container.DataItem as PageNode).GetUrl() %>'>
                     <asp:Literal runat="server" ID="titleLtl" Text='<%# Eval("Title") %>' />
                 </asp:HyperLink>
             </li>

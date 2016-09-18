@@ -41,6 +41,8 @@ namespace SitefinityWebApp
                "~/CustomWidgets/CompaniesLogosRotatorWidget/CompaniesLogosRotatorWidget.ascx", "Companies Logos Rotator Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/InfoWidget/InfoWidget.ascx", "Info Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/OurProductsWidget/OurProductsWidget.ascx", "Our Products Widget");
 
             //Register Layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
