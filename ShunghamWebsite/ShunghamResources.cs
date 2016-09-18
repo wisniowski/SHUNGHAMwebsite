@@ -344,5 +344,55 @@ namespace SitefinityWebApp
         }
 
         #endregion
+
+        #region Our Products widget
+
+        /// <summary>
+        /// Gets our products header text.
+        /// </summary>
+        [ResourceEntry("OurProductsHeader",
+                       Value = "Our Products",
+                       Description = "The text on 'Our Products' header in 'Our Products' widget.",
+                       LastModified = "2016/09/18")]
+        public string OurProductsHeader
+        {
+            get
+            {
+                return this["OurProductsHeader"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the policy coverage button text.
+        /// </summary>
+        [ResourceEntry("PolicyCoverageButtonText",
+                       Value = "See Policy Coverage",
+                       Description = "The text on 'Policy Coverage' button in 'Our Products' widget.",
+                       LastModified = "2016/09/18")]
+        public string PolicyCoverageButtonText
+        {
+            get
+            {
+                return this["PolicyCoverageButtonText"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the read more button text.
+        /// </summary>
+        [ResourceEntry("ReadMoreButtonText",
+                       Value = "Read More",
+                       Description = "The text on 'Read More' button in 'Our Products' widget.",
+                       LastModified = "2016/09/18")]
+        public string ReadMoreButtonText
+        {
+            get
+            {
+                return this["ReadMoreButtonText"];
+            }
+        }
+
+
+        #endregion
     }
 }
