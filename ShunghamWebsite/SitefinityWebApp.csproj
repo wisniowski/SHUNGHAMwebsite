@@ -891,6 +891,13 @@
     <Compile Include="CustomWidgets\OurProductsWidget\OurProductsWidget.ascx.designer.cs">
       <DependentUpon>OurProductsWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\OurTeamWidget\OurTeamWidget.ascx.cs">
+      <DependentUpon>OurTeamWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\OurTeamWidget\OurTeamWidget.ascx.designer.cs">
+      <DependentUpon>OurTeamWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\TestimonialsRotatorWidget\TestimonialsRotatorWidget.ascx.cs">
       <DependentUpon>TestimonialsRotatorWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -937,6 +944,7 @@
     <Content Include="CustomWidgets\OurProductsWidget\Designer\OurProductsWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\OurProductsWidget\Designer\OurProductsWidgetDesigner.js" />
     <Content Include="CustomWidgets\OurProductsWidget\OurProductsWidget.ascx" />
+    <Content Include="CustomWidgets\OurTeamWidget\OurTeamWidget.ascx" />
     <Content Include="CustomWidgets\TestimonialsRotatorWidget\TestimonialsRotatorWidget.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
