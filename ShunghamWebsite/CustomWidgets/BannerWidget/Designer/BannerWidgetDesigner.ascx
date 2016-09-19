@@ -19,7 +19,7 @@
 
         <li class="sfFormCtrl">
             <asp:Label runat="server" AssociatedControlID="SubTitle" CssClass="sfTxtLbl">Banner Subtitle</asp:Label>
-            <asp:TextBox ID="SubTitle" runat="server" CssClass="sfTxt" />
+            <asp:TextBox ID="SubTitle" runat="server" CssClass="sfTxt" TextMode="MultiLine" />
             <div class="sfExample"></div>
         </li>
 
