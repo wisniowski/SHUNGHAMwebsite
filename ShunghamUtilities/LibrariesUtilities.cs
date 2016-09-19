@@ -26,6 +26,22 @@ namespace ShunghamUtilities
             return mediaUlr;
         }
 
+        public static string GetAltByImageId(Guid masterImageId)
+        {
+            var manager = LibrariesManager.GetManager();
+
+            // Get the master version of the image
+            var image = manager.GetImages().FirstOrDefault(i => i.Id == masterImageId);
+            string alt = String.Empty;
+
+            if (image != null)
+            {
+                alt = image.AlternativeText;
+            }
+
+            return alt;
+        }
+
         public static IQueryable<Image> GetImagesByAlbumNativeAPI(Guid albumId)
         {
             LibrariesManager librariesManager = LibrariesManager.GetManager();

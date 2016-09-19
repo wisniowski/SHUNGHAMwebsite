@@ -1,22 +1,34 @@
 ﻿using ShunghamUtilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Sitefinity.DynamicModules.Model;
 using Telerik.Web.UI;
 using Telerik.Sitefinity.Model;
+using Telerik.Sitefinity.Pages.Model;
 
 namespace SitefinityWebApp.CustomWidgets.OurProductsWidget
 {
     public partial class OurProductsWidget : System.Web.UI.UserControl
     {
+        public Guid BackgroundImageId { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.productsList.PreRender += ProductsList_PreRender;
+
             PopulateProducts();
+        }
+
+        private void ProductsList_PreRender(object sender, EventArgs e)
+        {
+            Image backgroundImg = this.productsList.FindControl("BackgroundImg") as Image;
+
+            if (BackgroundImageId != null && BackgroundImageId != Guid.Empty)
+            {
+                backgroundImg.ImageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.BackgroundImageId, true);
+                backgroundImg.AlternateText = LibrariesUtilities.GetAltByImageId(this.BackgroundImageId);
+            }
         }
 
         private void PopulateProducts()
@@ -57,6 +69,16 @@ namespace SitefinityWebApp.CustomWidgets.OurProductsWidget
                     productTitleLtl.Text = productTitle;
                     heading3.Controls.Add(productTitleLtl);
                 }
+
+                //Add NavigateUrl to Policy Coverage link
+                HyperLink policyCoverageLink = e.Item.FindControl("PolicyCoverageLink") as HyperLink;
+                PageNode policyCoveragePageNode = productItem.GetValue("PolicyCoverageLandingPage") as PageNode;
+                policyCoverageLink.NavigateUrl = PagesUtilities.GetPageUrlByPageNode(policyCoveragePageNode);
+
+                //Add NavigateUrl to Read More link
+                HyperLink readMoreLink = e.Item.FindControl("ReadMoreLink") as HyperLink;
+                PageNode readMorePageNode = productItem.GetValue("ReadMoreLandingPage") as PageNode;
+                readMoreLink.NavigateUrl = PagesUtilities.GetPageUrlByPageNode(readMorePageNode);
             }
         }
 

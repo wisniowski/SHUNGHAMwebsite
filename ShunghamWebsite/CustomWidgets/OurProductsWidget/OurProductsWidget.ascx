@@ -13,7 +13,7 @@
                 </div>
             </div>
             <figure class="background">
-                <asp:Image runat="server" />
+                <asp:Image ID="BackgroundImg" runat="server" />
             </figure>
         </article>
     </LayoutTemplate>
@@ -25,10 +25,10 @@
             </header>
             <asp:Literal Text='<%# Eval("Summary")%>' runat="server" />
             <p class="link-a">
-                <asp:HyperLink NavigateUrl='<%# Eval("PolicyCoverageLandingPage")%>' runat="server">
+                <asp:HyperLink ID="PolicyCoverageLink" NavigateUrl='<%# Eval("PolicyCoverageLandingPage")%>' runat="server">
                     <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, PolicyCoverageButtonText%>' />
                 </asp:HyperLink>
-                <asp:HyperLink NavigateUrl='<%# Eval("ReadMoreLandingPage")%>' runat="server" CssClass="a">
+                <asp:HyperLink ID="ReadMoreLink" NavigateUrl='<%# Eval("ReadMoreLandingPage")%>' runat="server" CssClass="a">
                     <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, ReadMoreButtonText%>' />
                 </asp:HyperLink>
             </p>
