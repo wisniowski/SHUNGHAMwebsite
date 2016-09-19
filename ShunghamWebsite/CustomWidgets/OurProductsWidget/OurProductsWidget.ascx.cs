@@ -25,7 +25,7 @@ namespace SitefinityWebApp.CustomWidgets.OurProductsWidget
         {
             Image backgroundImg = this.productsList.FindControl("BackgroundImg") as Image;
 
-            if (BackgroundImageId != null && BackgroundImageId != Guid.Empty)
+            if (BackgroundImageId != null && BackgroundImageId != Guid.Empty && backgroundImg != null)
             {
                 backgroundImg.ImageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.BackgroundImageId, true);
                 backgroundImg.AlternateText = LibrariesUtilities.GetAltByImageId(this.BackgroundImageId);
@@ -51,38 +51,50 @@ namespace SitefinityWebApp.CustomWidgets.OurProductsWidget
                 DynamicContent productItem = ((RadListViewDataItem)e.Item).DataItem as DynamicContent;
                 string productTitle = productItem.GetString("Title");
 
-                if (productTitle.StartsWith("EU"))
+                if (heading3 != null)
                 {
-                    HtmlGenericControl span = new HtmlGenericControl("span");
-                    span.Attributes.Add("class", "overlay-c");
-                    string firstPart = productTitle.Substring(0, 2);
-                    string secondPart = productTitle.Substring(2);
-                    Literal literalEU = new Literal();
-                    literalEU.Text = firstPart;
-                    heading3.Controls.Add(literalEU);
+                    if (productTitle.StartsWith("EU"))
+                    {
+                        HtmlGenericControl span = new HtmlGenericControl("span");
+                        span.Attributes.Add("class", productNameSpanClass);
+                        string firstPart = productTitle.Substring(0, 2);
+                        string secondPart = productTitle.Substring(2);
+                        Literal literalEU = new Literal();
+                        literalEU.Text = firstPart;
+                        heading3.Controls.Add(literalEU);
 
-                    span.InnerText = secondPart;
-                    heading3.Controls.Add(span);
+                        span.InnerText = secondPart;
+                        heading3.Controls.Add(span);
+                    }
+                    else
+                    {
+                        Literal productTitleLtl = new Literal();
+                        productTitleLtl.Text = productTitle;
+                        heading3.Controls.Add(productTitleLtl);
+                    }
                 }
-                else
-                {
-                    Literal productTitleLtl = new Literal();
-                    productTitleLtl.Text = productTitle;
-                    heading3.Controls.Add(productTitleLtl);
-                }
-
+                
                 //Add NavigateUrl to Policy Coverage link
                 HyperLink policyCoverageLink = e.Item.FindControl("PolicyCoverageLink") as HyperLink;
                 PageNode policyCoveragePageNode = productItem.GetValue("PolicyCoverageLandingPage") as PageNode;
-                policyCoverageLink.NavigateUrl = PagesUtilities.GetPageUrlByPageNode(policyCoveragePageNode);
+
+                if (policyCoverageLink != null && policyCoveragePageNode != null)
+                {
+                    policyCoverageLink.NavigateUrl = PagesUtilities.GetPageUrlByPageNode(policyCoveragePageNode);
+                }
 
                 //Add NavigateUrl to Read More link
                 HyperLink readMoreLink = e.Item.FindControl("ReadMoreLink") as HyperLink;
                 PageNode readMorePageNode = productItem.GetValue("ReadMoreLandingPage") as PageNode;
-                readMoreLink.NavigateUrl = PagesUtilities.GetPageUrlByPageNode(readMorePageNode);
+
+                if (readMoreLink != null && readMorePageNode != null)
+                {
+                    readMoreLink.NavigateUrl = PagesUtilities.GetPageUrlByPageNode(readMorePageNode);
+                }
             }
         }
 
         private const string productsType = "Telerik.Sitefinity.DynamicTypes.Model.Products.Product";
+        private const string productNameSpanClass = "overlay-c";
     }
 }
