@@ -1,14 +1,15 @@
-﻿using ShunghamUtilities;
-using System;
+﻿using System;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using ShunghamUtilities;
 using Telerik.Sitefinity.DynamicModules.Model;
-using Telerik.Web.UI;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Pages.Model;
+using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.OurProductsWidget
 {
+    [Telerik.Sitefinity.Web.UI.ControlDesign.ControlDesigner(typeof(Designer.OurProductsWidgetDesigner))]
     public partial class OurProductsWidget : System.Web.UI.UserControl
     {
         public Guid BackgroundImageId { get; set; }
