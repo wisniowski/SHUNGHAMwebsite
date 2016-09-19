@@ -44,7 +44,7 @@
                     <span>
                         <label for="fab" class="hidden">Last Name</label>
                         <asp:TextBox runat="server" ID="fab" placeholder="Last Name" />
-                         <asp:RequiredFieldValidator ID="rvfLastName" runat="server"
+                        <asp:RequiredFieldValidator ID="rvfLastName" runat="server"
                             ControlToValidate="fab" EnableClientScript="false"
                             ErrorMessage="Last name is required!" ValidationGroup="Submit" />
                     </span>
@@ -78,15 +78,15 @@
                         ErrorMessage="Message is required!" ValidationGroup="Submit" />
                 </p>
                 <p>
-                    <button validationgroup="Submit" 
-                            onserverclick="btnSend_Click" id="btnSend" runat="server" causesvalidation="true"
-                            type="submit">
-                            Send</button>
+                    <button validationgroup="Submit"
+                        onserverclick="btnSend_Click" id="btnSend" runat="server" causesvalidation="true"
+                        type="submit">
+                        Send</button>
                 </p>
             </div>
         </div>
     </asp:Panel>
-    <asp:Panel ID="success" runat="server" Visible="false">
+    <asp:Panel ID="success" runat="server" Visible="false" CssClass="text-center">
         <p>
             <sf:SitefinityLabel ID="successfulSubmitMessage" runat="server"
                 Text="<%$ Resources: ShunghamResources, SuccessfulSubmitMessage %>" WrapperTagName="strong"

@@ -51,7 +51,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
 
             if (Page.IsValid)
             {
-                //SubmitContactForm();
+                SubmitContactForm();
             }
         }
 
@@ -59,11 +59,12 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
         {
             Dictionary<string, string> inputs = new Dictionary<string, string>();
 
-            //inputs.Add("FirstName", this.txtFirstName.Text);
-            //inputs.Add("LastName", this.txtLastName.Text);
-            //inputs.Add("Phone", this.txtPhone.Text);
-            //inputs.Add("Email", this.txtEmail.Text);
-            //inputs.Add("Message", this.txtMessage.Text);
+            inputs.Add("FirstName", this.faa.Text);
+            inputs.Add("LastName", this.fab.Text);
+            inputs.Add("Email", this.fac.Text);
+            inputs.Add("PhoneNumber", this.fad.Text);
+            inputs.Add("Company", this.fae.Text);
+            inputs.Add("Message", this.faf.Text);
 
             FormsManager manager = FormsManager.GetManager();
             var form = manager.GetFormByName("sf_contactus");
