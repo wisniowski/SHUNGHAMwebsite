@@ -18,14 +18,14 @@
                     <asp:Literal Text='<%# Eval("FirstName")%>' runat="server" /><br>
                     <asp:Literal Text='<%# Eval("LastName")%>' runat="server" /></h2>
                 <p>
-                    <asp:Literal Text='<%# Eval("JobTitle")%>' runat="server" /></p>
+                    <asp:Literal Text='<%# Eval("JobTitle")%>' runat="server" />
+                </p>
                 <ul class="social-b">
                     <li>
                         <asp:HyperLink NavigateUrl='<%# Eval("LinkedIn")%>' runat="server">
                             <i class="icon-linkedin"></i>
                             <span>LinkedIn</span>
-                        </asp:HyperLink>'<%# Eval("LinkedIn")%>'
-
+                        </asp:HyperLink>
                     </li>
                     <li>
                         <asp:HyperLink NavigateUrl='<%# Eval("Email")%>' CssClass="email" runat="server" />
