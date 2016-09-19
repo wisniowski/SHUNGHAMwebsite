@@ -1,0 +1,64 @@
+﻿<%@ Master Language="C#" %>
+
+<%@ Register Assembly="Telerik.Sitefinity" Namespace="Telerik.Sitefinity.Web.UI" TagPrefix="sf" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Shungham</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" sizes="16x16" />
+
+    <sf:ResourceLinks runat="server" ID="ResourceLinks1">
+        <sf:ResourceFile JavaScriptLibrary="JQuery"></sf:ResourceFile>
+        <sf:ResourceFile JavaScriptLibrary="JQueryUI"></sf:ResourceFile>
+    </sf:ResourceLinks>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="root">
+            <header id="top">
+                <div id="logo">
+                    <asp:ContentPlaceHolder ID="LogoTextHolder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <nav id="skip">
+                    <ul>
+                        <li><a href="#nav" accesskey="n">Skip to navigation (n)</a></li>
+                        <li><a href="#content" accesskey="c">Skip to content (c)</a></li>
+                        <li><a href="#footer" accesskey="f">Skip to footer (f)</a></li>
+                    </ul>
+                </nav>
+                <nav id="nav">
+                    <asp:ContentPlaceHolder ID="NavigationHolder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </nav>
+            </header>
+            <header id="featured" class="a">
+                <asp:ContentPlaceHolder ID="BannerHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </header>
+            <section id="content" class="a">
+                <asp:ContentPlaceHolder ID="ContentHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </section>
+            <figure>
+                <asp:ContentPlaceHolder ID="FigurePlaceHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </figure>
+            <footer id="footer">
+                <asp:ContentPlaceHolder ID="FooterHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </footer>
+        </div>
+        <telerik:RadCodeBlock runat="server" ID="RadCodeBlock1">
+            <script src="<%= ResolveUrl("~/CustomResources/js/head.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/scripts.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/mobile.js") %>"></script>
+        </telerik:RadCodeBlock>
+    </form>
+</body>
+</html>

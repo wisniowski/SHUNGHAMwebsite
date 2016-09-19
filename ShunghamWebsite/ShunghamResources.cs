@@ -348,21 +348,6 @@ namespace SitefinityWebApp
         #region Our Products widget
 
         /// <summary>
-        /// Gets our products header text.
-        /// </summary>
-        [ResourceEntry("OurProductsHeader",
-                       Value = "Our Products",
-                       Description = "The text on 'Our Products' header in 'Our Products' widget.",
-                       LastModified = "2016/09/18")]
-        public string OurProductsHeader
-        {
-            get
-            {
-                return this["OurProductsHeader"];
-            }
-        }
-
-        /// <summary>
         /// Gets the policy coverage button text.
         /// </summary>
         [ResourceEntry("PolicyCoverageButtonText",
@@ -392,6 +377,130 @@ namespace SitefinityWebApp
             }
         }
 
+
+        #endregion
+
+        #region Contact us widget
+
+        /// <summary>
+        /// Gets the contact us title
+        /// </summary>
+        [ResourceEntry("ContactTitle",
+                       Value = "Contact <span>us</span>",
+                       Description = "The contact title",
+                       LastModified = "2016/09/19")]
+        public string ContactTitle
+        {
+            get
+            {
+                return this["ContactTitle"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the street address.
+        /// </summary>
+        [ResourceEntry("StreetAddress",
+                       Value = "25 Rue Archimède",
+                       Description = "The street address.",
+                       LastModified = "2016/09/19")]
+        public string StreetAddress
+        {
+            get
+            {
+                return this["StreetAddress"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the postal code.
+        /// </summary>
+        [ResourceEntry("PostalCode",
+                       Value = "1000",
+                       Description = "The postal code.",
+                       LastModified = "2016/09/19")]
+        public string PostalCode
+        {
+            get
+            {
+                return this["PostalCode"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the locality.
+        /// </summary>
+        [ResourceEntry("Locality",
+                       Value = "Brussels",
+                       Description = "The locality.",
+                       LastModified = "2016/09/19")]
+        public string Locality
+        {
+            get
+            {
+                return this["Locality"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the country name.
+        /// </summary>
+        [ResourceEntry("CountryName",
+                       Value = "Belgium",
+                       Description = "The country name.",
+                       LastModified = "2016/09/19")]
+        public string CountryName
+        {
+            get
+            {
+                return this["CountryName"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the contact phone number.
+        /// </summary>
+        [ResourceEntry("ContactPhone",
+                       Value = "<a href='tel:+32489105317'>+32 489 105 317</a>",
+                       Description = "The contact phone number.",
+                       LastModified = "2016/09/19")]
+        public string ContactPhone
+        {
+            get
+            {
+                return this["ContactPhone"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the contact email.
+        /// </summary>
+        [ResourceEntry("ContactEmail",
+                       Value = "<a class='email' href='mailto:info@shungham.com'>info@shungham.com</a>",
+                       Description = "The contact email.",
+                       LastModified = "2016/09/19")]
+        public string ContactEmail
+        {
+            get
+            {
+                return this["ContactEmail"];
+            }
+        }
+
+        /// <summary>
+        /// The message that appears after successful submit.
+        /// </summary>
+        [ResourceEntry("SuccessfulSubmitMessage",
+                       Value = "Thank you, we'll get in touch soon.",
+                       Description = "The message that appears after successful submit.",
+                       LastModified = "2016/09/19")]
+        public string SuccessfulSubmitMessage
+        {
+            get
+            {
+                return this["SuccessfulSubmitMessage"];
+            }
+        }
 
         #endregion
     }

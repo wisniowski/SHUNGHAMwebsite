@@ -58,6 +58,18 @@ namespace ShunghamUtilities
         }
 
         /// <summary>
+        /// Gets the page URL by page node.
+        /// </summary>
+        /// <param name="pageNode">The page node.</param>
+        /// <returns></returns>
+        public static string GetPageUrlByPageNode(PageNode pageNode)
+        {
+            string url = pageNode.GetUrl();
+
+            return url;
+        }
+
+        /// <summary>
         /// Gets the page by title or by text that is contained in the Page Title.
         /// </summary>
         /// <param name="title">The title or contained text.</param>

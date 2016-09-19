@@ -119,7 +119,6 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
 
                     HyperLink pageLink = new HyperLink();
                     pageLink.NavigateUrl = childPageNode.GetUrl();
-                    pageLink.Target = "_blank";
                     pageLink.Controls.Add(literal);
                     li.Controls.Add(pageLink);
                 }
