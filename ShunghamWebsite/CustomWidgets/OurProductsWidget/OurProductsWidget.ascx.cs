@@ -25,7 +25,7 @@ namespace SitefinityWebApp.CustomWidgets.OurProductsWidget
         {
             Image backgroundImg = this.productsList.FindControl("BackgroundImg") as Image;
 
-            if (BackgroundImageId != null && BackgroundImageId != Guid.Empty && backgroundImg != null)
+            if (backgroundImg != null && BackgroundImageId != null && BackgroundImageId != Guid.Empty)
             {
                 backgroundImg.ImageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.BackgroundImageId, true);
                 backgroundImg.AlternateText = LibrariesUtilities.GetAltByImageId(this.BackgroundImageId);
