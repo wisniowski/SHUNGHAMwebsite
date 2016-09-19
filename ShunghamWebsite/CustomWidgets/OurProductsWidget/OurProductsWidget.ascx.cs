@@ -49,7 +49,12 @@ namespace SitefinityWebApp.CustomWidgets.OurProductsWidget
             {
                 HtmlControl heading3 = e.Item.FindControl("ProductTitle") as HtmlControl;
                 DynamicContent productItem = ((RadListViewDataItem)e.Item).DataItem as DynamicContent;
-                string productTitle = productItem.GetString("Title");
+                string productTitle = String.Empty;
+
+                if (productItem != null)
+                {
+                    productTitle = productItem.GetString("Title");
+                }
 
                 if (heading3 != null)
                 {
