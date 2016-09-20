@@ -867,6 +867,13 @@
     <Compile Include="CustomWidgets\FooterWidget\FooterWidget.ascx.designer.cs">
       <DependentUpon>FooterWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\FreeTrialWidget\FreeTrialWidget.ascx.cs">
+      <DependentUpon>FreeTrialWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\FreeTrialWidget\FreeTrialWidget.ascx.designer.cs">
+      <DependentUpon>FreeTrialWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\HeaderWidget\Designer\HeaderWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\HeaderWidget\HeaderWidget.ascx.cs">
       <DependentUpon>HeaderWidget.ascx</DependentUpon>
@@ -935,6 +942,7 @@
     <Content Include="CustomWidgets\FooterWidget\Designer\FooterWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\FooterWidget\Designer\FooterWidgetDesigner.js" />
     <Content Include="CustomWidgets\FooterWidget\FooterWidget.ascx" />
+    <Content Include="CustomWidgets\FreeTrialWidget\FreeTrialWidget.ascx" />
     <Content Include="CustomWidgets\HeaderWidget\Designer\HeaderWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\HeaderWidget\Designer\HeaderWidgetDesigner.js" />
     <Content Include="CustomWidgets\HeaderWidget\HeaderWidget.ascx" />

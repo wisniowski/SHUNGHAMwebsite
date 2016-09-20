@@ -506,7 +506,7 @@ namespace SitefinityWebApp
         /// Send us a message.
         /// </summary>
         [ResourceEntry("SendUsMessage",
-                       Value = "Send us a message.",
+                       Value = "Send us a message",
                        Description = "Send us a message.",
                        LastModified = "2016/09/19")]
         public string SendUsMessage
@@ -514,6 +514,25 @@ namespace SitefinityWebApp
             get
             {
                 return this["SendUsMessage"];
+            }
+        }
+
+        #endregion
+
+        #region Free trial widget
+
+        /// <summary>
+        /// Gets the free trial title
+        /// </summary>
+        [ResourceEntry("FreeTrialTitle",
+                       Value = "<span>Get a </span>free trial",
+                       Description = "The free trial title",
+                       LastModified = "2016/09/20")]
+        public string FreeTrialTitle
+        {
+            get
+            {
+                return this["FreeTrialTitle"];
             }
         }
 
