@@ -12,7 +12,6 @@
             <header>
                 <figure>
                     <asp:Image ImageUrl='<%# Eval("Avatar.MediaUrl")%>' AlternateText='<%# Eval("Avatar.AlternativeText")%>' runat="server" />
-                    <%--<img src="http://placehold.it/300x280" alt="Placeholder" width="300" height="280">--%>
                 </figure>
                 <h2>
                     <asp:Literal Text='<%# Eval("FirstName")%>' runat="server" /><br>
@@ -34,7 +33,9 @@
                 </ul>
             </header>
             <div>
-                <asp:Literal Text='<%# Eval("Biography")%>' runat="server" />
+                <p>
+                    <asp:Literal Text='<%# Eval("Biography")%>' runat="server" />
+                </p>
             </div>
         </li>
     </ItemTemplate>
