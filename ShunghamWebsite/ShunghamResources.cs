@@ -502,6 +502,21 @@ namespace SitefinityWebApp
             }
         }
 
+        /// <summary>
+        /// Send us a message.
+        /// </summary>
+        [ResourceEntry("SendUsMessage",
+                       Value = "Send us a message.",
+                       Description = "Send us a message.",
+                       LastModified = "2016/09/19")]
+        public string SendUsMessage
+        {
+            get
+            {
+                return this["SendUsMessage"];
+            }
+        }
+
         #endregion
     }
 }

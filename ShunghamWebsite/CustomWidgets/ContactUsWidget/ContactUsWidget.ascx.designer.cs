@@ -13,13 +13,22 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget {
     public partial class ContactUs {
         
         /// <summary>
-        /// titleLtl control.
+        /// articleWrapper control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal titleLtl;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl articleWrapper;
+        
+        /// <summary>
+        /// titleLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Sitefinity.Web.UI.SitefinityLabel titleLbl;
         
         /// <summary>
         /// wrapper control.

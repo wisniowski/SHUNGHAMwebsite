@@ -88,6 +88,17 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer
             }
         }
 
+        // <summary>
+        /// Gets the control that is bound to the ShowTitle property
+        /// </summary>
+        protected virtual Control ShowTitle
+        {
+            get
+            {
+                return this.Container.GetControl<Control>("showTitle", true);
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -110,6 +121,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer
             descriptor.AddElementProperty("deselectButtonBackgroundImageId", this.DeselectButtonBackgroundImageId.ClientID);
             descriptor.AddComponentProperty("selectorBackgroundImageId", this.SelectorBackgroundImageId.ClientID);
             descriptor.AddProperty("imageServiceUrl", this.imageServiceUrl);
+            descriptor.AddElementProperty("showTitle", this.ShowTitle.ClientID);
 
             return scriptDescriptors;
         }

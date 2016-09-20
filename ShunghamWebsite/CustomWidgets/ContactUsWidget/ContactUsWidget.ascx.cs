@@ -19,6 +19,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
     public partial class ContactUs : System.Web.UI.UserControl
     {
         public Guid BackgroundImageId { get; set; }
+        public bool ShowTitle { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,21 +29,38 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
                 this.success.Visible = false;
             }
 
+            if (this.ShowTitle)
+            {
+                this.titleLbl.Attributes["style"] = "display:block";
+                this.wrapper.Attributes["class"] = "module-b double";
+            }
+            else
+            {
+                this.titleLbl.Attributes["style"] = "display:none";
+            }
             SetBackgroundImage();
         }
 
         private void SetBackgroundImage()
         {
-            if (this.backgrdImage != null && BackgroundImageId != null && BackgroundImageId != Guid.Empty)
+            if (BackgroundImageId != null && BackgroundImageId != Guid.Empty)
             {
-                var imageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.BackgroundImageId, true);
-                this.backgrdImage.ImageUrl = imageUrl;
-                this.backgrdImage.AlternateText = LibrariesUtilities.GetAltByImageId(this.BackgroundImageId);
-
-                if (this.backgrdFigure != null)
+                this.articleWrapper.Attributes["class"] = "module-a has-background";
+                if (this.backgrdImage != null)
                 {
-                    this.backgrdFigure.Attributes["style"] = string.Format(@"background-image: url('{0}');", imageUrl);
+                    var imageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.BackgroundImageId, true);
+                    this.backgrdImage.ImageUrl = imageUrl;
+                    this.backgrdImage.AlternateText = LibrariesUtilities.GetAltByImageId(this.BackgroundImageId);
+                    if (this.backgrdFigure != null)
+                    {
+                        this.backgrdFigure.Attributes["style"] = string.Format(@"background-image: url('{0}');", imageUrl);
+                    }
                 }
+            }
+            else
+            {
+                this.articleWrapper.Attributes["class"] = "double a";
+                this.backgrdFigure.Visible = false;
             }
         }
         protected void btnSend_Click(object sender, EventArgs e)
