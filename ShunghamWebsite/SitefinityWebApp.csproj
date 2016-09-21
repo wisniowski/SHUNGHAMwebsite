@@ -905,6 +905,7 @@
     <Compile Include="CustomWidgets\JobApplicationWidget\JobApplicationWidget.ascx.designer.cs">
       <DependentUpon>JobApplicationWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\JobOpeningsWidget\Designer\JobOpeningsWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\JobOpeningsWidget\JobOpeningsWidget.ascx.cs">
       <DependentUpon>JobOpeningsWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -975,6 +976,8 @@
     <Content Include="CustomWidgets\InfoWidget\Designer\InfoWidgetDesigner.js" />
     <Content Include="CustomWidgets\InfoWidget\InfoWidget.ascx" />
     <Content Include="CustomWidgets\JobApplicationWidget\JobApplicationWidget.ascx" />
+    <Content Include="CustomWidgets\JobOpeningsWidget\Designer\JobOpeningsWidgetDesigner.ascx" />
+    <Content Include="CustomWidgets\JobOpeningsWidget\Designer\JobOpeningsWidgetDesigner.js" />
     <Content Include="CustomWidgets\JobOpeningsWidget\JobOpeningsWidget.ascx" />
     <Content Include="CustomWidgets\OurProductsWidget\Designer\OurProductsWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\OurProductsWidget\Designer\OurProductsWidgetDesigner.js" />
