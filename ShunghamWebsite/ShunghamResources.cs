@@ -664,5 +664,38 @@ namespace SitefinityWebApp
             }
         }
         #endregion
+
+        #region Features widget
+
+        /// <summary>
+        /// Gets the features widget title.
+        /// </summary>
+        [ResourceEntry("FeaturesWidgetTitle",
+                       Value = "Features",
+                       Description = "FeaturesWidget Title",
+                       LastModified = "2016/09/21")]
+        public string FeaturesWidgetTitle
+        {
+            get
+            {
+                return this["FeaturesWidgetTitle"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the features read more text.
+        /// </summary>
+        [ResourceEntry("FeaturesReadMoreText",
+                       Value = "Read More",
+                       Description = "Text on 'Read More' buttons in 'Features' widget.",
+                       LastModified = "2016/09/21")]
+        public string FeaturesReadMoreText
+        {
+            get
+            {
+                return this["FeaturesReadMoreText"];
+            }
+        }
+        #endregion
     }
 }
