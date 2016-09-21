@@ -14,6 +14,7 @@
         <li class="sfFormCtrl">
             <asp:Label runat="server" AssociatedControlID="Title" CssClass="sfTxtLbl">Banner Title</asp:Label>
              <sfFields:HtmlField ID="Title" runat="server" DisplayMode="Write" 
+                EditorToolsConfiguration="Standard" HtmlFieldEditModes="All"
                 EditorContentFilters="DefaultFilters,RemoveScripts" 
                 EditorStripFormattingOptions="AllExceptNewLines" IsToOverrideDialogs="false"
                 Width="600" Height="200" />
