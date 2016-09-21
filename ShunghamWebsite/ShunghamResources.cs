@@ -517,6 +517,21 @@ namespace SitefinityWebApp
             }
         }
 
+        /// <summary>
+        /// Shungham Information sprl.
+        /// </summary>
+        [ResourceEntry("InfoLabel",
+                       Value = "Shungham Information sprl",
+                       Description = "Shungham Information sprl.",
+                       LastModified = "2016/09/21")]
+        public string InfoLabel
+        {
+            get
+            {
+                return this["InfoLabel"];
+            }
+        }
+
         #endregion
 
         #region Free trial widget
@@ -533,6 +548,25 @@ namespace SitefinityWebApp
             get
             {
                 return this["FreeTrialTitle"];
+            }
+        }
+
+        #endregion
+
+        #region Job application widget
+
+        /// <summary>
+        /// Gets the free trial title
+        /// </summary>
+        [ResourceEntry("JobApplicationTitle",
+                       Value = "<span>Apply for a</span> job",
+                       Description = "Apply for a job",
+                       LastModified = "2016/09/21")]
+        public string JobApplicationTitle
+        {
+            get
+            {
+                return this["JobApplicationTitle"];
             }
         }
 

@@ -897,6 +897,13 @@
     <Compile Include="CustomWidgets\InfoWidget\InfoWidget.ascx.designer.cs">
       <DependentUpon>InfoWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\JobApplicationWidget\JobApplicationWidget.ascx.cs">
+      <DependentUpon>JobApplicationWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\JobApplicationWidget\JobApplicationWidget.ascx.designer.cs">
+      <DependentUpon>JobApplicationWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\OurProductsWidget\Designer\OurProductsWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\OurProductsWidget\OurProductsWidget.ascx.cs">
       <DependentUpon>OurProductsWidget.ascx</DependentUpon>
@@ -957,6 +964,7 @@
     <Content Include="CustomWidgets\InfoWidget\Designer\InfoWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\InfoWidget\Designer\InfoWidgetDesigner.js" />
     <Content Include="CustomWidgets\InfoWidget\InfoWidget.ascx" />
+    <Content Include="CustomWidgets\JobApplicationWidget\JobApplicationWidget.ascx" />
     <Content Include="CustomWidgets\OurProductsWidget\Designer\OurProductsWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\OurProductsWidget\Designer\OurProductsWidgetDesigner.js" />
     <Content Include="CustomWidgets\OurProductsWidget\OurProductsWidget.ascx" />

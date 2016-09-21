@@ -44,9 +44,11 @@ namespace SitefinityWebApp
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/OurProductsWidget/OurProductsWidget.ascx", "Our Products Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/ContactUsWidget/ContactUsWidget.ascx", "Contact Us Widget");
+               "~/CustomWidgets/ContactUsWidget/ContactUsWidget.ascx", "Contact Us Form");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-              "~/CustomWidgets/FreeTrialWidget/FreeTrialWidget.ascx", "Free Trial Widget");
+              "~/CustomWidgets/FreeTrialWidget/FreeTrialWidget.ascx", "Free Trial Form");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+              "~/CustomWidgets/JobApplicationWidget/JobApplicationWidget.ascx", "Job Application Form");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/OurTeamWidget/OurTeamWidget.ascx", "Our Team Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,

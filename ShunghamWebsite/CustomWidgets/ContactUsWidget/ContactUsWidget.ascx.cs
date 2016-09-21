@@ -32,7 +32,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
             if (this.ShowTitle)
             {
                 this.titleLbl.Attributes["style"] = "display:block";
-                this.wrapper.Attributes["class"] = "module-b double";
+                this.wrapper.Attributes["class"] = ContactUs.wrapperClass;
             }
             else
             {
@@ -45,7 +45,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
         {
             if (BackgroundImageId != null && BackgroundImageId != Guid.Empty)
             {
-                this.articleWrapper.Attributes["class"] = "module-a has-background";
+                this.articleWrapper.Attributes["class"] = ContactUs.articleWrapperBackgroundClass;
                 if (this.backgrdImage != null)
                 {
                     var imageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.BackgroundImageId, true);
@@ -59,7 +59,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
             }
             else
             {
-                this.articleWrapper.Attributes["class"] = "double a";
+                this.articleWrapper.Attributes["class"] = ContactUs.articleWrapperNoBckndClass;
                 this.backgrdFigure.Visible = false;
             }
         }
@@ -69,46 +69,25 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
 
             if (Page.IsValid)
             {
-                SubmitContactForm();
+                string ipAddress = this.Page.Request.UserHostAddress;
+
+                var identity = ClaimsManager.GetCurrentIdentity();
+                var userId = identity != null ? identity.UserId : Guid.Empty;
+                FormsUtilities.SubmitForm(this.faa.Text, this.fab.Text, this.fac.Text, this.fad.Text,
+                    this.fae.Text, this.faf.Text, ipAddress, userId, ContactUs.formName);
+
+                this.wrapper.Visible = false;
+                this.success.Visible = true;
             }
         }
 
-        private void SubmitContactForm()
-        {
-            Dictionary<string, string> inputs = new Dictionary<string, string>();
+        #region Private fields and constants
 
-            inputs.Add("FirstName", this.faa.Text);
-            inputs.Add("LastName", this.fab.Text);
-            inputs.Add("Email", this.fac.Text);
-            inputs.Add("PhoneNumber", this.fad.Text);
-            inputs.Add("Company", this.fae.Text);
-            inputs.Add("Message", this.faf.Text);
+        private const string formName = "sf_contactus";
+        private const string articleWrapperNoBckndClass = "double a";
+        private const string articleWrapperBackgroundClass = "module-a has-background";
+        private const string wrapperClass = "module-b double";
 
-            FormsManager manager = FormsManager.GetManager();
-            var form = manager.GetFormByName("sf_contactus");
-            FormEntry entry = manager.CreateFormEntry(form.EntriesTypeName);
-
-            foreach (var item in inputs)
-            {
-                entry.SetValue(item.Key, item.Value);
-            }
-
-            entry.IpAddress = this.Page.Request.UserHostAddress;
-            var identity = ClaimsManager.GetCurrentIdentity();
-            entry.UserId = identity != null ? identity.UserId : Guid.Empty;
-
-            if (AppSettings.CurrentSettings.Multilingual)
-            {
-                entry.Language = System.Globalization.CultureInfo.CurrentUICulture.Name;
-            }
-
-            entry.ReferralCode = (manager.Provider.GetNextReferralCode(entry.GetType().ToString())).ToString();
-            entry.SubmittedOn = System.DateTime.UtcNow;
-
-            manager.SaveChanges();
-
-            this.wrapper.Visible = false;
-            this.success.Visible = true;
-        }
+        #endregion
     }
 }

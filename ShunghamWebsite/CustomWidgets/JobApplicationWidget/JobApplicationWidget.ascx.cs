@@ -13,10 +13,10 @@ using Telerik.Sitefinity.Security.Claims;
 using Telerik.Sitefinity.Web.UI.ControlDesign;
 using Telerik.Sitefinity.Model;
 
-namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget
+namespace SitefinityWebApp.CustomWidgets.JobApplicationWidget
 {
     [ControlDesigner(typeof(ContactUsWidgetDesigner))]
-    public partial class FreeTrialWidget : System.Web.UI.UserControl
+    public partial class JobApplicationWidget : System.Web.UI.UserControl
     {
         public Guid BackgroundImageId { get; set; }
         public bool ShowTitle { get; set; }
@@ -32,7 +32,7 @@ namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget
             if (this.ShowTitle)
             {
                 this.titleLbl.Attributes["style"] = "display:block";
-                this.wrapper.Attributes["class"] = FreeTrialWidget.wrapperClass;
+                this.wrapper.Attributes["class"] = JobApplicationWidget.wrapperClass;
             }
             else
             {
@@ -45,7 +45,7 @@ namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget
         {
             if (BackgroundImageId != null && BackgroundImageId != Guid.Empty)
             {
-                this.articleWrapper.Attributes["class"] = FreeTrialWidget.articleWrapperBackgroundClass;
+                this.articleWrapper.Attributes["class"] = JobApplicationWidget.articleWrapperBackgroundClass;
                 if (this.backgrdImage != null)
                 {
                     var imageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.BackgroundImageId, true);
@@ -59,7 +59,7 @@ namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget
             }
             else
             {
-                this.articleWrapper.Attributes["class"] = FreeTrialWidget.articleWrapperNoBckndClass;
+                this.articleWrapper.Attributes["class"] = JobApplicationWidget.articleWrapperNoBckndClass;
                 this.backgrdFigure.Visible = false;
             }
         }
@@ -73,8 +73,8 @@ namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget
 
                 var identity = ClaimsManager.GetCurrentIdentity();
                 var userId = identity != null ? identity.UserId : Guid.Empty;
-                FormsUtilities.SubmitForm(this.faa.Text, this.fab.Text, this.fac.Text, this.fad.Text,
-                    this.fae.Text, this.faf.Text, ipAddress, userId, FreeTrialWidget.formName);
+                FormsUtilities.SubmitForm(this.faa.Text, this.fab.Text, this.fac.Text, this.fad.Text, 
+                    this.fae.Text, this.faf.Text, ipAddress, userId, JobApplicationWidget.formName);
 
                 this.wrapper.Visible = false;
                 this.success.Visible = true;
@@ -83,7 +83,7 @@ namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget
 
         #region Private fields and constants
 
-        private const string formName = "sf_freetrial";
+        private const string formName = "sf_jobapplication";
         private const string articleWrapperNoBckndClass = "double a";
         private const string articleWrapperBackgroundClass = "module-a has-background";
         private const string wrapperClass = "module-b double";
