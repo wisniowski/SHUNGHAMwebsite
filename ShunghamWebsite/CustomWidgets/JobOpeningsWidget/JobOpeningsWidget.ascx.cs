@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using ShunghamUtilities;
 
 namespace SitefinityWebApp.CustomWidgets.JobOpeningsWidget
 {
@@ -11,7 +7,19 @@ namespace SitefinityWebApp.CustomWidgets.JobOpeningsWidget
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            BindJobOpeningsWidget();
         }
+
+        private void BindJobOpeningsWidget()
+        {
+            var jobOpenings = DynamicModulesUtilities.GetDataItemsByType(jobOpeningsType);
+            if (jobOpenings != null)
+            {
+                this.jobOpeningsList.DataSource = jobOpenings;
+                this.jobOpeningsList.DataBind();
+            }
+        }
+
+        private const string jobOpeningsType = "Telerik.Sitefinity.DynamicTypes.Model.JobOpenings.JobOpening";
     }
 }
