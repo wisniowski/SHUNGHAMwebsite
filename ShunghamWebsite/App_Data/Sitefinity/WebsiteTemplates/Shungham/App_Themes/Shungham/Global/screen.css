@@ -3858,6 +3858,23 @@ svg:not(:root) {
     }
 }
 
+/*Fix for Job Openings widget*/
+.news-a ul li:after{
+    content: "";
+    display: block;
+    position: absolute;
+    left: -12px;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    border-radius: 9px;
+    background: #cb1010;
+}
+
+.news-a header ul li:after{
+    display: none;
+}
+
 /*Sitefinity backend fixes*/
 
 .sfPageEditor div.RadWindow{
