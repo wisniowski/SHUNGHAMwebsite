@@ -3,6 +3,7 @@ using ShunghamUtilities;
 
 namespace SitefinityWebApp.CustomWidgets.ButtonWidget
 {
+    [Telerik.Sitefinity.Web.UI.ControlDesign.ControlDesigner(typeof(Designer.ButtonWidgetDesigner))]
     public partial class ButtonWidget : System.Web.UI.UserControl
     {
         public string Text { get; set; }
