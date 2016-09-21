@@ -51,7 +51,6 @@ head.ready(function() {
 		"use strict";
 		globals.GLOB = {};
 	}( (1,eval)('this') ));
-	//var $ = jQuery.noConflict();
 	var Default = {
 		utils : {
 			links : function(){
@@ -61,10 +60,6 @@ head.ready(function() {
 				});
 			},
 			mails : function(){
-				$('.email:not(:input, div)').each(function(index){
-					em = $(this).text().replace('//','@').replace(/\//g,'.');
-					$(this).text(em).attr('href','mailto:'+em);
-				});
 				$('.social-b a.email').wrapInner('<span class="inner"></span>').prepend('<i class="icon-envelope"></i>');
 			},
 			forms : function(){
