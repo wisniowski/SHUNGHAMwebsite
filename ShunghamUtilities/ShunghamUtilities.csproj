@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DynamicModulesUtilities.cs" />
+    <Compile Include="FormsUtilities.cs" />
     <Compile Include="LibrariesUtilities.cs" />
     <Compile Include="PagesUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

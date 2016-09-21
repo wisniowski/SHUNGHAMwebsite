@@ -12,19 +12,22 @@
 <div id="designerLayoutRoot" class="sfContentViews sfSingleContentView" style="max-height: 400px; overflow: auto;">
     <ol>
         <li class="sfFormCtrl">
+            <asp:CheckBox runat="server" ID="showTitle" Text="Show Title" CssClass="sfCheckBox" />
+        </li>
+        <li class="sfFormCtrl">
             <asp:Label ID="Label1" runat="server" CssClass="sfTxtLbl">Background Image</asp:Label>
             <img id="previewBackgroundImageId" src="" alt="" style="display: none;" />
             <span style="display: none;" class="sfSelectedItem" id="selectedBackgroundImageId"></span>
             <div>
                 <asp:LinkButton ID="selectButtonBackgroundImageId" OnClientClick="return false;" runat="server" CssClass="sfLinkBtn sfChange">
-        <span class="sfLinkBtnIn">
-          <asp:Literal ID="Literal1" runat="server" Text="<%$Resources:Labels, SelectDotDotDot %>" />
-        </span>
+                    <span class="sfLinkBtnIn">
+                        <asp:Literal ID="Literal1" runat="server" Text="<%$Resources:Labels, SelectDotDotDot %>" />
+                    </span>
                 </asp:LinkButton>
                 <asp:LinkButton ID="deselectButtonBackgroundImageId" OnClientClick="return false;" runat="server" CssClass="sfLinkBtn sfChange">
-        <span class="sfLinkBtnIn">
-          <asp:Literal ID="Literal2" runat="server" Text="<%$Resources:Labels, Remove %>" />
-        </span>
+                    <span class="sfLinkBtnIn">
+                        <asp:Literal ID="Literal2" runat="server" Text="<%$Resources:Labels, Remove %>" />
+                    </span>
                 </asp:LinkButton>
             </div>
             <sf:EditorContentManagerDialog runat="server" ID="selectorBackgroundImageId" DialogMode="Image" HostedInRadWindow="false" BodyCssClass="" />

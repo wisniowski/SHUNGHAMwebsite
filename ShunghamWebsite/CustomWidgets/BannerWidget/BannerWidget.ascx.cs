@@ -54,7 +54,6 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget
         private void AddButton(Control parent, string btnText, Guid landingPageId, string btnExternalLink)
         {
             HyperLink btnLink = new HyperLink();
-            btnLink.Target = "_blank";
             btnLink.CssClass = "b";
 
             Literal btnTextLtl = new Literal();

@@ -1,13 +1,14 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ContactUsWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.ContactUsWidget.ContactUs" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FreeTrialWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.FreeTrialWidget.FreeTrialWidget" %>
+
 <%@ Register Assembly="Telerik.Sitefinity" Namespace="Telerik.Sitefinity.Web.UI" TagPrefix="sf" %>
 
 <article id="articleWrapper" runat="server">
     <sf:SitefinityLabel runat="server" ID="titleLbl" HideIfNoText="true" WrapperTagName="H2"
-        CssClass="text-center" Text="<%$ Resources: ShunghamResources, ContactTitle %>" />
+        CssClass="text-center" Text="<%$ Resources: ShunghamResources, FreeTrialTitle %>" />
     <asp:Panel ID="wrapper" runat="server">
         <header class="vcard a">
             <h3 class="mobile-hide">
-                <asp:Literal runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
+                <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
             <p class="fn org strong">Shungham Information sprl</p>
             <ul>
                 <li class="adr">
@@ -33,7 +34,7 @@
         </header>
         <div class="form-a">
             <h3 class="mobile-only">
-                <asp:Literal runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
+                <asp:Literal ID="Literal2" runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
             <p class="double a">
                 <span>
                     <label for="faa" class="hidden">First Name</label>

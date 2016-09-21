@@ -15,7 +15,7 @@
                 </asp:HyperLink>
             </li>
             <li class="btn invisible">
-                <asp:HyperLink ID="GetTrialLink" runat="server" Target="_blank">
+                <asp:HyperLink ID="GetTrialLink" runat="server">
                     <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, GetTrialButton%>' />
                 </asp:HyperLink>
             </li>

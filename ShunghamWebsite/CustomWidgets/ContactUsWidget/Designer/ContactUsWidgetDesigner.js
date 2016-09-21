@@ -16,6 +16,8 @@ SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer.ContactUsWidgetDesigner 
     /* Initialize the service url for the image thumbnails */
     this.imageServiceUrl = null;
 
+    this._showTitle = null;
+
     /* Calls the base constructor */
     SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer.ContactUsWidgetDesigner.initializeBase(this, [element]);
 }
@@ -103,6 +105,9 @@ SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer.ContactUsWidgetDesigner.
     refreshUI: function () {
         var controlData = this._propertyEditor.get_control(); /* JavaScript clone of your control - all the control properties will be properties of the controlData too */
 
+        /* RefreshUI ShowTitle */
+        jQuery(this.get_showTitle()).attr("checked", controlData.ShowTitle);
+
         /* RefreshUI BackgroundImageId */
         this.get_selectedBackgroundImageId().innerHTML = controlData.BackgroundImageId;
         if (controlData.BackgroundImageId && controlData.BackgroundImageId != "00000000-0000-0000-0000-000000000000") {
@@ -129,6 +134,9 @@ SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer.ContactUsWidgetDesigner.
     /* Called when the "Save" button is clicked. Here you can transfer the settings from the designer to the control */
     applyChanges: function () {
         var controlData = this._propertyEditor.get_control();
+
+        /* ApplyChanges ShowTitle */
+        controlData.ShowTitle = jQuery(this.get_showTitle()).is(":checked");
 
         /* ApplyChanges BackgroundImageId */
         controlData.BackgroundImageId = this.get_selectedBackgroundImageId().innerHTML;
@@ -217,7 +225,10 @@ SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer.ContactUsWidgetDesigner.
             this._selectedBackgroundImageId = this.findElement("selectedBackgroundImageId");
         }
         return this._selectedBackgroundImageId;
-    }
+    },
+    /* ShowTitle properties */
+    get_showTitle: function () { return this._showTitle; },
+    set_showTitle: function (value) { this._showTitle = value; }
 }
 
 SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer.ContactUsWidgetDesigner.registerClass('SitefinityWebApp.CustomWidgets.ContactUsWidget.Designer.ContactUsWidgetDesigner', Telerik.Sitefinity.Web.UI.ControlDesign.ControlDesignerBase);

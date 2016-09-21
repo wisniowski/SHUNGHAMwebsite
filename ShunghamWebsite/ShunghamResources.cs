@@ -502,6 +502,74 @@ namespace SitefinityWebApp
             }
         }
 
+        /// <summary>
+        /// Send us a message.
+        /// </summary>
+        [ResourceEntry("SendUsMessage",
+                       Value = "Send us a message",
+                       Description = "Send us a message.",
+                       LastModified = "2016/09/19")]
+        public string SendUsMessage
+        {
+            get
+            {
+                return this["SendUsMessage"];
+            }
+        }
+
+        /// <summary>
+        /// Shungham Information sprl.
+        /// </summary>
+        [ResourceEntry("InfoLabel",
+                       Value = "Shungham Information sprl",
+                       Description = "Shungham Information sprl.",
+                       LastModified = "2016/09/21")]
+        public string InfoLabel
+        {
+            get
+            {
+                return this["InfoLabel"];
+            }
+        }
+
+        #endregion
+
+        #region Free trial widget
+
+        /// <summary>
+        /// Gets the free trial title
+        /// </summary>
+        [ResourceEntry("FreeTrialTitle",
+                       Value = "<span>Get a </span>free trial",
+                       Description = "The free trial title",
+                       LastModified = "2016/09/20")]
+        public string FreeTrialTitle
+        {
+            get
+            {
+                return this["FreeTrialTitle"];
+            }
+        }
+
+        #endregion
+
+        #region Job application widget
+
+        /// <summary>
+        /// Gets the free trial title
+        /// </summary>
+        [ResourceEntry("JobApplicationTitle",
+                       Value = "<span>Apply for a</span> job",
+                       Description = "Apply for a job",
+                       LastModified = "2016/09/21")]
+        public string JobApplicationTitle
+        {
+            get
+            {
+                return this["JobApplicationTitle"];
+            }
+        }
+
         #endregion
     }
 }

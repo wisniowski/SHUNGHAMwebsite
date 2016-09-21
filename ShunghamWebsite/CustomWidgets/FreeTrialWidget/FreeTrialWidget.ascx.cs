@@ -13,10 +13,10 @@ using Telerik.Sitefinity.Security.Claims;
 using Telerik.Sitefinity.Web.UI.ControlDesign;
 using Telerik.Sitefinity.Model;
 
-namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
+namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget
 {
     [ControlDesigner(typeof(ContactUsWidgetDesigner))]
-    public partial class ContactUs : System.Web.UI.UserControl
+    public partial class FreeTrialWidget : System.Web.UI.UserControl
     {
         public Guid BackgroundImageId { get; set; }
         public bool ShowTitle { get; set; }
@@ -32,7 +32,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
             if (this.ShowTitle)
             {
                 this.titleLbl.Attributes["style"] = "display:block";
-                this.wrapper.Attributes["class"] = ContactUs.wrapperClass;
+                this.wrapper.Attributes["class"] = FreeTrialWidget.wrapperClass;
             }
             else
             {
@@ -45,7 +45,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
         {
             if (BackgroundImageId != null && BackgroundImageId != Guid.Empty)
             {
-                this.articleWrapper.Attributes["class"] = ContactUs.articleWrapperBackgroundClass;
+                this.articleWrapper.Attributes["class"] = FreeTrialWidget.articleWrapperBackgroundClass;
                 if (this.backgrdImage != null)
                 {
                     var imageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.BackgroundImageId, true);
@@ -59,7 +59,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
             }
             else
             {
-                this.articleWrapper.Attributes["class"] = ContactUs.articleWrapperNoBckndClass;
+                this.articleWrapper.Attributes["class"] = FreeTrialWidget.articleWrapperNoBckndClass;
                 this.backgrdFigure.Visible = false;
             }
         }
@@ -74,7 +74,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
                 var identity = ClaimsManager.GetCurrentIdentity();
                 var userId = identity != null ? identity.UserId : Guid.Empty;
                 FormsUtilities.SubmitForm(this.faa.Text, this.fab.Text, this.fac.Text, this.fad.Text,
-                    this.fae.Text, this.faf.Text, ipAddress, userId, ContactUs.formName);
+                    this.fae.Text, this.faf.Text, ipAddress, userId, FreeTrialWidget.formName);
 
                 this.wrapper.Visible = false;
                 this.success.Visible = true;
@@ -83,7 +83,7 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
 
         #region Private fields and constants
 
-        private const string formName = "sf_contactus";
+        private const string formName = "sf_freetrial";
         private const string articleWrapperNoBckndClass = "double a";
         private const string articleWrapperBackgroundClass = "module-a has-background";
         private const string wrapperClass = "module-b double";
