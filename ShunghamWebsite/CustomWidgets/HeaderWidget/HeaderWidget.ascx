@@ -10,7 +10,7 @@
         <ul>
             <asp:PlaceHolder ID="NavItemsContainer" runat="server" />
             <li class="strong">
-                <asp:HyperLink ID="LogInLink" runat="server">
+                <asp:HyperLink ID="LogInLink" runat="server" Target="_blank">
                     <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, LogInLinkText%>' />
                 </asp:HyperLink>
             </li>
