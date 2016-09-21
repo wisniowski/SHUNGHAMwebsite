@@ -571,5 +571,98 @@ namespace SitefinityWebApp
         }
 
         #endregion
+
+        #region Job Openings widget
+
+        /// <summary>
+        /// Gets the job openings widget title.
+        /// </summary>
+        [ResourceEntry("JobOpeningsWidgetTitle",
+                       Value = "Current job <span>openings</span>",
+                       Description = "JobOpeningsWidget Title",
+                       LastModified = "2016/09/21")]
+        public string JobOpeningsWidgetTitle
+        {
+            get
+            {
+                return this["JobOpeningsWidgetTitle"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the job basis text.
+        /// </summary>
+        [ResourceEntry("JobBasisText",
+                       Value = "Basis:",
+                       Description = "Explanatory text displayed in front of the job basis.",
+                       LastModified = "2016/09/21")]
+        public string JobBasisText
+        {
+            get
+            {
+                return this["JobBasisText"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the job added date text.
+        /// </summary>
+        [ResourceEntry("JobAddedText",
+                       Value = "Added:",
+                       Description = "Explanatory text displayed in front of the job Added date.",
+                       LastModified = "2016/09/21")]
+        public string JobAddedText
+        {
+            get
+            {
+                return this["JobAddedText"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the job key skills text.
+        /// </summary>
+        [ResourceEntry("JobKeySkillsText",
+                       Value = "Key Skills",
+                       Description = "Job Key skills text.",
+                       LastModified = "2016/09/21")]
+        public string JobKeySkillsText
+        {
+            get
+            {
+                return this["JobKeySkillsText"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the job responsibilities text.
+        /// </summary>
+        [ResourceEntry("JobResponsibilitiesText",
+                       Value = "Responsibilities",
+                       Description = "Job Responsibilities text.",
+                       LastModified = "2016/09/21")]
+        public string JobResponsibilitiesText
+        {
+            get
+            {
+                return this["JobResponsibilitiesText"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the apply now button text.
+        /// </summary>
+        [ResourceEntry("ApplyNowButtonText",
+                       Value = "Apply Now",
+                       Description = "The text on Apply Now button.",
+                       LastModified = "2016/09/21")]
+        public string ApplyNowButtonText
+        {
+            get
+            {
+                return this["ApplyNowButtonText"];
+            }
+        }
+        #endregion
     }
 }
