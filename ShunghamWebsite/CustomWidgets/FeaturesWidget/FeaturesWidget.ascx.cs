@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using ShunghamUtilities;
 
 namespace SitefinityWebApp.CustomWidgets.FeaturesWidget
 {
@@ -11,7 +7,22 @@ namespace SitefinityWebApp.CustomWidgets.FeaturesWidget
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            BindFeaturesWidget();
         }
+
+        private void BindFeaturesWidget()
+        {
+            var productFeatures = DynamicModulesUtilities.GetDataItemsByType(productFeaturesType);
+            if (productFeatures != null)
+            {
+                this.featuresList.DataSource = productFeatures;
+                this.featuresList.DataBind();
+
+                this.featuresPopupList.DataSource = productFeatures;
+                this.featuresPopupList.DataBind();
+            }
+        }
+
+        private const string productFeaturesType = "Telerik.Sitefinity.DynamicTypes.Model.ProductFeatures.Productfeature";
     }
 }

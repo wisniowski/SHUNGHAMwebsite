@@ -29,6 +29,15 @@
                 </asp:HyperLink>
             </p>
         </article>
+    </ItemTemplate>
+</telerik:RadListView>
+
+<telerik:RadListView ID="featuresPopupList" ItemPlaceholderID="FeaturesPopupsContainer" runat="server"
+    EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
+    <LayoutTemplate>
+            <asp:PlaceHolder ID="FeaturesPopupsContainer" runat="server" />
+    </LayoutTemplate>
+    <ItemTemplate>
         <article class="popup-a text-center" title='<%# Eval("Title")%>'>
             <header>
                 <h2 class="overlay-c">
