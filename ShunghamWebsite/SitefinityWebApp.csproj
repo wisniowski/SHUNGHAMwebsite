@@ -867,6 +867,13 @@
       <DependentUpon>ContactUsWidget.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.cs" />
+    <Compile Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx.cs">
+      <DependentUpon>FeaturesWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx.designer.cs">
+      <DependentUpon>FeaturesWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\FooterWidget\Designer\FooterWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\FooterWidget\FooterWidget.ascx.cs">
       <DependentUpon>FooterWidget.ascx</DependentUpon>
@@ -965,6 +972,7 @@
     <Content Include="CustomWidgets\ContactUsWidget\ContactUsWidget.ascx" />
     <Content Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.js" />
+    <Content Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx" />
     <Content Include="CustomWidgets\FooterWidget\Designer\FooterWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\FooterWidget\Designer\FooterWidgetDesigner.js" />
     <Content Include="CustomWidgets\FooterWidget\FooterWidget.ascx" />
