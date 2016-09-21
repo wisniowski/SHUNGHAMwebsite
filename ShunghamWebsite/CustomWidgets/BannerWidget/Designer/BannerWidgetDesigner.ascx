@@ -13,7 +13,10 @@
     <ol>
         <li class="sfFormCtrl">
             <asp:Label runat="server" AssociatedControlID="Title" CssClass="sfTxtLbl">Banner Title</asp:Label>
-            <asp:TextBox ID="Title" runat="server" CssClass="sfTxt" />
+             <sfFields:HtmlField ID="Title" runat="server" DisplayMode="Write" 
+                EditorContentFilters="DefaultFilters,RemoveScripts" 
+                EditorStripFormattingOptions="AllExceptNewLines" IsToOverrideDialogs="false"
+                Width="600" Height="200" />
             <div class="sfExample"></div>
         </li>
 

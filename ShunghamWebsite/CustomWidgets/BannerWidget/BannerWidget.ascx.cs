@@ -27,7 +27,11 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget
         {
             if (!string.IsNullOrEmpty(Title))
             {
-                this.titleLtl.Text = Title;
+                this.titleLbl.Text = Title;
+                if (this.titleLbl.Text.StartsWith("<span"))
+                {
+                    this.titleLbl.CssClass = "stronger overlay-c";
+                }
             }
 
             if (!string.IsNullOrEmpty(SubTitle))

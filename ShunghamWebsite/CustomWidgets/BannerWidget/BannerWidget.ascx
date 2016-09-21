@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BannerWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.BannerWidget.BannerWidget" %>
+<%@ Register Assembly="Telerik.Sitefinity" Namespace="Telerik.Sitefinity.Web.UI" TagPrefix="sf" %>
 
-<h1>
-    <asp:Literal runat="server" ID="titleLtl" />
-</h1>
+<sf:SitefinityLabel ID="titleLbl" runat="server" WrapperTagName="H1"
+    HideIfNoText="true" />
 <p>
     <asp:Literal runat="server" ID="subTitleLtl" />
 </p>

@@ -192,7 +192,8 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
         var controlData = this._propertyEditor.get_control(); /* JavaScript clone of your control - all the control properties will be properties of the controlData too */
 
         /* RefreshUI Title */
-        jQuery(this.get_title()).val(controlData.Title);
+        var htmlText = controlData.Title ? controlData.Title : "";
+        this.get_title().control.set_value(htmlText);
 
         /* RefreshUI SubTitle */
         jQuery(this.get_subTitle()).val(controlData.SubTitle);
@@ -282,8 +283,9 @@ SitefinityWebApp.CustomWidgets.BannerWidget.Designer.BannerWidgetDesigner.protot
     applyChanges: function () {
         var controlData = this._propertyEditor.get_control();
         this._resizeControlDesigner();
+
         /* ApplyChanges Title */
-        controlData.Title = jQuery(this.get_title()).val();
+        controlData.Title = this.get_title().control.get_value();
 
         /* ApplyChanges SubTitle */
         controlData.SubTitle = jQuery(this.get_subTitle()).val();
