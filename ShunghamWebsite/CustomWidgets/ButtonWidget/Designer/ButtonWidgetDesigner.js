@@ -71,6 +71,9 @@ SitefinityWebApp.CustomWidgets.ButtonWidget.Designer.ButtonWidgetDesigner.protot
         /* RefreshUI Text */
         jQuery(this.get_text()).val(controlData.Text);
 
+        /* RefreshUI Text */
+        jQuery("#AlignmentSelector").val(controlData.Alignment);
+
         /* RefreshUI LandingPageId */
         if (controlData.LandingPageId && controlData.LandingPageId !== "00000000-0000-0000-0000-000000000000") {
             var pagesSelectorLandingPageId = this.get_pageSelectorLandingPageId().get_pageSelector();
@@ -104,7 +107,8 @@ SitefinityWebApp.CustomWidgets.ButtonWidget.Designer.ButtonWidgetDesigner.protot
         /* ApplyChanges Text */
         controlData.Text = jQuery(this.get_text()).val();
 
-        /* ApplyChanges LandingPageId */
+        /* ApplyChanges Alignment */
+        controlData.Alignment = jQuery("#AlignmentSelector").val();
     },
 
     /* --------------------------------- event handlers ---------------------------------- */

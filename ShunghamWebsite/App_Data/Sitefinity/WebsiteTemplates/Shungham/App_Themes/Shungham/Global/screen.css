@@ -2085,16 +2085,16 @@ figure {
 
 .float-left {
     float: left;
-    max-width: 60%;
     margin-right: 40px;
     margin-bottom: 45px;
+    max-width: 60%;
 }
 
 .float-right {
     float: right;
-    max-width: 60%;
     margin-left: 40px;
     margin-bottom: 45px;
+    max-width: 60%;
 }
 
     figure:last-child, .float-left:last-child, .float-right:last-child {
@@ -3866,6 +3866,27 @@ svg:not(:root) {
     display: none;
 }
 
+.align-left {
+    display: block !important;
+    margin-right: auto;
+    margin-left: 0px;
+    max-width: 60%;
+}
+
+.align-center {
+    display: block !important;
+    max-width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.align-right {
+    display: block !important;
+    margin-right: 0px;
+    margin-left: auto;
+    max-width: 60%;
+}
+
 /*Sitefinity backend fixes*/
 
 .sfPageEditor div.RadWindow{
@@ -3877,4 +3898,8 @@ svg:not(:root) {
 
 #ZoneEditor{
     z-index: 100000 !important;
+}
+
+.sf_colsIn{
+    margin: 10px;
 }
