@@ -4,6 +4,7 @@ using System.Linq;
 using Telerik.Sitefinity.DynamicModules;
 using Telerik.Sitefinity.DynamicModules.Model;
 using Telerik.Sitefinity.Utilities.TypeConverters;
+using Telerik.Sitefinity.Model;
 
 namespace ShunghamUtilities
 {
@@ -25,5 +26,21 @@ namespace ShunghamUtilities
 
             return myCollection;
         }
+
+        public static string GetDataItemTitleById(string type, Guid id)
+        {
+            string title = string.Empty;
+            DynamicModuleManager dynamicModuleManager = DynamicModuleManager.GetManager();
+            Type resolvedType = TypeResolutionService.ResolveType(type);
+
+            var item = dynamicModuleManager.GetDataItem(resolvedType, id);
+
+            if (item != null)
+            {
+                title = item.GetString("Title");
+            }
+
+            return title;
+        } 
     }
 }
