@@ -6,7 +6,7 @@
         <h2 class="text-center">
             <asp:Literal runat="server" Text='<%$ Resources:ShunghamResources, FeaturesWidgetTitle%>' />
         </h2>
-        <div class="news-a а">
+        <div class="news-a b">
             <asp:PlaceHolder ID="FeaturesContainer" runat="server" />
         </div>
     </LayoutTemplate>
