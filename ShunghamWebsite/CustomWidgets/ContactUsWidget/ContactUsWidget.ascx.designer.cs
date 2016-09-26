@@ -13,6 +13,15 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget {
     public partial class ContactUs {
         
         /// <summary>
+        /// scriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptManager;
+        
+        /// <summary>
         /// articleWrapper control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Sitefinity.Web.UI.SitefinityLabel titleLbl;
+        
+        /// <summary>
+        /// updatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel;
         
         /// <summary>
         /// wrapper control.
