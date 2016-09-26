@@ -8,7 +8,7 @@
                 <h2 class="text-center">
                     <span>Our</span> products
                 </h2>
-                <div class="news-a a">
+                <div class="news-a b">
                     <asp:PlaceHolder ID="ProductsContainer" runat="server" />
                 </div>
             </div>

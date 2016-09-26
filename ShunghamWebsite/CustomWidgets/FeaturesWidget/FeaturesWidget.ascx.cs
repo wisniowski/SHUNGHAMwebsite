@@ -20,25 +20,16 @@ namespace SitefinityWebApp.CustomWidgets.FeaturesWidget
 
         private void BindFeaturesWidget()
         {
+            List<DynamicContent> dataSource;
+
             var productFeatures = DynamicModulesUtilities.GetDataItemsByType(productFeaturesType);
-            List<DynamicContent> dataSource = new List<DynamicContent>();
+            
             if (productFeatures != null)
             {
                 if (this.ProductId != null && this.ProductId != Guid.Empty)
                 {
                     var productTitle = DynamicModulesUtilities.GetDataItemTitleById(productType, this.ProductId);
-                    foreach (var feature in productFeatures)
-                    {
-                        var relatedItemsTemp = feature.GetRelatedItems("RelatedProduct").OfType<DynamicContent>();
-
-                        foreach (var relatedProduct in relatedItemsTemp)
-                        {
-                            if (relatedProduct.GetString("Title") == productTitle)
-                            {
-                                dataSource.Add(feature);
-                            }
-                        }
-                    }
+                    dataSource = this.GetDataItemsRelatedToItemWithTitle(productTitle, productFeatures);
                 }
                 else
                 {
@@ -56,7 +47,28 @@ namespace SitefinityWebApp.CustomWidgets.FeaturesWidget
             }
         }
 
+        private List<DynamicContent> GetDataItemsRelatedToItemWithTitle(string titleOfTheRelatedItem, IQueryable<DynamicContent> dataItems)
+        {
+            List<DynamicContent> dataSource = new List<DynamicContent>();
+
+            foreach (var feature in dataItems)
+            {
+                var relatedItemsTemp = feature.GetRelatedItems(relatedProductsFieldName).OfType<DynamicContent>();
+
+                foreach (var relatedProduct in relatedItemsTemp)
+                {
+                    if (relatedProduct.GetString("Title") == titleOfTheRelatedItem)
+                    {
+                        dataSource.Add(feature);
+                    }
+                }
+            }
+
+            return dataSource;
+        }
+
         private const string productFeaturesType = "Telerik.Sitefinity.DynamicTypes.Model.ProductFeatures.Productfeature";
         private const string productType = "Telerik.Sitefinity.DynamicTypes.Model.Products.Product";
+        private const string relatedProductsFieldName = "RelatedProduct";
     }
 }
