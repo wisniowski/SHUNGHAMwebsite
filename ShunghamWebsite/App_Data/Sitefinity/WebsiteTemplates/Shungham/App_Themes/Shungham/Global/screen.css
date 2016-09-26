@@ -2000,6 +2000,7 @@ h1 + .list-a, h2 + .list-a {
     .list-d.slider {
         padding-bottom: 79px;
         margin: 60px 0px;
+        z-index: 1 !important;
     }
 
     .list-d .bx-pager {
