@@ -27,7 +27,7 @@
                         </asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink NavigateUrl='<%# "mailto:" + Eval("Email").ToString(); %>' CssClass="email" runat="server" />
+                        <asp:HyperLink NavigateUrl='<%# "mailto:" + Eval("Email").ToString() %>' CssClass="email" runat="server" />
                     </li>
                 </ul>
             </header>
