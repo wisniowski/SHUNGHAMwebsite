@@ -3874,3 +3874,7 @@ svg:not(:root) {
     margin: auto;
     width: 700px !important;
 }
+
+#ZoneEditor{
+    z-index: 100000 !important;
+}
