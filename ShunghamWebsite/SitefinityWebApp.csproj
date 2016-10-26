@@ -867,6 +867,13 @@
       <DependentUpon>ContactUsWidget.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.cs" />
+    <Compile Include="CustomWidgets\EUCalendar\NavigationWidget\NavigationWidget.ascx.cs">
+      <DependentUpon>NavigationWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\EUCalendar\NavigationWidget\NavigationWidget.ascx.designer.cs">
+      <DependentUpon>NavigationWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx.cs">
       <DependentUpon>FeaturesWidget.ascx</DependentUpon>
@@ -973,6 +980,7 @@
     <Content Include="CustomWidgets\ContactUsWidget\ContactUsWidget.ascx" />
     <Content Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.js" />
+    <Content Include="CustomWidgets\EUCalendar\NavigationWidget\NavigationWidget.ascx" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.js" />
     <Content Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx" />
@@ -1166,6 +1174,7 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gbk.ttf" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gl.ttf" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\ShunghamContactUs.Master" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\ShunghamEUSections.Master" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShunghamUtilities\ShunghamUtilities.csproj">
