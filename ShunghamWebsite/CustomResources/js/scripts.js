@@ -51,7 +51,6 @@ head.ready(function () {
         "use strict";
         globals.GLOB = {};
     }((1, eval)('this')));
-    var $ = jQuery.noConflict();
     var Default = {
         utils: {
             links: function () {
