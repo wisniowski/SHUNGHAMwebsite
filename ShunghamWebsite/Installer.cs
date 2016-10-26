@@ -26,6 +26,7 @@ namespace SitefinityWebApp
             Res.RegisterResource<ShunghamResources>();
 
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName);
+            RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName);
             RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName);
 
             //Register widgets

@@ -960,6 +960,7 @@
   <ItemGroup>
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\Global\print.css" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\Global\screen.css" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.svg" />
     <Content Include="ClientBin\Telerik.Sitefinity.Analytics.xap" />
     <Content Include="ClientBin\Telerik.Sitefinity.Silverlight.xap" />
     <Content Include="CustomLayouts\InfoWidget_ThreeColumns.ascx" />
@@ -1175,6 +1176,8 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\fonts\gl.ttf" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\ShunghamContactUs.Master" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\ShunghamEUSections.Master" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.eot" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.woff" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShunghamUtilities\ShunghamUtilities.csproj">
