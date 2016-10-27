@@ -97,7 +97,10 @@
         dataTextField: "Attributes.uni_name"
     });
 
-    $("#listView").on("click", "li", function (event) {
-        $(this).toggleClass("active");
+    $("#listView").on("click", "li a", function (event) {
+        event.preventDefault();
+        $(this).parent().toggleClass("active");
+        //retrieves the text of the selected item
+        //alert($(this).text());
     });
 </script>
