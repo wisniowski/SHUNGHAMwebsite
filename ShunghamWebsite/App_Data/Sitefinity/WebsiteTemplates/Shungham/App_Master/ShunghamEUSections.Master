@@ -50,6 +50,7 @@
             <script src="<%= ResolveUrl("~/CustomResources/js/head.js") %>"></script>
             <script src="<%= ResolveUrl("~/CustomResources/js/scripts.js") %>"></script>
             <script src="<%= ResolveUrl("~/CustomResources/js/mobile.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/date.js") %>"></script>
         </telerik:RadCodeBlock>
         <!-- Google Tag Manager -->
         <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WVC5CC"

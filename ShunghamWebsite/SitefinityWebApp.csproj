@@ -966,6 +966,7 @@
     <Content Include="CustomLayouts\InfoWidget_ThreeColumns.ascx" />
     <Content Include="CustomLayouts\InfoWidget_TwoColumns.ascx" />
     <Content Include="CustomLayouts\OneColumnGreyBGR.ascx" />
+    <Content Include="CustomResources\js\date.js" />
     <Content Include="CustomResources\js\head.js" />
     <Content Include="CustomResources\js\mobile.js" />
     <Content Include="CustomResources\js\scripts.js" />

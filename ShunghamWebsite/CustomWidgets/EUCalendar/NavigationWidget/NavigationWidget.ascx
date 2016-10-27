@@ -1,11 +1,12 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUCalendar.NavigationWidget.NavigationWidget" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUCalendar.NavigationWidget.NavigationWidget" ClientIDMode="Static" %>
+
 <div id="aside" class="a">
     <h2>Filters / Search</h2>
     <ul>
-        <li class="date">March 2016
+        <li class="date"><div id="date"></div>
 							<ul>
-                                <li><a href="./">Previous month</a></li>
-                                <li><a href="./">Next month</a></li>
+                                <li><a onclick="displayPrevMonth()" href="javascript: void(0)">Previous month</a></li>
+                                <li><a onclick="displayNextMonth()" href="javascript: void(0)">Next month</a></li>
                             </ul>
         </li>
         <li class="search">
@@ -25,14 +26,14 @@
                         Event Registration Deadline</label></li>
             </ul>
         </li>
-        <li class="toggle"><a href="./">Policy Areas</a>
+        <li class="toggle"><a href="#">Policy Areas</a>
             <ul>
-                <li><a href="./">All Policy Areas</a></li>
+                <li class="active"><a href="./">All Policy Areas</a></li>
                 <li><a href="./">Agriculture &amp; Fisheries</a></li>
                 <li><a href="./">Chemicals</a></li>
                 <li><a href="./">Competition</a></li>
                 <li><a href="./">Consumers</a></li>
-                <li class="active"><a href="./">Culture &amp; Education</a></li>
+                <li><a href="./">Culture &amp; Education</a></li>
                 <li><a href="./">Economic &amp; Monetary</a></li>
                 <li><a href="./">Employment &amp; Social</a></li>
                 <li><a href="./">Energy &amp; Climate</a></li>
@@ -52,3 +53,23 @@
         </li>
     </ul>
 </div>
+
+<script type="text/javascript">
+    function pageLoad() {
+        $('#date').html(Date.today().toString('MMMM yyyy'));
+    }
+
+    function displayPrevMonth()
+    {
+        var currentMonth = Date.parse($('#date').text());
+        var prevMonth = currentMonth.add(-1).months();
+        $('#date').html(prevMonth.toString('MMMM yyyy'));
+    }
+
+    function displayNextMonth()
+    {
+        var currentMonth = Date.parse($('#date').text());
+        var nextMonth = currentMonth.add(1).months();
+        $('#date').html(nextMonth.toString('MMMM yyyy'));
+    }
+</script>
