@@ -3,11 +3,12 @@
 <div id="aside" class="a">
     <h2>Filters / Search</h2>
     <ul>
-        <li class="date"><div id="date"></div>
-							<ul>
-                                <li><a onclick="displayPrevMonth()" href="javascript: void(0)">Previous month</a></li>
-                                <li><a onclick="displayNextMonth()" href="javascript: void(0)">Next month</a></li>
-                            </ul>
+        <li class="date">
+            <div id="date"></div>
+            <ul>
+                <li><a onclick="displayPrevMonth()" href="javascript: void(0)">Previous month</a></li>
+                <li><a onclick="displayNextMonth()" href="javascript: void(0)">Next month</a></li>
+            </ul>
         </li>
         <li class="search">
             <label for="asa">Search</label>
@@ -26,8 +27,9 @@
                         Event Registration Deadline</label></li>
             </ul>
         </li>
-        <li class="toggle"><a href="#">Policy Areas</a>
-            <ul>
+        <li class="toggle">
+            <a href="#">Policy Areas</a>
+            <%--<ul>
                 <li class="active"><a href="./">All Policy Areas</a></li>
                 <li><a href="./">Agriculture &amp; Fisheries</a></li>
                 <li><a href="./">Chemicals</a></li>
@@ -49,6 +51,8 @@
                 <li><a href="./">Single Market &amp; Industry</a></li>
                 <li><a href="./">Trade</a></li>
                 <li><a href="./">Transport</a></li>
+            </ul>--%>
+            <ul id="listView">
             </ul>
         </li>
     </ul>
@@ -59,17 +63,41 @@
         $('#date').html(Date.today().toString('MMMM yyyy'));
     }
 
-    function displayPrevMonth()
-    {
+    function displayPrevMonth() {
         var currentMonth = Date.parse($('#date').text());
         var prevMonth = currentMonth.add(-1).months();
         $('#date').html(prevMonth.toString('MMMM yyyy'));
     }
 
-    function displayNextMonth()
-    {
+    function displayNextMonth() {
         var currentMonth = Date.parse($('#date').text());
         var nextMonth = currentMonth.add(1).months();
         $('#date').html(nextMonth.toString('MMMM yyyy'));
     }
+
+    var serviceRoot = "https://json2jsonp.com/?url=http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/shunghampolicyareas&callback=cbfunc";
+    homogeneous = new kendo.data.HierarchicalDataSource({
+        transport: {
+            read: {
+                url: serviceRoot,
+                dataType: "jsonp"
+            }
+        },
+        schema: {
+            model: {
+                id: "Id"
+            }
+        }
+    });
+
+    $("#listView").kendoListView({
+        template: "<li><a href='javascript: void(0)'>${Attributes.uni_name}</a></li>",
+        dataSource: homogeneous,
+        selectable: "multiple",
+        dataTextField: "Attributes.uni_name"
+    });
+
+    $("#listView").on("click", "li", function (event) {
+        $(this).toggleClass("active");
+    });
 </script>
