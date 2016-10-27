@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using Telerik.Sitefinity.Modules.Pages;
 using Telerik.Sitefinity.Modules.Pages.Web.UI;
 using Telerik.Sitefinity.Web.UI;
+using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 {
@@ -78,7 +83,13 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         #region Control references
 
-
+        protected virtual RadListView EventsList
+        {
+            get
+            {
+                return this.Container.GetControl<RadListView>("eventsList", false);
+            }
+        }
 
         #endregion
 
@@ -102,8 +113,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         /// <inheritdoc />
         protected override void InitializeControls(GenericContainer container)
         {
-
-
+            this.eventList = EventsControlsHelper.GetEventsList();
+            this.InitializeMasterView(this.eventList);
         }
 
         /// <inheritdoc />
@@ -133,8 +144,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         /// <param name="eventList">The event list.</param>
         private void InitializeMasterView(IList<EventModel> eventList)
         {
-            ////Need to initialize the controls before further filtering
-            //this.InitializeDropDownControls(eventList);
+            //Need to initialize the controls before further filtering
+            this.InitializeDropDownControls(eventList);
 
             //var queryStringParams = HttpContext.Current.Request.QueryString;
 
@@ -143,21 +154,15 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             //    eventList = this.FilterCollectionBySearchTerm(eventList, queryStringParams);
             //}
 
-            //int eventListCount = 0;
-            //eventListCount = eventList.Count;
+            int eventListCount = 0;
+            eventListCount = eventList.Count;
 
-            //if (eventListCount > 0)
-            //{
-            //    this.EventsList.DataSource = eventList;
-            //    this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-            //    this.EventsList.DataBind();
-            //}
-            //else
-            //{
-            //    this.ShowNoEventsAvailableMessage();
-            //}
-
-            //this.ShowAllBtn.InnerHtml = string.Format(Res.Get<ETXResources>().ShowAll, eventListCount);
+            if (eventListCount > 0)
+            {
+                this.EventsList.DataSource = eventList;
+                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+                this.EventsList.DataBind();
+            }
         }
 
         /// <summary>
@@ -220,18 +225,24 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             //}
         }
 
-        private void DisplayBackendMessage()
+        private void EventsList_ItemDataBound(object sender, RadListViewItemEventArgs e)
         {
-            //this.EventDetailErrMessage.Visible = true;
-            //StringBuilder sb = new StringBuilder();
-            //if (string.IsNullOrEmpty(this.BackBtnDefaultDestination))
-            //{
-            //    sb.AppendLine(Res.Get<ETXResources>().AddRelativePathToEventMasterPage);
-            //    sb.Append("<br />");
-            //}
-            //sb.AppendLine(Res.Get<ETXResources>().EventBackendErrMessage);
-            //this.EventDetailErrMessage.Text = sb.ToString();
-            //return;
+            if (e.Item.ItemType == RadListViewItemType.DataItem || e.Item.ItemType == RadListViewItemType.AlternatingItem)
+            {
+                var eventLinkControl = e.Item.FindControl("detailViewLink") as HtmlAnchor;
+                if (eventLinkControl != null)
+                {
+                    var eventItem = (e.Item as Telerik.Web.UI.RadListViewDataItem).DataItem as EventModel;
+
+                    if (this.DetailsPageId != null && this.DetailsPageId != Guid.Empty)
+                    {
+                        var pmanager = PageManager.GetManager();
+                        var detailsPage = pmanager.GetPageNode(this.DetailsPageId);
+                        eventLinkControl.HRef = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture) + fwdSlash +
+                            Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen);
+                    }
+                }
+            }
         }
 
         #endregion
@@ -245,6 +256,11 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         private string layoutTemplatePathMaster = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarMasterTemplate.ascx";
         private string scriptReference = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarWidget.js";
         private IList<EventModel> eventList = new List<EventModel>();
+        public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
+        public static string hyphen = "-";
+        public static string fwdSlash = "/";
+        public static string underscore = "_";
+        public static string eventsDateFormat = "dd MMM";
 
         #endregion
     }

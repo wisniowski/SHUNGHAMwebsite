@@ -49,23 +49,37 @@
             <ItemTemplate>
                 <li>
                     <header>
-                        <p><span><span>21</span> mar</span> 09:00 mon</p>
-                        <p>Registration Deadline: <span>
-                            <asp:Literal runat="server" ID="deadlineLtl" /></span></p>
+                        <p>
+                            <%--<span><span>21</span> mar</span> 09:00 mon--%>
+                            <asp:Literal runat="server" ID="Literal1" Text='<%#(DataBinder.Eval(Container.DataItem,"StartDate"))%>' /></span>
+                        </p>
+                        <p>
+                            Registration Deadline: <span>
+                                <asp:Literal runat="server" ID="deadlineLtl" Text='<%#(DataBinder.Eval(Container.DataItem,"DeadlineDate"))%>' /></span>
+                        </p>
                     </header>
                     <h2>
-                        <asp:Literal runat="server" ID="titleLtl" /></h2>
+                        <asp:Literal runat="server" ID="titleLtl" Text='<%#(DataBinder.Eval(Container.DataItem,"Attributes.cdi_name"))%>' /></h2>
                     <ul>
                         <li><span>Policy Area:</span>
-                            <asp:Literal runat="server" ID="policyAreaLtl" /></li>
+                            <asp:Literal runat="server" ID="policyAreaLtl" Text='<%#(DataBinder.Eval(Container.DataItem, "PolicyAreaName"))%>' /></li>
                         <li><span>Who:</span>
-                            <asp:Literal runat="server" ID="organizerLtl" /></li>
+                            <asp:Literal runat="server" ID="organizerLtl" Text='<%#(DataBinder.Eval(Container.DataItem, "OrganizerName"))%>' /></li>
                         <li><span>Where:</span>
-                            <asp:Literal runat="server" ID="locationLtl" /></li>
+                            <asp:Literal runat="server" ID="locationLtl" Text='<%#(DataBinder.Eval(Container.DataItem, "Location"))%>' /></li>
                     </ul>
-                    <p class="link"><a href="./">Open</a></p>
+                    <p class="link">
+                        <asp:HyperLink runat="server" ID="detailViewLink">Open</asp:HyperLink>
+                    </p>
                 </li>
             </ItemTemplate>
+            <EmptyDataTemplate>
+                <p>No known events were found.</p>
+                <p>
+                    Have an event and want to see it here? Let us know!<br>
+                    <a href="mailto:info@eucalendar.com">info@eucalendar.com</a>
+                </p>
+            </EmptyDataTemplate>
         </telerik:RadListView>
     </article>
 </div>
