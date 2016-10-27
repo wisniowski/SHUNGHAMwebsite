@@ -91,7 +91,7 @@
     });
 
     $("#listView").kendoListView({
-        template: "<li><a href='javascript: void(0)'>${Attributes.uni_name}</a></li>",
+        template: "<li><a href='javascript: void(0)' data='#=Attributes.uni_policyareaid#'>${Attributes.uni_name}</a></li>",
         dataSource: homogeneous,
         selectable: "multiple",
         dataTextField: "Attributes.uni_name"
@@ -100,7 +100,7 @@
     $("#listView").on("click", "li a", function (event) {
         event.preventDefault();
         $(this).parent().toggleClass("active");
-        //retrieves the text of the selected item
-        //alert($(this).text());
+        var queryStringValue = $(this).attr("data");
+        window.location = "?lcl=" + queryStringValue;
     });
 </script>
