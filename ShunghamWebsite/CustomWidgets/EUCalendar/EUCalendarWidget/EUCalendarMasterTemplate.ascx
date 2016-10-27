@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUCalendar.NavigationWidget.NavigationWidget" ClientIDMode="Static" %>
+﻿<%@ Control Language="C#" ClientIDMode="Static" %>
 
 <div id="aside" class="a">
     <h2>Filters / Search</h2>
@@ -6,14 +6,14 @@
         <li class="date">
             <div id="date"></div>
             <ul>
-                <li><a onclick="displayPrevMonth()" href="javascript: void(0)">Previous month</a></li>
-                <li><a onclick="displayNextMonth()" href="javascript: void(0)">Next month</a></li>
+                <li><a id="prev" onclick="displayPrevMonth()" href="javascript: void(0)">Previous month</a></li>
+                <li><a id="next" onclick="displayNextMonth()" href="javascript: void(0)">Next month</a></li>
             </ul>
         </li>
         <li class="search">
             <label for="asa">Search</label>
-            <input type="text" id="asa" name="asa" required>
-            <button type="submit">Submit</button>
+            <asp:TextBox ID="searchBox" runat="server" onkeypress="return enterEvent(event)"></asp:TextBox>
+            <button type="submit" id="searchBtn" runat="server">Submit</button>
         </li>
         <li class="toggle"><a href="./">Sort by</a>
             <ul>
@@ -31,36 +31,54 @@
             <a href="#">Policy Areas</a>
             <%--<ul>
                 <li class="active"><a href="./">All Policy Areas</a></li>
-                <li><a href="./">Agriculture &amp; Fisheries</a></li>
-                <li><a href="./">Chemicals</a></li>
-                <li><a href="./">Competition</a></li>
-                <li><a href="./">Consumers</a></li>
-                <li><a href="./">Culture &amp; Education</a></li>
-                <li><a href="./">Economic &amp; Monetary</a></li>
-                <li><a href="./">Employment &amp; Social</a></li>
-                <li><a href="./">Energy &amp; Climate</a></li>
-                <li><a href="./">Environment</a></li>
-                <li><a href="./">Financial Services</a></li>
-                <li><a href="./">Foreign &amp; Security</a></li>
-                <li><a href="./">Health &amp; Pharma</a></li>
-                <li><a href="./">Human Rights &amp; Development</a></li>
-                <li><a href="./">ICT, Research &amp; Innovation</a></li>
-                <li><a href="./">Institutional</a></li>
-                <li><a href="./">Justice &amp; Home Affairs</a></li>
-                <li><a href="./">Regional &amp; Cohesion</a></li>
-                <li><a href="./">Single Market &amp; Industry</a></li>
-                <li><a href="./">Trade</a></li>
-                <li><a href="./">Transport</a></li>
             </ul>--%>
             <ul id="listView">
             </ul>
         </li>
     </ul>
 </div>
+<div class="module-c">
+    <article>
+        <telerik:RadListView ID="eventsList" ItemPlaceholderID="EventsContainer" runat="server"
+            EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
+            <LayoutTemplate>
+                <ul class="list-h a">
+                    <asp:PlaceHolder ID="EventsContainer" runat="server" />
+                </ul>
+            </LayoutTemplate>
+            <ItemTemplate>
+                <li>
+                    <header>
+                        <p><span><span>21</span> mar</span> 09:00 mon</p>
+                        <p>Registration Deadline: <span>
+                            <asp:Literal runat="server" ID="deadlineLtl" /></span></p>
+                    </header>
+                    <h2>
+                        <asp:Literal runat="server" ID="titleLtl" /></h2>
+                    <ul>
+                        <li><span>Policy Area:</span>
+                            <asp:Literal runat="server" ID="policyAreaLtl" /></li>
+                        <li><span>Who:</span>
+                            <asp:Literal runat="server" ID="organizerLtl" /></li>
+                        <li><span>Where:</span>
+                            <asp:Literal runat="server" ID="locationLtl" /></li>
+                    </ul>
+                    <p class="link"><a href="./">Open</a></p>
+                </li>
+            </ItemTemplate>
+        </telerik:RadListView>
+    </article>
+</div>
 
 <script type="text/javascript">
     function pageLoad() {
         $('#date').html(Date.today().toString('MMMM yyyy'));
+    }
+
+    function enterEvent(e) {
+        if (e.keyCode == 13) {
+            __doPostBack('<%= searchBtn.UniqueID%>', "");
+        }
     }
 
     function displayPrevMonth() {
@@ -100,7 +118,5 @@
     $("#listView").on("click", "li a", function (event) {
         event.preventDefault();
         $(this).parent().toggleClass("active");
-        var queryStringValue = $(this).attr("data");
-        window.location = "?lcl=" + queryStringValue;
     });
 </script>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using SitefinityWebApp.CustomWidgets.EUCalendar;
+using SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget;
 using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.Pages.Configuration;
@@ -60,8 +62,8 @@ namespace SitefinityWebApp
                "~/CustomWidgets/FeaturesWidget/FeaturesWidget.ascx", "Features Widget");
 
             //Register EUCalendar widgets
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName,
-               "~/CustomWidgets/EUCalendar/NavigationWidget/NavigationWidget.ascx", "Navigation Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName, 
+                typeof(EUCalendarWidget).AssemblyQualifiedName, "EUCalendar Widget");
 
             //Register Layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,

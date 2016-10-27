@@ -1,0 +1,251 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using Telerik.Sitefinity.Modules.Pages.Web.UI;
+using Telerik.Sitefinity.Web.UI;
+
+namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
+{
+    [RequireScriptManager]
+    public class EUCalendarWidget : SimpleScriptView
+    {
+        #region Control Properties
+
+        /// <summary>
+        /// Gets or sets the initial items count.
+        /// </summary>
+        /// <value>
+        /// The initial items count.
+        /// </value>
+        public int InitialItemsCount
+        {
+            get
+            {
+                return this.initialItemsCount;
+            }
+            set
+            {
+                if (value == 0)
+                {
+                    value = 7; //Default value for the control
+                }
+                this.initialItemsCount = value;
+            }
+        }
+
+        /// <inheritdoc />
+        public override string LayoutTemplatePath
+        {
+            get
+            {
+                return this.layoutTemplatePath;
+            }
+            set
+            {
+                this.layoutTemplatePath = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the details page identifier.
+        /// </summary>
+        /// <value>
+        /// The details page identifier.
+        /// </value>
+        public Guid DetailsPageId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is details mode.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is details mode; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDetailsMode
+        {
+            get
+            {
+                return this.isDetailsMode;
+            }
+            set
+            {
+                this.isDetailsMode = value;
+            }
+        }
+
+        #endregion
+
+        #region Control references
+
+
+
+        #endregion
+
+        #region Overridden methods
+
+        /// <inheritdoc />
+        protected override void CreateChildControls()
+        {
+            if (this.IsDetailsMode)
+            {
+                this.LayoutTemplatePath = this.layoutTemplatePathDetails;
+            }
+            else
+            {
+                this.LayoutTemplatePath = this.layoutTemplatePathMaster;
+            }
+
+            base.CreateChildControls();
+        }
+
+        /// <inheritdoc />
+        protected override void InitializeControls(GenericContainer container)
+        {
+
+
+        }
+
+        /// <inheritdoc />
+        public override IEnumerable<System.Web.UI.ScriptDescriptor> GetScriptDescriptors()
+        {
+            ScriptControlDescriptor scriptControlDescriptor = new ScriptControlDescriptor(base.GetType().FullName, this.ClientID);
+            scriptControlDescriptor.AddProperty("initialItemsCount", this.InitialItemsCount);
+            scriptControlDescriptor.AddProperty("isDetailsMode", this.IsDetailsMode);
+            return new ScriptControlDescriptor[] { scriptControlDescriptor };
+        }
+
+        /// <inheritdoc />
+        public override IEnumerable<System.Web.UI.ScriptReference> GetScriptReferences()
+        {
+            var scripts = new List<ScriptReference>();
+            scripts.Add(new ScriptReference(this.scriptReference));
+            return scripts;
+        }
+
+        #endregion
+
+        #region Private methods
+
+        /// <summary>
+        /// Initializes the master view.
+        /// </summary>
+        /// <param name="eventList">The event list.</param>
+        private void InitializeMasterView(IList<EventModel> eventList)
+        {
+            ////Need to initialize the controls before further filtering
+            //this.InitializeDropDownControls(eventList);
+
+            //var queryStringParams = HttpContext.Current.Request.QueryString;
+
+            //if (queryStringParams != null && queryStringParams.Count > 0)
+            //{
+            //    eventList = this.FilterCollectionBySearchTerm(eventList, queryStringParams);
+            //}
+
+            //int eventListCount = 0;
+            //eventListCount = eventList.Count;
+
+            //if (eventListCount > 0)
+            //{
+            //    this.EventsList.DataSource = eventList;
+            //    this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+            //    this.EventsList.DataBind();
+            //}
+            //else
+            //{
+            //    this.ShowNoEventsAvailableMessage();
+            //}
+
+            //this.ShowAllBtn.InnerHtml = string.Format(Res.Get<ETXResources>().ShowAll, eventListCount);
+        }
+
+        /// <summary>
+        /// Initializes the drop down controls.
+        /// </summary>
+        /// <param name="eventList">The event list.</param>
+        private void InitializeDropDownControls(IList<EventModel> eventList)
+        {
+            //this.InitializeEventTypesDropDown(eventList);
+            //this.InitializeEventLocationsDropDown(eventList);
+            //this.InitializeEventLanguagesDropDown(eventList);
+        }
+
+        /// <summary>
+        /// Converts the relative URL to absolute URL.
+        /// </summary>
+        /// <param name="relativeUrl">The relative URL.</param>
+        /// <returns></returns>
+        public string ConvertRelativeUrlToAbsoluteUrl(string relativeUrl)
+        {
+            return string.Format("http{0}://{1}{2}",
+                HttpContext.Current.Request.IsSecureConnection ? "s" : string.Empty,
+                HttpContext.Current.Request.Url.Host,
+                Page.ResolveUrl(relativeUrl));
+        }
+
+        /// <summary>
+        /// Initializes the details view.
+        /// </summary>
+        /// <param name="eventList">The event list.</param>
+        private void InitializeDetailsView(IList<EventModel> eventList)
+        {
+            //if (this.IsBackend() || this.IsPreviewMode())
+            //{
+            //    this.DisplayBackendMessage();
+            //}
+
+            //string itemUrl = string.Empty;
+            //itemUrl = this.GetUrlParameterString(true);
+
+            //if (!string.IsNullOrEmpty(itemUrl))
+            //{
+            //    var eventItem = eventList.Where(e => itemUrl.Contains(Regex.Replace(e.EventTitle.ToLower(), ETXCommon.DevNames.UrlHelpers.UrlRegex, ETXCommon.DevNames.UrlHelpers.Dash))).FirstOrDefault();
+
+            //    if (eventItem != null)
+            //    {
+            //        RouteHelper.SetUrlParametersResolved();
+            //        this.BackButtonLink.NavigateUrl = HttpContext.Current.Request.UrlReferrer == null ? this.BackBtnDefaultDestination : HttpContext.Current.Request.UrlReferrer.AbsolutePath;
+            //        this.TypeControl.Text = eventItem.EventType;
+            //        this.SubjectControl.Text = eventItem.EventTitle;
+            //        this.DateControl.Text = eventItem.EventDates + " " + eventItem.EventHours;
+            //        this.LocationControl.Text = eventItem.EventLocation;
+            //        this.LanguageControl.Text = eventItem.EventLanguage;
+            //        this.AvailabilityControl.Text = eventItem.EventAvailability;
+            //        this.ContentControl.Text = eventItem.EventDetails;
+
+            //        this.ResolvePageMetaTags(eventItem);
+            //        this.SetupBookNowIframe(eventItem);
+            //    }
+            //}
+        }
+
+        private void DisplayBackendMessage()
+        {
+            //this.EventDetailErrMessage.Visible = true;
+            //StringBuilder sb = new StringBuilder();
+            //if (string.IsNullOrEmpty(this.BackBtnDefaultDestination))
+            //{
+            //    sb.AppendLine(Res.Get<ETXResources>().AddRelativePathToEventMasterPage);
+            //    sb.Append("<br />");
+            //}
+            //sb.AppendLine(Res.Get<ETXResources>().EventBackendErrMessage);
+            //this.EventDetailErrMessage.Text = sb.ToString();
+            //return;
+        }
+
+        #endregion
+
+        #region Private variables
+
+        private bool isDetailsMode = false;
+        private int initialItemsCount = 7;
+        private string layoutTemplatePath = string.Empty;
+        private string layoutTemplatePathDetails = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarDetailTemplate.ascx";
+        private string layoutTemplatePathMaster = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarMasterTemplate.ascx";
+        private string scriptReference = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarWidget.js";
+        private IList<EventModel> eventList = new List<EventModel>();
+
+        #endregion
+    }
+}

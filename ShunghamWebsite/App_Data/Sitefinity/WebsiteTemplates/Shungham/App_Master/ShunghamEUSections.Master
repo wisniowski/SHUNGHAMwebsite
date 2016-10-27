@@ -20,7 +20,6 @@
         <sf:ResourceFile JavaScriptLibrary="JQuery"></sf:ResourceFile>
         <sf:ResourceFile JavaScriptLibrary="JQueryUI"></sf:ResourceFile>
         <sf:ResourceFile JavaScriptLibrary="KendoAll"></sf:ResourceFile>
-        <sf:ResourceFile Name="Telerik.Sitefinity.Resources.Scripts.Kendo.styles.kendo_common_min.css" Static="True" />
     </sf:ResourceLinks>
 
 </head>

@@ -867,13 +867,8 @@
       <DependentUpon>ContactUsWidget.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.cs" />
-    <Compile Include="CustomWidgets\EUCalendar\NavigationWidget\NavigationWidget.ascx.cs">
-      <DependentUpon>NavigationWidget.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomWidgets\EUCalendar\NavigationWidget\NavigationWidget.ascx.designer.cs">
-      <DependentUpon>NavigationWidget.ascx</DependentUpon>
-    </Compile>
+    <Compile Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.cs" />
+    <Compile Include="CustomWidgets\EUCalendar\EventModel.cs" />
     <Compile Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx.cs">
       <DependentUpon>FeaturesWidget.ascx</DependentUpon>
@@ -982,7 +977,8 @@
     <Content Include="CustomWidgets\ContactUsWidget\ContactUsWidget.ascx" />
     <Content Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.js" />
-    <Content Include="CustomWidgets\EUCalendar\NavigationWidget\NavigationWidget.ascx" />
+    <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarMasterTemplate.ascx" />
+    <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.js" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.js" />
     <Content Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx" />
@@ -1186,7 +1182,6 @@
       <Name>ShunghamUtilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="OpenAccessNuget.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
