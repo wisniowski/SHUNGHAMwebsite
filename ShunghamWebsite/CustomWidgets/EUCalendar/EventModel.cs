@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SitefinityWebApp.CustomWidgets.EUCalendar
 {
@@ -10,15 +11,32 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
         public string Value { get; set; }
     }
 
+    public class NewEuclocation
+    {
+        public string __type { get; set; }
+        public string Id { get; set; }
+        public List<object> KeyAttributes { get; set; }
+        public string LogicalName { get; set; }
+        public string Name { get; set; }
+        public object RowVersion { get; set; }
+    }
+
     public class Attributes
     {
-        public string cdi_eventid { get; set; }
-        public string cdi_name { get; set; }
+        public string new_eucstarttime { get; set; }
+        public string new_eucconcatenatepolicyareastrings { get; set; }
         public OrganiserName organiserName { get; set; }
+        public string cdi_name { get; set; }
+        public string cdi_eventid { get; set; }
+        public DateTime new_eucstartdate { get; set; }
+        public NewEuclocation new_euclocation { get; set; }
+        public DateTime new_eucregistrationdeadline { get; set; }
     }
 
     public class FormattedValues
     {
+        public string new_eucstartdate { get; set; }
+        public string new_eucregistrationdeadline { get; set; }
     }
 
     public class EventModel
