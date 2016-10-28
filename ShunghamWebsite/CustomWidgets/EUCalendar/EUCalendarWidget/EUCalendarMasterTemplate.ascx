@@ -53,26 +53,25 @@
                             <%--<span><span>21</span> mar</span> 09:00 mon--%>
                             <span>
                                 <asp:Literal runat="server" ID="Literal1"
-                                    Text='<%# DataBinder.Eval(Container.DataItem,
-                            "Attributes.new_eucstartdate", "{0:dd MMM}") %>' />
+                                    Text='<%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstartdate", "{0:dd MMM}") %>' />
                             </span>
                             <asp:Literal runat="server" ID="Literal2"
-                                    Text='<%# DataBinder.Eval(Container.DataItem,
-                            "Attributes.new_eucstarttime", "{0:HH:mm}") %>' />
+                                    Text='<%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstarttime", "{0:HH:mm}") %>' />
                         </p>
                         <p>
                             Registration Deadline: <span>
-                                <asp:Literal runat="server" ID="deadlineLtl"
-                                    Text='<%# DataBinder.Eval(Container.DataItem,
-                                "Attributes.new_eucregistrationdeadline", "{0:dd MMM ddd}")%>' /></span>
+                                <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucregistrationdeadline", "{0:dd MMM ddd}")%> />
+                                                   </span>
                         </p>
                     </header>
                     <h2>
-                        <asp:Literal runat="server" ID="titleLtl" Text='<%#(DataBinder.Eval(Container.DataItem,"Attributes.cdi_name"))%>' /></h2>
+                        <%# DataBinder.Eval(Container.DataItem,"Attributes.cdi_name") %>
+                        <span class="scheme-a"><%# DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") %></span>
+                    </h2>
                     <ul>
                         <li><span>Policy Area:</span>
-                            <asp:Literal runat="server" ID="policyAreaLtl"
-                                Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.new_eucconcatenatepolicyareastrings"))%>' /></li>
+                           <%-- <asp:Literal runat="server" ID="policyAreaLtl"
+                                Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.new_eucconcatenatepolicyareastrings"))%>' />--%></li>
                         <li><span>Who:</span>
                             <asp:Literal runat="server" ID="organizerLtl"
                                 Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.organiserName.Value"))%>' /></li>

@@ -24,13 +24,13 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
     public class Attributes
     {
         public string new_eucstarttime { get; set; }
-        public string new_eucconcatenatepolicyareastrings { get; set; }
         public OrganiserName organiserName { get; set; }
         public string cdi_name { get; set; }
         public string cdi_eventid { get; set; }
         public DateTime new_eucstartdate { get; set; }
         public NewEuclocation new_euclocation { get; set; }
         public DateTime new_eucregistrationdeadline { get; set; }
+        public string new_euceventprice { get; set; }
     }
 
     public class FormattedValues
