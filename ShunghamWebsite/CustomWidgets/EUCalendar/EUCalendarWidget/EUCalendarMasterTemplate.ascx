@@ -18,13 +18,13 @@
         <li class="toggle"><a href="./">Sort by</a>
             <ul>
                 <li>
-                    <label for="asb">
-                        <input type="radio" id="asb" name="as">
-                        Event Date</label></li>
+                    <asp:RadioButton runat="server" ID="startDateRadioButton" GroupName="date"
+                        AutoPostBack="true" Text="Event Date" />
+                </li>
                 <li>
-                    <label for="asc">
-                        <input type="radio" id="asc" name="as">
-                        Event Registration Deadline</label></li>
+                    <asp:RadioButton runat="server" ID="deadlineRadioButton" GroupName="date"
+                        AutoPostBack="true" Text="Event Registration Deadline" />
+                </li>
             </ul>
         </li>
         <li class="toggle">

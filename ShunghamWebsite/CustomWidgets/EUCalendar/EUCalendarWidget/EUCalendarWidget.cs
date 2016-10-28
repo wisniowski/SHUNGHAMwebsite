@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 using Telerik.Sitefinity.Modules.Pages;
 using Telerik.Sitefinity.Modules.Pages.Web.UI;
+using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI;
 using Telerik.Web.UI;
 
@@ -91,6 +94,38 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
+        protected virtual RadioButton eventDateRadioButton
+        {
+            get
+            {
+                return this.Container.GetControl<RadioButton>("startDateRadioButton", false);
+            }
+        }
+
+        protected virtual RadioButton eventDeadlineRadioButton
+        {
+            get
+            {
+                return this.Container.GetControl<RadioButton>("deadlineRadioButton", false);
+            }
+        }
+
+        protected virtual TextBox SearchBox
+        {
+            get
+            {
+                return this.Container.GetControl<TextBox>("searchBox", false);
+            }
+        }
+
+        protected virtual HtmlButton SearchButton
+        {
+            get
+            {
+                return this.Container.GetControl<HtmlButton>("searchBtn", false);
+            }
+        }
+
         #endregion
 
         #region Overridden methods
@@ -114,7 +149,28 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         protected override void InitializeControls(GenericContainer container)
         {
             this.eventList = EventsControlsHelper.GetEventsList();
+                //.Where(a => a.Attributes.new_eucstartdate == DateTime.Now)
+                //    .ToList();
+            this.SearchButton.ServerClick += SearchButton_Click;
+
             this.InitializeMasterView(this.eventList);
+        }
+
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            var redirectLocation = string.Empty;
+            var searchQuery = this.SearchBox.Text;
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                redirectLocation = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture) 
+                    + eventsSearchUrlKeyword + searchQuery;
+            }
+            if (searchQuery == string.Empty)
+            {
+                redirectLocation = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+            }
+
+            HttpContext.Current.Response.Redirect(redirectLocation);
         }
 
         /// <inheritdoc />
@@ -147,12 +203,15 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             //Need to initialize the controls before further filtering
             this.InitializeDropDownControls(eventList);
 
-            //var queryStringParams = HttpContext.Current.Request.QueryString;
+            this.eventDateRadioButton.CheckedChanged += eventDateRadioButton_CheckedChanged;
+            this.eventDeadlineRadioButton.CheckedChanged += eventDeadlineRadioButton_CheckedChanged;
 
-            //if (queryStringParams != null && queryStringParams.Count > 0)
-            //{
-            //    eventList = this.FilterCollectionBySearchTerm(eventList, queryStringParams);
-            //}
+            var queryStringParams = HttpContext.Current.Request.QueryString;
+
+            if (queryStringParams != null && queryStringParams.Count > 0)
+            {
+                eventList = this.FilterCollectionBySearchTerm(eventList, queryStringParams);
+            }
 
             int eventListCount = 0;
             eventListCount = eventList.Count;
@@ -163,6 +222,59 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
             }
+        }
+
+        void eventDeadlineRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (eventDeadlineRadioButton.Checked)
+            {
+                this.EventsList.DataSource = this.eventList.OrderBy(a => a.Attributes.new_eucregistrationdeadline).ToList();
+                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+                this.EventsList.DataBind();
+            }
+        }
+
+        void eventDateRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (eventDateRadioButton.Checked)
+            {
+                this.EventsList.DataSource = this.eventList.OrderBy(a => a.Attributes.new_eucstartdate).ToList();
+                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+                this.EventsList.DataBind();
+            }
+        }
+
+        private IList<EventModel> FilterCollectionBySearchTerm(IList<EventModel> eventList, NameValueCollection queryStringParams)
+        {
+            List<EventModel> eventMatches = new List<EventModel>();
+            var searchTerm = queryStringParams["search"];
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                this.SearchBox.Text = searchTerm;
+                var searchTermCleaned = searchTerm.Trim();
+
+                //add white spaces on start and end of the search query for exact phrase/word matching
+                searchTermCleaned = " " + searchTermCleaned + " ";
+
+                //search with spaces
+                eventMatches = eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTermCleaned.ToLower())).ToList();
+
+                //search by exact match in the titles
+                eventMatches.AddRange(eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList());
+
+                //breakup phrase and search for any match on any word
+                eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' }, 
+                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
+                eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' },
+                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
+            }
+            else
+            {
+                return eventList;
+            }
+
+            return eventMatches.Distinct().ToList();
         }
 
         /// <summary>
@@ -261,6 +373,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         public static string fwdSlash = "/";
         public static string underscore = "_";
         public static string eventsDateFormat = "dd MMM";
+        public const string eventsSearchUrlKeyword = "?search=";
 
         #endregion
     }
