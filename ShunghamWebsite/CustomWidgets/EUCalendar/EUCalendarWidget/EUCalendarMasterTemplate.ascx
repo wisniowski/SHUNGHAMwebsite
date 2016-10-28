@@ -52,16 +52,16 @@
                         <p>
                             <%--<span><span>21</span> mar</span> 09:00 mon--%>
                             <span>
-                                <asp:Literal runat="server" ID="Literal1"
-                                    Text='<%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstartdate", "{0:dd MMM}") %>' />
+                                <span><%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstartdate", "{0:dd}") %></span>
+                                <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstartdate", "{0:MMM}") %>
                             </span>
-                            <asp:Literal runat="server" ID="Literal2"
-                                    Text='<%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstarttime", "{0:HH:mm}") %>' />
+                            <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstarttime", "{0:HH:mm}") %>
+                            <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstartdate", "{0:ddd}") %>
                         </p>
                         <p>
                             Registration Deadline: <span>
-                                <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucregistrationdeadline", "{0:dd MMM ddd}")%> />
-                                                   </span>
+                                <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucregistrationdeadline", "{0:dd MMM ddd}")%>
+                            </span>
                         </p>
                     </header>
                     <h2>
@@ -70,7 +70,7 @@
                     </h2>
                     <ul>
                         <li><span>Policy Area:</span>
-                           <%-- <asp:Literal runat="server" ID="policyAreaLtl"
+                            <%-- <asp:Literal runat="server" ID="policyAreaLtl"
                                 Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.new_eucconcatenatepolicyareastrings"))%>' />--%></li>
                         <li><span>Who:</span>
                             <asp:Literal runat="server" ID="organizerLtl"
