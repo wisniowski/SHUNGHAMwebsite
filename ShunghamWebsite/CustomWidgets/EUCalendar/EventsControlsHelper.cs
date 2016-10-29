@@ -75,16 +75,13 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
             }
         }
 
-        public static IList<EventModel> OrderEventsCollection(this IList<EventModel> eventList, string dateFormat, params string[] eventID)
+        public static IList<EventModel> OrderEventsCollection(this IList<EventModel> eventList, DateTime startDate)
         {
-            //eventList = eventList
-            //    .OrderBy(ev => DateTime.ParseExact(ev.StartDate, dateFormat, CultureInfo.CurrentCulture))
-            //    .ThenBy(ev => ev.EventTitle).ToList();
-            //if (eventID != null && eventID.Count() != 0)
-            //{
-            //    var featuredEvent = eventList.Where(eve => eve.EventId == eventID.FirstOrDefault()).FirstOrDefault();
-            //    eventList.Remove(featuredEvent);
-            //}
+
+            eventList = eventList
+                .Where(ev => ev.Attributes.new_eucstartdate.ToString("MMMM yyyy") == startDate.ToString("MMMM yyyy"))
+                .OrderBy(ev => ev.Attributes.new_eucstarttime)
+                .ThenBy(ev => ev.Attributes.cdi_name).ToList();
 
             return eventList;
         }

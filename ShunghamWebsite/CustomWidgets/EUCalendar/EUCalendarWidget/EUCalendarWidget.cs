@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -126,6 +127,30 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
+        protected virtual HtmlGenericControl Date
+        {
+            get
+            {
+                return this.Container.GetControl<HtmlGenericControl>("date", false);
+            }
+        }
+
+        protected virtual LinkButton Prev
+        {
+            get
+            {
+                return this.Container.GetControl<LinkButton>("prev", false);
+            }
+        }
+
+        protected virtual LinkButton Next
+        {
+            get
+            {
+                return this.Container.GetControl<LinkButton>("next", false);
+            }
+        }
+
         #endregion
 
         #region Overridden methods
@@ -148,12 +173,48 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         /// <inheritdoc />
         protected override void InitializeControls(GenericContainer container)
         {
-            this.eventList = EventsControlsHelper.GetEventsList();
-                //.Where(a => a.Attributes.new_eucstartdate == DateTime.Now)
-                //    .ToList();
+            if (!Page.IsPostBack)
+            {
+                HttpContext.Current.Session[dateKey] = DateTime.Now;
+                this.Date.InnerText = DateTime.Now.ToString(eventsDateFormat);
+
+                if (HttpContext.Current.Session[dateKey] != null)
+                {
+                    var date = (DateTime)HttpContext.Current.Session[dateKey];
+                    this.eventList = EventsControlsHelper.GetEventsList()
+                        .OrderEventsCollection(date);
+                }
+            }
+
             this.SearchButton.ServerClick += SearchButton_Click;
+            this.Prev.Click += Prev_Click;
+            this.Next.Click += Next_Click;
 
             this.InitializeMasterView(this.eventList);
+        }
+
+        protected void Prev_Click(object sender, EventArgs e)
+        {
+            var currentDate = ((DateTime)(HttpContext.Current.Session[dateKey])).AddMonths(-1);
+            HttpContext.Current.Session[dateKey] = currentDate;
+            this.Date.InnerText = currentDate.ToString(eventsDateFormat);
+
+            this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate);
+            this.EventsList.DataSource = this.eventList;
+            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+            this.EventsList.DataBind();
+        }
+
+        protected void Next_Click(object sender, EventArgs e)
+        {
+            var currentDate = ((DateTime)(HttpContext.Current.Session[dateKey])).AddMonths(1);
+            HttpContext.Current.Session[dateKey] = currentDate;
+            this.Date.InnerText = currentDate.ToString(eventsDateFormat);
+
+            this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate);
+            this.EventsList.DataSource = this.eventList;
+            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+            this.EventsList.DataBind();
         }
 
         protected void SearchButton_Click(object sender, EventArgs e)
@@ -162,7 +223,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             var searchQuery = this.SearchBox.Text;
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                redirectLocation = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture) 
+                redirectLocation = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture)
                     + eventsSearchUrlKeyword + searchQuery;
             }
             if (searchQuery == string.Empty)
@@ -264,7 +325,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 eventMatches.AddRange(eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList());
 
                 //breakup phrase and search for any match on any word
-                eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' }, 
+                eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' },
                     StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
                 eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' },
                     StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
@@ -372,8 +433,9 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         public static string hyphen = "-";
         public static string fwdSlash = "/";
         public static string underscore = "_";
-        public static string eventsDateFormat = "dd MMM";
+        public static string eventsDateFormat = "MMMM yyyy";
         public const string eventsSearchUrlKeyword = "?search=";
+        public static string dateKey = "Date";
 
         #endregion
     }

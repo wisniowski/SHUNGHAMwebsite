@@ -4,10 +4,14 @@
     <h2>Filters / Search</h2>
     <ul>
         <li class="date">
-            <div id="date"></div>
+            <div id="date" runat="server"></div>
             <ul>
-                <li><a id="prev" onclick="displayPrevMonth()" href="javascript: void(0)">Previous month</a></li>
-                <li><a id="next" onclick="displayNextMonth()" href="javascript: void(0)">Next month</a></li>
+                <li>
+                    <asp:LinkButton runat="server" ID="prev">Previous month</asp:LinkButton>
+                </li>
+                <li>
+                    <asp:LinkButton runat="server" ID="next">Next month</asp:LinkButton>
+                </li>
             </ul>
         </li>
         <li class="search">
@@ -96,26 +100,11 @@
 </div>
 
 <script type="text/javascript">
-    function pageLoad() {
-        $('#date').html(Date.today().toString('MMMM yyyy'));
-    }
-
+    
     function enterEvent(e) {
         if (e.keyCode == 13) {
             __doPostBack('<%= searchBtn.UniqueID%>', "");
         }
-    }
-
-    function displayPrevMonth() {
-        var currentMonth = Date.parse($('#date').text());
-        var prevMonth = currentMonth.add(-1).months();
-        $('#date').html(prevMonth.toString('MMMM yyyy'));
-    }
-
-    function displayNextMonth() {
-        var currentMonth = Date.parse($('#date').text());
-        var nextMonth = currentMonth.add(1).months();
-        $('#date').html(nextMonth.toString('MMMM yyyy'));
     }
 
     var serviceRoot = "https://json2jsonp.com/?url=http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/shunghampolicyareas&callback=cbfunc";
