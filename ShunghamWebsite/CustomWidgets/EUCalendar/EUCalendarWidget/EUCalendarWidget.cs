@@ -176,7 +176,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (!Page.IsPostBack)
             {
                 HttpContext.Current.Session[dateKey] = DateTime.Now;
-                this.Date.InnerText = DateTime.Now.ToString(eventsDateFormat);
 
                 if (HttpContext.Current.Session[dateKey] != null)
                 {
@@ -185,6 +184,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                         .OrderEventsCollection(date);
                 }
             }
+
+            this.Date.InnerText = DateTime.Now.ToString(eventsDateFormat);
 
             this.SearchButton.ServerClick += SearchButton_Click;
             this.Prev.Click += Prev_Click;
@@ -289,7 +290,9 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         {
             if (eventDeadlineRadioButton.Checked)
             {
-                this.EventsList.DataSource = this.eventList.OrderBy(a => a.Attributes.new_eucregistrationdeadline).ToList();
+                var currentDate = DateTime.Parse(this.Date.InnerHtml);
+                this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
+                    .OrderBy(a => a.Attributes.new_eucregistrationdeadline).ToList();
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
             }
@@ -299,7 +302,9 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         {
             if (eventDateRadioButton.Checked)
             {
-                this.EventsList.DataSource = this.eventList.OrderBy(a => a.Attributes.new_eucstartdate).ToList();
+                var currentDate = DateTime.Parse(this.Date.InnerHtml);
+                this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
+                    .OrderBy(a => a.Attributes.new_eucstartdate).ToList();
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
             }

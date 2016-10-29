@@ -79,12 +79,12 @@ head.ready(function () {
 
                 $('input[type="checkbox"][checked], input[type="radio"][checked]').each(function () { $(this).attr('checked', true).parent('label').addClass('active'); });
                 $('input[type="checkbox"]:not([checked]), input[type="radio"]:not([checked])').attr('checked', false);
-                $('#aside .checks label').append('<div class="input"></div>').each(function () { $(this).addClass($(this).children('input').attr('type')); }).children('input').addClass('hidden').on('click', function () {
-                    if ($(this).parent().hasClass('radio')) {
-                        $(this).parent('label').parents('p,ul').find('label').removeClass('active');
-                    }
-                    $(this).parent('label').toggleClass('active');
-                });
+                //$('#aside .checks label').append('<div class="input"></div>').each(function () { $(this).addClass($(this).children('input').attr('type')); }).children('input').addClass('hidden').on('click', function () {
+                //    if ($(this).parent().hasClass('radio')) {
+                //        $(this).parent('label').parents('p,ul').find('label').removeClass('active');
+                //    }
+                //    $(this).parent('label').toggleClass('active');
+                //});
             },
             date: function () {
                 $('#footer .date').text((new Date).getFullYear());

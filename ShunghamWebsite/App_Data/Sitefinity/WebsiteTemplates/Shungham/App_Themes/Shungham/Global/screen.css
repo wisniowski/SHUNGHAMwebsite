@@ -6408,3 +6408,12 @@ svg:not(:root) {
 .sf_colsIn {
     margin: 10px;
 }
+
+
+/* Fix for EUCalendar sort by radio buttons */
+
+.sortRadio {
+    width: 20px;
+    height: 20px;
+    top: 37px;
+}

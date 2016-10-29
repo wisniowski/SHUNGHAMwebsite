@@ -23,11 +23,11 @@
             <ul>
                 <li>
                     <asp:RadioButton runat="server" ID="startDateRadioButton" GroupName="date"
-                        AutoPostBack="true" Text="Event Date" />
+                        AutoPostBack="true" Text="Event Date" CssClass="sortRadio" />
                 </li>
                 <li>
                     <asp:RadioButton runat="server" ID="deadlineRadioButton" GroupName="date"
-                        AutoPostBack="true" Text="Event Registration Deadline" />
+                        AutoPostBack="true" Text="Event Registration Deadline" CssClass="sortRadio" />
                 </li>
             </ul>
         </li>
