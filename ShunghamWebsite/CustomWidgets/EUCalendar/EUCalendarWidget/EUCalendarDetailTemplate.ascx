@@ -45,7 +45,7 @@
     <asp:Literal ID="eventDetailErrMessage" runat="server" Visible="false"></asp:Literal>
     <header>
         <p class="link-b">
-            <asp:HyperLink runat="server" ID="backLink">
+            <asp:HyperLink runat="server" ID="backButtonLink">
             <i class="icon-caret-left"></i>Back to Events List
             </asp:HyperLink>
         </p>

@@ -697,5 +697,33 @@ namespace SitefinityWebApp
             }
         }
         #endregion
+
+        #region Events widget
+
+        [ResourceEntry("EventBackendErrMessage",
+        Value = "No event has been selected.",
+        Description = "The text displayed by event widget on the backend when set in Details mode.",
+        LastModified = "2016/10/30")]
+        public string EventBackendErrMessage
+        {
+            get
+            {
+                return this["EventBackendErrMessage"];
+            }
+        }
+
+        [ResourceEntry("AddRelativePathToEventListPage",
+        Value = "Please add a relative path to the page where events widget shows the list of events.",
+        Description = "The error message shown by events widget when no relative path has been provided to the events list page.",
+        LastModified = "2016/10/30")]
+        public string AddRelativePathToEventListPage
+        {
+            get
+            {
+                return this["AddRelativePathToEventListPage"];
+            }
+        }
+
+        #endregion
     }
 }

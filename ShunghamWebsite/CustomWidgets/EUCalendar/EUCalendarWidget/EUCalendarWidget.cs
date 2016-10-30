@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer;
+using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.Pages;
 using Telerik.Sitefinity.Modules.Pages.Web.UI;
 using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI;
+using Telerik.Sitefinity.Web.UI.ControlDesign;
 using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 {
-    [RequireScriptManager]
+    [RequireScriptManager, ControlDesigner(typeof(EUCalendarWidgetDesigner))]
     public class EUCalendarWidget : SimpleScriptView
     {
         #region Control Properties
@@ -83,9 +87,27 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
+        /// <summary>
+        /// Gets or sets the back button default destination.
+        /// </summary>
+        /// <value>
+        /// The back button default destination.
+        /// </value>
+        public string BackBtnDefaultDestination
+        {
+            get
+            {
+                return this.backBtnDefaultDestination;
+            }
+            set
+            {
+                this.backBtnDefaultDestination = value;
+            }
+        }
+
         #endregion
 
-        #region Control references
+        #region Events list control references
 
         protected virtual RadListView EventsList
         {
@@ -153,6 +175,106 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         #endregion
 
+        #region Event Details control references
+
+        protected virtual Literal EventDetailErrMessage
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("eventDetailErrMessage", false);
+            }
+        }
+
+        protected virtual HyperLink BackButtonLink
+        {
+            get
+            {
+                return this.Container.GetControl<HyperLink>("backButtonLink", false);
+            }
+        }
+
+        protected virtual Literal TitleControl
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("titleLtl", false);
+            }
+        }
+
+        protected virtual Literal DescriptionControl
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("descriptionLtl", false);
+            }
+        }
+
+        protected virtual HyperLink OrganizersEventLinkMobile
+        {
+            get
+            {
+                return this.Container.GetControl<HyperLink>("organizersEventLinkMobile", false);
+            }
+        }
+
+        protected virtual HyperLink OrganizersEventLink
+        {
+            get
+            {
+                return this.Container.GetControl<HyperLink>("organizersEventLink", false);
+            }
+        }
+
+        protected virtual Literal StartDateControl
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("startDateLtl", false);
+            }
+        }
+
+        protected virtual Literal PriceControl
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("priceLtl", false);
+            }
+        }
+
+        protected virtual Literal PolicyAreaControl
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("policyAreaLtl", false);
+            }
+        }
+
+        protected virtual Literal OrganizerControl
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("organizerLtl", false);
+            }
+        }
+
+        protected virtual Literal LocationControl
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("locationLtl", false);
+            }
+        }
+
+        protected virtual Literal DeadlineControl
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("deadlineLtl", false);
+            }
+        }
+
+        #endregion
+
         #region Overridden methods
 
         /// <inheritdoc />
@@ -191,7 +313,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.Prev.Click += Prev_Click;
             this.Next.Click += Next_Click;
 
-            this.InitializeMasterView(this.eventList);
+            if (this.IsDetailsMode)
+            {
+                this.InitializeDetailsView(this.eventList);
+            }
+            else
+            {
+                this.InitializeMasterView(this.eventList);
+            }
         }
 
         protected void Prev_Click(object sender, EventArgs e)
@@ -235,6 +364,34 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             HttpContext.Current.Response.Redirect(redirectLocation);
         }
 
+        protected void eventDeadlineRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (eventDeadlineRadioButton.Checked)
+            {
+                var currentDate = DateTime.Parse(this.Date.InnerHtml);
+                this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
+                    .OrderBy(a => a.Attributes.new_eucregistrationdeadline).ToList();
+                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+                this.EventsList.DataBind();
+            }
+        }
+
+        protected void eventDateRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (eventDateRadioButton.Checked)
+            {
+                var currentDate = DateTime.Parse(this.Date.InnerHtml);
+                this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
+                    .OrderBy(a => a.Attributes.new_eucstartdate).ToList();
+                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+                this.EventsList.DataBind();
+            }
+        }
+
+        #endregion
+
+        #region IScriptControl methods
+
         /// <inheritdoc />
         public override IEnumerable<System.Web.UI.ScriptDescriptor> GetScriptDescriptors()
         {
@@ -262,9 +419,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         /// <param name="eventList">The event list.</param>
         private void InitializeMasterView(IList<EventModel> eventList)
         {
-            //Need to initialize the controls before further filtering
-            this.InitializeDropDownControls(eventList);
-
             this.eventDateRadioButton.CheckedChanged += eventDateRadioButton_CheckedChanged;
             this.eventDeadlineRadioButton.CheckedChanged += eventDeadlineRadioButton_CheckedChanged;
 
@@ -281,30 +435,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (eventListCount > 0)
             {
                 this.EventsList.DataSource = eventList;
-                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-                this.EventsList.DataBind();
-            }
-        }
-
-        void eventDeadlineRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (eventDeadlineRadioButton.Checked)
-            {
-                var currentDate = DateTime.Parse(this.Date.InnerHtml);
-                this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
-                    .OrderBy(a => a.Attributes.new_eucregistrationdeadline).ToList();
-                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-                this.EventsList.DataBind();
-            }
-        }
-
-        void eventDateRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (eventDateRadioButton.Checked)
-            {
-                var currentDate = DateTime.Parse(this.Date.InnerHtml);
-                this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
-                    .OrderBy(a => a.Attributes.new_eucstartdate).ToList();
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
             }
@@ -344,18 +474,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         }
 
         /// <summary>
-        /// Initializes the drop down controls.
-        /// </summary>
-        /// <param name="eventList">The event list.</param>
-        private void InitializeDropDownControls(IList<EventModel> eventList)
-        {
-            //this.InitializeEventTypesDropDown(eventList);
-            //this.InitializeEventLocationsDropDown(eventList);
-            //this.InitializeEventLanguagesDropDown(eventList);
-        }
-
-        /// <summary>
-        /// Converts the relative URL to absolute URL.
+        /// Converts relative URL to absolute URL.
         /// </summary>
         /// <param name="relativeUrl">The relative URL.</param>
         /// <returns></returns>
@@ -373,41 +492,41 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         /// <param name="eventList">The event list.</param>
         private void InitializeDetailsView(IList<EventModel> eventList)
         {
-            //if (this.IsBackend() || this.IsPreviewMode())
-            //{
-            //    this.DisplayBackendMessage();
-            //}
+            if (this.IsBackend() || this.IsPreviewMode())
+            {
+                this.DisplayBackendMessage();
+            }
 
-            //string itemUrl = string.Empty;
-            //itemUrl = this.GetUrlParameterString(true);
+            string itemUrl = string.Empty;
+            itemUrl = this.GetUrlParameterString(true);
 
-            //if (!string.IsNullOrEmpty(itemUrl))
-            //{
-            //    var eventItem = eventList.Where(e => itemUrl.Contains(Regex.Replace(e.EventTitle.ToLower(), ETXCommon.DevNames.UrlHelpers.UrlRegex, ETXCommon.DevNames.UrlHelpers.Dash))).FirstOrDefault();
+            if (!string.IsNullOrEmpty(itemUrl))
+            {
+                var eventItem = eventList.Where(e => itemUrl.Contains(Regex.Replace(e.Attributes.cdi_name.ToLower(),
+                    urlRegex, hyphen))).FirstOrDefault();
 
-            //    if (eventItem != null)
-            //    {
-            //        RouteHelper.SetUrlParametersResolved();
-            //        this.BackButtonLink.NavigateUrl = HttpContext.Current.Request.UrlReferrer == null ? this.BackBtnDefaultDestination : HttpContext.Current.Request.UrlReferrer.AbsolutePath;
-            //        this.TypeControl.Text = eventItem.EventType;
-            //        this.SubjectControl.Text = eventItem.EventTitle;
-            //        this.DateControl.Text = eventItem.EventDates + " " + eventItem.EventHours;
-            //        this.LocationControl.Text = eventItem.EventLocation;
-            //        this.LanguageControl.Text = eventItem.EventLanguage;
-            //        this.AvailabilityControl.Text = eventItem.EventAvailability;
-            //        this.ContentControl.Text = eventItem.EventDetails;
-
-            //        this.ResolvePageMetaTags(eventItem);
-            //        this.SetupBookNowIframe(eventItem);
-            //    }
-            //}
+                if (eventItem != null)
+                {
+                    RouteHelper.SetUrlParametersResolved();
+                    this.BackButtonLink.NavigateUrl =
+                        HttpContext.Current.Request.UrlReferrer == null ? this.BackBtnDefaultDestination : HttpContext.Current.Request.UrlReferrer.AbsolutePath;
+                    this.TitleControl.Text = eventItem.Attributes.cdi_name;
+                    this.StartDateControl.Text = eventItem.Attributes.new_eucstartdate.ToString("dd MMMM yyyy");
+                    this.DescriptionControl.Text = "";
+                    this.PriceControl.Text = eventItem.Attributes.new_euceventprice;
+                    this.PolicyAreaControl.Text = "";
+                    this.OrganizerControl.Text = eventItem.Attributes.organiserName.Value;
+                    this.LocationControl.Text = eventItem.Attributes.new_euclocation.Name;
+                    this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline.ToString("dd MMMM yyyy");
+                }
+            }
         }
 
         private void EventsList_ItemDataBound(object sender, RadListViewItemEventArgs e)
         {
             if (e.Item.ItemType == RadListViewItemType.DataItem || e.Item.ItemType == RadListViewItemType.AlternatingItem)
             {
-                var eventLinkControl = e.Item.FindControl("detailViewLink") as HtmlAnchor;
+                var eventLinkControl = e.Item.FindControl("detailViewLink") as HyperLink;
                 if (eventLinkControl != null)
                 {
                     var eventItem = (e.Item as Telerik.Web.UI.RadListViewDataItem).DataItem as EventModel;
@@ -416,11 +535,24 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                     {
                         var pmanager = PageManager.GetManager();
                         var detailsPage = pmanager.GetPageNode(this.DetailsPageId);
-                        eventLinkControl.HRef = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture) + fwdSlash +
+                        eventLinkControl.NavigateUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture) + fwdSlash +
                             Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen);
                     }
                 }
             }
+        }
+
+        private void DisplayBackendMessage()
+        {
+            this.EventDetailErrMessage.Visible = true;
+            StringBuilder sb = new StringBuilder();
+            if (string.IsNullOrEmpty(this.BackBtnDefaultDestination))
+            {
+                sb.AppendLine(Res.Get<ShunghamResources>().AddRelativePathToEventListPage);
+                sb.Append("<br />");
+            }
+            sb.AppendLine(Res.Get<ShunghamResources>().EventBackendErrMessage);
+            this.EventDetailErrMessage.Text = sb.ToString();
         }
 
         #endregion
@@ -441,6 +573,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         public static string eventsDateFormat = "MMMM yyyy";
         public const string eventsSearchUrlKeyword = "?search=";
         public static string dateKey = "Date";
+        private string backBtnDefaultDestination = string.Empty;
 
         #endregion
     }

@@ -867,6 +867,7 @@
       <DependentUpon>ContactUsWidget.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.cs" />
+    <Compile Include="CustomWidgets\EUCalendar\EUCalendarWidget\Designer\EUCalendarWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EventModel.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EventsControlsHelper.cs" />
@@ -979,6 +980,9 @@
     <Content Include="CustomWidgets\ContactUsWidget\ContactUsWidget.ascx" />
     <Content Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.js" />
+    <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\Designer\EUCalendarWidgetDesigner.ascx" />
+    <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\Designer\EUCalendarWidgetDesigner.js" />
+    <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarDetailTemplate.ascx" />
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarMasterTemplate.ascx" />
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.js" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.ascx" />
