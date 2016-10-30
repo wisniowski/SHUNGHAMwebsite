@@ -21,13 +21,13 @@
         <sf:ResourceFile JavaScriptLibrary="JQueryUI"></sf:ResourceFile>
         <sf:ResourceFile JavaScriptLibrary="KendoAll"></sf:ResourceFile>
     </sf:ResourceLinks>
-
 </head>
 <body>
     <form id="form1" runat="server">
         <div id="root">
             <header id="top">
-                <p id="logo"><a href="/" accesskey="h"><span class="overlay-d">EU</span>Calendar</a></p>
+                <p id="logo"><a href="/" accesskey="h" style="font-family: 'Gotham Narrow', Gotham, Arial, Helvetica, sans-serif;">
+                    <span class="overlay-d">EU</span>Calendar</a></p>
                 <nav id="skip">
                     <ul>
                         <li><a href="#nav" accesskey="n">Skip to navigation (n)</a></li>
