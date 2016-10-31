@@ -3,7 +3,7 @@
 <%@ Import Namespace="Telerik.Sitefinity.Localization" %>
 
 <telerik:RadSocialShare ID="RadSocialShare" runat="server" EnableEmbeddedSkins="false" 
-    ClientIDMode="Static" CssClass="social-a a">
+    ClientIDMode="Static">
     <MainButtons>
         <telerik:RadSocialButton SocialNetType="LinkedIn" LabelText="LinkedIn" />
         <telerik:RadSocialButton SocialNetType="ShareOnTwitter" LabelText="Twitter" />
@@ -13,6 +13,9 @@
 
 <script type="text/javascript">
     $(function () {
+
+        $('ul.sshContent').addClass('social-a a');
+
         //custom JS logic to add custom icons to the social share buttons
         var $fbLinks = $('.RadSocialShare').find("a[title='Share on Facebook']"),
             $twitterLinks = $('.RadSocialShare').find("a[title='Tweet this']"),

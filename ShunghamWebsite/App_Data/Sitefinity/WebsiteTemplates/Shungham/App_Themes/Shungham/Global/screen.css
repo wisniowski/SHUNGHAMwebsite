@@ -1448,7 +1448,6 @@ p.double {
         }
 
         .module-c > .b footer .social-a {
-            position: relative;
             top: -2px;
             float: left;
         }
