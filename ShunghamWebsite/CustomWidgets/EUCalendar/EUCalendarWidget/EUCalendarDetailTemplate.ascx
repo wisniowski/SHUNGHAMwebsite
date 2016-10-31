@@ -65,7 +65,7 @@
                 </p>
             </div>
             <p class="link-b mobile-only">
-                <asp:HyperLink runat="server" ID="organizersEventLinkMobile">Organizer's Event Page 
+                <asp:HyperLink runat="server" ID="organizersEventLinkMobile" Target="_blank">Organizer's Event Page 
             <i class="icon-caret-right"></i></asp:HyperLink>
             </p>
             <ul class="list-f a">
@@ -92,7 +92,7 @@
                 <uc1:SocialShare runat="server" ID="SocialShare" />
             </div>
             <p class="link-b mobile-hide">
-                <asp:HyperLink runat="server" ID="organizersEventLink">Organizer's Event Page 
+                <asp:HyperLink runat="server" ID="organizersEventLink" Target="_blank">Organizer's Event Page 
             <i class="icon-caret-right"></i></asp:HyperLink>
             </p>
         </footer>

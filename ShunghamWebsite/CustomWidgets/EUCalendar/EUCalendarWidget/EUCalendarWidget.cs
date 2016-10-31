@@ -512,12 +512,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                         HttpContext.Current.Request.UrlReferrer == null ? this.BackBtnDefaultDestination : HttpContext.Current.Request.UrlReferrer.AbsolutePath;
                     this.TitleControl.Text = eventItem.Attributes.cdi_name;
                     this.StartDateControl.Text = eventItem.Attributes.new_eucstartdate.ToString("dd MMMM yyyy");
-                    this.DescriptionControl.Text = "";
+                    this.DescriptionControl.Text = eventItem.Attributes.new_euceventdescription;
                     this.PriceControl.Text = eventItem.Attributes.new_euceventprice;
-                    this.PolicyAreaControl.Text = "";
+                    this.PolicyAreaControl.Text = eventItem.Attributes.new_eucconcatenatepolicyareastrings;
                     this.OrganizerControl.Text = eventItem.Attributes.organiserName.Value;
                     this.LocationControl.Text = eventItem.Attributes.new_euclocation.Name;
                     this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline.ToString("dd MMMM yyyy");
+                    this.OrganizersEventLink.NavigateUrl = eventItem.Attributes.new_euceventlink;
+                    this.OrganizersEventLinkMobile.NavigateUrl = eventItem.Attributes.new_euceventlink;
                 }
             }
         }
