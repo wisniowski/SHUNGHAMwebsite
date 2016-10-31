@@ -48,9 +48,7 @@
         <asp:Literal ID="eventDetailErrMessage" runat="server" Visible="false"></asp:Literal>
         <header>
             <p class="link-b">
-                <asp:HyperLink runat="server" ID="backButtonLink">
-            <i class="icon-caret-left"></i>Back to Events List
-                </asp:HyperLink>
+                <a runat="server" ID="backButtonLink"></a>
             </p>
             <h2>
                 <asp:Literal ID="titleLtl" runat="server" />
@@ -63,10 +61,6 @@
                     <asp:Literal ID="descriptionLtl" runat="server" />
                 </p>
             </div>
-            <p class="link-b mobile-only">
-                <asp:HyperLink runat="server" ID="organizersEventLinkMobile" Target="_blank">Organizer's Event Page 
-            <i class="icon-caret-right"></i></asp:HyperLink>
-            </p>
             <ul class="list-f a">
                 <li><span>When:</span>
                     <asp:Literal runat="server" ID="startDateLtl" /></li>

@@ -185,11 +185,11 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
-        protected virtual HyperLink BackButtonLink
+        protected virtual HtmlAnchor BackButtonLink
         {
             get
             {
-                return this.Container.GetControl<HyperLink>("backButtonLink", false);
+                return this.Container.GetControl<HtmlAnchor>("backButtonLink", false);
             }
         }
 
@@ -206,14 +206,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             get
             {
                 return this.Container.GetControl<Literal>("descriptionLtl", false);
-            }
-        }
-
-        protected virtual HyperLink OrganizersEventLinkMobile
-        {
-            get
-            {
-                return this.Container.GetControl<HyperLink>("organizersEventLinkMobile", false);
             }
         }
 
@@ -508,7 +500,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 if (eventItem != null)
                 {
                     RouteHelper.SetUrlParametersResolved();
-                    this.BackButtonLink.NavigateUrl =
+                    this.BackButtonLink.InnerHtml = @"<i class=""icon-caret-left""></i>Back to Events List";
+                    this.BackButtonLink.HRef =
                         HttpContext.Current.Request.UrlReferrer == null ? this.BackBtnDefaultDestination : HttpContext.Current.Request.UrlReferrer.AbsolutePath;
                     this.TitleControl.Text = eventItem.Attributes.cdi_name;
                     this.StartDateControl.Text = eventItem.Attributes.new_eucstartdate.ToString("dd MMMM yyyy");
@@ -520,7 +513,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                     this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline == DateTime.MinValue ? "No deadline" :
                     eventItem.Attributes.new_eucregistrationdeadline.ToString("dd MMMM yyyy");
                     this.OrganizersEventLink.NavigateUrl = eventItem.Attributes.new_euceventlink;
-                    this.OrganizersEventLinkMobile.NavigateUrl = eventItem.Attributes.new_euceventlink;
                 }
             }
         }
