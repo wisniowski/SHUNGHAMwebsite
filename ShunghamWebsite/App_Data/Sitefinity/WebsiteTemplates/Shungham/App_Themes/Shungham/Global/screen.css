@@ -69,7 +69,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     background: #fff;
 }
 
-    /*#root:before {
+/*#root:before {
         content: "";
         display: block;
         position: fixed;
@@ -2253,7 +2253,7 @@ a {
     margin-top: 36px;
 }
 
-    .link-a a {
+    /*.link-a a {
         display: inline-block;
         position: relative;
         min-width: 154px;
@@ -2266,59 +2266,59 @@ a {
         line-height: 1.2;
         text-decoration: none;
         text-align: center;
+    }*/
+
+    .link-a a:hover {
+        border-color: #c80000;
+        background: #c80000;
     }
 
-        .link-a a:hover {
-            border-color: #c80000;
-            background: #c80000;
-        }
+    .link-a a + a {
+        margin-left: 8px;
+    }
 
-        .link-a a + a {
-            margin-left: 8px;
-        }
+    .link-a a.a {
+        background: none;
+        color: #cc4646;
+    }
 
-        .link-a a.a {
-            background: none;
-            color: #cc4646;
-        }
-
-            .link-a a.a:hover {
-                background: #cc4646;
-                color: #fff;
-            }
-
-        .link-a a.b {
-            border-color: #0971b2;
-            background: #0971b2;
-        }
-
-            .link-a a.b:hover {
-                border-color: #165278;
-                background: #165278;
-            }
-
-        .link-a a.c {
-            border-color: #0971b2;
-            background: none;
-            color: #0971b2;
-        }
-
-            .link-a a.c:hover {
-                background: #0971b2;
-                color: #fff;
-            }
-
-        .link-a a.d {
-            border-color: #c80000;
-            background: #c80000;
+        .link-a a.a:hover {
+            background: #cc4646;
             color: #fff;
         }
 
-            .link-a a.d:hover {
-                border-color: #cc4646;
-                background: #cc4646;
-                color: #fff;
-            }
+    .link-a a.b {
+        border-color: #0971b2;
+        background: #0971b2;
+    }
+
+        .link-a a.b:hover {
+            border-color: #165278;
+            background: #165278;
+        }
+
+    .link-a a.c {
+        border-color: #0971b2;
+        background: none;
+        color: #0971b2;
+    }
+
+        .link-a a.c:hover {
+            background: #0971b2;
+            color: #fff;
+        }
+
+    .link-a a.d {
+        border-color: #c80000;
+        background: #c80000;
+        color: #fff;
+    }
+
+        .link-a a.d:hover {
+            border-color: #cc4646;
+            background: #cc4646;
+            color: #fff;
+        }
 
     .link-a.a {
     }
@@ -6417,3 +6417,49 @@ svg:not(:root) {
     height: 20px;
     top: 37px;
 }
+
+.atc-style-blue .atcb-list,
+.atc-style-blue .atcb-item {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+.atc-style-blue .atcb-link, .atc-style-blue .atcb-link:active, .atc-style-blue .atcb-link:focus {
+    background: #c80000;
+    border: 1px solid #c80000;
+    font-family: 'Gotham Narrow', Gotham, Arial, Helvetica, sans-serif;
+    border-radius: 0px;
+    display: inline-block;
+    position: relative;
+    min-width: 154px;
+    padding: 8px 13px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+    text-decoration: none;
+    text-align: center;
+    min-width: 0;
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+    .atc-style-blue .atcb-link:hover {
+        background: #cc4646;
+        font-family: 'Gotham Narrow', Gotham, Arial, Helvetica, sans-serif;
+        border-radius: 0px;
+        display: inline-block;
+        position: relative;
+        min-width: 154px;
+        padding: 8px 13px;
+        border: 1px solid #cc4646;
+        color: #fff;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.2;
+        text-decoration: none;
+        text-align: center;
+        min-width: 0;
+        padding-left: 28px;
+        padding-right: 28px;
+    }
