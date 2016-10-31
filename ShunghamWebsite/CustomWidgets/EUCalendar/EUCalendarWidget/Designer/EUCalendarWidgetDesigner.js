@@ -13,6 +13,9 @@ SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer.EUCalendarWi
     /* Initialize InitialItemsCount fields */
     this._initialItemsCount = null;
 
+    /* Initialize BackButtonDefaultDestination fields */
+    this._backButtonDefaultDestination = null;
+
     /* Initialize IsDetailsMode fields */
     this._isDetailsMode = null;
 
@@ -91,6 +94,9 @@ SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer.EUCalendarWi
         /* RefreshUI InitialItemsCount */
         jQuery(this.get_initialItemsCount()).val(controlData.InitialItemsCount);
 
+        /* RefreshUI BackButtonDefaultDestination */
+        jQuery(this.get_backButtonDefaultDestination()).val(controlData.BackBtnDefaultDestination);
+
         /* RefreshUI IsDetailsMode */
         jQuery(this.get_isDetailsMode()).attr("checked", controlData.IsDetailsMode);
     },
@@ -105,6 +111,9 @@ SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer.EUCalendarWi
 
         /* ApplyChanges InitialItemsCount */
         controlData.InitialItemsCount = jQuery(this.get_initialItemsCount()).val();
+
+        /* ApplyChanges InitialItemsCount */
+        controlData.BackBtnDefaultDestination = jQuery(this.get_backButtonDefaultDestination()).val();
 
         /* ApplyChanges IsDetailsMode */
         controlData.IsDetailsMode = jQuery(this.get_isDetailsMode()).is(":checked");
@@ -181,6 +190,10 @@ SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer.EUCalendarWi
     /* InitialItemsCount properties */
     get_initialItemsCount: function () { return this._initialItemsCount; },
     set_initialItemsCount: function (value) { this._initialItemsCount = value; },
+
+    /* BackButtonDefaultDestination properties */
+    get_backButtonDefaultDestination: function () { return this._backButtonDefaultDestination; },
+    set_backButtonDefaultDestination: function (value) { this._backButtonDefaultDestination = value; },
 
     /* IsDetailsMode properties */
     get_isDetailsMode: function () { return this._isDetailsMode; },

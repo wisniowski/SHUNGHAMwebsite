@@ -89,6 +89,17 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer
         }
 
         /// <summary>
+        /// Gets the control that is bound to the InitialItemsCount property
+        /// </summary>
+        protected virtual Control BackButtonDefaultDestination
+        {
+            get
+            {
+                return this.Container.GetControl<Control>("BackButtonDefaultDestination", true);
+            }
+        }
+
+        /// <summary>
         /// Gets the control that is bound to the IsDetailsMode property
         /// </summary>
         protected virtual Control IsDetailsMode
@@ -126,6 +137,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer
             descriptor.AddComponentProperty("pageSelectorDetailsPageId", this.PageSelectorDetailsPageId.ClientID);
             descriptor.AddElementProperty("selectorTagDetailsPageId", this.SelectorTagDetailsPageId.ClientID);
             descriptor.AddElementProperty("initialItemsCount", this.InitialItemsCount.ClientID);
+            descriptor.AddElementProperty("backButtonDefaultDestination", this.BackButtonDefaultDestination.ClientID);
             descriptor.AddElementProperty("isDetailsMode", this.IsDetailsMode.ClientID);
 
             return scriptDescriptors;
