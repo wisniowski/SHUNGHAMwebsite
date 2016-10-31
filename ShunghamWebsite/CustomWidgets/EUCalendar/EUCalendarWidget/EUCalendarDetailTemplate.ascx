@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" %>
+<%@ Register Src="~/CustomWidgets/EUCalendar/SocialShare.ascx" TagPrefix="uc1" TagName="SocialShare" %>
 
 <div id="aside" class="a">
     <h2>Filters / Search</h2>
@@ -60,29 +61,52 @@
                 <asp:Literal ID="descriptionLtl" runat="server" />
             </p>
         </div>
-        <p class="link-b mobile-only"><asp:HyperLink runat="server" ID="organizersEventLinkMobile">Organizer's Event Page 
-            <i class="icon-caret-right"></i></asp:HyperLink></p>
+        <p class="link-b mobile-only">
+            <asp:HyperLink runat="server" ID="organizersEventLinkMobile">Organizer's Event Page 
+            <i class="icon-caret-right"></i></asp:HyperLink>
+        </p>
         <ul class="list-f a">
-            <li><span>When:</span> <asp:Literal runat="server" ID="startDateLtl" /></li>
-            <li><span>How much:</span> <span class="text-uppercase"><asp:Literal runat="server" ID="priceLtl" />
-                </span></li>
-            <li><span>Policy area:</span> <asp:Literal runat="server" ID="policyAreaLtl" /></li>
-            <li><span>Who:</span> <asp:Literal runat="server" ID="organizerLtl" /></li>
-            <li class="before-last"><span>Where:</span> <asp:Literal runat="server" ID="locationLtl" /></li>
-            <li><span>Registration deadline:</span> <asp:Literal runat="server" ID="deadlineLtl" /></li>
+            <li><span>When:</span>
+                <asp:Literal runat="server" ID="startDateLtl" /></li>
+            <li><span>How much:</span> <span class="text-uppercase">
+                <asp:Literal runat="server" ID="priceLtl" />
+            </span></li>
+            <li><span>Policy area:</span>
+                <asp:Literal runat="server" ID="policyAreaLtl" /></li>
+            <li><span>Who:</span>
+                <asp:Literal runat="server" ID="organizerLtl" /></li>
+            <li class="before-last"><span>Where:</span>
+                <asp:Literal runat="server" ID="locationLtl" /></li>
+            <li><span>Registration deadline:</span>
+                <asp:Literal runat="server" ID="deadlineLtl" /></li>
         </ul>
     </div>
     <footer class="double">
         <div>
-            <p class="link-a"><a class="d" href="./">Add to My Calendar</a></p>
-            <ul class="social-a a">
-                <li><a rel="external" href="./"><i class="icon-linkedin"></i><span>LinkedIn</span></a></li>
-                <li><a rel="external" href="./"><i class="icon-twitter"></i><span>Twitter</span></a></li>
-                <li><a rel="external" href="./"><i class="icon-facebook"></i><span>Facebook</span></a></li>
-            </ul>
+            <p class="link-a">
+                <%--<a class="d" href="./">Add to My Calendar</a></p>--%>
+                <span
+                    class="addtocalendar atc-style-red"
+                    data-calendars="iCalendar, Google Calendar, Outlook">
+                    <a class="atcb-link">Add to My Calendar</a>
+                    <var class="atc_event">
+                        <var class="atc_date_start">2016-05-04 12:00:00</var>
+                        <var class="atc_date_end">2016-05-04 18:00:00</var>
+                        <var class="atc_timezone">Europe/London</var>
+                        <var class="atc_title">Star Wars Day Party</var>
+                        <var class="atc_description">May the force be with you</var>
+                        <var class="atc_location">Tatooine</var>
+                        <var class="atc_organizer">Luke Skywalker</var>
+                        <var class="atc_organizer_email">luke@starwars.com</var>
+                    </var>
+                </span>
+            </p>
+            <uc1:SocialShare runat="server" ID="SocialShare" />
         </div>
-        <p class="link-b mobile-hide"><asp:HyperLink runat="server" ID="organizersEventLink">Organizer's Event Page 
-            <i class="icon-caret-right"></i></asp:HyperLink></p>
+        <p class="link-b mobile-hide">
+            <asp:HyperLink runat="server" ID="organizersEventLink">Organizer's Event Page 
+            <i class="icon-caret-right"></i></asp:HyperLink>
+        </p>
     </footer>
 </article>
 
