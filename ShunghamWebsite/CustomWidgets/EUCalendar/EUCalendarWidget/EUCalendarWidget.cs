@@ -265,6 +265,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
+        protected virtual RadListView SingleEvent
+        {
+            get
+            {
+                return this.Container.GetControl<RadListView>("singleEvent", false);
+            }
+        }
+
         #endregion
 
         #region Overridden methods
@@ -521,6 +529,9 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                     this.OrganizersEventLink.NavigateUrl = eventItem.Attributes.new_euceventlink;
 
                     this.ResolvePageMetaTags(eventItem);
+
+                    this.SingleEvent.DataSource = new List<EventModel>() { eventItem };
+                    this.SingleEvent.DataBind();
                 }
             }
         }

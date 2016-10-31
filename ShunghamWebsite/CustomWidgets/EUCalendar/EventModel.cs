@@ -29,7 +29,9 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
         public string cdi_name { get; set; }
         public string new_euceventlink { get; set; }
         public string cdi_eventid { get; set; }
+        public string new_eucendtime { get; set; }
         public string new_euceventdescription { get; set; }
+        public DateTime new_eucenddate { get; set; }
         public DateTime new_eucstartdate { get; set; }
         public NewEuclocation new_euclocation { get; set; }
         public DateTime new_eucregistrationdeadline { get; set; }

@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" %>
 <%@ Register Src="~/CustomWidgets/EUCalendar/SocialShare.ascx" TagPrefix="uc1" TagName="SocialShare" %>
-<%@ Register Src="~/CustomWidgets/EUCalendar/AddToCalendar.ascx" TagPrefix="uc1" TagName="AddToCalendar" %>
 
 <div id="aside" class="a">
     <h2>Filters / Search</h2>
@@ -48,7 +47,7 @@
         <asp:Literal ID="eventDetailErrMessage" runat="server" Visible="false"></asp:Literal>
         <header>
             <p class="link-b">
-                <a runat="server" ID="backButtonLink"></a>
+                <a runat="server" id="backButtonLink"></a>
             </p>
             <h2>
                 <asp:Literal ID="titleLtl" runat="server" />
@@ -80,7 +79,41 @@
         <footer class="double">
             <div>
                 <p class="link">
-                    <uc1:AddToCalendar runat="server" ID="AddToCalendar" />
+                    <span class="addtocalendar atc-style-blue"
+                        data-calendars="iCalendar, Google Calendar, Outlook">
+                        <a class="atcb-link">Add to My Calendar</a>
+                        <var class="atc_event">
+                            <telerik:RadListView ID="singleEvent" ItemPlaceholderID="EventsContainer" runat="server"
+                                EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
+                                <LayoutTemplate>
+                                    <asp:PlaceHolder ID="EventsContainer" runat="server" />
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <var class="atc_date_start">
+                                        <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstartdate", "{0:yyyy-MM-dd}") %>
+                                        <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstarttime", "{0:hh:MM:ss}") %>
+                                    </var>
+                                    <var class="atc_date_end">
+                                        <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucenddate", "{0:yyyy-MM-dd}") %>
+                                        <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucendtime", "{0:hh:MM:ss}") %>
+                                    </var>
+                                    <var class="atc_timezone">Europe/London</var>
+                                    <var class="atc_title">
+                                        <%# DataBinder.Eval(Container.DataItem,"Attributes.cdi_name") %>
+                                    </var>
+                                    <var class="atc_description">
+                                        <%# DataBinder.Eval(Container.DataItem,"Attributes.new_euceventdescription") %>
+                                    </var>
+                                    <var class="atc_location">
+                                        <%# DataBinder.Eval(Container.DataItem,"Attributes.new_euclocation.Name") %>
+                                    </var>
+                                    <var class="atc_organizer">
+                                        <%# DataBinder.Eval(Container.DataItem,"Attributes.organiserName.Value") %>
+                                    </var>
+                                </ItemTemplate>
+                            </telerik:RadListView>
+                        </var>
+                    </span>
                 </p>
                 <uc1:SocialShare runat="server" ID="SocialShare" />
             </div>
