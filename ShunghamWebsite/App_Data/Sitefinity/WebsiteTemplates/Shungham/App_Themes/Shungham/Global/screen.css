@@ -2233,7 +2233,7 @@ sub {
 /*! Links --------- */
 a {
     background: none;
-    color: #09f;
+    color: #fff;
     text-decoration: none;
     cursor: pointer;
 }
