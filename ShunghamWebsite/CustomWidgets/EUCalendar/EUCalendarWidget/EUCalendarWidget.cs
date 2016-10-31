@@ -513,7 +513,29 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                     this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline == DateTime.MinValue ? "No deadline" :
                     eventItem.Attributes.new_eucregistrationdeadline.ToString("dd MMMM yyyy");
                     this.OrganizersEventLink.NavigateUrl = eventItem.Attributes.new_euceventlink;
+
+                    this.ResolvePageMetaTags(eventItem);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Resolves the page meta tags.
+        /// </summary>
+        /// <param name="eventItem">The event item.</param>
+        protected virtual void ResolvePageMetaTags(EventModel eventItem)
+        {
+            if (this.Page == null)
+            {
+                return;
+            }
+            if (!string.IsNullOrEmpty(eventItem.Attributes.new_euceventdescription))
+            {
+                this.Page.MetaDescription = eventItem.Attributes.new_euceventdescription;
+            }
+            if (!string.IsNullOrEmpty(eventItem.Attributes.cdi_name))
+            {
+                this.Page.Title = eventItem.Attributes.cdi_name;
             }
         }
 

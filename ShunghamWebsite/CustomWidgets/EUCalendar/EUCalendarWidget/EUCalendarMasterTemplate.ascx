@@ -54,7 +54,6 @@
                 <li>
                     <header>
                         <p>
-                            <%--<span><span>21</span> mar</span> 09:00 mon--%>
                             <span>
                                 <span><%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstartdate", "{0:dd}") %></span>
                                 <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucstartdate", "{0:MMM}") %>
