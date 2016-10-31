@@ -79,7 +79,7 @@
         </div>
         <footer class="double">
             <div>
-                <p class="link-a">
+                <p class="link">
                     <uc1:AddToCalendar runat="server" ID="AddToCalendar" />
                 </p>
                 <uc1:SocialShare runat="server" ID="SocialShare" />
