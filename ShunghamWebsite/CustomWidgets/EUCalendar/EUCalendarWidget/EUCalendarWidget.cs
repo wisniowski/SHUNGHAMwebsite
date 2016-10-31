@@ -273,6 +273,22 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
+        protected virtual RadListView OtherEventsList
+        {
+            get
+            {
+                return this.Container.GetControl<RadListView>("otherEventsList", false);
+            }
+        }
+
+        protected virtual Literal Count
+        {
+            get
+            {
+                return this.Container.GetControl<Literal>("count", false);
+            }
+        }
+
         #endregion
 
         #region Overridden methods
@@ -514,26 +530,36 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 if (eventItem != null)
                 {
                     RouteHelper.SetUrlParametersResolved();
-                    this.BackButtonLink.InnerHtml = @"<i class=""icon-caret-left""></i>Back to Events List";
-                    this.BackButtonLink.HRef =
-                        HttpContext.Current.Request.UrlReferrer == null ? this.BackBtnDefaultDestination : HttpContext.Current.Request.UrlReferrer.AbsolutePath;
-                    this.TitleControl.Text = eventItem.Attributes.cdi_name;
-                    this.StartDateControl.Text = eventItem.Attributes.new_eucstartdate.ToString("dd MMMM yyyy");
-                    this.DescriptionControl.Text = eventItem.Attributes.new_euceventdescription;
-                    this.PriceControl.Text = eventItem.Attributes.new_euceventprice;
-                    this.PolicyAreaControl.Text = eventItem.Attributes.new_eucconcatenatepolicyareastrings;
-                    this.OrganizerControl.Text = eventItem.Attributes.organiserName.Value;
-                    this.LocationControl.Text = eventItem.Attributes.new_euclocation.Name;
-                    this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline == DateTime.MinValue ? "No deadline" :
-                    eventItem.Attributes.new_eucregistrationdeadline.ToString("dd MMMM yyyy");
-                    this.OrganizersEventLink.NavigateUrl = eventItem.Attributes.new_euceventlink;
+                    BindEventDetail(eventItem);
 
                     this.ResolvePageMetaTags(eventItem);
 
+                    //bind AddToCalendar event details
                     this.SingleEvent.DataSource = new List<EventModel>() { eventItem };
                     this.SingleEvent.DataBind();
+
+                    //bind other events list
+                    BindOtherEventsList(eventList, eventItem);
                 }
             }
+
+        }
+
+        private void BindEventDetail(EventModel eventItem)
+        {
+            this.BackButtonLink.InnerHtml = @"<i class=""icon-caret-left""></i>Back to Events List";
+            this.BackButtonLink.HRef =
+                HttpContext.Current.Request.UrlReferrer == null ? this.BackBtnDefaultDestination : HttpContext.Current.Request.UrlReferrer.AbsolutePath;
+            this.TitleControl.Text = eventItem.Attributes.cdi_name;
+            this.StartDateControl.Text = eventItem.Attributes.new_eucstartdate.ToString("dd MMMM yyyy");
+            this.DescriptionControl.Text = eventItem.Attributes.new_euceventdescription;
+            this.PriceControl.Text = eventItem.Attributes.new_euceventprice;
+            this.PolicyAreaControl.Text = eventItem.Attributes.new_eucconcatenatepolicyareastrings;
+            this.OrganizerControl.Text = eventItem.Attributes.organiserName.Value;
+            this.LocationControl.Text = eventItem.Attributes.new_euclocation.Name;
+            this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline == DateTime.MinValue ? "No deadline" :
+            eventItem.Attributes.new_eucregistrationdeadline.ToString("dd MMMM yyyy");
+            this.OrganizersEventLink.NavigateUrl = eventItem.Attributes.new_euceventlink;
         }
 
         /// <summary>
@@ -587,6 +613,16 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
             sb.AppendLine(Res.Get<ShunghamResources>().EventBackendErrMessage);
             this.EventDetailErrMessage.Text = sb.ToString();
+        }
+
+        private void BindOtherEventsList(IList<EventModel> eventList, EventModel eventItem)
+        {
+            var otherEvents = eventList.Where(ev => ev.Id != eventItem.Id &&
+                ev.Attributes.new_eucconcatenatepolicyareastrings == ev.Attributes.new_eucconcatenatepolicyareastrings);
+            this.Count.Text = otherEvents.Count().ToString();
+            this.OtherEventsList.DataSource = otherEvents;
+            this.OtherEventsList.ItemDataBound += EventsList_ItemDataBound;
+            this.OtherEventsList.DataBind();
         }
 
         #endregion
