@@ -985,6 +985,7 @@
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarDetailTemplate.ascx" />
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarMasterTemplate.ascx" />
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.js" />
+    <Content Include="CustomWidgets\EUCalendar\SocialShare.ascx" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.js" />
     <Content Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx" />
