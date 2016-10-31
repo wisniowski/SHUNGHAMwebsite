@@ -64,7 +64,9 @@
                         </p>
                         <p>
                             Registration Deadline: <span>
-                                <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucregistrationdeadline", "{0:dd MMM ddd}")%>
+                                <%# DataBinder.Eval(Container.DataItem, "Attributes.new_eucregistrationdeadline").ToString() == DateTime.MinValue.ToString() ?
+                                "No deadline" : DataBinder.Eval(Container.DataItem, "Attributes.new_eucregistrationdeadline", "{0:dd MMM ddd}")
+                                %>
                             </span>
                         </p>
                     </header>
@@ -74,8 +76,8 @@
                     </h2>
                     <ul>
                         <li><span>Policy Area:</span>
-                            <%-- <asp:Literal runat="server" ID="policyAreaLtl"
-                                Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.new_eucconcatenatepolicyareastrings"))%>' />--%></li>
+                            <asp:Literal runat="server" ID="policyAreaLtl"
+                                Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.new_eucconcatenatepolicyareastrings"))%>' /></li>
                         <li><span>Who:</span>
                             <asp:Literal runat="server" ID="organizerLtl"
                                 Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.organiserName.Value"))%>' /></li>
@@ -100,7 +102,7 @@
 </div>
 
 <script type="text/javascript">
-    
+
     function enterEvent(e) {
         if (e.keyCode == 13) {
             __doPostBack('<%= searchBtn.UniqueID%>', "");

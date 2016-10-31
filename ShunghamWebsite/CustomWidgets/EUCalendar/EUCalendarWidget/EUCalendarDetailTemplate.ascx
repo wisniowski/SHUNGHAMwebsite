@@ -2,7 +2,6 @@
 <%@ Register Src="~/CustomWidgets/EUCalendar/SocialShare.ascx" TagPrefix="uc1" TagName="SocialShare" %>
 <%@ Register Src="~/CustomWidgets/EUCalendar/AddToCalendar.ascx" TagPrefix="uc1" TagName="AddToCalendar" %>
 
-
 <div id="aside" class="a">
     <h2>Filters / Search</h2>
     <ul>

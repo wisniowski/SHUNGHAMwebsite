@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddToCalendar.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUCalendar.AddToCalendar" %>
 
-<span
-    class="addtocalendar atc-style-blue"
+<span class="addtocalendar atc-style-blue"
     data-calendars="iCalendar, Google Calendar, Outlook">
     <a class="atcb-link">Add to My Calendar</a>
     <var class="atc_event">
