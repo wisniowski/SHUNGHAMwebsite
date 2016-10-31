@@ -317,26 +317,32 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         protected void Prev_Click(object sender, EventArgs e)
         {
-            var currentDate = ((DateTime)(HttpContext.Current.Session[dateKey])).AddMonths(-1);
-            HttpContext.Current.Session[dateKey] = currentDate;
-            this.Date.InnerText = currentDate.ToString(eventsDateFormat);
+            if (!this.IsDetailsMode)
+            {
+                var currentDate = ((DateTime)(HttpContext.Current.Session[dateKey])).AddMonths(-1);
+                HttpContext.Current.Session[dateKey] = currentDate;
+                this.Date.InnerText = currentDate.ToString(eventsDateFormat);
 
-            this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate);
-            this.EventsList.DataSource = this.eventList;
-            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-            this.EventsList.DataBind();
+                this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate);
+                this.EventsList.DataSource = this.eventList;
+                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+                this.EventsList.DataBind();
+            }
         }
 
         protected void Next_Click(object sender, EventArgs e)
         {
-            var currentDate = ((DateTime)(HttpContext.Current.Session[dateKey])).AddMonths(1);
-            HttpContext.Current.Session[dateKey] = currentDate;
-            this.Date.InnerText = currentDate.ToString(eventsDateFormat);
+            if (!this.IsDetailsMode)
+            {
+                var currentDate = ((DateTime)(HttpContext.Current.Session[dateKey])).AddMonths(1);
+                HttpContext.Current.Session[dateKey] = currentDate;
+                this.Date.InnerText = currentDate.ToString(eventsDateFormat);
 
-            this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate);
-            this.EventsList.DataSource = this.eventList;
-            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-            this.EventsList.DataBind();
+                this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate);
+                this.EventsList.DataSource = this.eventList;
+                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+                this.EventsList.DataBind();
+            }
         }
 
         protected void SearchButton_Click(object sender, EventArgs e)
@@ -358,7 +364,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         protected void eventDeadlineRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (eventDeadlineRadioButton.Checked)
+            if (eventDeadlineRadioButton.Checked && !this.IsDetailsMode)
             {
                 var currentDate = DateTime.Parse(this.Date.InnerHtml);
                 this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
@@ -370,7 +376,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         protected void eventDateRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (eventDateRadioButton.Checked)
+            if (eventDateRadioButton.Checked && !this.IsDetailsMode)
             {
                 var currentDate = DateTime.Parse(this.Date.InnerHtml);
                 this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
