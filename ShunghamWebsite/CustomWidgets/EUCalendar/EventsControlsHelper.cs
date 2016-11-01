@@ -27,7 +27,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
             }
             else
             {
-                eventList = GetEventsFromMSDynamics();
+                var events = GetEventsFromMSDynamics();
+                eventList = GroupEventsByPolicyArea(events);
             }
 
             return eventList;
@@ -84,6 +85,30 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
                 .ThenBy(ev => ev.Attributes.cdi_name).ToList();
 
             return eventList;
+        }
+
+        public static IList<EventModel> GroupEventsByPolicyArea(IList<EventModel> ungroupedEvents)
+        {
+            IList<EventModel> result = new List<EventModel>();
+            var events = from ev in ungroupedEvents
+                         group ev by ev.Id into groupedEvents
+                         select new
+                         {
+                             ID = groupedEvents.First().Id,
+                             policyAreaName = string.Join(", ", (from p in groupedEvents select p.Attributes.policyAreaName.Value).ToArray())
+                         };
+
+            foreach (var e in events)
+            {
+                var eventItem = ungroupedEvents.Where(ev => ev.Id == e.ID).FirstOrDefault();
+                if (eventItem != null)
+                {
+                    eventItem.Attributes.policyAreaName.Value = e.policyAreaName;
+                    result.Add(eventItem);
+                }
+            }
+
+            return result;
         }
 
         private static ICacheManager CacheManager
