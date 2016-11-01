@@ -27,13 +27,13 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
             }
             else
             {
-                eventList = GetEventsFromSalesforce();
+                eventList = GetEventsFromMSDynamics();
             }
 
             return eventList;
         }
 
-        internal static IList<EventModel> GetEventsFromSalesforce()
+        internal static IList<EventModel> GetEventsFromMSDynamics()
         {
             List<EventModel> eventList = new List<EventModel>();
 
@@ -99,7 +99,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
         public const string requestType = "application/x-www-form-urlencoded";
         public const string requestMethod = "GET";
         private const string cacheKeywordEvents = "eventListCached";
-        private const string serviceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/ShunghamEvents";
+        private const string serviceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/filteredshunghamevents";
 
         #endregion
     }

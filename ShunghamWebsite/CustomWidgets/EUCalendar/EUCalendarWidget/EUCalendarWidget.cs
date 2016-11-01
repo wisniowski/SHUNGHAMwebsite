@@ -554,7 +554,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.StartDateControl.Text = eventItem.Attributes.new_eucstartdate.ToString("dd MMMM yyyy");
             this.DescriptionControl.Text = eventItem.Attributes.new_euceventdescription;
             this.PriceControl.Text = eventItem.Attributes.new_euceventprice;
-            this.PolicyAreaControl.Text = eventItem.Attributes.new_eucconcatenatepolicyareastrings;
+            this.PolicyAreaControl.Text = eventItem.Attributes.policyAreaName.Value;
             this.OrganizerControl.Text = eventItem.Attributes.organiserName.Value;
             this.LocationControl.Text = eventItem.Attributes.new_euclocation.Name;
             this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline == DateTime.MinValue ? "No deadline" :
@@ -618,7 +618,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         private void BindOtherEventsList(IList<EventModel> eventList, EventModel eventItem)
         {
             var otherEvents = eventList.Where(ev => ev.Id != eventItem.Id &&
-                ev.Attributes.new_eucconcatenatepolicyareastrings == ev.Attributes.new_eucconcatenatepolicyareastrings);
+                ev.Attributes.policyAreaID == ev.Attributes.policyAreaID);
             this.Count.Text = otherEvents.Count().ToString();
             this.OtherEventsList.DataSource = otherEvents;
             this.OtherEventsList.ItemDataBound += EventsList_ItemDataBound;

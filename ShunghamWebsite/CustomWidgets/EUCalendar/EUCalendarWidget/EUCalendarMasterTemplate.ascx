@@ -76,7 +76,7 @@
                     <ul>
                         <li><span>Policy Area:</span>
                             <asp:Literal runat="server" ID="policyAreaLtl"
-                                Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.new_eucconcatenatepolicyareastrings"))%>' /></li>
+                                Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.policyAreaName.Value"))%>' /></li>
                         <li><span>Who:</span>
                             <asp:Literal runat="server" ID="organizerLtl"
                                 Text='<%#(DataBinder.Eval(Container.DataItem, "Attributes.organiserName.Value"))%>' /></li>
