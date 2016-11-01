@@ -27,8 +27,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
             }
             else
             {
-                var events = GetEventsFromMSDynamics();
-                eventList = GroupEventsByPolicyArea(events);
+                eventList = GetEventsFromMSDynamics();
             }
 
             return eventList;
@@ -36,7 +35,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
 
         internal static IList<EventModel> GetEventsFromMSDynamics()
         {
-            List<EventModel> eventList = new List<EventModel>();
+            IList<EventModel> eventList = new List<EventModel>();
 
             WebRequest request = (WebRequest)WebRequest.Create(serviceUrl);
             request.Method = requestMethod;
@@ -55,7 +54,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
 
                     var parsedJson = JsonConvert.DeserializeObject<List<EventModel>>(stringValue);
 
-                    eventList = parsedJson;
+                    var events = parsedJson;
+                    eventList = GroupEventsByPolicyArea(events);
 
                     //TODO: extract this in a config
                     var cacheExpirationTime = 20;
