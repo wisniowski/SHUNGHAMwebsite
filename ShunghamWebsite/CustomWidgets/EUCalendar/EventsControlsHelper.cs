@@ -33,11 +33,27 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
             return eventList;
         }
 
+        internal static IList<PolicyAreaModel> GetPolicyAreasList()
+        {
+            IList<PolicyAreaModel> policyAreasList = new List<PolicyAreaModel>();
+
+            if (((IList<PolicyAreaModel>)CacheManager[cacheKeywordPolicyAreas]) != null)
+            {
+                policyAreasList = (List<PolicyAreaModel>)CacheManager[cacheKeywordPolicyAreas];
+            }
+            else
+            {
+                policyAreasList = GetPolicyAreasFromMSDynamics();
+            }
+
+            return policyAreasList;
+        }
+
         internal static IList<EventModel> GetEventsFromMSDynamics()
         {
             IList<EventModel> eventList = new List<EventModel>();
 
-            WebRequest request = (WebRequest)WebRequest.Create(serviceUrl);
+            WebRequest request = (WebRequest)WebRequest.Create(eventsServiceUrl);
             request.Method = requestMethod;
             request.ContentType = requestType;
             request.UseDefaultCredentials = true;
@@ -73,6 +89,48 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
             {
                 Log.Write(ex);
                 return eventList;
+            }
+        }
+
+        internal static IList<PolicyAreaModel> GetPolicyAreasFromMSDynamics()
+        {
+            IList<PolicyAreaModel> policyAreasList = new List<PolicyAreaModel>();
+
+            WebRequest request = (WebRequest)WebRequest.Create(policyAreasServiceUrl);
+            request.Method = requestMethod;
+            request.ContentType = requestType;
+            request.UseDefaultCredentials = true;
+            request.PreAuthenticate = true;
+            request.Credentials = CredentialCache.DefaultCredentials;
+
+            try
+            {
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                {
+                    StreamReader reader = new StreamReader(response.GetResponseStream());
+                    string stringValue = reader.ReadToEnd();
+                    reader.Close();
+
+                    var parsedJson = JsonConvert.DeserializeObject<List<PolicyAreaModel>>(stringValue);
+
+                    policyAreasList = parsedJson;
+
+                    //TODO: extract this in a config
+                    var cacheExpirationTime = 20;
+                    CacheManager.Add(
+                        cacheKeywordPolicyAreas,
+                        policyAreasList,
+                        CacheItemPriority.Normal,
+                        null,
+                        new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+
+                    return policyAreasList;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Write(ex);
+                return policyAreasList;
             }
         }
 
@@ -124,7 +182,9 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
         public const string requestType = "application/x-www-form-urlencoded";
         public const string requestMethod = "GET";
         private const string cacheKeywordEvents = "eventListCached";
-        private const string serviceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/filteredshunghamevents";
+        private const string cacheKeywordPolicyAreas = "policyAreasListCached";
+        private const string eventsServiceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/filteredshunghamevents";
+        private const string policyAreasServiceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/shunghampolicyareas";
 
         #endregion
     }

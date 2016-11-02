@@ -871,6 +871,7 @@
     <Compile Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EventModel.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EventsControlsHelper.cs" />
+    <Compile Include="CustomWidgets\EUCalendar\PolicyAreaModel.cs" />
     <Compile Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx.cs">
       <DependentUpon>FeaturesWidget.ascx</DependentUpon>

@@ -173,6 +173,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
+        protected virtual Repeater PolicyAreasRepeater
+        {
+            get
+            {
+                return this.Container.GetControl<Repeater>("policyAreasRepeater", false);
+            }
+        }
+
         #endregion
 
         #region Event Details control references
@@ -313,15 +321,17 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         {
             if (!Page.IsPostBack)
             {
-                HttpContext.Current.Session[dateKey] = DateTime.Now;
-
-                if (HttpContext.Current.Session[dateKey] != null)
-                {
-                    var date = (DateTime)HttpContext.Current.Session[dateKey];
-                    this.eventList = EventsControlsHelper.GetEventsList()
-                        .OrderEventsCollection(date);
-                }
+                HttpContext.Current.Session[dateKey] = DateTime.Now;        
             }
+
+            if (HttpContext.Current.Session[dateKey] != null)
+            {
+                var date = (DateTime)HttpContext.Current.Session[dateKey];
+                this.eventList = EventsControlsHelper.GetEventsList()
+                    .OrderEventsCollection(date);
+            }
+
+            this.policyAreasList = EventsControlsHelper.GetPolicyAreasList();
 
             this.Date.InnerText = DateTime.Now.ToString(eventsDateFormat);
 
@@ -335,7 +345,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
             else
             {
-                this.InitializeMasterView(this.eventList);
+                this.InitializeMasterView();
             }
         }
 
@@ -439,30 +449,29 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         /// Initializes the master view.
         /// </summary>
         /// <param name="eventList">The event list.</param>
-        private void InitializeMasterView(IList<EventModel> eventList)
+        private void InitializeMasterView()
         {
             this.eventDateRadioButton.CheckedChanged += eventDateRadioButton_CheckedChanged;
             this.eventDeadlineRadioButton.CheckedChanged += eventDeadlineRadioButton_CheckedChanged;
+
+            BindPolicyAreas();
 
             var queryStringParams = HttpContext.Current.Request.QueryString;
 
             if (queryStringParams != null && queryStringParams.Count > 0)
             {
-                eventList = this.FilterCollectionBySearchTerm(eventList, queryStringParams);
+                this.eventList = this.FilterCollectionBySearchTerm(queryStringParams);
             }
 
-            int eventListCount = 0;
-            eventListCount = eventList.Count;
-
-            if (eventListCount > 0)
+            if (this.eventList.Count > 0)
             {
-                this.EventsList.DataSource = eventList;
+                this.EventsList.DataSource = this.eventList;
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
             }
         }
 
-        private IList<EventModel> FilterCollectionBySearchTerm(IList<EventModel> eventList, NameValueCollection queryStringParams)
+        private IList<EventModel> FilterCollectionBySearchTerm(NameValueCollection queryStringParams)
         {
             List<EventModel> eventMatches = new List<EventModel>();
             var searchTerm = queryStringParams["search"];
@@ -476,20 +485,20 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 searchTermCleaned = " " + searchTermCleaned + " ";
 
                 //search with spaces
-                eventMatches = eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTermCleaned.ToLower())).ToList();
+                eventMatches = this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTermCleaned.ToLower())).ToList();
 
                 //search by exact match in the titles
-                eventMatches.AddRange(eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList());
+                eventMatches.AddRange(this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList());
 
                 //breakup phrase and search for any match on any word
-                eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' },
+                eventMatches.AddRange(this.eventList.Where(e => searchTerm.Split(new char[] { ' ' },
                     StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
                 eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' },
                     StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
             }
             else
             {
-                return eventList;
+                return this.eventList;
             }
 
             return eventMatches.Distinct().ToList();
@@ -518,6 +527,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             {
                 this.DisplayBackendMessage();
             }
+
+            BindPolicyAreas();
 
             string itemUrl = string.Empty;
             itemUrl = this.GetUrlParameterString(true);
@@ -548,8 +559,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         private void BindEventDetail(EventModel eventItem)
         {
             this.BackButtonLink.InnerHtml = @"<i class=""icon-caret-left""></i>Back to Events List";
-            this.BackButtonLink.HRef =
-                HttpContext.Current.Request.UrlReferrer == null ? this.BackBtnDefaultDestination : HttpContext.Current.Request.UrlReferrer.AbsolutePath;
+            this.BackButtonLink.HRef = this.BackBtnDefaultDestination;
             this.TitleControl.Text = eventItem.Attributes.cdi_name;
             this.StartDateControl.Text = eventItem.Attributes.new_eucstartdate.ToString("dd MMMM yyyy");
             this.DescriptionControl.Text = eventItem.Attributes.new_euceventdescription;
@@ -560,6 +570,62 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline == DateTime.MinValue ? "No deadline" :
             eventItem.Attributes.new_eucregistrationdeadline.ToString("dd MMMM yyyy");
             this.OrganizersEventLink.NavigateUrl = eventItem.Attributes.new_euceventlink;
+        }
+
+        private void BindPolicyAreas()
+        {
+            this.PolicyAreasRepeater.DataSource = this.policyAreasList;
+            this.PolicyAreasRepeater.ItemDataBound += PolicyAreasRepeater_ItemDataBound;
+            this.PolicyAreasRepeater.ItemCommand += PolicyAreasRepeater_ItemCommand;
+            this.PolicyAreasRepeater.DataBind();
+        }
+
+        protected void PolicyAreasRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "all")
+            {
+                //HtmlGenericControl li = e.Item.FindControl("allWrapper") as HtmlGenericControl;
+                //if (li.Attributes["class"] != null)
+                //{
+                //    li.Attributes["class"] = "";
+                //}
+                //else
+                //{
+                //    li.Attributes["class"] = "active";
+                //}
+            }
+            else
+            {
+                this.eventList = this.eventList.Where(ev => ev.Attributes.policyAreaID.Value == e.CommandName).ToList();
+                
+                //HtmlGenericControl li = e.Item.FindControl("linkWrapper") as HtmlGenericControl;
+                //if (li.Attributes["class"] != null)
+                //{
+                //    li.Attributes["class"] = "";
+                //}
+                //else {
+                //    li.Attributes["class"] = "active";
+                //}
+            }
+
+            this.EventsList.DataSource = this.eventList;
+            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+            this.EventsList.DataBind();
+        }
+
+        protected void PolicyAreasRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                var policyAreaItem = e.Item.DataItem as PolicyAreaModel;
+                if (policyAreaItem != null)
+                {
+                    LinkButton link = e.Item.FindControl("link") as LinkButton;
+
+                    link.CommandName = policyAreaItem.Attributes.uni_policyareaid;
+                    link.Text = policyAreaItem.Attributes.uni_name;
+                }
+            }
         }
 
         /// <summary>
@@ -636,6 +702,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         private string layoutTemplatePathMaster = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarMasterTemplate.ascx";
         private string scriptReference = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarWidget.js";
         private IList<EventModel> eventList = new List<EventModel>();
+        private IList<PolicyAreaModel> policyAreasList = new List<PolicyAreaModel>();
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";
         public static string fwdSlash = "/";

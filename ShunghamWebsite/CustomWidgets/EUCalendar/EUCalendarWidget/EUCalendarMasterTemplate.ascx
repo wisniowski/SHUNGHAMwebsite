@@ -31,13 +31,26 @@
                 </li>
             </ul>
         </li>
-        <li class="toggle">
+        <li class="toggle sub">
             <a href="#">Policy Areas</a>
-            <%--<ul>
-                <li class="active"><a href="./">All Policy Areas</a></li>
-            </ul>--%>
-            <ul id="listView">
-            </ul>
+            <span class="toggle"></span>
+            <asp:Repeater ID="policyAreasRepeater" runat="server">
+                <HeaderTemplate>
+                    <ul>
+                        <li runat="server" id="allWrapper" class="active">
+                            <asp:LinkButton runat="server" ID="all" Text="All Policy Areas" 
+                                CommandName="all" />
+                        </li>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <li runat="server" id="linkWrapper">
+                        <asp:LinkButton ID="link" runat="server" />
+                    </li>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </ul>
+                </FooterTemplate>
+            </asp:Repeater>
         </li>
     </ul>
 </div>
@@ -107,31 +120,4 @@
             __doPostBack('<%= searchBtn.UniqueID%>', "");
         }
     }
-
-    var serviceRoot = "https://json2jsonp.com/?url=http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/shunghampolicyareas&callback=cbfunc";
-    homogeneous = new kendo.data.HierarchicalDataSource({
-        transport: {
-            read: {
-                url: serviceRoot,
-                dataType: "jsonp"
-            }
-        },
-        schema: {
-            model: {
-                id: "Id"
-            }
-        }
-    });
-
-    $("#listView").kendoListView({
-        template: "<li><a href='javascript: void(0)' data='#=Attributes.uni_policyareaid#'>${Attributes.uni_name}</a></li>",
-        dataSource: homogeneous,
-        selectable: "multiple",
-        dataTextField: "Attributes.uni_name"
-    });
-
-    $("#listView").on("click", "li a", function (event) {
-        event.preventDefault();
-        $(this).parent().toggleClass("active");
-    });
 </script>
