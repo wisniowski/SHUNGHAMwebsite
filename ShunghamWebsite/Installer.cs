@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using pavliks.PortalConnector;
 using SitefinityWebApp.CustomWidgets.EUCalendar;
 using SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget;
+using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.Pages.Configuration;
@@ -21,6 +23,7 @@ namespace SitefinityWebApp
         public static void PreApplicationStart()
         {
             SystemManager.ApplicationStart += SystemManager_ApplicationStart;
+            Bootstrapper.Initialized += PortalInitialization.SitefinityBootstrapper_Initialized;
         }
 
         private static void SystemManager_ApplicationStart(object sender, EventArgs e)
