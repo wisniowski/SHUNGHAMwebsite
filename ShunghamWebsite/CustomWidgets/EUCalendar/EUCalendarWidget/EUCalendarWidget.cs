@@ -107,7 +107,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         #endregion
 
-        #region Events list control references
+        #region Events List control references
 
         protected virtual RadListView EventsList
         {
@@ -173,11 +173,11 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
-        protected virtual Repeater PolicyAreasRepeater
+        protected virtual RadTreeView PolicyAreasTreeView
         {
             get
             {
-                return this.Container.GetControl<Repeater>("policyAreasRepeater", false);
+                return this.Container.GetControl<RadTreeView>("policyAreasTreeView", false);
             }
         }
 
@@ -321,7 +321,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         {
             if (!Page.IsPostBack)
             {
-                HttpContext.Current.Session[dateKey] = DateTime.Now;        
+                HttpContext.Current.Session[dateKey] = DateTime.Now;
             }
 
             if (HttpContext.Current.Session[dateKey] != null)
@@ -574,58 +574,92 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         private void BindPolicyAreas()
         {
-            this.PolicyAreasRepeater.DataSource = this.policyAreasList;
-            this.PolicyAreasRepeater.ItemDataBound += PolicyAreasRepeater_ItemDataBound;
-            this.PolicyAreasRepeater.ItemCommand += PolicyAreasRepeater_ItemCommand;
-            this.PolicyAreasRepeater.DataBind();
+            IList<PolicyArea> policyAreas = new List<PolicyArea>();
+            policyAreas = this.policyAreasList
+                .Select(i => new PolicyArea { ID = i.Attributes.uni_policyareaid, Name = i.Attributes.uni_name })
+                .Distinct()
+                .ToList<PolicyArea>();
+
+            policyAreas.Insert(0, new PolicyArea() { ID = "0", Name = "All Policy Areas" });
+            this.PolicyAreasTreeView.NodeClick += PolicyAreasTreeView_NodeClick;
+            this.PolicyAreasTreeView.DataSource = policyAreas;
+            this.PolicyAreasTreeView.NodeDataBound += PolicyAreasTreeView_NodeDataBound;
+            this.PolicyAreasTreeView.DataBind();
         }
 
-        protected void PolicyAreasRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void PolicyAreasTreeView_NodeDataBound(object sender, RadTreeNodeEventArgs e)
         {
-            if (e.CommandName == "all")
+            var policyAreaItem = e.Node.DataItem as PolicyArea;
+
+            if (policyAreaItem != null)
             {
-                //HtmlGenericControl li = e.Item.FindControl("allWrapper") as HtmlGenericControl;
-                //if (li.Attributes["class"] != null)
-                //{
-                //    li.Attributes["class"] = "";
-                //}
-                //else
-                //{
-                //    li.Attributes["class"] = "active";
-                //}
+                if (!Page.IsPostBack && policyAreaItem.Name == "All Policy Areas")
+                {
+                    e.Node.Selected = true;
+                }
+                e.Node.Text = policyAreaItem.Name;
+                e.Node.Value = policyAreaItem.ID;
             }
-            else
+        }
+
+        protected void PolicyAreasTreeView_NodeClick(object sender, RadTreeNodeEventArgs e)
+        {
+            IList<EventModel> filteredList = new List<EventModel>();
+            IList<string> selectedPolicyAreas = new List<string>();
+
+            if (e.Node.Text == "All Policy Areas")
             {
-                this.eventList = this.eventList.Where(ev => ev.Attributes.policyAreaID.Value == e.CommandName).ToList();
-                
-                //HtmlGenericControl li = e.Item.FindControl("linkWrapper") as HtmlGenericControl;
-                //if (li.Attributes["class"] != null)
-                //{
-                //    li.Attributes["class"] = "";
-                //}
-                //else {
-                //    li.Attributes["class"] = "active";
-                //}
+                this.PolicyAreasTreeView.UnselectAllNodes();
+                e.Node.Selected = true;
             }
 
-            this.EventsList.DataSource = this.eventList;
+            selectedPolicyAreas = this.GetSelectedPolicyAreas();
+
+            foreach (var eventItem in this.eventList)
+            {
+                if (selectedPolicyAreas.Contains("All Policy Areas"))
+                {
+                    filteredList = this.eventList;
+                }
+                else
+                {
+                    bool isEventInFilter = true;
+
+                    foreach (var selectedPolicyArea in selectedPolicyAreas)
+                    {
+                        if (eventItem.Attributes.policyAreaName.Value.Contains(selectedPolicyArea))
+                        {
+                        }
+                        else
+                        {
+                            isEventInFilter = false;
+                            break;
+                        }
+                    }
+
+                    if (isEventInFilter)
+                    {
+                        filteredList.Add(eventItem);
+                    }
+                }
+            }
+
+            this.EventsList.DataSource = filteredList;
             this.EventsList.ItemDataBound += EventsList_ItemDataBound;
             this.EventsList.DataBind();
         }
 
-        protected void PolicyAreasRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        private IList<string> GetSelectedPolicyAreas()
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            IList<string> policyAreas = new List<string>();
+            var selectedNodes = this.PolicyAreasTreeView.SelectedNodes;
+            foreach (RadTreeNode node in selectedNodes)
             {
-                var policyAreaItem = e.Item.DataItem as PolicyAreaModel;
-                if (policyAreaItem != null)
-                {
-                    LinkButton link = e.Item.FindControl("link") as LinkButton;
-
-                    link.CommandName = policyAreaItem.Attributes.uni_policyareaid;
-                    link.Text = policyAreaItem.Attributes.uni_name;
-                }
+                policyAreas.Add(node.Text);
+                policyAreas = policyAreas.Distinct().ToList();
             }
+
+            return policyAreas;
         }
 
         /// <summary>
@@ -693,7 +727,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         #endregion
 
-        #region Private variables
+        #region Private fields and constants
 
         private bool isDetailsMode = false;
         private int initialItemsCount = 7;

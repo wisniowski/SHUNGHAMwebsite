@@ -35,23 +35,8 @@
         <li class="toggle sub">
             <a href="#">Policy Areas</a>
             <span class="toggle"></span>
-            <asp:Repeater ID="policyAreasRepeater" runat="server">
-                <HeaderTemplate>
-                    <ul>
-                        <li runat="server" id="allWrapper" class="active">
-                            <asp:LinkButton runat="server" ID="all" Text="All Policy Areas" 
-                                CommandName="all" />
-                        </li>
-                </HeaderTemplate>
-                <ItemTemplate>
-                    <li runat="server" id="linkWrapper">
-                        <asp:LinkButton ID="link" runat="server" />
-                    </li>
-                </ItemTemplate>
-                <FooterTemplate>
-                    </ul>
-                </FooterTemplate>
-            </asp:Repeater>
+            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" EnableEmbeddedSkins="false">
+            </telerik:RadTreeView>
         </li>
     </ul>
 </div>

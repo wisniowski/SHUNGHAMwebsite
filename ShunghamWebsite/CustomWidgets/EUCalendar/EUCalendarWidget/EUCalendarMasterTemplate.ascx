@@ -34,23 +34,8 @@
         <li class="toggle sub">
             <a href="#">Policy Areas</a>
             <span class="toggle"></span>
-            <asp:Repeater ID="policyAreasRepeater" runat="server">
-                <HeaderTemplate>
-                    <ul>
-                        <li runat="server" id="allWrapper" class="active">
-                            <asp:LinkButton runat="server" ID="all" Text="All Policy Areas" 
-                                CommandName="all" />
-                        </li>
-                </HeaderTemplate>
-                <ItemTemplate>
-                    <li runat="server" id="linkWrapper">
-                        <asp:LinkButton ID="link" runat="server" />
-                    </li>
-                </ItemTemplate>
-                <FooterTemplate>
-                    </ul>
-                </FooterTemplate>
-            </asp:Repeater>
+            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" EnableEmbeddedSkins="false" ShowLineImages="false">
+            </telerik:RadTreeView>
         </li>
     </ul>
 </div>
@@ -119,5 +104,14 @@
         if (e.keyCode == 13) {
             __doPostBack('<%= searchBtn.UniqueID%>', "");
         }
+    }
+
+    function pageLoad() {
+        var tree = $find("<%= policyAreasTreeView.ClientID %>");
+        var selectedItems = tree.get_selectedNodes();
+
+        for (var i = selectedItems.length - 1; i >= 0; i--) {
+            selectedItems[i].get_element().className = selectedItems[i].get_element().className + ' active';
+        };
     }
 </script>
