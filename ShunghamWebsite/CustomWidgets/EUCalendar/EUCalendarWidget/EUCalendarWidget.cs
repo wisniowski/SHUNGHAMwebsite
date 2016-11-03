@@ -18,6 +18,7 @@ using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI;
 using Telerik.Sitefinity.Web.UI.ControlDesign;
 using Telerik.Web.UI;
+using System.Web.Caching;
 
 namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 {
@@ -181,6 +182,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
+        protected virtual RadPersistenceManager RadPersistenceManager
+        {
+            get
+            {
+                return this.Container.GetControl<RadPersistenceManager>("RadPersistenceManager1", false);
+            }
+        }
+
         #endregion
 
         #region Event Details control references
@@ -322,6 +331,9 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (!Page.IsPostBack)
             {
                 HttpContext.Current.Session[dateKey] = DateTime.Now;
+
+                RadPersistenceManager.StorageProviderKey = cookieName;
+                RadPersistenceManager.StorageProvider = new CookieStorageProvider(cookieName);
             }
 
             if (HttpContext.Current.Session[dateKey] != null)
@@ -456,6 +468,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
             BindPolicyAreas();
 
+            LoadPersistedTreeViewState();
+
             var queryStringParams = HttpContext.Current.Request.QueryString;
 
             if (queryStringParams != null && queryStringParams.Count > 0)
@@ -468,6 +482,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 this.EventsList.DataSource = this.eventList;
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
+            }
+        }
+
+        private void LoadPersistedTreeViewState()
+        {
+            if (HttpContext.Current.Request.Cookies[cookieName] != null)
+            {
+                RadPersistenceManager.LoadState();
             }
         }
 
@@ -644,9 +666,16 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 }
             }
 
+            SavePersistedTreeViewState();
+
             this.EventsList.DataSource = filteredList;
             this.EventsList.ItemDataBound += EventsList_ItemDataBound;
             this.EventsList.DataBind();
+        }
+
+        private void SavePersistedTreeViewState()
+        {
+            RadPersistenceManager.SaveState();
         }
 
         private IList<string> GetSelectedPolicyAreas()
@@ -745,6 +774,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         public const string eventsSearchUrlKeyword = "?search=";
         public static string dateKey = "Date";
         private string backBtnDefaultDestination = string.Empty;
+        private static readonly string cookieName = "ShunghamCookie";
 
         #endregion
     }
