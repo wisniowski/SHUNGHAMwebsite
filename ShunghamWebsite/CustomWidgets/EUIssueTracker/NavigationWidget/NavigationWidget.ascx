@@ -12,13 +12,13 @@
             <li>
                 <asp:HyperLink ID="policyAreaItem" runat="server" 
                     Text='<%# Eval("Key")  %>' />
-                <asp:Repeater ID="categoriesRepeater" runat="server" DataSource='<%# Eval("Values") %>'>
+                <asp:Repeater ID="categoriesRepeater" runat="server">
                     <HeaderTemplate>
                         <ul>
                     </HeaderTemplate>
                     <ItemTemplate>
                         <li>
-                            <asp:HyperLink ID="policyAreaItem" runat="server" Text='<%# Eval("Attributes.uni_name")%>' />
+                            <asp:HyperLink ID="categoryLink" runat="server" Text='<%# Eval("Attributes.uni_name")%>' />
                         </li>
                     </ItemTemplate>
                     <FooterTemplate>
