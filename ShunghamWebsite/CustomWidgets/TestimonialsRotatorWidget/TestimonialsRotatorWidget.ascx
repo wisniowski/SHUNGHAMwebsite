@@ -13,9 +13,9 @@
                 <asp:Literal Text='<%# Eval("Testimonial")%>' runat="server" />
             </q>
             <span class="strong overlay-a">
-                <asp:Literal Text='<%# Eval("PersonName")%>' runat="server" />
+                <asp:Literal Text='<%# Eval("PersonName")%>' runat="server" />,
             </span>
-            ,<asp:Literal Text='<%# Eval("PersonJobTitle")%>' runat="server" />, 
+             <asp:Literal Text='<%# Eval("PersonJobTitle")%>' runat="server" />, 
             <span class="strong">
                 <asp:Literal Text='<%# Eval("Organization")%>' runat="server" />
             </span>

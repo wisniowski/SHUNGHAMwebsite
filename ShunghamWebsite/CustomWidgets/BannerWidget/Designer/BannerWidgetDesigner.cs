@@ -9,6 +9,7 @@ using System.Web;
 using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.Pages;
 using System.Web.UI.HtmlControls;
+using Telerik.Sitefinity.Web.UI.Fields;
 
 namespace SitefinityWebApp.CustomWidgets.BannerWidget.Designer
 {
@@ -56,14 +57,15 @@ namespace SitefinityWebApp.CustomWidgets.BannerWidget.Designer
         #endregion
 
         #region Control references
+
         /// <summary>
         /// Gets the control that is bound to the Title property
         /// </summary>
-        protected virtual Control Title
+        protected virtual HtmlField Title
         {
             get
             {
-                return this.Container.GetControl<Control>("Title", true);
+                return this.Container.GetControl<HtmlField>("Title", true);
             }
         }
 

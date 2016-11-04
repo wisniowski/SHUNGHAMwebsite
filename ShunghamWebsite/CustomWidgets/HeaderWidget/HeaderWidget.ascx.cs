@@ -54,7 +54,7 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
             {
                 var pageNode = ((RadListViewDataItem)e.Item).DataItem as PageNode;
                 HtmlControl listItem = e.Item.FindControl("itemTemplateLi") as HtmlControl;
-                var childNodes = pageNode.Nodes;
+                var childNodes = pageNode.Nodes.Where(p => p.ShowInNavigation).ToList();
 
                 if (childNodes.Count > 0 && listItem != null)
                 {
@@ -89,45 +89,48 @@ namespace SitefinityWebApp.CustomWidgets.HeaderWidget
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 var childPageNode = e.Item.DataItem as PageNode;
-                bool isUpperCase = false;
-                var li = new HtmlGenericControl("li");
-
-                string pageNodeText = childPageNode.Title;
-
-                if (pageNodeText.ToLower().Contains("products"))
+                if (childPageNode.ShowInNavigation)
                 {
-                    isUpperCase = true;
-                }
-                else if (pageNodeText.StartsWith("EU"))
-                {
-                    HtmlGenericControl spanIn = new HtmlGenericControl("span");
-                    string firstPart = pageNodeText.Substring(0, 2);
-                    string secondPart = pageNodeText.Substring(2);
-                    Literal literalIn = new Literal();
-                    literalIn.Text = secondPart;
-                    spanIn.Controls.Add(literalIn);
+                    bool isUpperCase = false;
+                    var li = new HtmlGenericControl("li");
 
-                    HtmlGenericControl spanOut = new HtmlGenericControl("span");
-                    spanOut.InnerText = firstPart;
-                    spanOut.Controls.Add(spanIn);
-                    li.Controls.Add(spanOut);
-                }
-                else
-                {
-                    Literal literal = new Literal();
-                    literal.Text = pageNodeText;
+                    string pageNodeText = childPageNode.Title;
 
-                    HyperLink pageLink = new HyperLink();
-                    pageLink.NavigateUrl = childPageNode.GetUrl();
-                    pageLink.Controls.Add(literal);
-                    li.Controls.Add(pageLink);
-                }
+                    if (pageNodeText.ToLower().Contains("products"))
+                    {
+                        isUpperCase = true;
+                    }
+                    else if (pageNodeText.StartsWith("EU"))
+                    {
+                        HtmlGenericControl spanIn = new HtmlGenericControl("span");
+                        string firstPart = pageNodeText.Substring(0, 2);
+                        string secondPart = pageNodeText.Substring(2);
+                        Literal literalIn = new Literal();
+                        literalIn.Text = secondPart;
+                        spanIn.Controls.Add(literalIn);
 
-                e.Item.Controls.Add(li);
+                        HtmlGenericControl spanOut = new HtmlGenericControl("span");
+                        spanOut.InnerText = firstPart;
+                        spanOut.Controls.Add(spanIn);
+                        li.Controls.Add(spanOut);
+                    }
+                    else
+                    {
+                        Literal literal = new Literal();
+                        literal.Text = pageNodeText;
 
-                if (childPageNode.Nodes.Count > 0)
-                {
-                    PopulateChildItems(li, childPageNode.Nodes, isUpperCase);
+                        HyperLink pageLink = new HyperLink();
+                        pageLink.NavigateUrl = childPageNode.GetUrl();
+                        pageLink.Controls.Add(literal);
+                        li.Controls.Add(pageLink);
+                    }
+
+                    e.Item.Controls.Add(li);
+
+                    if (childPageNode.Nodes.Count > 0)
+                    {
+                        PopulateChildItems(li, childPageNode.Nodes, isUpperCase);
+                    }
                 }
             }
         }

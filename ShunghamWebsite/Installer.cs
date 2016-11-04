@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Linq;
+using pavliks.PortalConnector;
+using SitefinityWebApp.CustomWidgets.EUCalendar;
+using SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget;
+using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.Pages.Configuration;
@@ -19,6 +23,7 @@ namespace SitefinityWebApp
         public static void PreApplicationStart()
         {
             SystemManager.ApplicationStart += SystemManager_ApplicationStart;
+            Bootstrapper.Initialized += PortalInitialization.SitefinityBootstrapper_Initialized;
         }
 
         private static void SystemManager_ApplicationStart(object sender, EventArgs e)
@@ -26,6 +31,8 @@ namespace SitefinityWebApp
             Res.RegisterResource<ShunghamResources>();
 
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName);
+            RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName);
+            RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName);
             RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName);
 
             //Register widgets
@@ -53,6 +60,18 @@ namespace SitefinityWebApp
                "~/CustomWidgets/OurTeamWidget/OurTeamWidget.ascx", "Our Team Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/ButtonWidget/ButtonWidget.ascx", "Button Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/JobOpeningsWidget/JobOpeningsWidget.ascx", "Job Openings Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/FeaturesWidget/FeaturesWidget.ascx", "Features Widget");
+
+            //Register EUCalendar widgets
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName, 
+                typeof(EUCalendarWidget).AssemblyQualifiedName, "EUCalendar Widget");
+
+            //Register EUIssueTracker widgets
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
+              "~/CustomWidgets/EUIssueTracker/NavigationWidget/NavigationWidget.ascx", "Navigation Widget");
 
             //Register Layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
@@ -131,6 +150,8 @@ namespace SitefinityWebApp
         private const string pageLayoutsToolboxName = "PageLayouts";
         private const string ShunghamLayoutsName = "ShunghamLayouts";
         private const string ShunghamControlsSectionName = "ShunghamControls";
+        private const string EUCalendarControlsSectionName = "EUCalendarControls";
+        private const string EUIssueTrackerControlsSectionName = "EUIssueTrackerControls";
 
         private static readonly string layoutControlTypeName = typeof(LayoutControl).AssemblyQualifiedName;
 

@@ -33,6 +33,16 @@
     </div>
     <div class="sfExample"></div>
     </li>
+
+    <li class="sfFormCtrl">
+    <asp:Label runat="server" AssociatedControlID="AlignmentSelector" CssClass="sfTxtLbl">Button Alignment</asp:Label>
+    <asp:DropDownList ID="AlignmentSelector" Width="100%" CssClass="sfTxt" runat="server" ClientIDMode="Static">
+        <asp:ListItem Text="Left" />
+        <asp:ListItem Text="Center" />
+        <asp:ListItem Text="Right" />
+    </asp:DropDownList>
+    <div class="sfExample"></div>
+    </li>
     
 </ol>
 </div>
