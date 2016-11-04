@@ -13,6 +13,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
 {
     public partial class NavigationWidget : System.Web.UI.UserControl
     {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            RouteHelper.SetUrlParametersResolved();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             RouteHelper.SetUrlParametersResolved();
