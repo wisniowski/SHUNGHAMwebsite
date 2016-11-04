@@ -32,6 +32,7 @@ namespace SitefinityWebApp
 
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName);
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName);
+            RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName);
             RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName);
 
             //Register widgets
@@ -67,6 +68,10 @@ namespace SitefinityWebApp
             //Register EUCalendar widgets
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName, 
                 typeof(EUCalendarWidget).AssemblyQualifiedName, "EUCalendar Widget");
+
+            //Register EUIssueTracker widgets
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
+              "~/CustomWidgets/EUIssueTracker/NavigationWidget/NavigationWidget.ascx", "Navigation Widget");
 
             //Register Layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
@@ -146,6 +151,7 @@ namespace SitefinityWebApp
         private const string ShunghamLayoutsName = "ShunghamLayouts";
         private const string ShunghamControlsSectionName = "ShunghamControls";
         private const string EUCalendarControlsSectionName = "EUCalendarControls";
+        private const string EUIssueTrackerControlsSectionName = "EUIssueTrackerControls";
 
         private static readonly string layoutControlTypeName = typeof(LayoutControl).AssemblyQualifiedName;
 

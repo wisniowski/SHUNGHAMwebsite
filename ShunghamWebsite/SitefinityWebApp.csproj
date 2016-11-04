@@ -877,6 +877,16 @@
     <Compile Include="CustomWidgets\EUCalendar\EventsControlsHelper.cs" />
     <Compile Include="CustomWidgets\EUCalendar\PolicyArea.cs" />
     <Compile Include="CustomWidgets\EUCalendar\PolicyAreaModel.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\CustomNavGroup.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\EUIPolicyAreaModel.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\EUIssueTrackerHelper.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\NavigationWidget\NavigationWidget.ascx.cs">
+      <DependentUpon>NavigationWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\EUIssueTracker\NavigationWidget\NavigationWidget.ascx.designer.cs">
+      <DependentUpon>NavigationWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx.cs">
       <DependentUpon>FeaturesWidget.ascx</DependentUpon>
@@ -991,6 +1001,7 @@
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarMasterTemplate.ascx" />
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.js" />
     <Content Include="CustomWidgets\EUCalendar\SocialShare.ascx" />
+    <Content Include="CustomWidgets\EUIssueTracker\NavigationWidget\NavigationWidget.ascx" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.js" />
     <Content Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx" />
