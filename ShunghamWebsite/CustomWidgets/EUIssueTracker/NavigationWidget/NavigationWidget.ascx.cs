@@ -90,11 +90,9 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             var urlParams = this.GetUrlParameters();
             if (urlParams != null && urlParams.Count() > 0)
             {
-                var navItem = navItems.Where(n => n.policyCategoryURL == urlParams[1]).FirstOrDefault();
-                SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", navItem.policyAreaURL, navItem.policyAreaName);
-                SiteMapNode policyCatNode = new SiteMapNode(provider, "policyAreaCatKey", navItem.policyCategoryURL, navItem.policyCategoryName);
-                policyCatNode.ParentNode = policyAreaNode;
-                policyAreaNode.ChildNodes.Add(policyCatNode);
+                var navItem = navItems.Where(n => n.policyAreaURL == urlParams[0] && n.policyCategoryURL == urlParams[1]).FirstOrDefault();
+                SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", 
+                    navItem.policyAreaURL, navItem.policyAreaName, navItem.policyCategoryName);
                 sitemap.Add(policyAreaNode);
                 return sitemap;
             }

@@ -12,17 +12,13 @@
                     <nav>
                         <ul class="list-e">
                             <li>
-                                <a href='<%# DataBinder.Eval(Container.DataItem, "url") %>'>
+                                <a href='#'>
                                     <%# DataBinder.Eval(Container.DataItem, "title") %>
                                 </a></li>
                         </ul>
                     </nav>
-                </NodeTemplate>
-            </telerik:SiteMapLevelSetting>
-            <telerik:SiteMapLevelSetting Level="1" MaximumNodes="2">
-                <NodeTemplate>
                     <h1>
-                        <%# DataBinder.Eval(Container.DataItem, "title") %>
+                        <%# DataBinder.Eval(Container.DataItem, "description") %>
                     </h1>
                 </NodeTemplate>
             </telerik:SiteMapLevelSetting>

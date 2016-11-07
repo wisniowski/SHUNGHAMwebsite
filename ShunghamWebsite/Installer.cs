@@ -3,6 +3,7 @@ using System.Linq;
 using pavliks.PortalConnector;
 using SitefinityWebApp.CustomWidgets.EUCalendar;
 using SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget;
+using SitefinityWebApp.CustomWidgets.EUIssueTracker.Breadcrumb;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Localization;
@@ -72,6 +73,8 @@ namespace SitefinityWebApp
             //Register EUIssueTracker widgets
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
               "~/CustomWidgets/EUIssueTracker/NavigationWidget/NavigationWidget.ascx", "Navigation Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
+               typeof(CustomBreadcrumb).AssemblyQualifiedName, "Custom Breadcrumb Widget");
 
             //Register Layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,

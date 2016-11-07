@@ -877,6 +877,7 @@
     <Compile Include="CustomWidgets\EUCalendar\EventsControlsHelper.cs" />
     <Compile Include="CustomWidgets\EUCalendar\PolicyArea.cs" />
     <Compile Include="CustomWidgets\EUCalendar\PolicyAreaModel.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\Breadcrumb\CustomBreadcrumb.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\CustomNavGroup.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUIPolicyAreaModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUIssueTrackerHelper.cs" />
