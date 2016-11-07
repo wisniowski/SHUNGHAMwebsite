@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" %>
+
+<%@ Register Assembly="Telerik.Sitefinity" Namespace="Telerik.Sitefinity.Web.UI" TagPrefix="sf" %>
+
+<!DOCTYPE html>
+
+<html lang="en" class="a" xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Shungham</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, target-densitydpi=device-dpi" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" sizes="16x16" />
+
+    <sf:ResourceLinks runat="server" ID="ResourceLinks1">
+        <sf:ResourceFile JavaScriptLibrary="JQuery"></sf:ResourceFile>
+        <sf:ResourceFile JavaScriptLibrary="JQueryUI"></sf:ResourceFile>
+        <sf:ResourceFile JavaScriptLibrary="KendoAll"></sf:ResourceFile>
+    </sf:ResourceLinks>
+
+    <link href="http://addtocalendar.com/atc/1.5/atc-style-blue.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- Add to Calendar script -->
+    <script type="text/javascript">(function () {
+    if (window.addtocalendar) if (typeof window.addtocalendar.start == "function") return;
+    if (window.ifaddtocalendar == undefined) {
+        window.ifaddtocalendar = 1;
+        var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+        s.type = 'text/javascript'; s.charset = 'UTF-8'; s.async = true;
+        s.src = ('https:' == window.location.protocol ? 'https' : 'http') + '://addtocalendar.com/atc/1.5/atc.min.js';
+        var h = d[g]('body')[0]; h.appendChild(s);
+    }
+})();
+    </script>
+
+    <form id="form1" runat="server">
+        <div id="root">
+            <header id="top">
+                <p id="logo">
+                    <a href="/euissuetracker" accesskey="h"
+                        style="font-family: 'Gotham Narrow', Gotham, Arial, Helvetica, sans-serif;">
+                        <span class="overlay-d">EU</span>IssueTracker</a>
+                </p>
+                <nav id="skip">
+                    <ul>
+                        <li><a href="#nav" accesskey="n">Skip to navigation (n)</a></li>
+                        <li><a href="#content" accesskey="c">Skip to content (c)</a></li>
+                        <li><a href="#footer" accesskey="f">Skip to footer (f)</a></li>
+                    </ul>
+                </nav>
+                <nav id="nav">
+                    <p><a href="/">Back to Shungham</a></p>
+                </nav>
+            </header>
+            <section id="content">
+                <asp:ContentPlaceHolder ID="NavigationHolder" runat="server">
+                </asp:ContentPlaceHolder>
+                <div class="module-c">
+                    <article>
+                        <asp:ContentPlaceHolder ID="ContentHolder" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </article>
+                </div>
+            </section>
+            <footer id="footer">
+                <asp:ContentPlaceHolder ID="FooterHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </footer>
+        </div>
+        <telerik:RadCodeBlock runat="server" ID="RadCodeBlock1">
+            <script src="<%= ResolveUrl("~/CustomResources/js/head.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/scripts.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/mobile.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/date.js") %>"></script>
+        </telerik:RadCodeBlock>
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WVC5CC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function (w, d, s, l, i) {
+    w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+        new Date().getTime(), event: 'gtm.js'
+    }); var f = d.getElementsByTagName(s)[0],
+    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+    '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-WVC5CC');</script>
+        <!-- End Google Tag Manager -->
+    </form>
+</body>
+</html>
