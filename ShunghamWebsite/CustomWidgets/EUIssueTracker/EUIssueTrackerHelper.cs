@@ -85,7 +85,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         public const string requestType = "application/x-www-form-urlencoded";
         public const string requestMethod = "GET";
         private const string cacheKeywordPAC = "policyAreasAndCategoriesCached";
-        private const string policyAreaServiceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/TestNavigation";
+        private const string policyAreaServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/navigation";
 
         #endregion
     }

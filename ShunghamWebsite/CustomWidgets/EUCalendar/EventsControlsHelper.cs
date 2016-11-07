@@ -183,8 +183,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
         public const string requestMethod = "GET";
         private const string cacheKeywordEvents = "eventListCached";
         private const string cacheKeywordPolicyAreas = "policyAreasListCached";
-        private const string eventsServiceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/filteredshunghamevents";
-        private const string policyAreasServiceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/shunghampolicyareas";
+        private const string eventsServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/filteredshunghamevents";      
+        private const string policyAreasServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/policyareas";
 
         #endregion
     }
