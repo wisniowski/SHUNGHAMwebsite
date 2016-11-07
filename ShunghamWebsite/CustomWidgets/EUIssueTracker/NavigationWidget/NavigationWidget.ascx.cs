@@ -11,11 +11,16 @@ using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
 {
-    public partial class NavigationWidget : System.Web.UI.UserControl
+    public partial class NavigationWidget : System.Web.UI.UserControl, IBreadcrumExtender
     {
         protected void Page_Init(object sender, EventArgs e)
         {
             RouteHelper.SetUrlParametersResolved();
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            this.Page.RegisterBreadcrumbExtender(this);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -30,6 +35,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
                 EUIssueTrackerHelper.GetNavigationItems()
                 .GroupBy(w => w.Attributes.policyAreaName.Value)
                 .Select(g => new CustomNavGroup<string, EUIPolicyAreaModel>() { Key = g.Key, Values = g });
+
+            navItems.Clear();
 
             this.navigationList.DataSource = result;
             this.navigationList.ItemDataBound += navigationList_ItemDataBound;
@@ -61,16 +68,48 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
                 HyperLink navLink = e.Item.FindControl("categoryLink") as HyperLink;
                 var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
                 var policyAreaUrlComponent = Regex.Replace(category.Attributes.policyAreaName.Value.ToLower(), urlRegex, hyphen);
-                var policyCategiryUrlComponent = Regex.Replace(category.Attributes.uni_name.ToLower(), urlRegex, hyphen);
-                navLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategiryUrlComponent);
+                var policyCategoryUrlComponent = Regex.Replace(category.Attributes.uni_name.ToLower(), urlRegex, hyphen);
+                navLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
+
+                navItems.Add(new NavigationItem
+                {
+                    policyAreaName = category.Attributes.policyAreaName.Value,
+                    policyAreaURL = policyAreaUrlComponent,
+                    policyCategoryName = category.Attributes.uni_name,
+                    policyCategoryURL = policyCategoryUrlComponent
+                });
             }
         }
+
+        #region IBreadcrumExtender
+
+        public IEnumerable<SiteMapNode> GetVirtualNodes(SiteMapProvider provider)
+        {
+            IList<SiteMapNode> sitemap = new List<SiteMapNode>();
+
+            var urlParams = this.GetUrlParameters();
+            if (urlParams != null && urlParams.Count() > 0)
+            {
+                var navItem = navItems.Where(n => n.policyCategoryURL == urlParams[1]).FirstOrDefault();
+                SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", navItem.policyAreaURL, navItem.policyAreaName);
+                SiteMapNode policyCatNode = new SiteMapNode(provider, "policyAreaCatKey", navItem.policyCategoryURL, navItem.policyCategoryName);
+                policyCatNode.ParentNode = policyAreaNode;
+                policyAreaNode.ChildNodes.Add(policyCatNode);
+                sitemap.Add(policyAreaNode);
+                return sitemap;
+            }
+            return sitemap;
+        }
+
+        #endregion
 
         #region Private fields and constants
 
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";
+        public IList<NavigationItem> navItems = new List<NavigationItem>();
 
         #endregion
+
     }
 }
