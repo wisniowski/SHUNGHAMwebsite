@@ -886,6 +886,7 @@
     <Compile Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\EUDossierGridWidget.ascx.designer.cs">
       <DependentUpon>EUDossierGridWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\EUIssueTracker\EUDossierModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUDossierStatusModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUIPolicyAreaModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUIssueTrackerHelper.cs" />

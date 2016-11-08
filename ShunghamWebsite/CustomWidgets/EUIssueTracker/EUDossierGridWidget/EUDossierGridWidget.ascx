@@ -16,93 +16,36 @@
         </li>
     </ItemTemplate>
 </telerik:RadListView>
-<ul class="list-h">
-    <li>
-        <p class="label">New</p>
-        <h4>Capital Markets Union (CMU): Action Plan</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
+
+<telerik:RadListView ID="dossiersList" ItemPlaceholderID="DossiersContainer" runat="server"
+    EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
+    <LayoutTemplate>
+        <ul class="list-h">
+            <asp:PlaceHolder ID="DossiersContainer" runat="server" />
         </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-    <li>
-        <p class="label">New</p>
-        <h4>Alternative Investment Fund Managers (AIFM)</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
-        </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-    <li>
-        <h4>Capital Markets Union (CMU): Action Plan</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
-        </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-    <li>
-        <p class="label">New</p>
-        <h4>Capital Markets Union (CMU): Action Plan</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
-        </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-    <li>
-        <h4>Alternative Investment Fund Managers (AIFM)</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
-        </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-    <li>
-        <h4>Capital Markets Union (CMU): Action Plan</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
-        </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-    <li>
-        <p class="label">New</p>
-        <h4>Capital Markets Union (CMU): Action Plan</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
-        </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-    <li>
-        <h4>Alternative Investment Fund Managers (AIFM)</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
-        </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-    <li>
-        <h4>Capital Markets Union (CMU): Action Plan</h4>
-        <ul>
-            <li class="text-uppercase"><span>Updated:</span> 20 JUL 2016</li>
-            <li><span>Status:</span> Current Proposals</li>
-            <li><span>Dossier:</span> 13245</li>
-        </ul>
-        <p class="link"><a href="./">Open</a></p>
-    </li>
-</ul>
+    </LayoutTemplate>
+    <ItemTemplate>
+        <li>
+            <p class="label">New</p>
+            <h4>
+                <%# DataBinder.Eval(Container.DataItem,"Attributes.uni_shorttitle") %>
+            </h4>
+            <ul>
+                <li class="text-uppercase"><span>Updated:</span>
+                    <%# DataBinder.Eval(Container.DataItem, "Attributes.createdon", "{0:dd MMM yyyy}") %></li>
+                <li><span>Status:</span>
+                    <%# DataBinder.Eval(Container.DataItem,"Attributes.Status.Value") %>
+                </li>
+                <li><span>Dossier:</span>
+                    <%# DataBinder.Eval(Container.DataItem,"Attributes.DossierID.Value") %>
+                </li>
+            </ul>
+            <p class="link">
+                <asp:HyperLink runat="server" ID="detailViewLink">Open</asp:HyperLink>
+            </p>
+        </li>
+    </ItemTemplate>
+</telerik:RadListView>
 
 <script type="text/javascript">
     $(function () {

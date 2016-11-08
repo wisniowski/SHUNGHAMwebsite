@@ -20,5 +20,14 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadListView statusesList;
+        
+        /// <summary>
+        /// dossiersList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadListView dossiersList;
     }
 }

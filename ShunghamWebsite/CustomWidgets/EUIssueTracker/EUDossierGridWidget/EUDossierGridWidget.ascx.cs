@@ -18,6 +18,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             if (!IsPostBack)
             {
                 BindDossierStatusesList();
+                BindDossierList();
             }
         }
 
@@ -28,6 +29,14 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             this.statusesList.DataSource = dossierStatuses;
             this.statusesList.ItemDataBound += statusesList_ItemDataBound;
             this.statusesList.DataBind();
+        }
+
+        private void BindDossierList()
+        {
+            var dossiers = EUIssueTrackerHelper.GetDossiers();
+
+            this.dossiersList.DataSource = dossiers;
+            this.dossiersList.DataBind();
         }
 
         protected void statusesList_ItemDataBound(object sender, RadListViewItemEventArgs e)
