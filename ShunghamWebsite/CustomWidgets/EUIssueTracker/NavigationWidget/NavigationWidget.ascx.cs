@@ -5,13 +5,14 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Sitefinity.Web;
 using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
 {
-    public partial class NavigationWidget : System.Web.UI.UserControl, IBreadcrumExtender
+    public partial class NavigationWidget : UserControl, IBreadcrumExtender
     {
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -26,7 +27,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
         protected void Page_Load(object sender, EventArgs e)
         {
             RouteHelper.SetUrlParametersResolved();
-            BindNavigationWidget();
+
+            if (!IsPostBack)
+            {
+                BindNavigationWidget();
+            }
         }
 
         private void BindNavigationWidget()
@@ -65,11 +70,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 var category = e.Item.DataItem as EUIPolicyAreaModel;
-                HyperLink navLink = e.Item.FindControl("categoryLink") as HyperLink;
+                LinkButton navLink = e.Item.FindControl("categoryLink") as LinkButton;
                 var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
                 var policyAreaUrlComponent = Regex.Replace(category.Attributes.policyAreaName.Value.ToLower(), urlRegex, hyphen);
                 var policyCategoryUrlComponent = Regex.Replace(category.Attributes.uni_name.ToLower(), urlRegex, hyphen);
-                navLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
+                navLink.PostBackUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
 
                 navItems.Add(new NavigationItem
                 {
@@ -78,6 +83,26 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
                     policyCategoryName = category.Attributes.uni_name,
                     policyCategoryURL = policyCategoryUrlComponent
                 });
+            }
+        }
+
+        public string GetPolicyAreaClass(int itemIndex)
+        {
+            if (itemIndex == 0)
+                return "toggle sub";
+            else
+            {
+                return "sub";
+            }
+        }
+
+        public string GetCategoryClass(int itemIndex)
+        {
+            if (itemIndex == 0)
+                return "active";
+            else
+            {
+                return "";
             }
         }
 

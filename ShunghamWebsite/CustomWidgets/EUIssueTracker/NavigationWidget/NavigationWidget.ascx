@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget.NavigationWidget" %>
+
 <header id="aside">
     <h2>Category</h2>
     <telerik:RadListView ID="navigationList" ItemPlaceholderID="NavigationContainer" runat="server"
@@ -9,7 +10,7 @@
             </ul>
         </LayoutTemplate>
         <ItemTemplate>
-            <li>
+            <li class="<%# GetPolicyAreaClass(Container.DataItemIndex) %>">
                 <asp:HyperLink ID="policyAreaItem" runat="server" 
                     Text='<%# Eval("Key")  %>' />
                 <asp:Repeater ID="categoriesRepeater" runat="server">
@@ -17,8 +18,9 @@
                         <ul>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <li>
-                            <asp:HyperLink ID="categoryLink" runat="server" Text='<%# Eval("Attributes.uni_name")%>' />
+                        <li class="<%# GetCategoryClass(Container.ItemIndex) %>">
+                            <asp:LinkButton ID="categoryLink" runat="server" Text='<%# Eval("Attributes.uni_name")%>'
+                                CommandName="selectCategory" />
                         </li>
                     </ItemTemplate>
                     <FooterTemplate>
