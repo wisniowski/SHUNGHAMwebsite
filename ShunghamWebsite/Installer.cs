@@ -75,6 +75,8 @@ namespace SitefinityWebApp
               "~/CustomWidgets/EUIssueTracker/NavigationWidget/NavigationWidget.ascx", "Navigation Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
                typeof(CustomBreadcrumb).AssemblyQualifiedName, "Custom Breadcrumb Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
+              "~/CustomWidgets/EUIssueTracker/EUDossierGridWidget/EUDossierGridWidget.ascx", "Dossier Grid Widget");
 
             //Register Layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
