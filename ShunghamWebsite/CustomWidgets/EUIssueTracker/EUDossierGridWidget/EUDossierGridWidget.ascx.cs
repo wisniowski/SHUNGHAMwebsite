@@ -37,15 +37,16 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 var dataItem = ((RadListViewDataItem)e.Item).DataItem as EUDossierStatusModel;
                 HyperLink statusLink = e.Item.FindControl("dossierStatusLink") as HyperLink;
                 var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
-                var urlParams = this.GetUrlParameterString(true);
+                var urlParams = this.GetUrlParameters();
                 var statusUrlComponent = Regex.Replace(dataItem.Attributes.uni_name.ToLower(), urlRegex, hyphen);
 
-                if (!string.IsNullOrEmpty(urlParams))
+                if (urlParams != null)
                 {
-                    if (!statusLink.NavigateUrl.Contains(statusUrlComponent))
+                    if (urlParams.Count() > 2)
                     {
-                        statusLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, urlParams, statusUrlComponent);
+                        urlParams = urlParams.Take(urlParams.Count() - 1).ToArray();
                     }
+                    statusLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, string.Join("/", urlParams), statusUrlComponent);
                 }
             }
         }

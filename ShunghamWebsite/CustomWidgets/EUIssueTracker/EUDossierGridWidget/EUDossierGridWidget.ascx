@@ -107,7 +107,6 @@
 <script type="text/javascript">
     $(function () {
         var href = window.location.href;
-        debugger;
         $("[id*=dossierStatusLink]").each(function (e, i) {
             if (href.indexOf($(this).attr('href')) >= 0) {
                 $(this).parent().addClass('active');
