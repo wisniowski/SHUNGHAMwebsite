@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget.NavigationWidget" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget.NavigationWidget" ClientIDMode="Static" %>
 
 <header id="aside">
     <h2>Category</h2>
@@ -10,17 +10,16 @@
             </ul>
         </LayoutTemplate>
         <ItemTemplate>
-            <li class="<%# GetPolicyAreaClass(Container.DataItemIndex) %>">
-                <asp:HyperLink ID="policyAreaItem" runat="server" 
+            <li>
+                <asp:HyperLink ID="policyAreaItem" runat="server"
                     Text='<%# Eval("Key")  %>' />
                 <asp:Repeater ID="categoriesRepeater" runat="server">
                     <HeaderTemplate>
                         <ul>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <li class="<%# GetCategoryClass(Container.ItemIndex) %>">
-                            <asp:LinkButton ID="categoryLink" runat="server" Text='<%# Eval("Attributes.uni_name")%>'
-                                CommandName="selectCategory" />
+                        <li>
+                            <asp:HyperLink ID="categoryLink" runat="server" Text='<%# Eval("Attributes.uni_name")%>' />
                         </li>
                     </ItemTemplate>
                     <FooterTemplate>
@@ -31,3 +30,15 @@
         </ItemTemplate>
     </telerik:RadListView>
 </header>
+
+<script type="text/javascript">
+    $(function () {
+        var href = window.location.href;
+        $("[id*=categoryLink]").each(function (e, i) {
+            if (href.indexOf($(this).attr('href')) >= 0) {
+                $(this).parent().addClass('active');
+                $(this).parent().parent().parent().addClass("toggle");
+            }
+        });
+    });
+</script>

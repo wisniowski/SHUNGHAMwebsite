@@ -70,40 +70,33 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 var category = e.Item.DataItem as EUIPolicyAreaModel;
-                LinkButton navLink = e.Item.FindControl("categoryLink") as LinkButton;
+                HyperLink navLink = e.Item.FindControl("categoryLink") as HyperLink;
                 var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
                 var policyAreaUrlComponent = Regex.Replace(category.Attributes.policyAreaName.Value.ToLower(), urlRegex, hyphen);
                 var policyCategoryUrlComponent = Regex.Replace(category.Attributes.uni_name.ToLower(), urlRegex, hyphen);
-                navLink.PostBackUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
+                navLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
 
                 navItems.Add(new NavigationItem
                 {
                     policyAreaName = category.Attributes.policyAreaName.Value,
                     policyAreaURL = policyAreaUrlComponent,
                     policyCategoryName = category.Attributes.uni_name,
-                    policyCategoryURL = policyCategoryUrlComponent
+                    policyCategoryURL = policyCategoryUrlComponent,
                 });
             }
         }
 
-        public string GetPolicyAreaClass(int itemIndex)
+        private NavigationItem GetNavItemByUrlParams()
         {
-            if (itemIndex == 0)
-                return "toggle sub";
-            else
+            NavigationItem navItem = null;
+            var urlParams = this.GetUrlParameters();
+            if (urlParams != null && urlParams.Count() > 0)
             {
-                return "sub";
+                navItem = navItems
+                    .Where(n => n.policyAreaURL == urlParams[0] && n.policyCategoryURL == urlParams[1]).FirstOrDefault();
             }
-        }
 
-        public string GetCategoryClass(int itemIndex)
-        {
-            if (itemIndex == 0)
-                return "active";
-            else
-            {
-                return "";
-            }
+            return navItem;
         }
 
         #region IBreadcrumExtender
@@ -111,13 +104,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
         public IEnumerable<SiteMapNode> GetVirtualNodes(SiteMapProvider provider)
         {
             IList<SiteMapNode> sitemap = new List<SiteMapNode>();
-
-            var urlParams = this.GetUrlParameters();
-            if (urlParams != null && urlParams.Count() > 0)
+            var navItem = GetNavItemByUrlParams();
+            if (navItem != null)
             {
-                var navItem = navItems.Where(n => n.policyAreaURL == urlParams[0] && n.policyCategoryURL == urlParams[1]).FirstOrDefault();
-                SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", 
-                    navItem.policyAreaURL, navItem.policyAreaName, navItem.policyCategoryName);
+                SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", navItem.policyAreaURL,
+                    navItem.policyAreaName, navItem.policyCategoryName);
                 sitemap.Add(policyAreaNode);
                 return sitemap;
             }
