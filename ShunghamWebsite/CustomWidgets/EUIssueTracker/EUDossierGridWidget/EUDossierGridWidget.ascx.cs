@@ -44,6 +44,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 {
                     if (urlParams.Count() > 2)
                     {
+                        //removes old status from url and applies the new one
                         urlParams = urlParams.Take(urlParams.Count() - 1).ToArray();
                     }
                     statusLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, string.Join("/", urlParams), statusUrlComponent);

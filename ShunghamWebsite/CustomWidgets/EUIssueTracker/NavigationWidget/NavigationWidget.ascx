@@ -35,10 +35,12 @@
     $(function () {
         var href = window.location.href;
         $("[id*=categoryLink]").each(function (e, i) {
-            if (href.indexOf($(this).attr('href')) >= 0) {
+            var itemUrl = $(this).attr('href').replace(/\.\.\//g, '').trim();
+            if (href.indexOf(itemUrl) >= 0) {
                 $(this).parent().addClass('active');
                 $(this).parent().parent().parent().addClass("toggle");
             }
         });
     });
+
 </script>
