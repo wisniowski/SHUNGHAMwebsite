@@ -5,7 +5,15 @@ using System.Web;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
 {
-    public class DossierID
+    public class UpdateId
+    {
+        public string __type { get; set; }
+        public string AttributeLogicalName { get; set; }
+        public string EntityLogicalName { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class DossierId
     {
         public string __type { get; set; }
         public string AttributeLogicalName { get; set; }
@@ -21,7 +29,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         public string Value { get; set; }
     }
 
-    public class Status
+    public class PolicyCategoryName
     {
         public string __type { get; set; }
         public string AttributeLogicalName { get; set; }
@@ -29,7 +37,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         public string Value { get; set; }
     }
 
-    public class PolicyCategoryName
+    public class Status
     {
         public string __type { get; set; }
         public string AttributeLogicalName { get; set; }
@@ -41,15 +49,16 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
     {
         public string uni_shorttitle { get; set; }
         public DateTime uni_publishdate { get; set; }
-        public DossierID DossierID { get; set; }
-        public DossierPolicyAreaName PolicyAreaName { get; set; }
-        public PolicyCategoryName PolicyCategoryName { get; set; }
-        public Status Status { get; set; }
+        public UpdateId updateId { get; set; }
+        public DossierId dossierId { get; set; }
+        public DossierPolicyAreaName policyAreaName { get; set; }
+        public PolicyCategoryName policyCategoryName { get; set; }
+        public Status status { get; set; }
     }
 
     public class DossierFormattedValues
     {
-        public string createdon { get; set; }
+        public string uni_publishdate { get; set; }
     }
 
     public class EUDossierModel

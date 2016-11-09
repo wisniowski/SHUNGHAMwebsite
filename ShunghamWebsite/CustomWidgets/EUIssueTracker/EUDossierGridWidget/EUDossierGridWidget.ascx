@@ -37,7 +37,7 @@
                     <%# DataBinder.Eval(Container.DataItem,"Attributes.Status.Value") %>
                 </li>
                 <li><span>Dossier:</span>
-                    <%# DataBinder.Eval(Container.DataItem,"Attributes.DossierID.Value") %>
+                    <%# DataBinder.Eval(Container.DataItem,"Attributes.dossierId.Value") %>
                 </li>
             </ul>
             <p class="link">
