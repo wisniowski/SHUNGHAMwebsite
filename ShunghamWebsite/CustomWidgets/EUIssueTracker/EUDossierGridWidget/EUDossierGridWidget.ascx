@@ -32,7 +32,7 @@
             </h4>
             <ul>
                 <li class="text-uppercase"><span>Updated:</span>
-                    <%# DataBinder.Eval(Container.DataItem, "Attributes.createdon", "{0:dd MMM yyyy}") %></li>
+                    <%# DataBinder.Eval(Container.DataItem, "Attributes.uni_publishdate", "{0:dd MMM yyyy}") %></li>
                 <li><span>Status:</span>
                     <%# DataBinder.Eval(Container.DataItem,"Attributes.Status.Value") %>
                 </li>
