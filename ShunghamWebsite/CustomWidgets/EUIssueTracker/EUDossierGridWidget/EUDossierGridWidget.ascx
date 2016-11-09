@@ -45,6 +45,18 @@
             </p>
         </li>
     </ItemTemplate>
+    <EmptyDataTemplate>
+        <p class="strong overlay-a">
+            <asp:Literal runat="server" ID="emptyMessageLtl" />
+        </p>
+        <footer class="module-d">
+            <h2>
+                <asp:Literal runat="server" ID="emptyTitleLtl" />
+            </h2>
+            <p>
+                <asp:Literal runat="server" ID="emptyMessageContentLtl" />
+            </p>
+    </EmptyDataTemplate>
 </telerik:RadListView>
 
 <script type="text/javascript">

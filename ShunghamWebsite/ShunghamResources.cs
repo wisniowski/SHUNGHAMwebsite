@@ -95,7 +95,7 @@ namespace SitefinityWebApp
             }
         }
 
-        #region Header widget                
+        #region Header widget
         /// <summary>
         /// Text on Get Free Trial Button.
         /// </summary>
@@ -721,6 +721,118 @@ namespace SitefinityWebApp
             get
             {
                 return this["AddRelativePathToEventListPage"];
+            }
+        }
+
+        #endregion
+
+        #region DossierGrid widget
+
+        [ResourceEntry("DormantEmptyMessage",
+        Value = "This information is available to our clients. Please log in, or contact us to gain access to the Dormant listing as well as the full information on these dossiers.",
+        Description = "The text displayed by grid widget only if Dormant status is clicked",
+        LastModified = "2016/11/09")]
+        public string DormantEmptyMessage
+        {
+            get
+            {
+                return this["DormantEmptyMessage"];
+            }
+        }
+
+        [ResourceEntry("FutureInitiativesEmptyMessage",
+        Value = "This information is available to our clients. Please log in, or contact us to gain access to the Future Initiatives listing as well as the full information on these dossiers.",
+        Description = "The text displayed by grid widget only if Future Initiatives status is clicked",
+        LastModified = "2016/11/09")]
+        public string FutureInitiativesEmptyMessage
+        {
+            get
+            {
+                return this["FutureInitiativesEmptyMessage"];
+            }
+        }
+
+        [ResourceEntry("ShelvedEmptyMessage",
+       Value = "This information is available to our clients. Please log in, or contact us to gain access to the Shelved listing as well as the full information on these dossiers.",
+       Description = "The text displayed by grid widget only if Shelved status is clicked",
+       LastModified = "2016/11/09")]
+        public string ShelvedEmptyMessage
+        {
+            get
+            {
+                return this["ShelvedEmptyMessage"];
+            }
+        }
+
+        [ResourceEntry("ShelvedTitle",
+       Value = "Shelved",
+       Description = "The title displayed by grid widget only if Shelved status is clicked",
+       LastModified = "2016/11/09")]
+        public string ShelvedTitle
+        {
+            get
+            {
+                return this["ShelvedTitle"];
+            }
+        }
+
+        [ResourceEntry("DormantTitle",
+       Value = "Dormant",
+       Description = "The title displayed by grid widget only if Dormant status is clicked",
+       LastModified = "2016/11/09")]
+        public string DormantTitle
+        {
+            get
+            {
+                return this["DormantTitle"];
+            }
+        }
+
+        [ResourceEntry("FutureInitiativesTitle",
+       Value = "Future Initiatives",
+       Description = "The title displayed by grid widget only if Future Initiatives status is clicked",
+       LastModified = "2016/11/09")]
+        public string FutureInitiativesTitle
+        {
+            get
+            {
+                return this["FutureInitiativesTitle"];
+            }
+        }
+
+        [ResourceEntry("FutureInitiativesEmptyContent",
+       Value = "EU Issue Tracker provides clients with an “early distant warning” service to inform you of future legislative initiatives at EU level that may impact your business or organisation. This is information, systematically gathered by our policy intelligence team, is not yet officially in the public domain and most of it is unavailable elsewhere. Please contact us in order to benefit from this unique service.",
+       Description = "The content displayed by grid widget only if Future Initiatives status is clicked",
+       LastModified = "2016/11/09")]
+        public string FutureInitiativesEmptyContent
+        {
+            get
+            {
+                return this["FutureInitiativesEmptyContent"];
+            }
+        }
+
+        [ResourceEntry("DormantEmptyContent",
+       Value = "EU Issue Tracker provides clients with an “early distant warning” service to inform you of dormant initiatives at EU level that may impact your business or organisation. This is information, systematically gathered by our policy intelligence team, is not yet officially in the public domain and most of it is unavailable elsewhere. Please contact us in order to benefit from this unique service.",
+       Description = "The content displayed by grid widget only if Dormant status is clicked",
+       LastModified = "2016/11/09")]
+        public string DormantEmptyContent
+        {
+            get
+            {
+                return this["DormantEmptyContent"];
+            }
+        }
+
+        [ResourceEntry("ShelvedEmptyContent",
+       Value = "EU Issue Tracker provides clients with an “early distant warning” service to inform you of shelved initiatives at EU level that may impact your business or organisation. This is information, systematically gathered by our policy intelligence team, is not yet officially in the public domain and most of it is unavailable elsewhere. Please contact us in order to benefit from this unique service.",
+       Description = "The content displayed by grid widget only if Shelved status is clicked",
+       LastModified = "2016/11/09")]
+        public string ShelvedEmptyContent
+        {
+            get
+            {
+                return this["ShelvedEmptyContent"];
             }
         }
 
