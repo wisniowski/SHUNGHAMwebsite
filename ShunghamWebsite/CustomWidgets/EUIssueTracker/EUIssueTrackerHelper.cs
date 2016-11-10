@@ -188,16 +188,71 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             }
         }
 
+        /// <summary>
+        /// Gets the dossiers count by status.
+        /// </summary>
+        /// <param name="dossiersList">The dossiers list.</param>
+        /// <param name="statusName">Name of the status.</param>
+        /// <returns></returns>
         public static int GetDossiersCountByStatus(this IList<EUDossierModel> dossiersList, string statusName)
         {
             var count = dossiersList.Where(d => d.Attributes.status.Value == statusName).Count();
             return count;
         }
 
+        /// <summary>
+        /// Filters the dossiers by status.
+        /// </summary>
+        /// <param name="dossiersList">The dossiers list.</param>
+        /// <param name="statusName">Name of the status.</param>
+        /// <returns></returns>
         public static IList<EUDossierModel> FilterDossiersByStatus(this IList<EUDossierModel> dossiersList, string statusName)
         {
             dossiersList = dossiersList.Where(d => d.Attributes.status.Value == statusName).ToList();
             return dossiersList;
+        }
+
+        /// <summary>
+        /// Filters the dossiers by policy area and category.
+        /// </summary>
+        /// <param name="dossiersList">The dossiers list.</param>
+        /// <param name="areaName">Name of the area.</param>
+        /// <param name="categoryName">Name of the category.</param>
+        /// <returns></returns>
+        public static IList<EUDossierModel> FilterDossiersByPolicyAreaAndCategory(this IList<EUDossierModel> dossiersList, string areaName, string categoryName)
+        {
+            dossiersList = dossiersList.Where(d => d.Attributes.policyAreaName.Value == areaName &&
+                d.Attributes.policyCategoryName.Value == categoryName).ToList();
+            return dossiersList;
+        }
+
+        /// <summary>
+        /// Restricts the dossiers list so that dossiers with status "Future Initiatives", 
+        /// "Dormant" and "Shelved" are not displayed.
+        /// </summary>
+        /// <param name="dossiersList">The dossiers list.</param>
+        /// <returns></returns>
+        public static IList<EUDossierModel> RestrictDossiersByStatus(this IList<EUDossierModel> dossiersList)
+        {
+            return dossiersList.Where(d => d.Attributes.status.Value != "Future Initiatives" &&
+                d.Attributes.status.Value != "Shelved" && d.Attributes.status.Value != "Dormant").ToList();
+        }
+
+        /// <summary>
+        /// Gets the nav item by URL parameters.
+        /// </summary>
+        /// <param name="urlParams">The URL parameters.</param>
+        /// <returns></returns>
+        public static NavigationItem GetNavItemByUrlParams(string[] urlParams)
+        {
+            NavigationItem navItem = null;
+            if (urlParams != null && urlParams.Count() > 0)
+            {
+                navItem = navItems
+                    .Where(n => n.policyAreaURL == urlParams[0] && n.policyCategoryURL == urlParams[1]).FirstOrDefault();
+            }
+
+            return navItem;
         }
 
         private static ICacheManager CacheManager
@@ -218,6 +273,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         private const string policyAreaServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/navigation";
         private const string dossierStatusServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/ShunghamDossierStatuses";
         private const string dossierServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/ShunghamDossiers";
+        public static IList<NavigationItem> navItems = new List<NavigationItem>();
 
         #endregion
     }

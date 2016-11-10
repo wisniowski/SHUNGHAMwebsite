@@ -21,7 +21,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             {
                 BindDossierList();
                 BindDossierStatusesList();
-                FilterDossierListByStatus();
+                var urlParams = this.GetUrlParameters();
+                if (urlParams != null)
+                {
+                    FilterDossierList(urlParams);
+                }
             }
         }
 
@@ -36,9 +40,10 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
 
         private void BindDossierList()
         {
+            //when first displayed, the dossiers grid must display all dossiers that were modified in the last 30 days
             dossiers = EUIssueTrackerHelper.GetDossiers();
 
-            this.dossiersList.DataSource = dossiers;
+            this.dossiersList.DataSource = dossiers.RestrictDossiersByStatus();
             this.dossiersList.ItemCreated += dossiersList_ItemCreated;
             this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
             this.dossiersList.DataBind();
@@ -58,34 +63,59 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             }
         }
 
-        private void FilterDossierListByStatus()
+        private void FilterDossierList(string[] urlParams)
         {
-            var urlParams = this.GetUrlParameters();
-            if (urlParams != null && urlParams.Count() > 2)
+            IList<EUDossierModel> filteredDossiers = new List<EUDossierModel>();
+            IList<EUDossierModel> filteredByPolicyCatDossiers = new List<EUDossierModel>();
+            if (urlParams != null && urlParams.Count() > 1)
             {
-                selectedStatus = urlParams[2];
-                switch (selectedStatus)
+                filteredByPolicyCatDossiers = FilterDossierListByPolicyAreaAndCategory(dossiers);
+                this.dossiersList.DataSource = filteredByPolicyCatDossiers.RestrictDossiersByStatus();
+
+                if (urlParams.Count() > 2)
                 {
-                    case "future-initiatives":
-                    case "dormant":
-                    case "shelved":
-                        this.dossiersList.DataSource = null;
-                        this.dossiersList.DataBind();
-                        break;
-                    default:
-                        var status = statuses.Where(s => s.statusURL == selectedStatus).FirstOrDefault();
-                        if (status != null)
-                        {
-                            this.dossiersList.DataSource = dossiers.FilterDossiersByStatus(status.statusName);
-                            this.dossiersList.DataBind();
-                        }
-                        else
-                        {
-                            this.dossiersList.DataSource = null;
-                            this.dossiersList.DataBind();
-                        }
-                        break;
+                    filteredDossiers = FilterDossierListByStatus(filteredByPolicyCatDossiers, urlParams);
+                    if (filteredDossiers != null)
+                    {
+                        filteredDossiers = filteredDossiers.RestrictDossiersByStatus();
+                    }
+                    this.dossiersList.DataSource = filteredDossiers;
                 }
+            }
+
+            dossiers = filteredByPolicyCatDossiers;
+
+            this.dossiersList.DataBind();
+
+            this.statusesList.DataBind();
+        }
+
+        private IList<EUDossierModel> FilterDossierListByPolicyAreaAndCategory(IList<EUDossierModel> dossiers)
+        {
+            var navItem = EUIssueTrackerHelper.GetNavItemByUrlParams(this.GetUrlParameters());
+            var result = dossiers.FilterDossiersByPolicyAreaAndCategory(navItem.policyAreaName, navItem.policyCategoryName);
+            return result;
+        }
+
+        private IList<EUDossierModel> FilterDossierListByStatus(IList<EUDossierModel> dossiers, string[] urlParams)
+        {
+            selectedStatus = urlParams[2];
+            switch (selectedStatus)
+            {
+                case "future-initiatives":
+                case "dormant":
+                case "shelved":
+                    return null;
+                default:
+                    var status = statuses.Where(s => s.statusURL == selectedStatus).FirstOrDefault();
+                    if (status != null)
+                    {
+                        return dossiers.FilterDossiersByStatus(status.statusName);
+                    }
+                    else
+                    {
+                        return null;
+                    }
             }
         }
 
@@ -143,7 +173,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                         //removes old status from url and applies the new one
                         urlParams = urlParams.Take(urlParams.Count() - 1).ToArray();
                     }
-                    statusLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, 
+                    statusLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl,
                         string.Join("/", urlParams), statusUrlComponent);
                 }
             }

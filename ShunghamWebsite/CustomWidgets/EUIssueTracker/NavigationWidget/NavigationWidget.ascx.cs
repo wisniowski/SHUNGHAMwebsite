@@ -41,7 +41,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
                 .GroupBy(w => w.Attributes.policyAreaName.Value)
                 .Select(g => new CustomNavGroup<string, EUIPolicyAreaModel>() { Key = g.Key, Values = g });
 
-            navItems.Clear();
+            EUIssueTrackerHelper.navItems.Clear();
 
             this.navigationList.DataSource = result;
             this.navigationList.ItemDataBound += navigationList_ItemDataBound;
@@ -76,7 +76,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
                 var policyCategoryUrlComponent = Regex.Replace(category.Attributes.uni_name.ToLower(), urlRegex, hyphen);
                 navLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
 
-                navItems.Add(new NavigationItem
+                EUIssueTrackerHelper.navItems.Add(new NavigationItem
                 {
                     policyAreaName = category.Attributes.policyAreaName.Value,
                     policyAreaURL = policyAreaUrlComponent,
@@ -86,25 +86,12 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             }
         }
 
-        private NavigationItem GetNavItemByUrlParams()
-        {
-            NavigationItem navItem = null;
-            var urlParams = this.GetUrlParameters();
-            if (urlParams != null && urlParams.Count() > 0)
-            {
-                navItem = navItems
-                    .Where(n => n.policyAreaURL == urlParams[0] && n.policyCategoryURL == urlParams[1]).FirstOrDefault();
-            }
-
-            return navItem;
-        }
-
         #region IBreadcrumExtender
 
         public IEnumerable<SiteMapNode> GetVirtualNodes(SiteMapProvider provider)
         {
             IList<SiteMapNode> sitemap = new List<SiteMapNode>();
-            var navItem = GetNavItemByUrlParams();
+            var navItem = EUIssueTrackerHelper.GetNavItemByUrlParams(this.GetUrlParameters());
             if (navItem != null)
             {
                 SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", navItem.policyAreaURL,
@@ -121,7 +108,6 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
 
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";
-        public IList<NavigationItem> navItems = new List<NavigationItem>();
 
         #endregion
 
