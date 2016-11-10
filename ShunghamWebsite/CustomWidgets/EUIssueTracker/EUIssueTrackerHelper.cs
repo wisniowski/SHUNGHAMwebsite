@@ -12,7 +12,7 @@ using Telerik.Sitefinity.Services;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
 {
-    public class EUIssueTrackerHelper
+    public static class EUIssueTrackerHelper
     {
         internal static IList<EUIPolicyAreaModel> GetNavigationItems()
         {
@@ -186,6 +186,12 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
                 Log.Write(ex);
                 return dossiersList;
             }
+        }
+
+        public static int GetDossiersCountByStatus(this IList<EUDossierModel> dossiersList, string statusName)
+        {
+            var count = dossiersList.Where(d => d.Attributes.status.Value == statusName).Count();
+            return count;
         }
 
         private static ICacheManager CacheManager

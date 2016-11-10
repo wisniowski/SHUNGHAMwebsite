@@ -19,8 +19,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         {
             if (!IsPostBack)
             {
-                BindDossierStatusesList();
                 BindDossierList();
+                BindDossierStatusesList();
                 FilterDossierListByStatus();
             }
         }
@@ -36,7 +36,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
 
         private void BindDossierList()
         {
-            var dossiers = EUIssueTrackerHelper.GetDossiers();
+            dossiers = EUIssueTrackerHelper.GetDossiers();
 
             this.dossiersList.DataSource = dossiers;
             this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
@@ -131,9 +131,13 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             }
         }
 
-        protected string GetDossiersCountByStatus(RadListViewDataItem dataItem)
+        protected int DisplayDossiersCount(EUDossierStatusModel statusItem)
         {
-            return "13";
+            if (statusItem != null)
+            {
+                return dossiers.GetDossiersCountByStatus(statusItem.Attributes.uni_name);
+            }
+            return 0;
         }
 
         #region Private fields and constants
@@ -141,6 +145,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";
         public string selectedStatus = null;
+        private IList<EUDossierModel> dossiers = new List<EUDossierModel>();
 
         #endregion
     }

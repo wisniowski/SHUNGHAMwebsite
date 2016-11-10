@@ -10,7 +10,7 @@
     <ItemTemplate>
         <li>
             <asp:HyperLink ID="dossierStatusLink" runat="server">
-                <span><%# GetDossiersCountByStatus((Container.DataItem as RadListViewDataItem)) %></span>
+                <span><%# DisplayDossiersCount((Container.DataItem as SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierStatusModel)) %></span>
                 <%# DataBinder.Eval(Container.DataItem,"Attributes.uni_name") %>
             </asp:HyperLink>
         </li>
