@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using Telerik.Sitefinity.Modules.Pages;
+using Telerik.Sitefinity.Web.UI;
 using Telerik.Sitefinity.Web.UI.ControlDesign;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget.Designer
@@ -53,6 +55,30 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget.Desi
         #region Control references
 
         /// <summary>
+        /// Gets the page selector control.
+        /// </summary>
+        /// <value>The page selector control.</value>
+        protected internal virtual PagesSelector PageSelectorDetailsPageId
+        {
+            get
+            {
+                return this.Container.GetControl<PagesSelector>("pageSelectorDetailsPageId", true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the selector tag.
+        /// </summary>
+        /// <value>The selector tag.</value>
+        public HtmlGenericControl SelectorTagDetailsPageId
+        {
+            get
+            {
+                return this.Container.GetControl<HtmlGenericControl>("selectorTagDetailsPageId", true);
+            }
+        }
+
+        /// <summary>
         /// Gets the control that is bound to the DaysToDisplayUpdatesWithin property
         /// </summary>
         protected virtual Control DaysToDisplayUpdatesWithin
@@ -97,6 +123,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget.Desi
 
             descriptor.AddElementProperty("daysToDisplayUpdatesWithin", this.DaysToDisplayUpdatesWithin.ClientID);
             descriptor.AddElementProperty("displayOtherUpdates", this.DisplayOtherUpdates.ClientID);
+            descriptor.AddComponentProperty("pageSelectorDetailsPageId", this.PageSelectorDetailsPageId.ClientID);
+            descriptor.AddElementProperty("selectorTagDetailsPageId", this.SelectorTagDetailsPageId.ClientID);
 
             return scriptDescriptors;
         }

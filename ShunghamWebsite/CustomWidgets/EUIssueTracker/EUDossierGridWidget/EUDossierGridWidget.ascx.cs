@@ -9,6 +9,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget.Designer;
 using Telerik.Sitefinity.Localization;
+using Telerik.Sitefinity.Modules.Pages;
 using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI.ControlDesign;
 using Telerik.Web.UI;
@@ -18,6 +19,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
     [ControlDesigner(typeof(EUDossierGridWidgetDesigner))]
     public partial class EUDossierGridWidget : System.Web.UI.UserControl
     {
+        #region Properties
+
         public bool DisplayOtherUpdates { get; set; }
 
         public int DaysToDisplayUpdatesWithin
@@ -31,6 +34,10 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 this.daysToDisplayUpdatesWithin = value;
             }
         }
+
+        public Guid DetailsPageId { get; set; }
+
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {           
@@ -50,7 +57,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 if (this.DisplayOtherUpdates)
                 {
                     this.statusesList.Visible = false;
-                    this.otherUpdatesTitle.Text = string.Format(Res.Get<ShunghamResources>().OtherUpdatesTitle, otherUpdatesCount);
+                    this.otherUpdatesTitle.Text = string.Format(Res.Get<ShunghamResources>().OtherUpdatesTitle, 
+                        otherUpdatesCount);
                 }
                 else
                 {
@@ -94,6 +102,20 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 {
                     HtmlGenericControl pTag = e.Item.FindControl("newWrapper") as HtmlGenericControl;
                     pTag.Attributes["style"] = "display:block";
+                }
+
+                var detailViewLinkControl = e.Item.FindControl("detailViewLink") as HyperLink;
+                if (detailViewLinkControl != null)
+                {
+                    if (this.DetailsPageId != null && this.DetailsPageId != Guid.Empty)
+                    {
+                        var pmanager = PageManager.GetManager();
+                        var detailsPage = pmanager.GetPageNode(this.DetailsPageId);
+                        var pageUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture);
+                        detailViewLinkControl.NavigateUrl = 
+                            string.Format("{0}/{1}/{2}", pageUrl, dataItem.Attributes.dossierId.Value, 
+                            Regex.Replace(dataItem.Attributes.uni_shorttitle.ToLower(), urlRegex, hyphen));
+                    }
                 }
             }
         }
@@ -236,6 +258,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         private int otherUpdatesCount = 0;
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";
+        public static string fwdSlash = "/";
+        public static string underscore = "_";
         public string selectedStatus = null;
         private IList<EUDossierModel> dossiers = new List<EUDossierModel>();
         public IList<StatusItem> statuses = new List<StatusItem>();

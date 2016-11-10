@@ -12,6 +12,23 @@
 <div id="designerLayoutRoot" class="sfContentViews sfSingleContentView" style="max-height: 400px; overflow: auto;">
     <ol>
         <li class="sfFormCtrl">
+            <label class="sfTxtLbl" for="selectedDetailsPageIdLabel">Select the ID of Details page</label>
+            <span style="display: none;" class="sfSelectedItem" id="selectedDetailsPageIdLabel">
+                <asp:Literal ID="Literal1" runat="server" Text="" />
+            </span>
+            <span class="sfLinkBtn sfChange">
+                <a href="javascript: void(0)" class="sfLinkBtnIn" id="pageSelectButtonDetailsPageId">
+                    <asp:Literal ID="Literal2" runat="server" Text="<%$Resources:Labels, SelectDotDotDot %>" />
+                </a>
+            </span>
+            <div id="selectorTagDetailsPageId" runat="server" style="display: none;">
+                <sf:PagesSelector runat="server" ID="pageSelectorDetailsPageId"
+                    AllowExternalPagesSelection="false" AllowMultipleSelection="false" />
+            </div>
+            <div class="sfExample"></div>
+        </li>
+
+        <li class="sfFormCtrl">
             <asp:Label ID="Label2" runat="server" AssociatedControlID="DaysToDisplayUpdatesWithin" 
                 CssClass="sfTxtLbl">Days within to display dossier updates</asp:Label>
             <asp:TextBox ID="DaysToDisplayUpdatesWithin" runat="server" CssClass="sfTxt" />
