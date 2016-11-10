@@ -227,6 +227,19 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         }
 
         /// <summary>
+        /// Gets the latest updated dossiers within days
+        /// </summary>
+        /// <param name="dossiersList">The dossiers list.</param>
+        /// <param name="days">The days.</param>
+        /// <returns></returns>
+        public static IList<EUDossierModel> GetLatestUpdatedDossiersWithinDays(this IList<EUDossierModel> dossiersList, int days)
+        {
+            dossiersList = dossiersList.Where(d => d.Attributes.uni_publishdate > DateTime.Now.AddDays(-days) &&
+                d.Attributes.uni_publishdate <= DateTime.Now).ToList();
+                return dossiersList;
+        }
+
+        /// <summary>
         /// Restricts the dossiers list so that dossiers with status "Future Initiatives", 
         /// "Dormant" and "Shelved" are not displayed.
         /// </summary>

@@ -879,6 +879,7 @@
     <Compile Include="CustomWidgets\EUCalendar\PolicyAreaModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\Breadcrumb\CustomBreadcrumb.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\CustomNavGroup.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\Designer\EUDossierGridWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\EUDossierGridWidget.ascx.cs">
       <DependentUpon>EUDossierGridWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1014,6 +1015,8 @@
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.js" />
     <Content Include="CustomWidgets\EUCalendar\SocialShare.ascx" />
     <Content Include="CustomWidgets\EUIssueTracker\Breadcrumb\BreadcrumbTemplate.ascx" />
+    <Content Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\Designer\EUDossierGridWidgetDesigner.js" />
+    <Content Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\Designer\EUDossierGridWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\EUDossierGridWidget.ascx" />
     <Content Include="CustomWidgets\EUIssueTracker\NavigationWidget\NavigationWidget.ascx" />
     <Content Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.ascx" />

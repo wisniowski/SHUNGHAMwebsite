@@ -7,20 +7,50 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget.Designer;
 using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Web;
+using Telerik.Sitefinity.Web.UI.ControlDesign;
 using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
 {
+    [ControlDesigner(typeof(EUDossierGridWidgetDesigner))]
     public partial class EUDossierGridWidget : System.Web.UI.UserControl
     {
+        public bool DisplayOtherUpdates { get; set; }
+
+        public int DaysToDisplayUpdatesWithin
+        {
+            get
+            {
+                return this.daysToDisplayUpdatesWithin;
+            }
+            set
+            {
+                this.daysToDisplayUpdatesWithin = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (this.DisplayOtherUpdates)
+            {
+                this.statusesList.Visible = false;
+                this.otherUpdatesTitle.Text = Res.Get<ShunghamResources>().OtherUpdatesTitle;
+            }
+            else
+            {
+                this.statusesList.Visible = true;
+            }
+
             if (!IsPostBack)
             {
                 BindDossierList();
-                BindDossierStatusesList();
+                if (!this.DisplayOtherUpdates)
+                {
+                    BindDossierStatusesList();
+                }
                 var urlParams = this.GetUrlParameters();
                 if (urlParams != null)
                 {
@@ -40,8 +70,13 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
 
         private void BindDossierList()
         {
-            //when first displayed, the dossiers grid must display all dossiers that were modified in the last 30 days
             dossiers = EUIssueTrackerHelper.GetDossiers();
+
+            if (this.DisplayOtherUpdates)
+            {
+                //the other dossiers grid must display all dossiers that were modified in the last X days
+                dossiers = dossiers.GetLatestUpdatedDossiersWithinDays(this.DaysToDisplayUpdatesWithin);
+            }
 
             this.dossiersList.DataSource = dossiers.RestrictDossiersByStatus();
             this.dossiersList.ItemCreated += dossiersList_ItemCreated;
@@ -93,8 +128,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         private IList<EUDossierModel> FilterDossierListByPolicyAreaAndCategory(IList<EUDossierModel> dossiers)
         {
             var navItem = EUIssueTrackerHelper.GetNavItemByUrlParams(this.GetUrlParameters());
-            var result = dossiers.FilterDossiersByPolicyAreaAndCategory(navItem.policyAreaName, navItem.policyCategoryName);
-            return result;
+            if (navItem != null)
+            {
+                return dossiers.FilterDossiersByPolicyAreaAndCategory(navItem.policyAreaName, navItem.policyCategoryName);
+            }
+            return dossiers;
         }
 
         private IList<EUDossierModel> FilterDossierListByStatus(IList<EUDossierModel> dossiers, string[] urlParams)
@@ -190,6 +228,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
 
         #region Private fields and constants
 
+        private int daysToDisplayUpdatesWithin = 30;
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";
         public string selectedStatus = null;

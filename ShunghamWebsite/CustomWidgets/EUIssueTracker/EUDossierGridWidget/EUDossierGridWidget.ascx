@@ -1,4 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EUDossierGridWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget.EUDossierGridWidget" %>
+<%@ Register Assembly="Telerik.Sitefinity" Namespace="Telerik.Sitefinity.Web.UI" TagPrefix="sf" %>
+
+<sf:SitefinityLabel ID="otherUpdatesTitle" runat="server" WrapperTagName="H3" HideIfNoText="true" />
 
 <telerik:RadListView ID="statusesList" ItemPlaceholderID="StatusesContainer" runat="server"
     EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
@@ -26,7 +29,7 @@
     </LayoutTemplate>
     <ItemTemplate>
         <li>
-            <p id="newWrapper" runat="server" class="label" style="display:none;">New</p>
+            <p id="newWrapper" runat="server" class="label" style="display: none;">New</p>
             <h4>
                 <%# DataBinder.Eval(Container.DataItem,"Attributes.uni_shorttitle") %>
             </h4>

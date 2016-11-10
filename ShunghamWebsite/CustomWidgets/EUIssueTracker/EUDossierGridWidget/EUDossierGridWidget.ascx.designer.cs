@@ -13,6 +13,15 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget {
     public partial class EUDossierGridWidget {
         
         /// <summary>
+        /// otherUpdatesTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Sitefinity.Web.UI.SitefinityLabel otherUpdatesTitle;
+        
+        /// <summary>
         /// statusesList control.
         /// </summary>
         /// <remarks>
