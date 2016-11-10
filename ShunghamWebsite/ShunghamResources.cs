@@ -849,7 +849,7 @@ namespace SitefinityWebApp
         }
 
         [ResourceEntry("OtherUpdatesTitle",
-        Value = "Other regulatory updates in this category",
+        Value = @"Other regulatory updates in this category <span class=""no"">{0}</span>",
         Description = "The title displayed when Other Updates grid appears",
         LastModified = "2016/11/10")]
         public string OtherUpdatesTitle

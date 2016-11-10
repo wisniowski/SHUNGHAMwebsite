@@ -33,17 +33,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            if (this.DisplayOtherUpdates)
-            {
-                this.statusesList.Visible = false;
-                this.otherUpdatesTitle.Text = Res.Get<ShunghamResources>().OtherUpdatesTitle;
-            }
-            else
-            {
-                this.statusesList.Visible = true;
-            }
-
+        {           
             if (!IsPostBack)
             {
                 BindDossierList();
@@ -55,6 +45,16 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 if (urlParams != null)
                 {
                     FilterDossierList(urlParams);
+                }
+
+                if (this.DisplayOtherUpdates)
+                {
+                    this.statusesList.Visible = false;
+                    this.otherUpdatesTitle.Text = string.Format(Res.Get<ShunghamResources>().OtherUpdatesTitle, otherUpdatesCount);
+                }
+                else
+                {
+                    this.statusesList.Visible = true;
                 }
             }
         }
@@ -105,6 +105,10 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             if (urlParams != null && urlParams.Count() > 1)
             {
                 filteredByPolicyCatDossiers = FilterDossierListByPolicyAreaAndCategory(dossiers);
+                if (filteredByPolicyCatDossiers.Count > 0)
+                {
+                    otherUpdatesCount = filteredByPolicyCatDossiers.Count - 1;
+                }
                 this.dossiersList.DataSource = filteredByPolicyCatDossiers.RestrictDossiersByStatus();
 
                 if (urlParams.Count() > 2)
@@ -229,6 +233,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         #region Private fields and constants
 
         private int daysToDisplayUpdatesWithin = 30;
+        private int otherUpdatesCount = 0;
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";
         public string selectedStatus = null;
