@@ -26,7 +26,7 @@
     </LayoutTemplate>
     <ItemTemplate>
         <li>
-            <p class="label">New</p>
+            <p id="newWrapper" runat="server" class="label" style="display:none;">New</p>
             <h4>
                 <%# DataBinder.Eval(Container.DataItem,"Attributes.uni_shorttitle") %>
             </h4>

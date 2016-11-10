@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Web;
@@ -38,7 +39,22 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             var dossiers = EUIssueTrackerHelper.GetDossiers();
 
             this.dossiersList.DataSource = dossiers;
+            this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
             this.dossiersList.DataBind();
+        }
+
+        protected void dossiersList_ItemDataBound(object sender, RadListViewItemEventArgs e)
+        {
+            if (e.Item is RadListViewDataItem)
+            {
+                var dataItem = ((RadListViewDataItem)e.Item).DataItem as EUDossierModel;
+                var dateUpdated = dataItem.Attributes.uni_publishdate;
+                if (dateUpdated > DateTime.Now.AddHours(-24) && dateUpdated <= DateTime.Now)
+                {
+                    HtmlGenericControl pTag = e.Item.FindControl("newWrapper") as HtmlGenericControl;
+                    pTag.Attributes["style"] = "display:block";
+                }
+            }
         }
 
         private void FilterDossierListByStatus()
