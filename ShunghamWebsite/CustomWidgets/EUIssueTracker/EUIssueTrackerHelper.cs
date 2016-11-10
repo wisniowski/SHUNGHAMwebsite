@@ -194,6 +194,12 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             return count;
         }
 
+        public static IList<EUDossierModel> FilterDossiersByStatus(this IList<EUDossierModel> dossiersList, string statusName)
+        {
+            dossiersList = dossiersList.Where(d => d.Attributes.status.Value == statusName).ToList();
+            return dossiersList;
+        }
+
         private static ICacheManager CacheManager
         {
             get

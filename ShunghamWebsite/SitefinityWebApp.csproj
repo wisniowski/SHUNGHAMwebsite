@@ -898,6 +898,7 @@
     <Compile Include="CustomWidgets\EUIssueTracker\NavigationWidget\NavigationWidget.ascx.designer.cs">
       <DependentUpon>NavigationWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\EUIssueTracker\StatusItem.cs" />
     <Compile Include="CustomWidgets\FeaturesWidget\Designer\FeaturesWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\FeaturesWidget\FeaturesWidget.ascx.cs">
       <DependentUpon>FeaturesWidget.ascx</DependentUpon>

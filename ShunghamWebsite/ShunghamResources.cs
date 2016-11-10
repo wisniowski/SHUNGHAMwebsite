@@ -836,6 +836,18 @@ namespace SitefinityWebApp
             }
         }
 
+        [ResourceEntry("NoDossiersFound",
+       Value = "No dossiers found.",
+       Description = "The content displayed by grid widget when there are no dossiers found",
+       LastModified = "2016/11/10")]
+        public string NoDossiersFound
+        {
+            get
+            {
+                return this["NoDossiersFound"];
+            }
+        }
+
         #endregion
     }
 }

@@ -39,6 +39,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             dossiers = EUIssueTrackerHelper.GetDossiers();
 
             this.dossiersList.DataSource = dossiers;
+            this.dossiersList.ItemCreated += dossiersList_ItemCreated;
             this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
             this.dossiersList.DataBind();
         }
@@ -69,10 +70,20 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                     case "dormant":
                     case "shelved":
                         this.dossiersList.DataSource = null;
-                        this.dossiersList.ItemCreated += dossiersList_ItemCreated;
                         this.dossiersList.DataBind();
                         break;
                     default:
+                        var status = statuses.Where(s => s.statusURL == selectedStatus).FirstOrDefault();
+                        if (status != null)
+                        {
+                            this.dossiersList.DataSource = dossiers.FilterDossiersByStatus(status.statusName);
+                            this.dossiersList.DataBind();
+                        }
+                        else
+                        {
+                            this.dossiersList.DataSource = null;
+                            this.dossiersList.DataBind();
+                        }
                         break;
                 }
             }
@@ -103,6 +114,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                         emptyMessageContentLtl.Text = Res.Get<ShunghamResources>().ShelvedEmptyContent;
                         break;
                     default:
+                        emptyMessageContentLtl.Text = Res.Get<ShunghamResources>().NoDossiersFound;
                         break;
                 }
             }
@@ -117,6 +129,12 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
                 var urlParams = this.GetUrlParameters();
                 var statusUrlComponent = Regex.Replace(dataItem.Attributes.uni_name.ToLower(), urlRegex, hyphen);
+
+                statuses.Add(new StatusItem
+                {
+                    statusName = dataItem.Attributes.uni_name,
+                    statusURL = statusUrlComponent,
+                });
 
                 if (urlParams != null)
                 {
@@ -146,6 +164,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         public static string hyphen = "-";
         public string selectedStatus = null;
         private IList<EUDossierModel> dossiers = new List<EUDossierModel>();
+        public IList<StatusItem> statuses = new List<StatusItem>();
 
         #endregion
     }
