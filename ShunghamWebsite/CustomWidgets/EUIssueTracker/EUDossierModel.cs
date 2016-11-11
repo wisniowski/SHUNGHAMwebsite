@@ -48,6 +48,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
     public class DossierAttributes
     {
         public string uni_shorttitle { get; set; }
+        public string uni_fulltitle { get; set; }
         public DateTime uni_publishdate { get; set; }
         public UpdateId updateId { get; set; }
         public DossierId dossierId { get; set; }

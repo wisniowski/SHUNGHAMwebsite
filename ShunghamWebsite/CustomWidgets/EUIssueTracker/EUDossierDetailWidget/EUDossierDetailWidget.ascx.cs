@@ -8,12 +8,12 @@ using Telerik.Sitefinity.Web;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
 {
-    public partial class EUDossierDetailWidget : System.Web.UI.UserControl
+    public partial class EUDossierDetailWidget : UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             string[] urlParams = this.GetUrlParameters();
-            if (urlParams.Count() > 0)
+            if (urlParams != null && urlParams.Count() > 0)
             {
                 var dossierID = urlParams[0];
                 var dossiers = EUIssueTrackerHelper.GetDossiers().RestrictDossiersByStatus();
@@ -32,7 +32,25 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
             this.dateUpdatedLtl.Text = dossierUpdate.Attributes.uni_publishdate.ToString("dd MMM yyyy");
             this.statusLtl.Text = dossierUpdate.Attributes.status.Value;
             this.dossierIDLtl.Text = dossierUpdate.Attributes.dossierId.Value;
-            this.fullTitleLtl.Text = "";
+            this.fullTitleLtl.Text = dossierUpdate.Attributes.uni_fulltitle;
         }
+
+        #region IBreadcrumExtender
+
+        //public IEnumerable<SiteMapNode> GetVirtualNodes(SiteMapProvider provider)
+        //{
+        //    IList<SiteMapNode> sitemap = new List<SiteMapNode>();
+        //    var navItem = EUIssueTrackerHelper.GetNavItemByUrlParams(this.GetUrlParameters());
+        //    if (navItem != null)
+        //    {
+        //        SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", navItem.policyAreaURL,
+        //            navItem.policyAreaName, navItem.policyCategoryName);
+        //        sitemap.Add(policyAreaNode);
+        //        return sitemap;
+        //    }
+        //    return sitemap;
+        //}
+
+        #endregion
     }
 }
