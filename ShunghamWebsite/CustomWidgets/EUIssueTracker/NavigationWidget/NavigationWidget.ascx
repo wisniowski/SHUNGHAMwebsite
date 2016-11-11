@@ -36,6 +36,7 @@
 
 <script type="text/javascript">
     $(function () {
+
         var href = window.location.href;
         var preSelectedCategory = $('[id*=activeCategoryHdn]').val();
         var preSelectedArea = $('[id*=activeAreaHdn]').val();
@@ -45,8 +46,8 @@
                 $(this).parent().addClass('active');
                 $(this).parent().parent().parent().addClass("toggle");
             }
-            else if (preSelectedArea) {
-                if ($(this).text() == preSelectedCategory && $(this).parent().parent().text() == preSelectedArea)
+            else if (preSelectedCategory) {
+                if ($(this).text() == preSelectedCategory)
                 {
                     $(this).parent().addClass('active');
                     $(this).parent().parent().parent().addClass("toggle");
