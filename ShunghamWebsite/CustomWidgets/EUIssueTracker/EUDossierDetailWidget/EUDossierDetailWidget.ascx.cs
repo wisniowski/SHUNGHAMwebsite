@@ -23,6 +23,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
                 {
                     RouteHelper.SetUrlParametersResolved();
                     BindDossierDetail(dossierUpdate);
+                    ResolvePageMetaTags(dossierUpdate);
                 }
             }
         }
@@ -35,22 +36,20 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
             this.fullTitleLtl.Text = dossierUpdate.Attributes.uni_fulltitle;
         }
 
-        #region IBreadcrumExtender
-
-        //public IEnumerable<SiteMapNode> GetVirtualNodes(SiteMapProvider provider)
-        //{
-        //    IList<SiteMapNode> sitemap = new List<SiteMapNode>();
-        //    var navItem = EUIssueTrackerHelper.GetNavItemByUrlParams(this.GetUrlParameters());
-        //    if (navItem != null)
-        //    {
-        //        SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", navItem.policyAreaURL,
-        //            navItem.policyAreaName, navItem.policyCategoryName);
-        //        sitemap.Add(policyAreaNode);
-        //        return sitemap;
-        //    }
-        //    return sitemap;
-        //}
-
-        #endregion
+        private void ResolvePageMetaTags(EUDossierModel dossierUpdate)
+        {
+            if (this.Page == null)
+            {
+                return;
+            }
+            if (!string.IsNullOrEmpty(dossierUpdate.Attributes.uni_fulltitle))
+            {
+                this.Page.MetaDescription = dossierUpdate.Attributes.uni_fulltitle;
+            }
+            if (!string.IsNullOrEmpty(dossierUpdate.Attributes.uni_shorttitle))
+            {
+                this.Page.Title = dossierUpdate.Attributes.uni_shorttitle;
+            }
+        }
     }
 }
