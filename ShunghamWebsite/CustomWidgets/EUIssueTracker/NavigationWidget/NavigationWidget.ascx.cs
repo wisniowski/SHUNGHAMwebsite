@@ -31,6 +31,12 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             if (!IsPostBack)
             {
                 BindNavigationWidget();
+
+                var currentUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+                if (currentUrl.Contains("detail"))
+                {
+                    PreselectActivePolicyAreaAndCategory();
+                }
             }
         }
 
@@ -83,6 +89,22 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
                     policyCategoryName = category.Attributes.uni_name,
                     policyCategoryURL = policyCategoryUrlComponent,
                 });
+            }
+        }
+
+        private void PreselectActivePolicyAreaAndCategory()
+        {
+            string[] urlParams = this.GetUrlParameters();
+            if (urlParams != null && urlParams.Count() > 0)
+            {
+                var dossierID = urlParams[0];
+                var dossiers = EUIssueTrackerHelper.GetDossiers().RestrictDossiersByStatus();
+                var dossierUpdate = dossiers.Where(d => d.Attributes.dossierId.Value == dossierID).FirstOrDefault();
+                if (dossierUpdate != null)
+                {
+                    this.activeCategoryHdn.Value = dossierUpdate.Attributes.policyCategoryName.Value;
+                    this.activeAreaHdn.Value = dossierUpdate.Attributes.policyAreaName.Value;
+                }
             }
         }
 

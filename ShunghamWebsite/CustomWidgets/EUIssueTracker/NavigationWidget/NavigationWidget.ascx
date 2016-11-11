@@ -1,5 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationWidget.ascx.cs" Inherits="SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget.NavigationWidget" ClientIDMode="Static" %>
 
+<asp:HiddenField runat="server" ID="activeAreaHdn" />
+<asp:HiddenField runat="server" ID="activeCategoryHdn" />
+
 <header id="aside">
     <h2>Category</h2>
     <telerik:RadListView ID="navigationList" ItemPlaceholderID="NavigationContainer" runat="server"
@@ -34,11 +37,20 @@
 <script type="text/javascript">
     $(function () {
         var href = window.location.href;
+        var preSelectedCategory = $('[id*=activeCategoryHdn]').val();
+        var preSelectedArea = $('[id*=activeAreaHdn]').val();
         $("[id*=categoryLink]").each(function (e, i) {
             var itemUrl = $(this).attr('href').replace(/\.\.\//g, '').trim();
             if (href.indexOf(itemUrl) >= 0) {
                 $(this).parent().addClass('active');
                 $(this).parent().parent().parent().addClass("toggle");
+            }
+            else if (preSelectedArea) {
+                if ($(this).text() == preSelectedCategory && $(this).parent().parent().text() == preSelectedArea)
+                {
+                    $(this).parent().addClass('active');
+                    $(this).parent().parent().parent().addClass("toggle");
+                }
             }
         });
     });

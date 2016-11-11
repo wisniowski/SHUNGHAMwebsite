@@ -10,6 +10,16 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
 {
     public partial class EUDossierDetailWidget : UserControl, IBreadcrumExtender
     {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            RouteHelper.SetUrlParametersResolved();
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            this.Page.RegisterBreadcrumbExtender(this);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string[] urlParams = this.GetUrlParameters();

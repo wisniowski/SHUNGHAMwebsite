@@ -13,6 +13,24 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget {
     public partial class NavigationWidget {
         
         /// <summary>
+        /// activeAreaHdn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField activeAreaHdn;
+        
+        /// <summary>
+        /// activeCategoryHdn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField activeCategoryHdn;
+        
+        /// <summary>
         /// navigationList control.
         /// </summary>
         /// <remarks>
