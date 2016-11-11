@@ -7,7 +7,7 @@
         CssClass="sfBreadcrumbLabel" />
     <telerik:RadSiteMap runat="server" ID="Breadcrumb" EnableEmbeddedSkins="false">
         <LevelSettings>
-            <telerik:SiteMapLevelSetting Level="0" MaximumNodes="1">
+            <telerik:SiteMapLevelSetting Level="0" MaximumNodes="3">
                 <NodeTemplate>
                     <nav>
                         <ul class="list-e">

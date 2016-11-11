@@ -8,7 +8,7 @@ using Telerik.Sitefinity.Web;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
 {
-    public partial class EUDossierDetailWidget : UserControl
+    public partial class EUDossierDetailWidget : UserControl, IBreadcrumExtender
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,7 +17,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
             {
                 var dossierID = urlParams[0];
                 var dossiers = EUIssueTrackerHelper.GetDossiers().RestrictDossiersByStatus();
-                var dossierUpdate = dossiers.Where(d => d.Attributes.dossierId.Value == dossierID).FirstOrDefault();
+                dossierUpdate = dossiers.Where(d => d.Attributes.dossierId.Value == dossierID).FirstOrDefault();
 
                 if (dossierUpdate != null)
                 {
@@ -51,5 +51,30 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
                 this.Page.Title = dossierUpdate.Attributes.uni_shorttitle;
             }
         }
+
+        public IEnumerable<SiteMapNode> GetVirtualNodes(SiteMapProvider provider)
+        {
+            IList<SiteMapNode> sitemap = new List<SiteMapNode>();
+            if (dossierUpdate != null)
+            {
+                SiteMapNode policyAreaNode = new SiteMapNode(provider, "dossierUpdateKey", "#",
+                    dossierUpdate.Attributes.policyAreaName.Value);
+                sitemap.Add(policyAreaNode);
+                SiteMapNode policyCategoryNode = new SiteMapNode(provider, "dossierUpdateKey", "#",
+                    dossierUpdate.Attributes.policyCategoryName.Value);
+                sitemap.Add(policyCategoryNode);
+                SiteMapNode dossierUpdateNode = new SiteMapNode(provider, "dossierUpdateKey", "#",
+                    dossierUpdate.Attributes.status.Value, dossierUpdate.Attributes.uni_shorttitle);
+                sitemap.Add(dossierUpdateNode);
+                return sitemap;
+            }
+            return sitemap;
+        }
+
+        #region Private fields and constants
+
+        public EUDossierModel dossierUpdate = null;
+
+        #endregion
     }
 }
