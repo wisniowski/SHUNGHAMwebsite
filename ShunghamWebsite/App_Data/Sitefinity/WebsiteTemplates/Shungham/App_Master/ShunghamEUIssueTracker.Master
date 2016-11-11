@@ -61,10 +61,8 @@
                 <asp:ContentPlaceHolder ID="NavigationHolder" runat="server">
                 </asp:ContentPlaceHolder>
                 <div class="module-c">
-                    <article>
-                        <asp:ContentPlaceHolder ID="ContentHolder" runat="server">
-                        </asp:ContentPlaceHolder>
-                    </article>
+                    <asp:ContentPlaceHolder ID="ContentHolder" runat="server">
+                    </asp:ContentPlaceHolder>
                 </div>
             </section>
             <footer id="footer">

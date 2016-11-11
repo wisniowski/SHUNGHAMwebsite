@@ -879,6 +879,13 @@
     <Compile Include="CustomWidgets\EUCalendar\PolicyAreaModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\Breadcrumb\CustomBreadcrumb.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\CustomNavGroup.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\EUDossierDetailWidget\EUDossierDetailWidget.ascx.cs">
+      <DependentUpon>EUDossierDetailWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\EUIssueTracker\EUDossierDetailWidget\EUDossierDetailWidget.ascx.designer.cs">
+      <DependentUpon>EUDossierDetailWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\Designer\EUDossierGridWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\EUDossierGridWidget.ascx.cs">
       <DependentUpon>EUDossierGridWidget.ascx</DependentUpon>
@@ -989,6 +996,7 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.svg" />
     <Content Include="ClientBin\Telerik.Sitefinity.Analytics.xap" />
     <Content Include="ClientBin\Telerik.Sitefinity.Silverlight.xap" />
+    <Content Include="CustomLayouts\EUContent_OneColumn.ascx" />
     <Content Include="CustomLayouts\InfoWidget_ThreeColumns.ascx" />
     <Content Include="CustomLayouts\InfoWidget_TwoColumns.ascx" />
     <Content Include="CustomLayouts\OneColumnGreyBGR.ascx" />
@@ -1015,6 +1023,7 @@
     <Content Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.js" />
     <Content Include="CustomWidgets\EUCalendar\SocialShare.ascx" />
     <Content Include="CustomWidgets\EUIssueTracker\Breadcrumb\BreadcrumbTemplate.ascx" />
+    <Content Include="CustomWidgets\EUIssueTracker\EUDossierDetailWidget\EUDossierDetailWidget.ascx" />
     <Content Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\Designer\EUDossierGridWidgetDesigner.js" />
     <Content Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\Designer\EUDossierGridWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\EUIssueTracker\EUDossierGridWidget\EUDossierGridWidget.ascx" />
@@ -1223,6 +1232,7 @@
       <Name>ShunghamUtilities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="OpenAccessNuget.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -861,5 +861,21 @@ namespace SitefinityWebApp
         }
 
         #endregion
+
+        #region DossierDetail widget
+
+        [ResourceEntry("FullContentWarning",
+        Value = "Full content of this dossier is available only for registered EU Issue Tracker members!",
+        Description = "The text displayed when dossier is previewed in detail view",
+        LastModified = "2016/11/11")]
+        public string FullContentWarning
+        {
+            get
+            {
+                return this["FullContentWarning"];
+            }
+        }
+
+        #endregion
     }
 }
