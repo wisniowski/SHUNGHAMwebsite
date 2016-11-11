@@ -19,7 +19,6 @@
     <sf:ResourceLinks runat="server" ID="ResourceLinks1">
         <sf:ResourceFile JavaScriptLibrary="JQuery"></sf:ResourceFile>
         <sf:ResourceFile JavaScriptLibrary="JQueryUI"></sf:ResourceFile>
-        <sf:ResourceFile JavaScriptLibrary="KendoAll"></sf:ResourceFile>
     </sf:ResourceLinks>
 
     <link href="http://addtocalendar.com/atc/1.5/atc-style-blue.css" rel="stylesheet" type="text/css">
