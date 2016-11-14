@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Web;
 using Newtonsoft.Json;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Caching;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Caching.Expirations;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Services;
+using Telerik.Sitefinity.Web;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
 {
@@ -238,7 +241,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         {
             dossiersList = dossiersList.Where(d => d.Attributes.uni_publishdate > DateTime.Now.AddDays(-days) &&
                 d.Attributes.uni_publishdate <= DateTime.Now).ToList();
-                return dossiersList;
+            return dossiersList;
         }
 
         /// <summary>
@@ -270,6 +273,46 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             return navItem;
         }
 
+        /// <summary>
+        /// Constructs the policy area and category URL.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="pageUrl">The page URL.</param>
+        /// <param name="policyAreaUrlComponent">The policy area URL component.</param>
+        /// <param name="policyCategoryUrlComponent">The policy category URL component.</param>
+        public static void ConstructPolicyAreaAndCategoryURL(string areaName, string categoryName, out string navigateUrl)
+        {
+            var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+            if (pageUrl.Contains("detail"))
+            {
+                pageUrl = pageUrl.Substring(0, pageUrl.IndexOf("/detail"));
+            }
+            var fullPageUrl = VirtualPathUtility.ToAbsolute(pageUrl);
+            var policyAreaUrlComponent = Regex.Replace(areaName.ToLower(), urlRegex, hyphen);
+            var policyCategoryUrlComponent = Regex.Replace(categoryName.ToLower(), urlRegex, hyphen);
+            navigateUrl = string.Format("{0}/{1}/{2}", fullPageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
+
+            EUIssueTrackerHelper.navItems.Add(new NavigationItem
+            {
+                policyAreaName = areaName,
+                policyAreaURL = policyAreaUrlComponent,
+                policyCategoryName = categoryName,
+                policyCategoryURL = policyCategoryUrlComponent,
+            });
+        }
+
+        public static void ConstructStatusUrl(string statusName, out string navigateUrl)
+        {
+            var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+            if (pageUrl.Contains("detail"))
+            {
+                pageUrl = pageUrl.Substring(0, pageUrl.IndexOf("/detail"));
+            }
+            var fullPageUrl = VirtualPathUtility.ToAbsolute(pageUrl);
+            var statusUrlComponent = Regex.Replace(statusName.ToLower(), urlRegex, hyphen);
+            navigateUrl = string.Format("{0}/{1}", fullPageUrl, statusUrlComponent);
+        }
+
         private static ICacheManager CacheManager
         {
             get
@@ -289,7 +332,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         private const string dossierStatusServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/ShunghamDossierStatuses";
         private const string dossierServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/ShunghamDossiers";
         public static IList<NavigationItem> navItems = new List<NavigationItem>();
-
+        public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
+        public static string hyphen = "-";
         #endregion
     }
 }

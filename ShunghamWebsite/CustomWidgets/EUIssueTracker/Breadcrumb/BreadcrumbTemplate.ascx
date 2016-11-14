@@ -12,7 +12,7 @@
                     <nav>
                         <ul class="list-e">
                             <li>
-                                <a href='#'>
+                                <a href='<%# DataBinder.Eval(Container.DataItem, "url") %>'>
                                     <%# DataBinder.Eval(Container.DataItem, "title") %>
                                 </a></li>
                         </ul>
@@ -25,3 +25,9 @@
         </LevelSettings>
     </telerik:RadSiteMap>
 </header>
+
+<script type="text/javascript">
+    $('a[href="javascript:void(0)"]').replaceWith(function () {
+        return $("<span>" + $(this).html() + "</span>");
+    });
+</script>

@@ -78,22 +78,13 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             {
                 var category = e.Item.DataItem as EUIPolicyAreaModel;
                 HyperLink navLink = e.Item.FindControl("categoryLink") as HyperLink;
-                var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
-                if (pageUrl.Contains("detail"))
-                {
-                    pageUrl = pageUrl.Substring(0, pageUrl.IndexOf("detail"));
-                }
-                var policyAreaUrlComponent = Regex.Replace(category.Attributes.policyAreaName.Value.ToLower(), urlRegex, hyphen);
-                var policyCategoryUrlComponent = Regex.Replace(category.Attributes.uni_name.ToLower(), urlRegex, hyphen);
-                navLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
+                var categoryName = category.Attributes.policyAreaName.Value;
+                var areaName = category.Attributes.uni_name;
+                string navigateUrl = null;
+                EUIssueTrackerHelper.ConstructPolicyAreaAndCategoryURL(areaName, categoryName, out navigateUrl);
+                navLink.NavigateUrl = navigateUrl;
 
-                EUIssueTrackerHelper.navItems.Add(new NavigationItem
-                {
-                    policyAreaName = category.Attributes.policyAreaName.Value,
-                    policyAreaURL = policyAreaUrlComponent,
-                    policyCategoryName = category.Attributes.uni_name,
-                    policyCategoryURL = policyCategoryUrlComponent,
-                });
+                
             }
         }
 
@@ -121,7 +112,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             var navItem = EUIssueTrackerHelper.GetNavItemByUrlParams(this.GetUrlParameters());
             if (navItem != null)
             {
-                SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", navItem.policyAreaURL,
+                SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", "javascript:void(0)",
                     navItem.policyAreaName, navItem.policyCategoryName);
                 sitemap.Add(policyAreaNode);
                 return sitemap;
@@ -130,13 +121,5 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
         }
 
         #endregion
-
-        #region Private fields and constants
-
-        public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
-        public static string hyphen = "-";
-
-        #endregion
-
     }
 }

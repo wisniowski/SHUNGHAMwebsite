@@ -67,13 +67,18 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
             IList<SiteMapNode> sitemap = new List<SiteMapNode>();
             if (dossierUpdate != null)
             {
-                SiteMapNode policyAreaNode = new SiteMapNode(provider, "dossierUpdateKey", "#",
+                SiteMapNode policyAreaNode = new SiteMapNode(provider, "dossierUpdateKey", "javascript:void(0)",
                     dossierUpdate.Attributes.policyAreaName.Value);
                 sitemap.Add(policyAreaNode);
-                SiteMapNode policyCategoryNode = new SiteMapNode(provider, "dossierUpdateKey", "#",
+                string policyAreaAndCatUrl = "javascript:void(0)";
+                EUIssueTrackerHelper.ConstructPolicyAreaAndCategoryURL(dossierUpdate.Attributes.policyAreaName.Value, 
+                    dossierUpdate.Attributes.policyCategoryName.Value, out policyAreaAndCatUrl);
+                SiteMapNode policyCategoryNode = new SiteMapNode(provider, "dossierUpdateKey", policyAreaAndCatUrl,
                     dossierUpdate.Attributes.policyCategoryName.Value);
                 sitemap.Add(policyCategoryNode);
-                SiteMapNode dossierUpdateNode = new SiteMapNode(provider, "dossierUpdateKey", "#",
+                var statusUrl = "javascript:void(0)";
+                EUIssueTrackerHelper.ConstructStatusUrl(dossierUpdate.Attributes.status.Value, out statusUrl);
+                SiteMapNode dossierUpdateNode = new SiteMapNode(provider, "dossierUpdateKey", statusUrl,
                     dossierUpdate.Attributes.status.Value, dossierUpdate.Attributes.uni_shorttitle);
                 sitemap.Add(dossierUpdateNode);
                 return sitemap;
