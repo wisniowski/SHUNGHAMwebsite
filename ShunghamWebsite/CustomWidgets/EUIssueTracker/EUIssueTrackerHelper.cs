@@ -24,7 +24,9 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             }
             else
             {
-                navItemsList = GetNavItemsFromMSDynamics();
+                navItemsList = GetNavItemsFromMSDynamics()
+                    .OrderBy(p => p.Attributes.policyAreaName.Value)
+                    .ToList();
             }
 
             return navItemsList;
