@@ -45,7 +45,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             IEnumerable<CustomNavGroup<string, EUIPolicyAreaModel>> result =
                 EUIssueTrackerHelper.GetNavigationItems()
                 .GroupBy(w => w.Attributes.policyAreaName.Value)
-                .Select(g => new CustomNavGroup<string, EUIPolicyAreaModel>() { Key = g.Key, Values = g });
+                .OrderBy(p => p.Key)
+                .Select(g => new CustomNavGroup<string, EUIPolicyAreaModel>() { Key = g.Key, Values = g.OrderBy(c => c.Attributes.policyAreaName.Value) });
 
             EUIssueTrackerHelper.navItems.Clear();
 
