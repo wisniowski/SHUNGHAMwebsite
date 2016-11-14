@@ -3,13 +3,10 @@
 
 <sf:SitefinityLabel ID="otherUpdatesTitle" runat="server" WrapperTagName="H3" HideIfNoText="true" />
 
-<telerik:RadListView ID="statusesList" ItemPlaceholderID="StatusesContainer" runat="server"
-    EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
-    <LayoutTemplate>
+<asp:Repeater ID="statusesList" runat="server">
+    <HeaderTemplate>
         <ul class="list-i">
-            <asp:PlaceHolder ID="StatusesContainer" runat="server" />
-        </ul>
-    </LayoutTemplate>
+    </HeaderTemplate>
     <ItemTemplate>
         <li>
             <asp:HyperLink ID="dossierStatusLink" runat="server">
@@ -18,7 +15,10 @@
             </asp:HyperLink>
         </li>
     </ItemTemplate>
-</telerik:RadListView>
+    <FooterTemplate>
+        </ul>
+    </FooterTemplate>
+</asp:Repeater>
 
 <telerik:RadListView ID="dossiersList" ItemPlaceholderID="DossiersContainer" runat="server"
     EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">

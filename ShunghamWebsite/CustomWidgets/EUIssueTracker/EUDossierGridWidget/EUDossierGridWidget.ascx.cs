@@ -243,6 +243,35 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             }
         }
 
+        protected void statusesList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                var dataItem = e.Item.DataItem as EUDossierStatusModel;
+                HyperLink statusLink = e.Item.FindControl("dossierStatusLink") as HyperLink;
+                var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+                var urlParams = this.GetUrlParameters();
+                var statusUrlComponent = Regex.Replace(dataItem.Attributes.uni_name.ToLower(), urlRegex, hyphen);
+
+                statuses.Add(new StatusItem
+                {
+                    statusName = dataItem.Attributes.uni_name,
+                    statusURL = statusUrlComponent,
+                });
+
+                if (urlParams != null)
+                {
+                    if (urlParams.Count() > 2)
+                    {
+                        //removes old status from url and applies the new one
+                        urlParams = urlParams.Take(urlParams.Count() - 1).ToArray();
+                    }
+                    statusLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl,
+                        string.Join("/", urlParams), statusUrlComponent);
+                }
+            }
+        }
+
         protected int DisplayDossiersCount(EUDossierStatusModel statusItem)
         {
             if (statusItem != null)
