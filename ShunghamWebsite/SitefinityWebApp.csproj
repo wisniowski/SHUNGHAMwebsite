@@ -1225,6 +1225,7 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.eot" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.woff" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\ShunghamEUIssueTracker.Master" />
+    <Content Include="App_Data\Sitefinity\Configuration\AnalyticsConfig.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShunghamUtilities\ShunghamUtilities.csproj">

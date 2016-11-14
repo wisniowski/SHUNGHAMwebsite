@@ -79,6 +79,10 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
                 var category = e.Item.DataItem as EUIPolicyAreaModel;
                 HyperLink navLink = e.Item.FindControl("categoryLink") as HyperLink;
                 var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+                if (pageUrl.Contains("detail"))
+                {
+                    pageUrl = pageUrl.Substring(0, pageUrl.IndexOf("detail"));
+                }
                 var policyAreaUrlComponent = Regex.Replace(category.Attributes.policyAreaName.Value.ToLower(), urlRegex, hyphen);
                 var policyCategoryUrlComponent = Regex.Replace(category.Attributes.uni_name.ToLower(), urlRegex, hyphen);
                 navLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategoryUrlComponent);
