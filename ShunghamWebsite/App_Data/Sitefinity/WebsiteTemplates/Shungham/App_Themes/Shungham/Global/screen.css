@@ -955,7 +955,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
 }
 
     #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label {
-        padding: 13px 0;
+        padding: 10px 0;
     }
 
     #aside > ul > li > ul > li.active > a:after {
@@ -970,7 +970,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     }
 
     #aside > ul > li > ul > li > label {
-        padding-left: 37px;
+        padding-left: 33px;
     }
 
         #aside > ul > li > ul > li > label .input {
@@ -3568,6 +3568,19 @@ figure:first-child, * + .float-left, * + .float-right, .news-a:first-child, h1:f
     margin-bottom: 30px;
 }
 
+.checks input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    display: block;
+    position: absolute;
+    left: 0;
+    border-radius: 20px;
+    border: 1px solid #333;
+    background: #fff;
+    cursor: pointer;
+}
+
 /*! Warnings --------- */
 p.lt-ie9 {
     position: fixed;
@@ -4131,6 +4144,10 @@ svg:not(:root) {
             margin-right: 4px;
             line-height: 30px;
         }
+
+        .checks input[type="radio"]{
+        top: 8px;
+    }
 }
 
 @media only screen and (max-width: 100em) { /* 1600 */
@@ -4587,6 +4604,12 @@ svg:not(:root) {
         -o-transform: none;
         -ms-transform: none;
         transform: none;
+    }
+
+    .checks input[type="radio"]{
+        width: 18px;
+        height: 18px;
+        top: 7px;
     }
 }
 
@@ -6318,6 +6341,13 @@ svg:not(:root) {
         bottom: inherit;
         right: inherit;
     }
+
+    .checks input[type="radio"]{
+        width: 16px;
+        height: 16px;
+        left: 34px;
+        top: 7px;
+    }
 }
 
 @media only screen and (max-width: 31.25em) { /* 500 */
@@ -6410,19 +6440,6 @@ svg:not(:root) {
 
 
 /* Fix for EUCalendar sort by radio buttons */
-
-.checks input[type="radio"] {
-    width: 20px;
-    height: 20px;
-    top: 25px;
-    display: block;
-    position: absolute;
-    left: 0;
-    border-radius: 20px;
-    border: 1px solid #333;
-    background: #fff;
-    cursor: pointer;
-}
 
 .atc-style-blue .atcb-list,
 .atc-style-blue .atcb-item {
