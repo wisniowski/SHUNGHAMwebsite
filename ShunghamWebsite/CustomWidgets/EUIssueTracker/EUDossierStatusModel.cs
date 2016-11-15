@@ -8,7 +8,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
     public class EUDossierAttributes
     {
         public int uni_statusid { get; set; }
-        public string uni_name { get; set; }
+        public string uni_displayname { get; set; }
         public string uni_shunghamdossierstatusid { get; set; }
     }
 

@@ -11,7 +11,7 @@
         <li>
             <asp:HyperLink ID="dossierStatusLink" runat="server">
                 <span><%# DisplayDossiersCount((Container.DataItem as SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierStatusModel)) %></span>
-                <%# DataBinder.Eval(Container.DataItem,"Attributes.uni_name") %>
+                <%# DataBinder.Eval(Container.DataItem,"Attributes.uni_displayname") %>
             </asp:HyperLink>
         </li>
     </ItemTemplate>

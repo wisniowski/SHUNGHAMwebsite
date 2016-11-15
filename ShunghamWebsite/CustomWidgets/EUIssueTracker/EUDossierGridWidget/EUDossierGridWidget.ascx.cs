@@ -244,11 +244,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 HyperLink statusLink = e.Item.FindControl("dossierStatusLink") as HyperLink;
                 var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
                 var urlParams = this.GetUrlParameters();
-                var statusUrlComponent = Regex.Replace(dataItem.Attributes.uni_name.ToLower(), urlRegex, hyphen);
+                var statusUrlComponent = Regex.Replace(dataItem.Attributes.uni_displayname.ToLower(), urlRegex, hyphen);
 
                 statuses.Add(new StatusItem
                 {
-                    statusName = dataItem.Attributes.uni_name,
+                    statusName = dataItem.Attributes.uni_displayname,
                     statusURL = statusUrlComponent,
                 });
 
@@ -273,11 +273,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 HyperLink statusLink = e.Item.FindControl("dossierStatusLink") as HyperLink;
                 var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
                 var urlParams = this.GetUrlParameters();
-                var statusUrlComponent = Regex.Replace(dataItem.Attributes.uni_name.ToLower(), urlRegex, hyphen);
+                var statusUrlComponent = Regex.Replace(dataItem.Attributes.uni_displayname.ToLower(), urlRegex, hyphen);
 
                 statuses.Add(new StatusItem
                 {
-                    statusName = dataItem.Attributes.uni_name,
+                    statusName = dataItem.Attributes.uni_displayname,
                     statusURL = statusUrlComponent,
                 });
 
@@ -298,7 +298,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         {
             if (statusItem != null)
             {
-                return dossiers.GetDossiersCountByStatus(statusItem.Attributes.uni_name);
+                return dossiers.GetDossiersCountByStatus(statusItem.Attributes.uni_displayname);
             }
             return 0;
         }
