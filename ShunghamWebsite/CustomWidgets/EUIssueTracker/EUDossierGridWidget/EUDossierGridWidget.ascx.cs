@@ -186,23 +186,15 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         private IList<EUDossierModel> FilterDossierListByStatus(IList<EUDossierModel> dossiers, string[] urlParams)
         {
             selectedStatus = urlParams[2];
-            switch (selectedStatus)
+            var status = statuses.Where(s => s.statusURL == selectedStatus).FirstOrDefault();
+            if (status != null)
             {
-                case "future-initiatives":
-                case "dormant":
-                case "shelved":
-                    return null;
-                default:
-                    var status = statuses.Where(s => s.statusURL == selectedStatus).FirstOrDefault();
-                    if (status != null)
-                    {
-                        return dossiers.FilterDossiersByStatus(status.statusName);
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                if (status.showOnSitefinity == "Yes")
+                {
+                    return dossiers.FilterDossiersByStatus(status.statusName);
+                }
             }
+            return null;
         }
 
         protected void dossiersList_ItemCreated(object sender, RadListViewItemEventArgs e)
@@ -250,6 +242,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 {
                     statusName = dataItem.Attributes.uni_displayname,
                     statusURL = statusUrlComponent,
+                    showOnSitefinity = dataItem.FormattedValues.uni_showonsitefinity
                 });
 
                 if (urlParams != null)

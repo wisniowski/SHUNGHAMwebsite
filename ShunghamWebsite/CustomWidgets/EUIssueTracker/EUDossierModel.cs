@@ -45,6 +45,14 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         public string Value { get; set; }
     }
 
+    public class ShowOnSitefinity
+    {
+        public string __type { get; set; }
+        public string AttributeLogicalName { get; set; }
+        public string EntityLogicalName { get; set; }
+        public bool Value { get; set; }
+    }
+
     public class DossierAttributes
     {
         public string uni_shorttitle { get; set; }
@@ -54,6 +62,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         public DossierId dossierId { get; set; }
         public DossierPolicyAreaName policyAreaName { get; set; }
         public PolicyCategoryName policyCategoryName { get; set; }
+        public ShowOnSitefinity showOnSitefinity { get; set; }
         public Status status { get; set; }
     }
 

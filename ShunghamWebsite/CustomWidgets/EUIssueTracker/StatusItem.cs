@@ -9,5 +9,6 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
     {
         public string statusName { get; set; }
         public string statusURL { get; set; }
+        public string showOnSitefinity { get; set; }
     }
 }

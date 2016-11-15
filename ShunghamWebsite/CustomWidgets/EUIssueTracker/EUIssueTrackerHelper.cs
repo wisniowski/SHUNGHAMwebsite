@@ -259,15 +259,15 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         }
 
         /// <summary>
-        /// Restricts the dossiers list so that dossiers with status "Future Initiatives", 
+        /// Restricts the dossiers list so that dossiers with Show On Sitefinity value "False" require authentication.
+        /// Such are for example: "Future Initiatives", 
         /// "Dormant" and "Shelved" are not displayed.
         /// </summary>
         /// <param name="dossiersList">The dossiers list.</param>
         /// <returns></returns>
         public static IList<EUDossierModel> RestrictDossiersByStatus(this IList<EUDossierModel> dossiersList)
         {
-            return dossiersList.Where(d => d.Attributes.status.Value != "Future Initiatives" &&
-                d.Attributes.status.Value != "Shelved" && d.Attributes.status.Value != "Dormant").ToList();
+            return dossiersList.Where(d => d.Attributes.showOnSitefinity.Value).ToList();
         }
 
         /// <summary>

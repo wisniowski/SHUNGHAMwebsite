@@ -15,6 +15,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
     public class EUDossierStatusesFormattedValues
     {
         public string uni_statusid { get; set; }
+        public string uni_showonsitefinity { get; set; }
     }
 
     public class EUDossierStatusModel
