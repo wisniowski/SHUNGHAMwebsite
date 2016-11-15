@@ -40,7 +40,8 @@
                     <telerik:PersistenceSetting ControlID="policyAreasTreeView" />
                 </PersistenceSettings>
             </telerik:RadPersistenceManager>
-            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" EnableEmbeddedSkins="false" ShowLineImages="false">
+            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight"
+                EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false" ShowLineImages="false">
             </telerik:RadTreeView>
         </li>
     </ul>
