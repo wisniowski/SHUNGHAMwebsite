@@ -1403,6 +1403,7 @@ p.double {
     }
 
 .module-c {
+    float: right;
 }
 
     .module-c > * {
