@@ -40,28 +40,27 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
-        {           
+        {
             if (!IsPostBack)
             {
-                BindDossierList();
-                if (!this.DisplayOtherUpdates)
-                {
-                    BindDossierStatusesList();
-                }
-                var urlParams = this.GetUrlParameters();
-                if (urlParams != null)
-                {
-                    FilterDossierList(urlParams);
-                }
-
                 if (this.DisplayOtherUpdates)
                 {
+                    BindOtherUpdatesList();
                     this.statusesList.Visible = false;
-                    this.otherUpdatesTitle.Text = string.Format(Res.Get<ShunghamResources>().OtherUpdatesTitle, 
+                    this.otherUpdatesTitle.Text = string.Format(Res.Get<ShunghamResources>().OtherUpdatesTitle,
                         otherUpdatesCount);
                 }
                 else
                 {
+                    BindDossierList();
+                    BindDossierStatusesList();
+
+                    var urlParams = this.GetUrlParameters();
+                    if (urlParams != null)
+                    {
+                        FilterDossierList(urlParams);
+                    }
+
                     this.statusesList.Visible = true;
                 }
             }
@@ -80,13 +79,40 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         {
             dossiers = EUIssueTrackerHelper.GetDossiers();
 
-            if (this.DisplayOtherUpdates)
-            {
-                //the other dossiers grid must display all dossiers that were modified in the last X days
-                dossiers = dossiers.GetLatestUpdatedDossiersWithinDays(this.DaysToDisplayUpdatesWithin);
-            }
+            //initially the dossiers grid must display all dossiers that were modified in the last X days
+            dossiers = dossiers.GetLatestUpdatedDossiersWithinDays(this.DaysToDisplayUpdatesWithin);
 
             this.dossiersList.DataSource = dossiers.RestrictDossiersByStatus();
+            this.dossiersList.ItemCreated += dossiersList_ItemCreated;
+            this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
+            this.dossiersList.DataBind();
+        }
+
+        private void BindOtherUpdatesList()
+        {
+            dossiers = EUIssueTrackerHelper.GetDossiers();
+            string[] urlParams = this.GetUrlParameters();
+            var dossierUpdate = EUIssueTrackerHelper.GetDossierByUrlParams(urlParams);
+
+            var category = dossierUpdate.Attributes.policyCategoryName.Value;
+
+            //exclude current dossier from list
+            dossiers.Remove(dossierUpdate);
+
+            //filters dossiers by category and exclude current dossier from list
+            dossiers = dossiers.Where(a => a.Attributes.policyCategoryName.Value == category)
+                .ToList();
+
+            //filters dossiers by status
+            dossiers = dossiers.RestrictDossiersByStatus();
+
+            //gets dossiers count
+            if (dossiers.Count > 0)
+            {
+                otherUpdatesCount = dossiers.Count;
+            }
+
+            this.dossiersList.DataSource = dossiers;
             this.dossiersList.ItemCreated += dossiersList_ItemCreated;
             this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
             this.dossiersList.DataBind();
@@ -112,8 +138,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                         var pmanager = PageManager.GetManager();
                         var detailsPage = pmanager.GetPageNode(this.DetailsPageId);
                         var pageUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture);
-                        detailViewLinkControl.NavigateUrl = 
-                            string.Format("{0}/{1}/{2}", pageUrl, dataItem.Attributes.dossierId.Value, 
+                        detailViewLinkControl.NavigateUrl =
+                            string.Format("{0}/{1}/{2}", pageUrl, dataItem.Attributes.dossierId.Value,
                             Regex.Replace(dataItem.Attributes.uni_shorttitle.ToLower(), urlRegex, hyphen));
                     }
                 }
@@ -127,10 +153,6 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             if (urlParams != null && urlParams.Count() > 1)
             {
                 filteredByPolicyCatDossiers = FilterDossierListByPolicyAreaAndCategory(dossiers);
-                if (filteredByPolicyCatDossiers.Count > 0)
-                {
-                    otherUpdatesCount = filteredByPolicyCatDossiers.Count - 1;
-                }
                 this.dossiersList.DataSource = filteredByPolicyCatDossiers.RestrictDossiersByStatus();
 
                 if (urlParams.Count() > 2)

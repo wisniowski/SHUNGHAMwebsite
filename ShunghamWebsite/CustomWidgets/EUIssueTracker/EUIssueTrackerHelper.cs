@@ -301,6 +301,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             });
         }
 
+        /// <summary>
+        /// Constructs the status URL.
+        /// </summary>
+        /// <param name="statusName">Name of the status.</param>
+        /// <param name="navigateUrl">The navigate URL.</param>
         public static void ConstructStatusUrl(string statusName, out string navigateUrl)
         {
             var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
@@ -311,6 +316,14 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             var fullPageUrl = VirtualPathUtility.ToAbsolute(pageUrl);
             var statusUrlComponent = Regex.Replace(statusName.ToLower(), urlRegex, hyphen);
             navigateUrl = string.Format("{0}/{1}", fullPageUrl, statusUrlComponent);
+        }
+
+        public static EUDossierModel GetDossierByUrlParams(string[] urlParams)
+        {
+            var dossierID = urlParams[0];
+            var dossiers = EUIssueTrackerHelper.GetDossiers().RestrictDossiersByStatus();
+            var dossierUpdate = dossiers.Where(d => d.Attributes.dossierId.Value == dossierID).FirstOrDefault();
+            return dossierUpdate;
         }
 
         private static ICacheManager CacheManager

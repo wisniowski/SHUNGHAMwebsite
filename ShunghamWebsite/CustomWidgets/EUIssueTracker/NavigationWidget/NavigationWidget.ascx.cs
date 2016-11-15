@@ -84,18 +84,16 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
                 EUIssueTrackerHelper.ConstructPolicyAreaAndCategoryURL(areaName, categoryName, out navigateUrl);
                 navLink.NavigateUrl = navigateUrl;
 
-                
+
             }
         }
 
         private void PreselectActivePolicyAreaAndCategory()
-        {
+        {          
             string[] urlParams = this.GetUrlParameters();
             if (urlParams != null && urlParams.Count() > 0)
             {
-                var dossierID = urlParams[0];
-                var dossiers = EUIssueTrackerHelper.GetDossiers().RestrictDossiersByStatus();
-                var dossierUpdate = dossiers.Where(d => d.Attributes.dossierId.Value == dossierID).FirstOrDefault();
+                var dossierUpdate = EUIssueTrackerHelper.GetDossierByUrlParams(urlParams);
                 if (dossierUpdate != null)
                 {
                     this.activeCategoryHdn.Value = dossierUpdate.Attributes.policyCategoryName.Value;
