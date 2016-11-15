@@ -9,25 +9,29 @@
         <LevelSettings>
             <telerik:SiteMapLevelSetting Level="0" MaximumNodes="4">
                 <NodeTemplate>
-                    <nav>
-                        <ul class="list-e">
-                            <li>
-                                <a href='<%# DataBinder.Eval(Container.DataItem, "url") %>'>
-                                    <%# DataBinder.Eval(Container.DataItem, "title") %>
-                                </a></li>
-                        </ul>
-                    </nav>
-                    <h1>
+                    <a href='<%# DataBinder.Eval(Container.DataItem, "url") %>'>
+                        <%# DataBinder.Eval(Container.DataItem, "title") %>
+                    </a>
+                    <h1 class="titleInvisible">
                         <%# DataBinder.Eval(Container.DataItem, "description") %>
                     </h1>
                 </NodeTemplate>
             </telerik:SiteMapLevelSetting>
         </LevelSettings>
     </telerik:RadSiteMap>
+    <h1 class="titleVisible"></h1>
 </header>
 
 <script type="text/javascript">
     $('a[href="javascript:void(0)"]').replaceWith(function () {
         return $("<span>" + $(this).html() + "</span>");
+    });
+    $(".rsmList").addClass("list-e");
+    $(".titleInvisible").each(function (index) {
+        var str = $(this).html();
+        if (str != "") {
+            $(".titleVisible").html(str);
+        };
+        $(this).hide();
     });
 </script>
