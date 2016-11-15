@@ -78,13 +78,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             {
                 var category = e.Item.DataItem as EUIPolicyAreaModel;
                 HyperLink navLink = e.Item.FindControl("categoryLink") as HyperLink;
-                var categoryName = category.Attributes.policyAreaName.Value;
-                var areaName = category.Attributes.uni_name;
+                var areaName = category.Attributes.policyAreaName.Value;
+                var categoryName = category.Attributes.uni_name;
                 string navigateUrl = null;
                 EUIssueTrackerHelper.ConstructPolicyAreaAndCategoryURL(areaName, categoryName, out navigateUrl);
                 navLink.NavigateUrl = navigateUrl;
-
-
             }
         }
 
