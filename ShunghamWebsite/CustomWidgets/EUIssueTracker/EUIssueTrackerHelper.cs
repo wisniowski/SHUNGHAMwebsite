@@ -172,7 +172,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
 
                     var parsedJson = JsonConvert.DeserializeObject<List<EUDossierModel>>(stringValue);
 
-                    dossiersList = parsedJson;
+                    var dossiers = parsedJson;
+                    dossiersList = dossiers.GetLatestUpdatedDossiersOnly();
 
                     //TODO: extract this in a config
                     var cacheExpirationTime = 20;
@@ -191,6 +192,19 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
                 Log.Write(ex);
                 return dossiersList;
             }
+        }
+
+        /// <summary>
+        /// Gets the latest updated dossiers only per status.
+        /// </summary>
+        /// <param name="dossiersList">The dossiers list.</param>
+        /// <returns></returns>
+        public static IList<EUDossierModel> GetLatestUpdatedDossiersOnly(this IList<EUDossierModel> dossiersList)
+        {
+            return dossiersList.OrderByDescending(d => d.Attributes.uni_publishdate)
+                                .GroupBy(s => new { DossierID = s.Attributes.dossierId.Value, Status = s.Attributes.status.Value })
+                                .Select(grp => grp.FirstOrDefault())
+                                .ToList();
         }
 
         /// <summary>
