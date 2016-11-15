@@ -1404,6 +1404,7 @@ p.double {
 
 .module-c {
     float: right;
+    padding: 50px 0 0;
 }
 
     .module-c > * {
