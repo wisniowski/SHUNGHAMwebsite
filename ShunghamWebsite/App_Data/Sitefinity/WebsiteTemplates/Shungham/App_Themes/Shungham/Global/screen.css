@@ -766,7 +766,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
             cursor: pointer;
         }
 
-            #aside > ul > li > ul > li.active > a, #aside ul li a:hover {
+            #aside > ul > li > ul > li.active > a, #aside .rtSelected .rtIn, #aside ul li a:hover, #aside ul li .rtIn:hover {
                 color: #c80000;
             }
 
@@ -950,15 +950,26 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     left: 0;
 }
 
+#aside .rtUL {
+    padding: 18px 50px 18px 120px;
+    font-size: .81818181818em;
+}
+
+#aside .rtUL .rtIn {
+    display: inline-block;
+    cursor: pointer;
+}
+
 #aside > ul > li > ul > li {
     font-size: .81818181818em;
 }
 
-    #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label {
+    #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label, #aside .rtUL .rtIn {
         padding: 10px 0;
     }
 
-    #aside > ul > li > ul > li.active > a:after {
+    #aside > ul > li > ul > li.active > a:after,
+    #aside .rtSelected span.rtIn:after{
         content: "\e90a";
         display: inline-block;
         top: -2px;
@@ -4090,6 +4101,10 @@ svg:not(:root) {
                         height: 8px;
                         margin: -4px 0 0 -4px;
                     }
+    
+    #aside .rtUL {
+        padding: 18px 50px 18px 70px;
+    }
 
     html.a #root {
         padding-top: 89px;
@@ -4326,7 +4341,7 @@ svg:not(:root) {
             padding: 10px 20px;
         }
 
-            #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label {
+            #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label, #aside .rtUL .rtIn {
                 padding: 8px 0;
             }
 
@@ -4343,6 +4358,10 @@ svg:not(:root) {
                     width: 18px;
                     height: 18px;
                 }
+
+    #aside .rtUL{
+        padding: 10px 50px 18px 46px;
+    }
 
     html.a {
     }
@@ -5095,6 +5114,10 @@ svg:not(:root) {
 
     #aside.a > ul > li.toggle > a {
         box-shadow: 0 0 4px rgba(0,0,0,.2);
+    }
+
+    #aside .rtUL {
+        padding: 10px 50px 18px 60px;
     }
 
     #content {
