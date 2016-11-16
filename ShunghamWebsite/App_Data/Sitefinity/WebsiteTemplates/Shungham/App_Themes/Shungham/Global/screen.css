@@ -10,6 +10,11 @@
     padding: 0;
 }
 
+/*Sitefinity backend fix*/
+body.sfPageEditor {
+    font-size: 35%;
+}
+
 *, :before, :after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -6514,9 +6519,4 @@ svg:not(:root) {
 .atc-style-blue .atcb-item-link:hover, .atc-style-blue .atcb-item-link:active, .atc-style-blue .atcb-item-link:focus {
     border-color: #c80000;
     background: #c80000;
-}
-
-/*Sitefinity backend fix*/
-body.sfPageEditor {
-    font-size: 6px;
 }
