@@ -6515,3 +6515,8 @@ svg:not(:root) {
     border-color: #c80000;
     background: #c80000;
 }
+
+/*Sitefinity backend fix*/
+body.sfPageEditor {
+    font-size: 6px;
+}
