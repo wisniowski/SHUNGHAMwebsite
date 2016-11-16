@@ -15,6 +15,9 @@ using Telerik.Sitefinity.Web;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
 {
+    /// <summary>
+    /// Helper class to consume MS Dynamics data and perform CRUD operations via helper methods.
+    /// </summary>
     public static class EUIssueTrackerHelper
     {
         internal static IList<EUIPolicyAreaModel> GetNavigationItems()
@@ -90,14 +93,17 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
 
                     policyAreasList = parsedJson;
 
-                    //TODO: extract this in a config
-                    var cacheExpirationTime = 20;
-                    CacheManager.Add(
-                        cacheKeywordPAC,
-                        policyAreasList,
-                        CacheItemPriority.Normal,
-                        null,
-                        new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    if (policyAreasList != null && policyAreasList.Count > 0)
+                    {
+                        //TODO: extract this in a config
+                        var cacheExpirationTime = 20;
+                        CacheManager.Add(
+                            cacheKeywordPAC,
+                            policyAreasList,
+                            CacheItemPriority.Normal,
+                            null,
+                            new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    }
 
                     return policyAreasList;
                 }
@@ -132,14 +138,17 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
 
                     dossierStatusesList = parsedJson;
 
-                    //TODO: extract this in a config
-                    var cacheExpirationTime = 20;
-                    CacheManager.Add(
-                        cacheKeywordDossierStatuses,
-                        dossierStatusesList,
-                        CacheItemPriority.Normal,
-                        null,
-                        new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    if (dossierStatusesList != null && dossierStatusesList.Count > 0)
+                    {
+                        //TODO: extract this in a config
+                        var cacheExpirationTime = 20;
+                        CacheManager.Add(
+                            cacheKeywordDossierStatuses,
+                            dossierStatusesList,
+                            CacheItemPriority.Normal,
+                            null,
+                            new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    }
 
                     return dossierStatusesList;
                 }
@@ -175,14 +184,17 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
                     var dossiers = parsedJson;
                     dossiersList = dossiers.GetLatestUpdatedDossiersOnly();
 
-                    //TODO: extract this in a config
-                    var cacheExpirationTime = 20;
-                    CacheManager.Add(
-                        cacheKeywordDossiers,
-                        dossiersList,
-                        CacheItemPriority.Normal,
-                        null,
-                        new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    if (dossiersList != null && dossiersList.Count > 0)
+                    {
+                        //TODO: extract this in a config
+                        var cacheExpirationTime = 20;
+                        CacheManager.Add(
+                            cacheKeywordDossiers,
+                            dossiersList,
+                            CacheItemPriority.Normal,
+                            null,
+                            new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    }
 
                     return dossiersList;
                 }
@@ -332,6 +344,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             navigateUrl = string.Format("{0}/{1}", fullPageUrl, statusUrlComponent);
         }
 
+        /// <summary>
+        /// Gets the dossier by URL parameters.
+        /// </summary>
+        /// <param name="urlParams">The URL parameters.</param>
+        /// <returns></returns>
         public static EUDossierModel GetDossierByUrlParams(string[] urlParams)
         {
             var dossierID = urlParams[0];
