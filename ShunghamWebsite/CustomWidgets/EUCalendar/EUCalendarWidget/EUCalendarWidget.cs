@@ -340,6 +340,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.eventList = EventsControlsHelper.GetEventsList();
 
             BindDateLinks();
+            BindPolicyAreas();
 
             var selectedDate = this.GetDateByUrlParams();
             this.Date.InnerText = selectedDate.ToString(eventsDateFormat);
@@ -482,8 +483,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.eventDateRadioButton.CheckedChanged += eventDateRadioButton_CheckedChanged;
             this.eventDeadlineRadioButton.CheckedChanged += eventDeadlineRadioButton_CheckedChanged;
 
-            BindPolicyAreas();
-
             LoadPersistedTreeViewState();
 
             var queryStringParams = HttpContext.Current.Request.QueryString;
@@ -566,8 +565,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 this.DisplayBackendMessage();
             }
 
-            BindPolicyAreas();
-
             string itemUrl = string.Empty;
             var urlParams = this.GetUrlParameters();
             if (urlParams.Count() == 1)
@@ -596,7 +593,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                     this.SingleEvent.DataBind();
 
                     //bind other events list
-                    BindOtherEventsList(eventList, eventItem);
+                    BindSimilarEventsList(eventItem);
                 }
             }
 
@@ -748,14 +745,20 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                     {
                         var pmanager = PageManager.GetManager();
                         var detailsPage = pmanager.GetPageNode(this.DetailsPageId);
+
                         if (detailsPage != null)
                         {
-                            var urlParams = this.GetUrlParameterString(true);
                             var detailPageUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture);
+
+                            var urlParams = this.GetUrlParameters();
                             if (urlParams != null)
                             {
-                                eventLinkControl.NavigateUrl = string.Format("{0}/{1}/{2}", detailPageUrl, urlParams,
-                                    Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
+                                if (urlParams.Count() > 2)
+                                {
+                                    var urlParamString = this.GetUrlParameterString(false);
+                                    eventLinkControl.NavigateUrl = string.Format("{0}/{1}/{2}", detailPageUrl, urlParamString,
+                                        Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
+                                }
                             }
                             else
                             {
@@ -781,12 +784,24 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.EventDetailErrMessage.Text = sb.ToString();
         }
 
-        private void BindOtherEventsList(IList<EventModel> eventList, EventModel eventItem)
+        private void BindSimilarEventsList(EventModel eventItem)
         {
-            var otherEvents = eventList.Where(ev => ev.Id != eventItem.Id &&
-                ev.Attributes.policyAreaID == ev.Attributes.policyAreaID);
-            this.Count.Text = otherEvents.Count().ToString();
-            this.OtherEventsList.DataSource = otherEvents;
+            IList<EventModel> similarEvents = new List<EventModel>();
+            string[] policyAreaListSource = eventItem.Attributes.policyAreaName.Value.Split(',');
+            foreach (var item in this.eventList)
+            {
+                if (item.Id == eventItem.Id)
+                {
+                    continue;
+                }
+                var policyAreaList = item.Attributes.policyAreaName.Value.Split(',');
+                if (policyAreaList.Any(policyAreaListSource.Contains))
+                {
+                    similarEvents.Add(item);
+                }
+            }
+            this.Count.Text = similarEvents.Count().ToString();
+            this.OtherEventsList.DataSource = similarEvents;
             this.OtherEventsList.ItemDataBound += EventsList_ItemDataBound;
             this.OtherEventsList.DataBind();
         }
