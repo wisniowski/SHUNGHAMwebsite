@@ -337,12 +337,19 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 RadPersistenceManager.StorageProviderKey = cookieName;
                 RadPersistenceManager.StorageProvider = new CookieStorageProvider(cookieName);
 
+                this.policyAreasList = EventsControlsHelper.GetPolicyAreasList();
+                this.eventList = EventsControlsHelper.GetEventsList();
+
                 BindDateLinks();
-                FilterEventsByDate();
+
+                var selectedDate = this.GetDateByUrlParams();
+                this.Date.InnerText = selectedDate.ToString(eventsDateFormat);
+
+                if (!this.IsDetailsMode)
+                {
+                    FilterEventsByDate(selectedDate);
+                }
             }
-
-            this.policyAreasList = EventsControlsHelper.GetPolicyAreasList();
-
 
             this.SearchButton.ServerClick += SearchButton_Click;
 
@@ -367,15 +374,19 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             nextDate = selectedDate.AddMonths(1);
 
             var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
-            this.PrevLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, prevDate.ToString("yyyy"), prevDate.ToString("MMMM"));
-            this.NextLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, nextDate.ToString("yyyy"), nextDate.ToString("MMMM"));
+            if (pageUrl.Contains("detail"))
+            {
+                pageUrl = pageUrl.Substring(0, pageUrl.IndexOf("/detail"));
+            }
+            this.PrevLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, prevDate.ToString("yyyy"),
+                prevDate.ToString("MMMM"));
+            this.NextLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, nextDate.ToString("yyyy"),
+                nextDate.ToString("MMMM"));
         }
 
-        private void FilterEventsByDate()
+        private void FilterEventsByDate(DateTime selectedDate)
         {
-            var selectedDate = this.GetDateByUrlParams();
-            this.Date.InnerText = selectedDate.ToString(eventsDateFormat);
-            this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(selectedDate);
+            this.eventList = this.eventList.OrderEventsCollection(selectedDate);
 
             this.EventsList.DataSource = this.eventList;
             this.EventsList.ItemDataBound += EventsList_ItemDataBound;
@@ -385,7 +396,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         private DateTime GetDateByUrlParams()
         {
             var urlParams = this.GetUrlParameters();
-            if (urlParams != null && urlParams.Count() == 2)
+            if (urlParams != null && urlParams.Count() >= 2)
             {
                 var year = urlParams[0];
                 var month = urlParams[1];
@@ -560,7 +571,15 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             BindPolicyAreas();
 
             string itemUrl = string.Empty;
-            itemUrl = this.GetUrlParameterString(true);
+            var urlParams = this.GetUrlParameters();
+            if (urlParams.Count() == 1)
+            {
+                itemUrl = urlParams[0];
+            }
+            else if (urlParams.Count() == 3)
+            {
+                itemUrl = urlParams[2];
+            }
 
             if (!string.IsNullOrEmpty(itemUrl))
             {
@@ -731,8 +750,21 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                     {
                         var pmanager = PageManager.GetManager();
                         var detailsPage = pmanager.GetPageNode(this.DetailsPageId);
-                        eventLinkControl.NavigateUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture) + fwdSlash +
-                            Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen);
+                        if (detailsPage != null)
+                        {
+                            var urlParams = this.GetUrlParameterString(true);
+                            var detailPageUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture);
+                            if (urlParams != null)
+                            {
+                                eventLinkControl.NavigateUrl = string.Format("{0}/{1}/{2}", detailPageUrl, urlParams,
+                                    Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
+                            }
+                            else
+                            {
+                                eventLinkControl.NavigateUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture) + fwdSlash +
+                                   Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen);
+                            }
+                        }
                     }
                 }
             }
