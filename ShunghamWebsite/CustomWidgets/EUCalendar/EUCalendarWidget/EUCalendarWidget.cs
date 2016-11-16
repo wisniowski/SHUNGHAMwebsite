@@ -411,14 +411,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         {
             var redirectLocation = string.Empty;
             var searchQuery = this.SearchBox.Text;
+            var currentUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                redirectLocation = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture)
-                    + eventsSearchUrlKeyword + searchQuery;
+                redirectLocation = string.Format("{0}?search={1}", currentUrl, searchQuery);
             }
             if (searchQuery == string.Empty)
             {
-                redirectLocation = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+                redirectLocation = currentUrl;
             }
 
             HttpContext.Current.Response.Redirect(redirectLocation);
@@ -759,8 +759,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                             }
                             else
                             {
-                                eventLinkControl.NavigateUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture) + fwdSlash +
-                                   Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen);
+                                eventLinkControl.NavigateUrl = string.Format("{0}/{1}", detailPageUrl,
+                                    Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
                             }
                         }
                     }
@@ -805,11 +805,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         private IList<PolicyAreaModel> policyAreasList = new List<PolicyAreaModel>();
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";
-        public static string fwdSlash = "/";
         public static string underscore = "_";
         public static string eventsDateFormat = "MMMM yyyy";
-        public const string eventsSearchUrlKeyword = "?search=";
-        public static string dateKey = "Date";
         private string backBtnDefaultDestination = string.Empty;
         private static readonly string cookieName = "ShunghamCookie";
 
