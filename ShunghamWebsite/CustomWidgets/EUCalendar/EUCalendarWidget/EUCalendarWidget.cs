@@ -332,23 +332,21 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
             if (!Page.IsPostBack)
             {
-                HttpContext.Current.Session[dateKey] = DateTime.Now;
-
                 RadPersistenceManager.StorageProviderKey = cookieName;
-                RadPersistenceManager.StorageProvider = new CookieStorageProvider(cookieName);
+                RadPersistenceManager.StorageProvider = new CookieStorageProvider(cookieName);                
+            }
 
-                this.policyAreasList = EventsControlsHelper.GetPolicyAreasList();
-                this.eventList = EventsControlsHelper.GetEventsList();
+            this.policyAreasList = EventsControlsHelper.GetPolicyAreasList();
+            this.eventList = EventsControlsHelper.GetEventsList();
 
-                BindDateLinks();
+            BindDateLinks();
 
-                var selectedDate = this.GetDateByUrlParams();
-                this.Date.InnerText = selectedDate.ToString(eventsDateFormat);
+            var selectedDate = this.GetDateByUrlParams();
+            this.Date.InnerText = selectedDate.ToString(eventsDateFormat);
 
-                if (!this.IsDetailsMode)
-                {
-                    FilterEventsByDate(selectedDate);
-                }
+            if (!this.IsDetailsMode)
+            {
+                FilterEventsByDate(selectedDate);
             }
 
             this.SearchButton.ServerClick += SearchButton_Click;
@@ -431,7 +429,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (eventDeadlineRadioButton.Checked && !this.IsDetailsMode)
             {
                 var currentDate = DateTime.Parse(this.Date.InnerHtml);
-                this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
+                this.EventsList.DataSource = this.eventList.OrderEventsCollection(currentDate)
                     .OrderBy(a => a.Attributes.new_eucregistrationdeadline).ToList();
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
@@ -443,7 +441,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (eventDateRadioButton.Checked && !this.IsDetailsMode)
             {
                 var currentDate = DateTime.Parse(this.Date.InnerHtml);
-                this.EventsList.DataSource = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate)
+                this.EventsList.DataSource = this.eventList.OrderEventsCollection(currentDate)
                     .OrderBy(a => a.Attributes.new_eucstartdate).ToList();
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();

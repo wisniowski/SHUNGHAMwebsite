@@ -143,7 +143,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
 
         public static IList<EventModel> OrderEventsCollection(this IList<EventModel> eventList, DateTime startDate)
         {
-
             eventList = eventList
                 .Where(ev => ev.Attributes.new_eucstartdate.ToString("MMMM yyyy") == startDate.ToString("MMMM yyyy"))
                 .OrderBy(ev => ev.Attributes.new_eucstarttime)
