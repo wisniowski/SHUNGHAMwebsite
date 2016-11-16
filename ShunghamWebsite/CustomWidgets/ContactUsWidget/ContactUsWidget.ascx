@@ -35,8 +35,6 @@
                     </ul>
                 </header>
                 <div class="form-a">
-                    <h3 class="mobile-only">
-                        <asp:Literal runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
                     <p class="double a">
                         <span>
                             <label for="faa" class="hidden">First Name</label>
