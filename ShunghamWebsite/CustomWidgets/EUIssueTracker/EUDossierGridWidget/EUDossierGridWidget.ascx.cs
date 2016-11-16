@@ -150,23 +150,42 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         {
             IList<EUDossierModel> filteredDossiers = new List<EUDossierModel>();
             IList<EUDossierModel> filteredByPolicyCatDossiers = new List<EUDossierModel>();
-            if (urlParams != null && urlParams.Count() > 1)
+            if (urlParams != null)
             {
-                filteredByPolicyCatDossiers = FilterDossierListByPolicyAreaAndCategory(dossiers);
-                this.dossiersList.DataSource = filteredByPolicyCatDossiers.RestrictDossiersByStatus();
-
-                if (urlParams.Count() > 2)
+                //filter dossiers by status only
+                if (urlParams.Count() == 1)
                 {
-                    filteredDossiers = FilterDossierListByStatus(filteredByPolicyCatDossiers, urlParams);
+                    statusURL = urlParams[0];
+                    filteredDossiers = FilterDossierListByStatus(dossiers, statusURL);
                     if (filteredDossiers != null)
                     {
                         filteredDossiers = filteredDossiers.RestrictDossiersByStatus();
                     }
                     this.dossiersList.DataSource = filteredDossiers;
                 }
-            }
+                else
+                {
+                    //filter dossiers by policy area and policy category
+                    if (urlParams.Count() > 1)
+                    {
+                        filteredByPolicyCatDossiers = FilterDossierListByPolicyAreaAndCategory(dossiers);
+                        this.dossiersList.DataSource = filteredByPolicyCatDossiers.RestrictDossiersByStatus();
+                    }
+                    //filter dossiers by policy area, policy category and status
+                    if (urlParams.Count() > 2)
+                    {
+                        statusURL = urlParams[2];
+                        filteredDossiers = FilterDossierListByStatus(filteredByPolicyCatDossiers, statusURL);
+                        if (filteredDossiers != null)
+                        {
+                            filteredDossiers = filteredDossiers.RestrictDossiersByStatus();
+                        }
+                        this.dossiersList.DataSource = filteredDossiers;
+                    }
 
-            dossiers = filteredByPolicyCatDossiers;
+                    dossiers = filteredByPolicyCatDossiers;
+                }
+            }
 
             this.dossiersList.DataBind();
 
@@ -183,16 +202,12 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             return dossiers;
         }
 
-        private IList<EUDossierModel> FilterDossierListByStatus(IList<EUDossierModel> dossiers, string[] urlParams)
+        private IList<EUDossierModel> FilterDossierListByStatus(IList<EUDossierModel> dossiers, string selectedStatusURL)
         {
-            selectedStatus = urlParams[2];
-            var status = statuses.Where(s => s.statusURL == selectedStatus).FirstOrDefault();
+            var status = statuses.Where(s => s.statusURL == selectedStatusURL).FirstOrDefault();
             if (status != null)
             {
-                if (status.showOnSitefinity == "Yes")
-                {
-                    return dossiers.FilterDossiersByStatus(status.statusName);
-                }
+                return dossiers.FilterDossiersByStatus(status.statusName);
             }
             return null;
         }
@@ -204,7 +219,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 Literal emptyMessageLtl = e.Item.FindControl("emptyMessageLtl") as Literal;
                 Literal emptyTitleLtl = e.Item.FindControl("emptyTitleLtl") as Literal;
                 Literal emptyMessageContentLtl = e.Item.FindControl("emptyMessageContentLtl") as Literal;
-                switch (selectedStatus)
+                switch (statusURL)
                 {
                     case "future-initiatives":
                         emptyMessageLtl.Text = Res.Get<ShunghamResources>().FutureInitiativesEmptyMessage;
@@ -274,7 +289,11 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                     statusURL = statusUrlComponent,
                 });
 
-                if (urlParams != null)
+                if (urlParams == null || urlParams.Count() == 1)
+                {
+                    statusLink.NavigateUrl = string.Format("{0}/{1}", pageUrl, statusUrlComponent);
+                }
+                else if (urlParams != null)
                 {
                     if (urlParams.Count() > 2)
                     {
@@ -304,7 +323,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         public static string hyphen = "-";
         public static string fwdSlash = "/";
         public static string underscore = "_";
-        public string selectedStatus = null;
+        public string statusURL = null;
         private IList<EUDossierModel> dossiers = new List<EUDossierModel>();
         public IList<StatusItem> statuses = new List<StatusItem>();
 
