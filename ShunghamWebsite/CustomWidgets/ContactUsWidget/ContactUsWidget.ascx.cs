@@ -59,7 +59,6 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
             }
             else
             {
-                this.articleWrapper.Attributes["class"] = ContactUs.articleWrapperNoBckndClass;
                 this.backgrdFigure.Visible = false;
             }
         }
@@ -84,7 +83,6 @@ namespace SitefinityWebApp.CustomWidgets.ContactUsWidget
         #region Private fields and constants
 
         private const string formName = "sf_contactus";
-        private const string articleWrapperNoBckndClass = "double a";
         private const string articleWrapperBackgroundClass = "module-a has-background";
         private const string wrapperClass = "module-b double";
 
