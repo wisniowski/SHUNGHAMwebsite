@@ -1501,6 +1501,7 @@ p.double {
     }
 
     .module-c .list-h {
+        margin-bottom: -30px;
     }
 
         .module-c .list-h:first-child {
@@ -1510,10 +1511,6 @@ p.double {
             .module-c .list-h:first-child > li:first-child {
                 border-top-width: 0;
             }
-
-        .module-c .list-h:last-child {
-            margin-bottom: -30px;
-        }
 
     .module-c .size-b {
         margin-bottom: 22px;
