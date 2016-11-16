@@ -1475,6 +1475,7 @@ p.double {
 
         .module-c header h1, .module-c header h2, .module-c h3, .module-c h4, .module-c h5, .module-c h6 {
             font-size: 3em;
+            color: #333;
         }
 
             .module-c h1 .no, .module-c h2 .no, .module-c h3 .no, .module-c h4 .no, .module-c h5 .no, .module-c h6 .no {
