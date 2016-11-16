@@ -7,36 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget {
+namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget {
     
     
-    public partial class NavigationWidget {
+    public partial class EUDossierGridWidget {
         
         /// <summary>
-        /// activeAreaHdn control.
+        /// otherUpdatesTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField activeAreaHdn;
+        protected global::Telerik.Sitefinity.Web.UI.SitefinityLabel otherUpdatesTitle;
         
         /// <summary>
-        /// activeCategoryHdn control.
+        /// statusesList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField activeCategoryHdn;
+        protected global::System.Web.UI.WebControls.Repeater statusesList;
         
         /// <summary>
-        /// navigationList control.
+        /// dossiersList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadListView navigationList;
+        protected global::Telerik.Web.UI.RadListView dossiersList;
     }
 }

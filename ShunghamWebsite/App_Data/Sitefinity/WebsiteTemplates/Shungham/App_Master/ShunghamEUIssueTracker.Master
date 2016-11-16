@@ -41,8 +41,9 @@
         <div id="root">
             <header id="top">
                 <p id="logo">
-                    <a href="/eucalendar" accesskey="h" style="font-family: 'Gotham Narrow', Gotham, Arial, Helvetica, sans-serif;">
-                        <span class="overlay-d">EU</span>Calendar</a>
+                    <a href="/euissuetracker" accesskey="h"
+                        style="font-family: 'Gotham Narrow', Gotham, Arial, Helvetica, sans-serif;">
+                        <span class="overlay-d">EU</span>IssueTracker</a>
                 </p>
                 <nav id="skip">
                     <ul>
@@ -56,8 +57,12 @@
                 </nav>
             </header>
             <section id="content">
-                <asp:ContentPlaceHolder ID="ContentHolder" runat="server">
+                <asp:ContentPlaceHolder ID="NavigationHolder" runat="server">
                 </asp:ContentPlaceHolder>
+                <div class="module-c">
+                    <asp:ContentPlaceHolder ID="ContentHolder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
             </section>
             <footer id="footer">
                 <asp:ContentPlaceHolder ID="FooterHolder" runat="server">

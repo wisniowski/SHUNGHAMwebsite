@@ -5,23 +5,39 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Sitefinity.Web;
 using Telerik.Web.UI;
 
 namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
 {
-    public partial class NavigationWidget : System.Web.UI.UserControl
+    public partial class NavigationWidget : UserControl, IBreadcrumExtender
     {
         protected void Page_Init(object sender, EventArgs e)
         {
             RouteHelper.SetUrlParametersResolved();
         }
 
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            this.Page.RegisterBreadcrumbExtender(this);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             RouteHelper.SetUrlParametersResolved();
-            BindNavigationWidget();
+
+            if (!IsPostBack)
+            {
+                BindNavigationWidget();
+
+                var currentUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+                if (currentUrl.Contains("detail"))
+                {
+                    PreselectActivePolicyAreaAndCategory();
+                }
+            }
         }
 
         private void BindNavigationWidget()
@@ -29,7 +45,10 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             IEnumerable<CustomNavGroup<string, EUIPolicyAreaModel>> result =
                 EUIssueTrackerHelper.GetNavigationItems()
                 .GroupBy(w => w.Attributes.policyAreaName.Value)
-                .Select(g => new CustomNavGroup<string, EUIPolicyAreaModel>() { Key = g.Key, Values = g });
+                .OrderBy(p => p.Key)
+                .Select(g => new CustomNavGroup<string, EUIPolicyAreaModel>() { Key = g.Key, Values = g.OrderBy(c => c.Attributes.policyAreaName.Value) });
+
+            EUIssueTrackerHelper.navItems.Clear();
 
             this.navigationList.DataSource = result;
             this.navigationList.ItemDataBound += navigationList_ItemDataBound;
@@ -59,17 +78,43 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUINavigationWidget
             {
                 var category = e.Item.DataItem as EUIPolicyAreaModel;
                 HyperLink navLink = e.Item.FindControl("categoryLink") as HyperLink;
-                var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
-                var policyAreaUrlComponent = Regex.Replace(category.Attributes.policyAreaName.Value.ToLower(), urlRegex, hyphen);
-                var policyCategiryUrlComponent = Regex.Replace(category.Attributes.uni_name.ToLower(), urlRegex, hyphen);
-                navLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, policyAreaUrlComponent, policyCategiryUrlComponent);
+                var areaName = category.Attributes.policyAreaName.Value;
+                var categoryName = category.Attributes.uni_name;
+                string navigateUrl = null;
+                EUIssueTrackerHelper.ConstructPolicyAreaAndCategoryURL(areaName, categoryName, out navigateUrl);
+                navLink.NavigateUrl = navigateUrl;
             }
         }
 
-        #region Private fields and constants
+        private void PreselectActivePolicyAreaAndCategory()
+        {          
+            string[] urlParams = this.GetUrlParameters();
+            if (urlParams != null && urlParams.Count() > 0)
+            {
+                var dossierUpdate = EUIssueTrackerHelper.GetDossierByUrlParams(urlParams);
+                if (dossierUpdate != null)
+                {
+                    this.activeCategoryHdn.Value = dossierUpdate.Attributes.policyCategoryName.Value;
+                    this.activeAreaHdn.Value = dossierUpdate.Attributes.policyAreaName.Value;
+                }
+            }
+        }
 
-        public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
-        public static string hyphen = "-";
+        #region IBreadcrumExtender
+
+        public IEnumerable<SiteMapNode> GetVirtualNodes(SiteMapProvider provider)
+        {
+            IList<SiteMapNode> sitemap = new List<SiteMapNode>();
+            var navItem = EUIssueTrackerHelper.GetNavItemByUrlParams(this.GetUrlParameters());
+            if (navItem != null)
+            {
+                SiteMapNode policyAreaNode = new SiteMapNode(provider, "policyAreaKey", "javascript:void(0)",
+                    navItem.policyAreaName, navItem.policyCategoryName);
+                sitemap.Add(policyAreaNode);
+                return sitemap;
+            }
+            return sitemap;
+        }
 
         #endregion
     }

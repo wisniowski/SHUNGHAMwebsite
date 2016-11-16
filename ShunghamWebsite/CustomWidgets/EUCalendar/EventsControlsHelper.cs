@@ -71,16 +71,20 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
                     var parsedJson = JsonConvert.DeserializeObject<List<EventModel>>(stringValue);
 
                     var events = parsedJson;
+                    //combines policy areas into a comma-separated list
                     eventList = GroupEventsByPolicyArea(events);
 
-                    //TODO: extract this in a config
-                    var cacheExpirationTime = 20;
-                    CacheManager.Add(
-                        cacheKeywordEvents,
-                        eventList,
-                        CacheItemPriority.Normal,
-                        null,
-                        new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    if (eventList != null && eventList.Count > 0)
+                    {
+                        //TODO: extract this in a config
+                        var cacheExpirationTime = 20;
+                        CacheManager.Add(
+                            cacheKeywordEvents,
+                            eventList,
+                            CacheItemPriority.Normal,
+                            null,
+                            new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    }
 
                     return eventList;
                 }
@@ -115,14 +119,17 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
 
                     policyAreasList = parsedJson;
 
-                    //TODO: extract this in a config
-                    var cacheExpirationTime = 20;
-                    CacheManager.Add(
-                        cacheKeywordPolicyAreas,
-                        policyAreasList,
-                        CacheItemPriority.Normal,
-                        null,
-                        new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    if (policyAreasList != null && policyAreasList.Count > 0)
+                    {
+                        //TODO: extract this in a config
+                        var cacheExpirationTime = 20;
+                        CacheManager.Add(
+                            cacheKeywordPolicyAreas,
+                            policyAreasList,
+                            CacheItemPriority.Normal,
+                            null,
+                            new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    }
 
                     return policyAreasList;
                 }
@@ -136,7 +143,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
 
         public static IList<EventModel> OrderEventsCollection(this IList<EventModel> eventList, DateTime startDate)
         {
-
             eventList = eventList
                 .Where(ev => ev.Attributes.new_eucstartdate.ToString("MMMM yyyy") == startDate.ToString("MMMM yyyy"))
                 .OrderBy(ev => ev.Attributes.new_eucstarttime)
@@ -183,8 +189,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
         public const string requestMethod = "GET";
         private const string cacheKeywordEvents = "eventListCached";
         private const string cacheKeywordPolicyAreas = "policyAreasListCached";
-        private const string eventsServiceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/filteredshunghamevents";
-        private const string policyAreasServiceUrl = "http://shunghamdemo.crmportalconnector.com/SavedQueryService/Execute/shunghampolicyareas";
+        private const string eventsServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/filteredshunghamevents";      
+        private const string policyAreasServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/policyareas";
 
         #endregion
     }

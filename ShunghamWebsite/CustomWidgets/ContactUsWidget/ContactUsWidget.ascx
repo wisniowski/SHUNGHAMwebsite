@@ -7,7 +7,7 @@
         CssClass="text-center" Text="<%$ Resources: ShunghamResources, ContactTitle %>" />
     <asp:UpdatePanel runat="server" ID="updatePanel" ChildrenAsTriggers="true" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:Panel ID="wrapper" runat="server">
+            <asp:Panel ID="wrapper" runat="server" CssClass="double a">
                 <header class="vcard a">
                     <h3 class="mobile-hide">
                         <asp:Literal runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
@@ -35,8 +35,6 @@
                     </ul>
                 </header>
                 <div class="form-a">
-                    <h3 class="mobile-only">
-                        <asp:Literal runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
                     <p class="double a">
                         <span>
                             <label for="faa" class="hidden">First Name</label>

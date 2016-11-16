@@ -3,6 +3,7 @@ using System.Linq;
 using pavliks.PortalConnector;
 using SitefinityWebApp.CustomWidgets.EUCalendar;
 using SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget;
+using SitefinityWebApp.CustomWidgets.EUIssueTracker.Breadcrumb;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Localization;
@@ -34,6 +35,7 @@ namespace SitefinityWebApp
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName);
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName);
             RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName);
+            RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamEUSectionLayoutsName);
 
             //Register widgets
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
@@ -72,6 +74,12 @@ namespace SitefinityWebApp
             //Register EUIssueTracker widgets
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
               "~/CustomWidgets/EUIssueTracker/NavigationWidget/NavigationWidget.ascx", "Navigation Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
+               typeof(CustomBreadcrumb).AssemblyQualifiedName, "Custom Breadcrumb Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
+              "~/CustomWidgets/EUIssueTracker/EUDossierGridWidget/EUDossierGridWidget.ascx", "Dossier Grid Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
+              "~/CustomWidgets/EUIssueTracker/EUDossierDetailWidget/EUDossierDetailWidget.ascx", "Dossier Detail Widget");
 
             //Register Layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
@@ -80,6 +88,10 @@ namespace SitefinityWebApp
                 Installer.layoutControlTypeName, "InfoWidget_ThreeColumns", "~/CustomLayouts/InfoWidget_ThreeColumns.ascx");
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
                 Installer.layoutControlTypeName, "InfoWidget_TwoColumns", "~/CustomLayouts/InfoWidget_TwoColumns.ascx");
+
+            //Register EUSection layout controls
+            RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamEUSectionLayoutsName,
+                Installer.layoutControlTypeName, "OneColumnEUContent", "~/CustomLayouts/EUContent_OneColumn.ascx");
         }
 
         private static void RegisterSectionInBackend(string toolboxName, string sectionName)
@@ -149,6 +161,7 @@ namespace SitefinityWebApp
         private const string pageControlsToolboxName = "PageControls";
         private const string pageLayoutsToolboxName = "PageLayouts";
         private const string ShunghamLayoutsName = "ShunghamLayouts";
+        private const string ShunghamEUSectionLayoutsName = "ShunghamEUSectionLayouts";
         private const string ShunghamControlsSectionName = "ShunghamControls";
         private const string EUCalendarControlsSectionName = "EUCalendarControls";
         private const string EUIssueTrackerControlsSectionName = "EUIssueTrackerControls";

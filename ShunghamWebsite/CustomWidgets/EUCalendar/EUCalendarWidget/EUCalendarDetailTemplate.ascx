@@ -8,10 +8,10 @@
             <div id="date" runat="server"></div>
             <ul>
                 <li>
-                    <asp:LinkButton runat="server" ID="prev">Previous month</asp:LinkButton>
+                    <asp:HyperLink runat="server" ID="prev">Previous month</asp:HyperLink>
                 </li>
                 <li>
-                    <asp:LinkButton runat="server" ID="next">Next month</asp:LinkButton>
+                    <asp:HyperLink runat="server" ID="next">Next month</asp:HyperLink>
                 </li>
             </ul>
         </li>
@@ -40,7 +40,8 @@
                     <telerik:PersistenceSetting ControlID="policyAreasTreeView" />
                 </PersistenceSettings>
             </telerik:RadPersistenceManager>
-            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" EnableEmbeddedSkins="false" ShowLineImages="false">
+            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight"
+                EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false" ShowLineImages="false">
             </telerik:RadTreeView>
         </li>
     </ul>

@@ -10,6 +10,11 @@
     padding: 0;
 }
 
+/*Sitefinity backend fix*/
+body.sfPageEditor {
+    font-size: 35%;
+}
+
 *, :before, :after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -766,7 +771,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
             cursor: pointer;
         }
 
-            #aside > ul > li > ul > li.active > a, #aside ul li a:hover {
+            #aside > ul > li > ul > li.active > a, #aside .rtSelected .rtIn, #aside ul li a:hover, #aside ul li .rtIn:hover {
                 color: #c80000;
             }
 
@@ -950,15 +955,26 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     left: 0;
 }
 
+#aside .rtUL {
+    padding: 18px 50px 18px 120px;
+    font-size: .81818181818em;
+}
+
+#aside .rtUL .rtIn {
+    display: inline-block;
+    cursor: pointer;
+}
+
 #aside > ul > li > ul > li {
     font-size: .81818181818em;
 }
 
-    #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label {
-        padding: 13px 0;
+    #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label, #aside .rtUL .rtIn {
+        padding: 10px 0;
     }
 
-    #aside > ul > li > ul > li.active > a:after {
+    #aside > ul > li > ul > li.active > a:after,
+    #aside .rtSelected span.rtIn:after{
         content: "\e90a";
         display: inline-block;
         top: -2px;
@@ -970,7 +986,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     }
 
     #aside > ul > li > ul > li > label {
-        padding-left: 37px;
+        padding-left: 33px;
     }
 
         #aside > ul > li > ul > li > label .input {
@@ -1403,6 +1419,9 @@ p.double {
     }
 
 .module-c {
+    float: right;
+    width: 100%;
+    padding: 50px 0 0;
 }
 
     .module-c > * {
@@ -1461,6 +1480,7 @@ p.double {
 
         .module-c header h1, .module-c header h2, .module-c h3, .module-c h4, .module-c h5, .module-c h6 {
             font-size: 3em;
+            color: #333;
         }
 
             .module-c h1 .no, .module-c h2 .no, .module-c h3 .no, .module-c h4 .no, .module-c h5 .no, .module-c h6 .no {
@@ -1486,6 +1506,7 @@ p.double {
     }
 
     .module-c .list-h {
+        margin-bottom: -30px;
     }
 
         .module-c .list-h:first-child {
@@ -1495,10 +1516,6 @@ p.double {
             .module-c .list-h:first-child > li:first-child {
                 border-top-width: 0;
             }
-
-        .module-c .list-h:last-child {
-            margin-bottom: -30px;
-        }
 
     .module-c .size-b {
         margin-bottom: 22px;
@@ -3568,6 +3585,19 @@ figure:first-child, * + .float-left, * + .float-right, .news-a:first-child, h1:f
     margin-bottom: 30px;
 }
 
+.checks input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    display: block;
+    position: absolute;
+    left: 0;
+    border-radius: 20px;
+    border: 1px solid #333;
+    background: #fff;
+    cursor: pointer;
+}
+
 /*! Warnings --------- */
 p.lt-ie9 {
     position: fixed;
@@ -4075,6 +4105,10 @@ svg:not(:root) {
                         height: 8px;
                         margin: -4px 0 0 -4px;
                     }
+    
+    #aside .rtUL {
+        padding: 18px 50px 18px 70px;
+    }
 
     html.a #root {
         padding-top: 89px;
@@ -4131,6 +4165,10 @@ svg:not(:root) {
             margin-right: 4px;
             line-height: 30px;
         }
+
+        .checks input[type="radio"]{
+        top: 8px;
+    }
 }
 
 @media only screen and (max-width: 100em) { /* 1600 */
@@ -4307,7 +4345,7 @@ svg:not(:root) {
             padding: 10px 20px;
         }
 
-            #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label {
+            #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label, #aside .rtUL .rtIn {
                 padding: 8px 0;
             }
 
@@ -4324,6 +4362,10 @@ svg:not(:root) {
                     width: 18px;
                     height: 18px;
                 }
+
+    #aside .rtUL{
+        padding: 10px 50px 18px 46px;
+    }
 
     html.a {
     }
@@ -4587,6 +4629,12 @@ svg:not(:root) {
         -o-transform: none;
         -ms-transform: none;
         transform: none;
+    }
+
+    .checks input[type="radio"]{
+        width: 18px;
+        height: 18px;
+        top: 7px;
     }
 }
 
@@ -5070,6 +5118,10 @@ svg:not(:root) {
 
     #aside.a > ul > li.toggle > a {
         box-shadow: 0 0 4px rgba(0,0,0,.2);
+    }
+
+    #aside .rtUL {
+        padding: 10px 50px 18px 60px;
     }
 
     #content {
@@ -6318,6 +6370,13 @@ svg:not(:root) {
         bottom: inherit;
         right: inherit;
     }
+
+    .checks input[type="radio"]{
+        width: 16px;
+        height: 16px;
+        left: 34px;
+        top: 7px;
+    }
 }
 
 @media only screen and (max-width: 31.25em) { /* 500 */
@@ -6410,19 +6469,6 @@ svg:not(:root) {
 
 
 /* Fix for EUCalendar sort by radio buttons */
-
-.checks input[type="radio"] {
-    width: 20px;
-    height: 20px;
-    top: 25px;
-    display: block;
-    position: absolute;
-    left: 0;
-    border-radius: 20px;
-    border: 1px solid #333;
-    background: #fff;
-    cursor: pointer;
-}
 
 .atc-style-blue .atcb-list,
 .atc-style-blue .atcb-item {

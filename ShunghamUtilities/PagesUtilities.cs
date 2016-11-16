@@ -19,7 +19,8 @@ namespace ShunghamUtilities
             PageManager pageManager = PageManager.GetManager();
 
             IQueryable<PageNode> pagesPublished = pageManager.GetPageNodes()
-                .Where(pt => pt.Parent.Title == frontendPagesParentName && pt.ShowInNavigation == shownInNavigation);
+                .Where(pt => pt.Parent.Title == frontendPagesParentName && pt.ShowInNavigation == shownInNavigation
+                && pt.IsDeleted == false);
 
             return pagesPublished;
         }
