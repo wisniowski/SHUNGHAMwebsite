@@ -71,16 +71,20 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
                     var parsedJson = JsonConvert.DeserializeObject<List<EventModel>>(stringValue);
 
                     var events = parsedJson;
+                    //combines policy areas into a comma-separated list
                     eventList = GroupEventsByPolicyArea(events);
 
-                    //TODO: extract this in a config
-                    var cacheExpirationTime = 20;
-                    CacheManager.Add(
-                        cacheKeywordEvents,
-                        eventList,
-                        CacheItemPriority.Normal,
-                        null,
-                        new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    if (eventList != null && eventList.Count > 0)
+                    {
+                        //TODO: extract this in a config
+                        var cacheExpirationTime = 20;
+                        CacheManager.Add(
+                            cacheKeywordEvents,
+                            eventList,
+                            CacheItemPriority.Normal,
+                            null,
+                            new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    }
 
                     return eventList;
                 }
@@ -115,14 +119,17 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
 
                     policyAreasList = parsedJson;
 
-                    //TODO: extract this in a config
-                    var cacheExpirationTime = 20;
-                    CacheManager.Add(
-                        cacheKeywordPolicyAreas,
-                        policyAreasList,
-                        CacheItemPriority.Normal,
-                        null,
-                        new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    if (policyAreasList != null && policyAreasList.Count > 0)
+                    {
+                        //TODO: extract this in a config
+                        var cacheExpirationTime = 20;
+                        CacheManager.Add(
+                            cacheKeywordPolicyAreas,
+                            policyAreasList,
+                            CacheItemPriority.Normal,
+                            null,
+                            new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    }
 
                     return policyAreasList;
                 }

@@ -158,19 +158,19 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
-        protected virtual LinkButton Prev
+        protected virtual HyperLink PrevLink
         {
             get
             {
-                return this.Container.GetControl<LinkButton>("prev", false);
+                return this.Container.GetControl<HyperLink>("prev", false);
             }
         }
 
-        protected virtual LinkButton Next
+        protected virtual HyperLink NextLink
         {
             get
             {
-                return this.Container.GetControl<LinkButton>("next", false);
+                return this.Container.GetControl<HyperLink>("next", false);
             }
         }
 
@@ -328,28 +328,23 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         /// <inheritdoc />
         protected override void InitializeControls(GenericContainer container)
         {
+            RouteHelper.SetUrlParametersResolved();
+
             if (!Page.IsPostBack)
             {
                 HttpContext.Current.Session[dateKey] = DateTime.Now;
 
                 RadPersistenceManager.StorageProviderKey = cookieName;
                 RadPersistenceManager.StorageProvider = new CookieStorageProvider(cookieName);
-            }
 
-            if (HttpContext.Current.Session[dateKey] != null)
-            {
-                var date = (DateTime)HttpContext.Current.Session[dateKey];
-                this.eventList = EventsControlsHelper.GetEventsList()
-                    .OrderEventsCollection(date);
+                BindDateLinks();
+                FilterEventsByDate();
             }
 
             this.policyAreasList = EventsControlsHelper.GetPolicyAreasList();
 
-            this.Date.InnerText = DateTime.Now.ToString(eventsDateFormat);
 
             this.SearchButton.ServerClick += SearchButton_Click;
-            this.Prev.Click += Prev_Click;
-            this.Next.Click += Next_Click;
 
             if (this.IsDetailsMode)
             {
@@ -361,34 +356,46 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             }
         }
 
-        protected void Prev_Click(object sender, EventArgs e)
+        private void BindDateLinks()
         {
-            if (!this.IsDetailsMode)
-            {
-                var currentDate = ((DateTime)(HttpContext.Current.Session[dateKey])).AddMonths(-1);
-                HttpContext.Current.Session[dateKey] = currentDate;
-                this.Date.InnerText = currentDate.ToString(eventsDateFormat);
+            DateTime prevDate = DateTime.Now.AddMonths(-1);
+            DateTime nextDate = DateTime.Now.AddMonths(1);
 
-                this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate);
-                this.EventsList.DataSource = this.eventList;
-                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-                this.EventsList.DataBind();
-            }
+            var selectedDate = this.GetDateByUrlParams();
+
+            prevDate = selectedDate.AddMonths(-1);
+            nextDate = selectedDate.AddMonths(1);
+
+            var pageUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+            this.PrevLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, prevDate.ToString("yyyy"), prevDate.ToString("MMMM"));
+            this.NextLink.NavigateUrl = string.Format("{0}/{1}/{2}", pageUrl, nextDate.ToString("yyyy"), nextDate.ToString("MMMM"));
         }
 
-        protected void Next_Click(object sender, EventArgs e)
+        private void FilterEventsByDate()
         {
-            if (!this.IsDetailsMode)
-            {
-                var currentDate = ((DateTime)(HttpContext.Current.Session[dateKey])).AddMonths(1);
-                HttpContext.Current.Session[dateKey] = currentDate;
-                this.Date.InnerText = currentDate.ToString(eventsDateFormat);
+            var selectedDate = this.GetDateByUrlParams();
+            this.Date.InnerText = selectedDate.ToString(eventsDateFormat);
+            this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(selectedDate);
 
-                this.eventList = EventsControlsHelper.GetEventsList().OrderEventsCollection(currentDate);
-                this.EventsList.DataSource = this.eventList;
-                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-                this.EventsList.DataBind();
+            this.EventsList.DataSource = this.eventList;
+            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+            this.EventsList.DataBind();
+        }
+
+        private DateTime GetDateByUrlParams()
+        {
+            var urlParams = this.GetUrlParameters();
+            if (urlParams != null && urlParams.Count() == 2)
+            {
+                var year = urlParams[0];
+                var month = urlParams[1];
+                int selectedMonth = DateTime.ParseExact(month, "MMMM", CultureInfo.InvariantCulture).Month;
+                int selectedYear = DateTime.ParseExact(year, "yyyy", CultureInfo.InvariantCulture).Year;
+                var selectedDate = new DateTime(selectedYear, selectedMonth, 1);
+                return selectedDate;
             }
+
+            return DateTime.Now;
         }
 
         protected void SearchButton_Click(object sender, EventArgs e)
