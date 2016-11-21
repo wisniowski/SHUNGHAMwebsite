@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Caching;
@@ -165,8 +166,51 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         internal static IList<EUDossierModel> GetDossiersFromMSDynamics()
         {
             IList<EUDossierModel> dossiersList = new List<EUDossierModel>();
+            Stopwatch sw = Stopwatch.StartNew();
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(dossierServiceUrl);
+            IList<string> serviceUrls = new List<string>();
+            var parsedJson = new List<EUDossierModel>();
+            for (int i = 1; i < 18; i++)
+            {
+                serviceUrls.Add(string.Format("{0}/{1}/{2}", dossierServiceUrl, i, 1000));
+            }
+            var tasks = serviceUrls.Select(GetAsync).ToArray();
+            var completed = Task.Factory.ContinueWhenAll(tasks,
+                                completedTasks =>
+                                {
+                                    foreach (var result in completedTasks.Select(t => t.Result))
+                                    {
+                                        parsedJson.AddRange(JsonConvert.DeserializeObject<List<EUDossierModel>>(result));
+                                    }
+                                });
+            completed.Wait();
+
+            //anything that follows gets executed after all urls have finished downloading
+            var dossiers = parsedJson;
+            Log.Write(string.Format("Total number of dossier updates: {0}", dossiers.Count), ConfigurationPolicy.Trace);
+            dossiersList = dossiers.GetLatestUpdatedDossiersOnly();
+
+            if (dossiersList != null && dossiersList.Count > 0)
+            {
+                //TODO: extract this in a config
+                var cacheExpirationTime = 20;
+                CacheManager.Add(
+                    cacheKeywordDossiers,
+                    dossiersList,
+                    CacheItemPriority.Normal,
+                    null,
+                    new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+            }
+            sw.Stop();
+            Log.Write(string.Format("Dossiers request took {0}", sw.Elapsed), ConfigurationPolicy.Trace);
+
+            return dossiersList;
+        }
+
+        public static Task<string> GetAsync(string url)
+        {
+            var tcs = new TaskCompletionSource<string>();
+            var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = requestMethod;
             request.ContentType = requestType;
             request.UseDefaultCredentials = true;
@@ -174,43 +218,29 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             request.Credentials = CredentialCache.DefaultCredentials;
             request.Proxy = null;
             request.ServicePoint.Expect100Continue = false;
-
             try
             {
-                Stopwatch sw = Stopwatch.StartNew();
-                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                request.BeginGetResponse(iar =>
                 {
-                    StreamReader reader = new StreamReader(response.GetResponseStream());
-                    string stringValue = reader.ReadToEnd();
-                    reader.Close();
-
-                    var parsedJson = JsonConvert.DeserializeObject<List<EUDossierModel>>(stringValue);
-
-                    var dossiers = parsedJson;
-                    dossiersList = dossiers.GetLatestUpdatedDossiersOnly();
-
-                    if (dossiersList != null && dossiersList.Count > 0)
+                    HttpWebResponse response = null;
+                    try
                     {
-                        //TODO: extract this in a config
-                        var cacheExpirationTime = 20;
-                        CacheManager.Add(
-                            cacheKeywordDossiers,
-                            dossiersList,
-                            CacheItemPriority.Normal,
-                            null,
-                            new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                        response = (HttpWebResponse)request.EndGetResponse(iar);
+                        using (var reader = new StreamReader(response.GetResponseStream()))
+                        {
+                            tcs.SetResult(reader.ReadToEnd());
+                        }
                     }
-                    sw.Stop();
-                    Log.Write(string.Format("Dossiers request took {0}", sw.Elapsed), ConfigurationPolicy.Trace);
-
-                    return dossiersList;
-                }
+                    catch (Exception exc) { tcs.SetException(exc); }
+                    finally { if (response != null) response.Close(); }
+                }, null);
             }
-            catch (Exception ex)
+            catch (Exception exc)
             {
-                Log.Write(ex);
-                return dossiersList;
+                Log.Write(exc.Message, ConfigurationPolicy.ErrorLog);
             }
+
+            return tcs.Task;
         }
 
         /// <summary>
