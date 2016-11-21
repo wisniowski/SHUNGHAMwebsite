@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,7 @@ using System.Web;
 using Newtonsoft.Json;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Caching;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Caching.Expirations;
+using Telerik.Microsoft.Practices.EnterpriseLibrary.Logging;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Services;
 using Telerik.Sitefinity.Web;
@@ -164,15 +166,18 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         {
             IList<EUDossierModel> dossiersList = new List<EUDossierModel>();
 
-            WebRequest request = (WebRequest)WebRequest.Create(dossierServiceUrl);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(dossierServiceUrl);
             request.Method = requestMethod;
             request.ContentType = requestType;
             request.UseDefaultCredentials = true;
             request.PreAuthenticate = true;
             request.Credentials = CredentialCache.DefaultCredentials;
+            request.Proxy = null;
+            request.ServicePoint.Expect100Continue = false;
 
             try
             {
+                Stopwatch sw = Stopwatch.StartNew();
                 using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
                 {
                     StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -195,6 +200,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
                             null,
                             new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
                     }
+                    sw.Stop();
+                    Log.Write(string.Format("Dossiers request took {0}", sw.Elapsed), ConfigurationPolicy.Trace);
 
                     return dossiersList;
                 }
