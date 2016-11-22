@@ -170,9 +170,9 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
 
             IList<string> serviceUrls = new List<string>();
             var parsedJson = new List<EUDossierModel>();
-            for (int i = 1; i < 18; i++)
+            for (int i = 1; i < 4; i++)
             {
-                serviceUrls.Add(string.Format("{0}/{1}/{2}", dossierServiceUrl, i, 1000));
+                serviceUrls.Add(string.Format("{0}/{1}/{2}", dossierServiceUrl, i, 6000));
             }
             var tasks = serviceUrls.Select(GetAsync).ToArray();
             var completed = Task.Factory.ContinueWhenAll(tasks,
