@@ -75,9 +75,13 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
                 {
                     button.CssClass = "c";
                 }
-                else
+                else if (btnBackground == "Blue")
                 {
                     button.CssClass = "b";
+                }
+                else
+                {
+                    button.CssClass = "";
                 }
             }
 

@@ -45,6 +45,16 @@
     </div>
     <div class="sfExample"></div>
     </li>
+
+    <li class="sfFormCtrl">
+        <asp:Label runat="server" AssociatedControlID="FirstBtnBackgroundSelector" CssClass="sfTxtLbl">First Button Background color:</asp:Label>
+        <asp:DropDownList ID="FirstBtnBackgroundSelector" Width="60%" CssClass="sfTxt" runat="server" ClientIDMode="Static">
+            <asp:ListItem Text="Red" Selected="True" />
+            <asp:ListItem Text="White" />
+            <asp:ListItem Text="Blue" />
+        </asp:DropDownList>
+        <div class="sfExample">Default Value: Red;</div>
+    </li>
     
     <li class="sfFormCtrl">
     <asp:Label runat="server" AssociatedControlID="SecondButtonText" CssClass="sfTxtLbl">Second Button Text</asp:Label>
@@ -67,6 +77,16 @@
             AllowExternalPagesSelection="false" AllowMultipleSelection="false" />
     </div>
     <div class="sfExample"></div>
+    </li>
+
+    <li class="sfFormCtrl">
+        <asp:Label runat="server" AssociatedControlID="SecondBtnBackgroundSelector" CssClass="sfTxtLbl">Second Button Background color:</asp:Label>
+        <asp:DropDownList ID="SecondBtnBackgroundSelector" Width="60%" CssClass="sfTxt" runat="server" ClientIDMode="Static">
+            <asp:ListItem Text="Red" Selected="True" />
+            <asp:ListItem Text="White" />
+            <asp:ListItem Text="Blue" />
+        </asp:DropDownList>
+        <div class="sfExample">Default Value: Red;</div>
     </li>
     
 </ol>

@@ -138,7 +138,10 @@ SitefinityWebApp.CustomWidgets.WhyJoinWidget.Designer.WhyJoinWidgetDesigner.prot
                 }
             });
             pagesSelectorFirstButtonLandingPage.set_selectedItems([{ Id: controlData.FirstButtonLandingPage}]);
-        }        
+        }
+
+        /* RefreshUI FirstButtonBackground */
+        jQuery("#FirstBtnBackgroundSelector").val(controlData.FirstButtonBackground);
 
         /* RefreshUI SecondButtonText */
         jQuery(this.get_secondButtonText()).val(controlData.SecondButtonText);
@@ -157,7 +160,10 @@ SitefinityWebApp.CustomWidgets.WhyJoinWidget.Designer.WhyJoinWidgetDesigner.prot
                 }
             });
             pagesSelectorSecondButtonLandingPage.set_selectedItems([{ Id: controlData.SecondButtonLandingPage}]);
-        }        
+        }
+
+        /* RefreshUI SecondButtonBackground */
+        jQuery("#SecondBtnBackgroundSelector").val(controlData.SecondButtonBackground);
     },
 
     /* Called when the "Save" button is clicked. Here you can transfer the settings from the designer to the control */
@@ -173,12 +179,14 @@ SitefinityWebApp.CustomWidgets.WhyJoinWidget.Designer.WhyJoinWidgetDesigner.prot
         /* ApplyChanges FirstButtonText */
         controlData.FirstButtonText = jQuery(this.get_firstButtonText()).val();
 
-        /* ApplyChanges FirstButtonLandingPage */
+        /* ApplyChanges FirstButtonBackground */
+        controlData.FirstButtonBackground = jQuery("#FirstBtnBackgroundSelector").val();
 
         /* ApplyChanges SecondButtonText */
         controlData.SecondButtonText = jQuery(this.get_secondButtonText()).val();
 
-        /* ApplyChanges SecondButtonLandingPage */
+        /* ApplyChanges FirstButtonBackground */
+        controlData.SecondButtonBackground = jQuery("#SecondBtnBackgroundSelector").val();
     },
 
     /* --------------------------------- event handlers ---------------------------------- */
