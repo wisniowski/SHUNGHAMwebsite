@@ -987,6 +987,7 @@
     <Compile Include="CustomWidgets\TestimonialsRotatorWidget\TestimonialsRotatorWidget.ascx.designer.cs">
       <DependentUpon>TestimonialsRotatorWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\WhyJoinWidget\Designer\WhyJoinWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\WhyJoinWidget\WhyJoinWidget.ascx.cs">
       <DependentUpon>WhyJoinWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1064,6 +1065,8 @@
     <Content Include="CustomWidgets\OurProductsWidget\OurProductsWidget.ascx" />
     <Content Include="CustomWidgets\OurTeamWidget\OurTeamWidget.ascx" />
     <Content Include="CustomWidgets\TestimonialsRotatorWidget\TestimonialsRotatorWidget.ascx" />
+    <Content Include="CustomWidgets\WhyJoinWidget\Designer\WhyJoinWidgetDesigner.ascx" />
+    <Content Include="CustomWidgets\WhyJoinWidget\Designer\WhyJoinWidgetDesigner.js" />
     <Content Include="CustomWidgets\WhyJoinWidget\WhyJoinWidget.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
