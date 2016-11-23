@@ -66,6 +66,8 @@ namespace SitefinityWebApp
                "~/CustomWidgets/JobOpeningsWidget/JobOpeningsWidget.ascx", "Job Openings Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/FeaturesWidget/FeaturesWidget.ascx", "Features Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/WhyJoinWidget/WhyJoinWidget.ascx", "Why Join Widget");
 
             //Register EUCalendar widgets
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName, 
