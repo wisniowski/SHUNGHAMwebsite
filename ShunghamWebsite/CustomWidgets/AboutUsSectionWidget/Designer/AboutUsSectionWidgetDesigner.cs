@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.Web;
 using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.Pages;
+using Telerik.Sitefinity.Web.UI.Fields;
 
 namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget.Designer
 {
@@ -58,22 +59,22 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget.Designer
         /// <summary>
         /// Gets the control that is bound to the Title property
         /// </summary>
-        protected virtual Control Title
+        protected virtual HtmlField Title
         {
             get
             {
-                return this.Container.GetControl<Control>("Title", true);
+                return this.Container.GetControl<HtmlField>("Title", true);
             }
         }
 
         /// <summary>
         /// Gets the control that is bound to the Content property
         /// </summary>
-        protected virtual Control Content
+        protected virtual HtmlField Content
         {
             get
             {
-                return this.Container.GetControl<Control>("Content", true);
+                return this.Container.GetControl<HtmlField>("Content", true);
             }
         }
 

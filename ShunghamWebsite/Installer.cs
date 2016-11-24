@@ -32,44 +32,47 @@ namespace SitefinityWebApp
             Res.RegisterResource<ShunghamResources>();
 
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName);
+            RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.ShunghamFormsSectionName);
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName);
             RegisterSectionInBackend(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName);
             RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName);
             RegisterSectionInBackend(Installer.pageLayoutsToolboxName, Installer.ShunghamEUSectionLayoutsName);
 
-            //Register widgets
+            //Register widgets in Shungham Controls section
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/HeaderWidget/HeaderWidget.ascx", "Header Widget");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/FooterWidget/FooterWidget.ascx", "Footer Widget");
+               "~/CustomWidgets/AboutUsSectionWidget/AboutUsSectionWidget.ascx", "About Us Section Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/BannerWidget/BannerWidget.ascx", "Banner Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/TestimonialsRotatorWidget/TestimonialsRotatorWidget.ascx", "Testimonials Rotator Widget");
+              "~/CustomWidgets/ButtonWidget/ButtonWidget.ascx", "Button Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/CompaniesLogosRotatorWidget/CompaniesLogosRotatorWidget.ascx", "Companies Logos Rotator Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/FeaturesWidget/FeaturesWidget.ascx", "Features Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/FooterWidget/FooterWidget.ascx", "Footer Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/HeaderWidget/HeaderWidget.ascx", "Header Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/InfoWidget/InfoWidget.ascx", "Info Widget");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/OurProductsWidget/OurProductsWidget.ascx", "Our Products Widget");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/ContactUsWidget/ContactUsWidget.ascx", "Contact Us Form");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-              "~/CustomWidgets/FreeTrialWidget/FreeTrialWidget.ascx", "Free Trial Form");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-              "~/CustomWidgets/JobApplicationWidget/JobApplicationWidget.ascx", "Job Application Form");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/OurTeamWidget/OurTeamWidget.ascx", "Our Team Widget");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/ButtonWidget/ButtonWidget.ascx", "Button Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/JobOpeningsWidget/JobOpeningsWidget.ascx", "Job Openings Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/FeaturesWidget/FeaturesWidget.ascx", "Features Widget");
+               "~/CustomWidgets/OurProductsWidget/OurProductsWidget.ascx", "Our Products Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/OurTeamWidget/OurTeamWidget.ascx", "Our Team Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
+               "~/CustomWidgets/TestimonialsRotatorWidget/TestimonialsRotatorWidget.ascx", "Testimonials Rotator Widget");  
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
                "~/CustomWidgets/WhyJoinWidget/WhyJoinWidget.ascx", "Why Join Widget");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamControlsSectionName,
-               "~/CustomWidgets/AboutUsSectionWidget/AboutUsSectionWidget.ascx", "About Us Section Widget");
+
+            //Register widgets in Shungham Forms section
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamFormsSectionName,
+               "~/CustomWidgets/ContactUsWidget/ContactUsWidget.ascx", "Contact Us Form");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamFormsSectionName,
+              "~/CustomWidgets/FreeTrialWidget/FreeTrialWidget.ascx", "Free Trial Form");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.ShunghamFormsSectionName,
+              "~/CustomWidgets/JobApplicationWidget/JobApplicationWidget.ascx", "Job Application Form");
 
             //Register EUCalendar widgets
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUCalendarControlsSectionName, 
@@ -77,21 +80,21 @@ namespace SitefinityWebApp
 
             //Register EUIssueTracker widgets
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
-              "~/CustomWidgets/EUIssueTracker/NavigationWidget/NavigationWidget.ascx", "Navigation Widget");
-            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
                typeof(CustomBreadcrumb).AssemblyQualifiedName, "Custom Breadcrumb Widget");
+            RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
+              "~/CustomWidgets/EUIssueTracker/EUDossierDetailWidget/EUDossierDetailWidget.ascx", "Dossier Detail Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
               "~/CustomWidgets/EUIssueTracker/EUDossierGridWidget/EUDossierGridWidget.ascx", "Dossier Grid Widget");
             RegisterControlInToolbox(Installer.pageControlsToolboxName, Installer.EUIssueTrackerControlsSectionName,
-              "~/CustomWidgets/EUIssueTracker/EUDossierDetailWidget/EUDossierDetailWidget.ascx", "Dossier Detail Widget");
+              "~/CustomWidgets/EUIssueTracker/NavigationWidget/NavigationWidget.ascx", "Navigation Widget");
 
-            //Register Layout controls
-            RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
-                Installer.layoutControlTypeName, "OneColumnGreyBGR", "~/CustomLayouts/OneColumnGreyBGR.ascx");
+            //Register Layout controls  
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
                 Installer.layoutControlTypeName, "InfoWidget_ThreeColumns", "~/CustomLayouts/InfoWidget_ThreeColumns.ascx");
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
                 Installer.layoutControlTypeName, "InfoWidget_TwoColumns", "~/CustomLayouts/InfoWidget_TwoColumns.ascx");
+            RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamLayoutsName,
+                Installer.layoutControlTypeName, "OneColumnGreyBGR", "~/CustomLayouts/OneColumnGreyBGR.ascx");
 
             //Register EUSection layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamEUSectionLayoutsName,
@@ -164,11 +167,12 @@ namespace SitefinityWebApp
 
         private const string pageControlsToolboxName = "PageControls";
         private const string pageLayoutsToolboxName = "PageLayouts";
-        private const string ShunghamLayoutsName = "ShunghamLayouts";
-        private const string ShunghamEUSectionLayoutsName = "ShunghamEUSectionLayouts";
-        private const string ShunghamControlsSectionName = "ShunghamControls";
-        private const string EUCalendarControlsSectionName = "EUCalendarControls";
-        private const string EUIssueTrackerControlsSectionName = "EUIssueTrackerControls";
+        private const string ShunghamLayoutsName = "Shungham Layouts";
+        private const string ShunghamEUSectionLayoutsName = "ShunghamEUSection Layouts";
+        private const string ShunghamControlsSectionName = "Shungham Controls";
+        private const string ShunghamFormsSectionName = "Shungham Forms";
+        private const string EUCalendarControlsSectionName = "EUCalendar Controls";
+        private const string EUIssueTrackerControlsSectionName = "EUIssueTracker Controls";
 
         private static readonly string layoutControlTypeName = typeof(LayoutControl).AssemblyQualifiedName;
 

@@ -1,10 +1,5 @@
-﻿using ShunghamUtilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System;
+using ShunghamUtilities;
 
 namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
 {
@@ -18,6 +13,11 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
         public string TextBackgroundColor { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
+        {
+            this.BindWidget();
+        }
+
+        private void BindWidget()
         {
             if (!string.IsNullOrEmpty(this.Title))
             {
@@ -39,11 +39,11 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
             {
                 if (this.ImageAlignment == "Left")
                 {
-                    this.imageWrapper.Attributes.Add("class", "float-left");
+                    this.imageWrapper.Attributes.Add("class", leftAlignmentCSSClass);
                 }
                 else
                 {
-                    this.imageWrapper.Attributes.Add("class", "float-right");
+                    this.imageWrapper.Attributes.Add("class", rightAlignmentCSSClass);
                 }
             }
 
@@ -51,9 +51,19 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
             {
                 if (this.TextBackgroundColor == "White")
                 {
-                    this.contentWrapper.Attributes.Add("class", "list-a");
+                    this.contentWrapper.Style.Add("background-color", whiteBGRColorName);
+                    this.contentWrapper.Style.Add("padding", contentWrapperPaddingStyle);
                 }
             }
         }
+
+        #region Private fields and constants
+
+        private const string leftAlignmentCSSClass = "float-left";
+        private const string rightAlignmentCSSClass = "float-right";
+        private const string whiteBGRColorName = "white";
+        private const string contentWrapperPaddingStyle = "60px 80px 5px";
+
+        #endregion
     }
 }

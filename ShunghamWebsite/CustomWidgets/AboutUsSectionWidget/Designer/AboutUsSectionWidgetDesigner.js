@@ -110,10 +110,10 @@ SitefinityWebApp.CustomWidgets.AboutUsSectionWidget.Designer.AboutUsSectionWidge
         var controlData = this._propertyEditor.get_control(); /* JavaScript clone of your control - all the control properties will be properties of the controlData too */
 
         /* RefreshUI Title */
-        jQuery(this.get_title()).val(controlData.Title);
+        this.get_title().control.set_value(controlData.Title);
 
         /* RefreshUI Content */
-        jQuery(this.get_content()).val(controlData.Content);
+        this.get_content().control.set_value(controlData.Content);
 
         /* RefreshUI Image */
         this.get_selectedImage().innerHTML = controlData.Image;
@@ -149,10 +149,10 @@ SitefinityWebApp.CustomWidgets.AboutUsSectionWidget.Designer.AboutUsSectionWidge
         var controlData = this._propertyEditor.get_control();
 
         /* ApplyChanges Title */
-        controlData.Title = jQuery(this.get_title()).val();
+        controlData.Title = this.get_title().control.get_value();
 
         /* ApplyChanges Content */
-        controlData.Content = jQuery(this.get_content()).val();
+        controlData.Content = this.get_content().control.get_value();
 
         /* ApplyChanges Image */
         controlData.Image = this.get_selectedImage().innerHTML;
