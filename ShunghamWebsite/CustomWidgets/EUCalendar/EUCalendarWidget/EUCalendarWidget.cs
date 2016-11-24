@@ -406,24 +406,13 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         protected void SearchButton_Click(object sender, EventArgs e)
         {
-            var redirectLocation = string.Empty;
             var searchQuery = this.SearchBox.Text;
-            var currentUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
-            var urlParams = this.GetUrlParameterString(true);
+            var currentUri = this.Page.Request.Url;
+            var redirectLocation = currentUri.AbsoluteUri;
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                if (urlParams != null)
-                {
-                    redirectLocation = string.Format("{0}/{1}?search={2}", currentUrl, urlParams, searchQuery);
-                }
-                else
-                {
-                    redirectLocation = string.Format("{0}?search={1}", currentUrl, searchQuery);
-                }
-            }
-            if (searchQuery == string.Empty)
-            {
-                redirectLocation = currentUrl;
+                var values = new Dictionary<string, string> { { "search", searchQuery } };
+                redirectLocation = currentUri.ExtendQuery(values).AbsoluteUri;
             }
 
             HttpContext.Current.Response.Redirect(redirectLocation);
@@ -492,20 +481,16 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (queryStringParams != null && queryStringParams.Count > 0)
             {
                 this.FilterCollectionByPolicyAreas(queryStringParams);
-                this.eventList = this.FilterCollectionBySearchTerm(queryStringParams);
+                this.FilterCollectionBySearchTerm(queryStringParams);
             }
 
-            if (this.eventList.Count > 0)
-            {
-                this.EventsList.DataSource = this.eventList;
-                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-                this.EventsList.DataBind();
-            }
+            this.EventsList.DataSource = this.eventList;
+            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+            this.EventsList.DataBind();
         }
 
-        private IList<EventModel> FilterCollectionBySearchTerm(NameValueCollection queryStringParams)
+        private void FilterCollectionBySearchTerm(NameValueCollection queryStringParams)
         {
-            List<EventModel> eventMatches = new List<EventModel>();
             var searchTerm = queryStringParams["search"];
 
             if (!string.IsNullOrEmpty(searchTerm))
@@ -517,23 +502,17 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 searchTermCleaned = " " + searchTermCleaned + " ";
 
                 //search with spaces
-                eventMatches = this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTermCleaned.ToLower())).ToList();
+                this.eventList = this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTermCleaned.ToLower())).ToList();
 
                 //search by exact match in the titles
-                eventMatches.AddRange(this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList());
+                this.eventList = this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList();
 
                 //breakup phrase and search for any match on any word
-                eventMatches.AddRange(this.eventList.Where(e => searchTerm.Split(new char[] { ' ' },
-                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
-                eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' },
-                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
+                this.eventList = this.eventList.Where(e => searchTerm.Split(new char[] { ' ' },
+                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))).ToList();
+                this.eventList = this.eventList.Where(e => searchTerm.Split(new char[] { ' ' },
+                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))).ToList();
             }
-            else
-            {
-                return this.eventList;
-            }
-
-            return eventMatches.Distinct().ToList();
         }
 
         private void FilterCollectionByPolicyAreas(NameValueCollection queryStringParams)
