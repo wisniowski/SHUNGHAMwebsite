@@ -553,6 +553,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 this.DisplayBackendMessage();
             }
 
+            var queryStringParams = HttpContext.Current.Request.QueryString;
+
+            if (queryStringParams != null && queryStringParams.Count > 0)
+            {
+                this.FilterCollectionByPolicyAreas(queryStringParams);
+                this.FilterCollectionBySearchTerm(queryStringParams);
+            }
+
             string itemUrl = string.Empty;
             var urlParams = this.GetUrlParameters();
             if (urlParams.Count() == 1)
@@ -626,7 +634,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             {
                 if (policyAreaItem.Name == "All Policy Areas")
                 {
-                    if (this.Page.Request.QueryString.Count == 0 || this.Page.Request.QueryString.AllKeys.Contains("search"))
+                    if (this.Page.Request.QueryString.Count == 0 || !this.Page.Request.QueryString.AllKeys
+                        .Any(c => c.Contains("lc")))
                     {
                         e.Node.Checked = true;
                     }
