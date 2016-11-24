@@ -882,7 +882,6 @@
       <DependentUpon>ContactUsWidget.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.cs" />
-    <Compile Include="CustomWidgets\EUCalendar\CookieStorageProvider.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EUCalendarWidget\Designer\EUCalendarWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EventModel.cs" />
