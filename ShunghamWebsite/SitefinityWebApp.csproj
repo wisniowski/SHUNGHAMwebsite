@@ -842,6 +842,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureWebRole.cs" />
+    <Compile Include="CustomWidgets\AboutUsSectionWidget\AboutUsSectionWidget.ascx.cs">
+      <DependentUpon>AboutUsSectionWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\AboutUsSectionWidget\AboutUsSectionWidget.ascx.designer.cs">
+      <DependentUpon>AboutUsSectionWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomWidgets\BannerWidget\BannerWidget.ascx.cs">
       <DependentUpon>BannerWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1019,6 +1026,7 @@
     <Content Include="CustomResources\js\head.js" />
     <Content Include="CustomResources\js\mobile.js" />
     <Content Include="CustomResources\js\scripts.js" />
+    <Content Include="CustomWidgets\AboutUsSectionWidget\AboutUsSectionWidget.ascx" />
     <Content Include="CustomWidgets\BannerWidget\BannerWidget.ascx" />
     <Content Include="CustomWidgets\BannerWidget\Designer\BannerWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\BannerWidget\Designer\BannerWidgetDesigner.js" />
