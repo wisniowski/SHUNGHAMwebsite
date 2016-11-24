@@ -8,3 +8,10 @@
     <p class="link-a a c sticky" id="btnWrapper" runat="server">
     </p>
 </article>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('article.a ul').addClass('list-g');
+    });
+</script>
