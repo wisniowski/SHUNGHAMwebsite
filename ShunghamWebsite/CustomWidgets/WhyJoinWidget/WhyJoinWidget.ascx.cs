@@ -1,11 +1,6 @@
-﻿using ShunghamUtilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
+﻿using System;
 using System.Web.UI.WebControls;
+using ShunghamUtilities;
 
 namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
 {
@@ -28,16 +23,19 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
 
         private void BindWhyJoinWidget()
         {
+            //Set Title
             if (!string.IsNullOrEmpty(this.Title))
             {
                 this.TitleLtl.Text = this.Title;
             }
 
+            //Add Content
             if (!string.IsNullOrEmpty(this.Content))
             {
                 this.ContentLtl.Text = this.Content;
             }
 
+            //Add button
             if (!string.IsNullOrEmpty(this.FirstButtonText))
             {
                 HyperLink button = AddButton(this.FirstButtonText, this.FirstButtonLandingPage, this.FirstButtonBackground);
@@ -48,6 +46,7 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
                 }
             }
 
+            //Add button
             if (!string.IsNullOrEmpty(this.SecondButtonText))
             {
                 HyperLink button = AddButton(this.SecondButtonText, this.SecondButtonLandingPage, this.SecondButtonBackground);
@@ -59,6 +58,12 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
             }
         }
 
+        /// <summary>
+        /// Method for adding custom button.
+        /// </summary>
+        /// <param name="btnText">The button text.</param>
+        /// <param name="btnLandingPage">The button landing page.</param>
+        /// <param name="btnBackground">The button background color.</param>
         private HyperLink AddButton(string btnText, Guid btnLandingPage, string btnBackground)
         {
             HyperLink button = new HyperLink();
@@ -78,11 +83,11 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
             {
                 if (btnBackground == "White")
                 {
-                    button.CssClass = "c";
+                    button.CssClass = whiteBtnCssClass;
                 }
                 else if (btnBackground == "Blue")
                 {
-                    button.CssClass = "b";
+                    button.CssClass = blueBtnCssClass;
                 }
                 else
                 {
@@ -92,5 +97,11 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
 
             return button;
         }
+
+        #region Private fields and constants
+
+        private const string whiteBtnCssClass = "c";
+        private const string blueBtnCssClass = "b";
+        #endregion
     }
 }

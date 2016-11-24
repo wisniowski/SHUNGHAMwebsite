@@ -11,7 +11,6 @@
 
 <script type="text/javascript">
     $(function () {
-
         $('article.a ul').addClass('list-g');
     });
 </script>
