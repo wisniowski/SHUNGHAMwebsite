@@ -414,6 +414,10 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 var values = new Dictionary<string, string> { { "search", searchQuery } };
                 redirectLocation = currentUri.ExtendQuery(values).AbsoluteUri;
             }
+            else
+            {
+                redirectLocation = this.Page.Request.Url.AbsolutePath;
+            }
 
             HttpContext.Current.Response.Redirect(redirectLocation);
         }
