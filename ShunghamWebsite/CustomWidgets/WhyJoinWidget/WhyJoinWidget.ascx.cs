@@ -23,6 +23,11 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.BindWhyJoinWidget();
+        }
+
+        private void BindWhyJoinWidget()
+        {
             if (!string.IsNullOrEmpty(this.Title))
             {
                 this.TitleLtl.Text = this.Title;

@@ -2110,7 +2110,11 @@ h3.header-a, h4.header-a, h5.header-a, h6.header-a {
 
 
 /*! Content --------- */
-b, strong, .strong {
+b, strong {
+    font-weight: 900;
+}
+
+.strong {
     font-weight: 700;
 }
 
