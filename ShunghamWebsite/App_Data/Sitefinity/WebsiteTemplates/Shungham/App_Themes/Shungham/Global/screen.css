@@ -421,18 +421,6 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
             text-transform: none;
         }
 
-ul li:after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: -12px;
-    top: 9px;
-    width: 5px;
-    height: 5px;
-    border-radius: 9px;
-    background: #cb1010;
-}
-
 /*Fix for Sitefinity backend*/
 #sfPageContainer #nav {
     position: absolute;
@@ -2901,6 +2889,11 @@ h1 + .list-a, h2 + .list-a {
             top: 6px;
             width: 9px;
             height: 9px;
+            content: "";
+            display: block;
+            position: absolute;
+            border-radius: 9px;
+            background: #cb1010;
         }
 
 .list-h {
