@@ -34,12 +34,7 @@
         <li class="toggle sub">
             <a href="#">Policy Areas</a>
             <span class="toggle"></span>
-            <telerik:RadPersistenceManager runat="server" ID="RadPersistenceManager1">
-                <PersistenceSettings>
-                    <telerik:PersistenceSetting ControlID="policyAreasTreeView" />
-                </PersistenceSettings>
-            </telerik:RadPersistenceManager>
-            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight"
+            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight" CheckBoxes="true"
                 EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false" ShowLineImages="false">
             </telerik:RadTreeView>
         </li>
