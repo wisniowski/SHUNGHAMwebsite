@@ -1345,7 +1345,7 @@ p.double {
 
 .module-a {
     position: relative;
-    padding: 100px 0 85px;
+    padding: 85px 0 85px;
 }
 
     .module-a:before {
@@ -1358,7 +1358,6 @@ p.double {
     }
 
     .module-a .list-a, .module-a .list-a.a {
-        padding: 60px 80px 5px;
         background: #fff;
     }
 

@@ -51,7 +51,8 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
             {
                 if (this.TextBackgroundColor == "White")
                 {
-                    this.contentWrapper.Attributes.Add("class", "list-a");
+                    this.contentWrapper.Style.Add("background-color", "white");
+                    this.contentWrapper.Style.Add("padding", "60px 80px 5px");
                 }
             }
         }
