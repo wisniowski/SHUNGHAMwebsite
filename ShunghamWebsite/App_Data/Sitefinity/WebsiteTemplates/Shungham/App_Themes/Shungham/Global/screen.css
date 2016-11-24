@@ -6528,3 +6528,13 @@ svg:not(:root) {
     border-color: #c80000;
     background: #c80000;
 }
+
+/*Sitefinity Backend - Shungham Toolbox icon*/
+.ShunghamSectionIcon {
+    background-image: url(../../../../../../../favicon.ico) !important;
+    background-repeat: no-repeat;
+    background-position: 1px 4px;
+    display: block;
+    background-size: 15px;
+    text-indent: 20px;
+}
