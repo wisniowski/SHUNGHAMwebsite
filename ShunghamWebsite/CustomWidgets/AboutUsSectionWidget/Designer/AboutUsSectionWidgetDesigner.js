@@ -139,6 +139,9 @@ SitefinityWebApp.CustomWidgets.AboutUsSectionWidget.Designer.AboutUsSectionWidge
 
         /* RefreshUI ImageAlignment */
         jQuery("#AlignmentSelector").val(controlData.ImageAlignment);
+
+        /* RefreshUI TextBackgroundColor */
+        jQuery("#TextBackgroundColorSelector").val(controlData.TextBackgroundColor);
     },
 
     /* Called when the "Save" button is clicked. Here you can transfer the settings from the designer to the control */
@@ -156,6 +159,9 @@ SitefinityWebApp.CustomWidgets.AboutUsSectionWidget.Designer.AboutUsSectionWidge
 
         /* ApplyChanges ImageAlignment */
         controlData.ImageAlignment = jQuery("#AlignmentSelector").val();
+
+        /* ApplyChanges TextBackgroundColor */
+        controlData.TextBackgroundColor = jQuery("#TextBackgroundColorSelector").val();
     },
 
     /* --------------------------------- event handlers ---------------------------------- */

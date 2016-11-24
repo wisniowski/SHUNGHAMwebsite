@@ -22,6 +22,15 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget {
         protected global::System.Web.UI.WebControls.Literal TitleLtl;
         
         /// <summary>
+        /// contentWrapper control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl contentWrapper;
+        
+        /// <summary>
         /// imageWrapper control.
         /// </summary>
         /// <remarks>

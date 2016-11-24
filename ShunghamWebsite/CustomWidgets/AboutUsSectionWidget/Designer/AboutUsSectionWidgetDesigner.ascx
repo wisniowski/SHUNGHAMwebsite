@@ -51,6 +51,15 @@
         </asp:DropDownList>
         <div class="sfExample">Default value: Right;</div>
     </li>
+
+    <li class="sfFormCtrl">
+        <asp:Label runat="server" AssociatedControlID="TextBackgroundColorSelector" CssClass="sfTxtLbl">Text Background Color:</asp:Label>
+        <asp:DropDownList ID="TextBackgroundColorSelector" Width="60%" CssClass="sfTxt" runat="server" ClientIDMode="Static">
+            <asp:ListItem Text="None" />
+            <asp:ListItem Text="White" />
+        </asp:DropDownList>
+        <div class="sfExample">Default value: None;</div>
+    </li>
     
 </ol>
 </div>

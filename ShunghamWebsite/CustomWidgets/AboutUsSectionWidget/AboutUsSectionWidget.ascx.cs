@@ -46,6 +46,14 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
                     this.imageWrapper.Attributes.Add("class", "float-right");
                 }
             }
+
+            if (!string.IsNullOrEmpty(this.TextBackgroundColor))
+            {
+                if (this.TextBackgroundColor == "White")
+                {
+                    this.contentWrapper.Attributes.Add("class", "list-a");
+                }
+            }
         }
     }
 }
