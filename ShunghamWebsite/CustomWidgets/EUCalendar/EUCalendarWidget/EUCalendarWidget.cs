@@ -727,7 +727,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                             var urlParams = this.GetUrlParameters();
                             if (urlParams != null)
                             {
-                                if (urlParams.Count() > 2)
+                                if (urlParams.Count() >= 2)
                                 {
                                     var urlParamString = this.GetUrlParameterString(false);
                                     eventLinkControl.NavigateUrl = string.Format("{0}/{1}/{2}", detailPageUrl, urlParamString,
@@ -807,7 +807,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         public static string underscore = "_";
         public static string eventsDateFormat = "MMMM yyyy";
         private string backBtnDefaultDestination = string.Empty;
-        private static readonly string cookieName = "ShunghamCookie";
 
         #endregion
     }
