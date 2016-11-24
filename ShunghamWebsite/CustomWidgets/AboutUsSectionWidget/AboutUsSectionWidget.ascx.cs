@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShunghamUtilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
         public string Content { get; set; }
         public Guid Image { get; set; }
         public string ImageAlignment { get; set; }
-        public string BackgroundColor { get; set; }
+        public string TextBackgroundColor { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +27,24 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
             if (!string.IsNullOrEmpty(this.Content))
             {
                 this.ContentLtl.Text = this.Content;
+            }
+
+            if (this.Image != null && this.Image != Guid.Empty)
+            {
+                this.ImageControl.ImageUrl = LibrariesUtilities.GetMediaUrlByImageId(this.Image, true);
+                this.ImageControl.AlternateText = LibrariesUtilities.GetAltByImageId(this.Image);
+            }
+
+            if (!string.IsNullOrEmpty(this.ImageAlignment))
+            {
+                if (this.ImageAlignment == "Left")
+                {
+                    this.imageWrapper.Attributes.Add("class", "float-left");
+                }
+                else
+                {
+                    this.imageWrapper.Attributes.Add("class", "float-right");
+                }
             }
         }
     }

@@ -42,6 +42,15 @@
     <sf:EditorContentManagerDialog runat="server" ID="selectorImage" DialogMode="Image" HostedInRadWindow="false" BodyCssClass="" />
     <div class="sfExample"></div>
     </li>
+
+    <li class="sfFormCtrl">
+        <asp:Label runat="server" AssociatedControlID="AlignmentSelector" CssClass="sfTxtLbl">Image Alignment:</asp:Label>
+        <asp:DropDownList ID="AlignmentSelector" Width="60%" CssClass="sfTxt" runat="server" ClientIDMode="Static">
+            <asp:ListItem Text="Left" />
+            <asp:ListItem Text="Right" />
+        </asp:DropDownList>
+        <div class="sfExample">Default value: Right;</div>
+    </li>
     
 </ol>
 </div>

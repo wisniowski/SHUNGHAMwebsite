@@ -136,6 +136,9 @@ SitefinityWebApp.CustomWidgets.AboutUsSectionWidget.Designer.AboutUsSectionWidge
         else {
             jQuery(this.get_deselectButtonImage()).hide()
         }
+
+        /* RefreshUI ImageAlignment */
+        jQuery("#AlignmentSelector").val(controlData.ImageAlignment);
     },
 
     /* Called when the "Save" button is clicked. Here you can transfer the settings from the designer to the control */
@@ -150,6 +153,9 @@ SitefinityWebApp.CustomWidgets.AboutUsSectionWidget.Designer.AboutUsSectionWidge
 
         /* ApplyChanges Image */
         controlData.Image = this.get_selectedImage().innerHTML;
+
+        /* ApplyChanges ImageAlignment */
+        controlData.ImageAlignment = jQuery("#AlignmentSelector").val();
     },
 
     /* --------------------------------- event handlers ---------------------------------- */
