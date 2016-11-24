@@ -116,7 +116,7 @@ namespace SitefinityWebApp
                 section = new ToolboxSection(controls.Sections)
                 {
                     Name = sectionName,
-                    Title = sectionName,
+                    Title = "<span class='ShunghamSectionIcon'>" + sectionName + "</span>",
                     Description = sectionName,
                     ResourceClassId = string.Empty
                 };
