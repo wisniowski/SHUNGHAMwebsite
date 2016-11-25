@@ -502,12 +502,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 this.SearchBox.Text = searchTerm;
                 var searchTermCleaned = searchTerm.Trim();
 
-                //add white spaces on start and end of the search query for exact phrase/word matching
-                searchTermCleaned = " " + searchTermCleaned + " ";
-
-                //search with spaces
-                this.eventList = this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTermCleaned.ToLower())).ToList();
-
                 //search by exact match in the titles
                 this.eventList = this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList();
 
