@@ -740,11 +740,26 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                             var urlParams = this.GetUrlParameters();
                             if (urlParams != null)
                             {
-                                if (urlParams.Count() >= 2)
+                                //if url contains another detail as detail/25-years-of-media-investing-in-creativity-building-the-future
+                                if (urlParams.Count() == 1)
+                                {
+                                    eventLinkControl.NavigateUrl = string.Format("{0}/{1}", detailPageUrl,
+                                    Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
+                                }
+                                //if url contains only date filter e.g. /2016/December/
+                                else if (urlParams.Count() == 2)
                                 {
                                     var urlParamString = this.GetUrlParameterString(false);
                                     eventLinkControl.NavigateUrl = string.Format("{0}/{1}/{2}", detailPageUrl, urlParamString,
                                         Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
+                                }
+                                //if url contains both date and another detail in URL, e.g.:
+                                //detail/2016/December/25-years-of-media-investing-in-creativity-building-the-future
+                                else if (urlParams.Count() == 3)
+                                {
+                                    eventLinkControl.NavigateUrl = string.Format("{0}/{1}/{2}/{3}", detailPageUrl,
+                                        urlParams[0], urlParams[1],
+                                    Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
                                 }
                             }
                             else
