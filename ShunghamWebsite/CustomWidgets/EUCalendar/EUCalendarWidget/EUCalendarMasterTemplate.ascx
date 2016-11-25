@@ -70,7 +70,10 @@
                     </header>
                     <h2>
                         <%# DataBinder.Eval(Container.DataItem,"Attributes.cdi_name") %>
-                        <span class="scheme-a"><%# DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") %></span>
+                        <span class="scheme-a">
+                            <%# DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") == null ?
+                            "Free" : DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") %>
+                        </span>
                     </h2>
                     <ul>
                         <li><span>Policy Area:</span>
