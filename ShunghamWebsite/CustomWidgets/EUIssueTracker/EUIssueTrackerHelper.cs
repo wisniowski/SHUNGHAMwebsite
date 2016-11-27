@@ -167,12 +167,13 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         {
             IList<EUDossierModel> dossiersList = new List<EUDossierModel>();
             Stopwatch sw = Stopwatch.StartNew();
+            OpenServicePoint(dossierServiceUrl);
 
             IList<string> serviceUrls = new List<string>();
             var parsedJson = new List<EUDossierModel>();
-            for (int i = 1; i < 4; i++)
+            for (int i = 1; i < 5; i++)
             {
-                serviceUrls.Add(string.Format("{0}/{1}/{2}", dossierServiceUrl, i, 6000));
+                serviceUrls.Add(string.Format("{0}/{1}/{2}", dossierServiceUrl, i, 5000));
             }
             var tasks = serviceUrls.Select(GetAsync).ToArray();
             var completed = Task.Factory.ContinueWhenAll(tasks,
@@ -207,6 +208,16 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             return dossiersList;
         }
 
+        private static void OpenServicePoint(string url)
+        {
+            ServicePointManager.UseNagleAlgorithm = true;
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.CheckCertificateRevocationList = true;
+            ServicePointManager.DefaultConnectionLimit = 100;
+            Uri serviceUrl = new Uri(url);
+            ServicePoint servicePoint = ServicePointManager.FindServicePoint(serviceUrl);
+        }
+
         public static Task<string> GetAsync(string url)
         {
             var tcs = new TaskCompletionSource<string>();
@@ -217,7 +228,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             request.PreAuthenticate = true;
             request.Credentials = CredentialCache.DefaultCredentials;
             request.Proxy = null;
-            request.ServicePoint.Expect100Continue = false;
+
             try
             {
                 request.BeginGetResponse(iar =>
