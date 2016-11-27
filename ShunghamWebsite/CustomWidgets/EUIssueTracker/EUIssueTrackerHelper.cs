@@ -200,7 +200,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
                     dossiersList,
                     CacheItemPriority.Normal,
                     null,
-                    new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    new SlidingTime(TimeSpan.FromMinutes(1)));
             }
             sw.Stop();
             Log.Write(string.Format("Dossiers request took {0}", sw.Elapsed), ConfigurationPolicy.Trace);

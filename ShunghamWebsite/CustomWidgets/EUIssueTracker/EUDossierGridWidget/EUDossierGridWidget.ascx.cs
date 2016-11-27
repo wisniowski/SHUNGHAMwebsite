@@ -80,9 +80,9 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             MemoryCacheItem.dossiers = EUIssueTrackerHelper.GetDossiers();
 
             //initially the dossiers grid must display all dossiers that were modified in the last X days
-            MemoryCacheItem.dossiers = MemoryCacheItem.dossiers.GetLatestUpdatedDossiersWithinDays(this.DaysToDisplayUpdatesWithin);
+            var initialDossiers = MemoryCacheItem.dossiers.GetLatestUpdatedDossiersWithinDays(this.DaysToDisplayUpdatesWithin);
 
-            this.dossiersList.DataSource = MemoryCacheItem.dossiers.RestrictDossiersByStatus();
+            this.dossiersList.DataSource = initialDossiers.RestrictDossiersByStatus();
             this.dossiersList.ItemCreated += dossiersList_ItemCreated;
             this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
             this.dossiersList.DataBind();
