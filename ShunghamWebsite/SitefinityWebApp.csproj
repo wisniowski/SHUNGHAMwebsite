@@ -909,6 +909,7 @@
     <Compile Include="CustomWidgets\EUIssueTracker\EUDossierStatusModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUIPolicyAreaModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUIssueTrackerHelper.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\MemoryCacheItem.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\NavigationItem.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\NavigationWidget\NavigationWidget.ascx.cs">
       <DependentUpon>NavigationWidget.ascx</DependentUpon>

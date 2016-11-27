@@ -3,6 +3,7 @@ using System.Linq;
 using pavliks.PortalConnector;
 using SitefinityWebApp.CustomWidgets.EUCalendar;
 using SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget;
+using SitefinityWebApp.CustomWidgets.EUIssueTracker;
 using SitefinityWebApp.CustomWidgets.EUIssueTracker.Breadcrumb;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Configuration;
@@ -10,6 +11,7 @@ using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.Pages.Configuration;
 using Telerik.Sitefinity.Services;
 using Telerik.Sitefinity.Web.UI;
+using System.Collections.Generic;
 
 namespace SitefinityWebApp
 {
@@ -99,6 +101,10 @@ namespace SitefinityWebApp
             //Register EUSection layout controls
             RegisterControlInToolbox(Installer.pageLayoutsToolboxName, Installer.ShunghamEUSectionLayoutsName,
                 Installer.layoutControlTypeName, "OneColumnEUContent", "~/CustomLayouts/EUContent_OneColumn.ascx");
+
+            //retrieve dossier updates from ms dynamics
+            MemoryCacheItem.dossiers = new List<EUDossierModel>();
+            MemoryCacheItem.dossiers = EUIssueTrackerHelper.GetDossiers();
         }
 
         private static void RegisterSectionInBackend(string toolboxName, string sectionName)
