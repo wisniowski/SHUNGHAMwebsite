@@ -43,15 +43,15 @@
                             <label for="faa" class="hidden">First Name</label>
                             <asp:TextBox runat="server" ID="faa" placeholder="First Name" />
                             <asp:RequiredFieldValidator ID="rfvFirstName" runat="server"
-                                ControlToValidate="faa" EnableClientScript="false"
-                                ErrorMessage="First name is required!" ValidationGroup="Submit" />
+                                ControlToValidate="faa" EnableClientScript="false" CssClass="error-element"
+                                ErrorMessage="First name is required" ValidationGroup="Submit" />
                         </span>
                         <span>
                             <label for="fab" class="hidden">Last Name</label>
                             <asp:TextBox runat="server" ID="fab" placeholder="Last Name" />
                             <asp:RequiredFieldValidator ID="rvfLastName" runat="server"
-                                ControlToValidate="fab" EnableClientScript="false"
-                                ErrorMessage="Last name is required!" ValidationGroup="Submit" />
+                                ControlToValidate="fab" EnableClientScript="false" CssClass="error-element"
+                                ErrorMessage="Last name is required" ValidationGroup="Submit" />
                         </span>
                     </p>
                     <p class="double a">
@@ -59,11 +59,11 @@
                             <label for="fac" class="hidden">E-mail</label>
                             <asp:TextBox runat="server" ID="fac" placeholder="E-mail" TextMode="Email" />
                             <asp:RequiredFieldValidator ID="rfvEmail" runat="server"
-                                ControlToValidate="fac" EnableClientScript="false"
-                                ErrorMessage="Email is required!" ValidationGroup="Submit" />
+                                ControlToValidate="fac" EnableClientScript="false" CssClass="error-element"
+                                ErrorMessage="Email is required" ValidationGroup="Submit" />
                             <asp:RegularExpressionValidator ID="expEmail" runat="server"
-                                ControlToValidate="fac" ErrorMessage="Email is invalid!"
-                                ValidationGroup="Submit"
+                                ControlToValidate="fac" ErrorMessage="Email is invalid"
+                                ValidationGroup="Submit" CssClass="error-element"
                                 ValidationExpression="^([a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]){1,70}$" />
                         </span>
                         <span>
@@ -82,8 +82,8 @@
                             <label for="faf" class="hidden">Message</label>
                             <asp:TextBox runat="server" ID="faf" placeholder="Message" TextMode="MultiLine" />
                             <asp:RequiredFieldValidator ID="rfvMessage" runat="server"
-                                ControlToValidate="faf" EnableClientScript="false"
-                                ErrorMessage="Message is required!" ValidationGroup="Submit" />
+                                ControlToValidate="faf" EnableClientScript="false" CssClass="error-element"
+                                ErrorMessage="Message is required" ValidationGroup="Submit" />
                         </span>
                     </p>
                     <p>
