@@ -600,7 +600,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.TitleControl.Text = eventItem.Attributes.cdi_name;
             this.StartDateControl.Text = eventItem.Attributes.new_eucstartdate.ToString("dd MMMM yyyy");
             this.DescriptionControl.Text = eventItem.Attributes.new_euceventdescription;
-            this.PriceControl.Text = eventItem.Attributes.new_euceventprice;
+            this.PriceControl.Text = string.IsNullOrEmpty(eventItem.Attributes.new_euceventprice) ? "Free" : eventItem.Attributes.new_euceventprice;
             this.PolicyAreaControl.Text = eventItem.Attributes.policyAreaName.Value;
             this.OrganizerControl.Text = eventItem.Attributes.organiserName.Value;
             this.LocationControl.Text = eventItem.Attributes.new_euclocation.Name;
