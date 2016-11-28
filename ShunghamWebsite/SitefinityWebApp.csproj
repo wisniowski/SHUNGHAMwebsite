@@ -120,6 +120,10 @@
       <HintPath>packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Intelligencia.UrlRewriter, Version=2.0.0.9, Culture=neutral, PublicKeyToken=0573f3650687980d, processorArchitecture=MSIL">
+      <HintPath>packages\Intelligencia.UrlRewriter.2.0.0.9\lib\net40\Intelligencia.UrlRewriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LinqToTwitter, Version=2.1.9.0, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">
       <HintPath>packages\linqtotwitterNET40.2.1.9.0\lib\net40\LinqToTwitter.dll</HintPath>
       <Private>True</Private>
@@ -838,6 +842,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureWebRole.cs" />
+    <Compile Include="CustomWidgets\AboutUsSectionWidget\AboutUsSectionWidget.ascx.cs">
+      <DependentUpon>AboutUsSectionWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\AboutUsSectionWidget\AboutUsSectionWidget.ascx.designer.cs">
+      <DependentUpon>AboutUsSectionWidget.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomWidgets\AboutUsSectionWidget\Designer\AboutUsSectionWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\BannerWidget\BannerWidget.ascx.cs">
       <DependentUpon>BannerWidget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -870,7 +882,6 @@
       <DependentUpon>ContactUsWidget.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomWidgets\ContactUsWidget\Designer\ContactUsWidgetDesigner.cs" />
-    <Compile Include="CustomWidgets\EUCalendar\CookieStorageProvider.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EUCalendarWidget\Designer\EUCalendarWidgetDesigner.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EUCalendarWidget\EUCalendarWidget.cs" />
     <Compile Include="CustomWidgets\EUCalendar\EventModel.cs" />
@@ -898,6 +909,7 @@
     <Compile Include="CustomWidgets\EUIssueTracker\EUDossierStatusModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUIPolicyAreaModel.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\EUIssueTrackerHelper.cs" />
+    <Compile Include="CustomWidgets\EUIssueTracker\MemoryCacheItem.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\NavigationItem.cs" />
     <Compile Include="CustomWidgets\EUIssueTracker\NavigationWidget\NavigationWidget.ascx.cs">
       <DependentUpon>NavigationWidget.ascx</DependentUpon>
@@ -983,12 +995,23 @@
     <Compile Include="CustomWidgets\TestimonialsRotatorWidget\TestimonialsRotatorWidget.ascx.designer.cs">
       <DependentUpon>TestimonialsRotatorWidget.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomWidgets\WhyJoinWidget\Designer\WhyJoinWidgetDesigner.cs" />
+    <Compile Include="CustomWidgets\WhyJoinWidget\WhyJoinWidget.ascx.cs">
+      <DependentUpon>WhyJoinWidget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomWidgets\WhyJoinWidget\WhyJoinWidget.ascx.designer.cs">
+      <DependentUpon>WhyJoinWidget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Installer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShunghamResources.cs" />
+    <Compile Include="UrlRewrites\SitefinityBackendExclusionCondition.cs" />
+    <Compile Include="UrlRewrites\SitefinityBackendExclusionConditionParser.cs" />
+    <Compile Include="UrlRewrites\TrailingSlashesTrimmerTransform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\Global\print.css" />
@@ -1004,6 +1027,9 @@
     <Content Include="CustomResources\js\head.js" />
     <Content Include="CustomResources\js\mobile.js" />
     <Content Include="CustomResources\js\scripts.js" />
+    <Content Include="CustomWidgets\AboutUsSectionWidget\AboutUsSectionWidget.ascx" />
+    <Content Include="CustomWidgets\AboutUsSectionWidget\Designer\AboutUsSectionWidgetDesigner.ascx" />
+    <Content Include="CustomWidgets\AboutUsSectionWidget\Designer\AboutUsSectionWidgetDesigner.js" />
     <Content Include="CustomWidgets\BannerWidget\BannerWidget.ascx" />
     <Content Include="CustomWidgets\BannerWidget\Designer\BannerWidgetDesigner.ascx" />
     <Content Include="CustomWidgets\BannerWidget\Designer\BannerWidgetDesigner.js" />
@@ -1050,6 +1076,9 @@
     <Content Include="CustomWidgets\OurProductsWidget\OurProductsWidget.ascx" />
     <Content Include="CustomWidgets\OurTeamWidget\OurTeamWidget.ascx" />
     <Content Include="CustomWidgets\TestimonialsRotatorWidget\TestimonialsRotatorWidget.ascx" />
+    <Content Include="CustomWidgets\WhyJoinWidget\Designer\WhyJoinWidgetDesigner.ascx" />
+    <Content Include="CustomWidgets\WhyJoinWidget\Designer\WhyJoinWidgetDesigner.js" />
+    <Content Include="CustomWidgets\WhyJoinWidget\WhyJoinWidget.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -1226,6 +1255,7 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Themes\Shungham\icons\icomoon.woff" />
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\ShunghamEUIssueTracker.Master" />
     <Content Include="App_Data\Sitefinity\Configuration\AnalyticsConfig.config" />
+    <Content Include="App_Data\UrlRewrites\rewriter.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShunghamUtilities\ShunghamUtilities.csproj">

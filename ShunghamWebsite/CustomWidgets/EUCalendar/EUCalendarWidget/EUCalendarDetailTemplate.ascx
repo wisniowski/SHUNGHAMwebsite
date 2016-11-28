@@ -28,19 +28,14 @@
                 </li>
                 <li>
                     <asp:RadioButton runat="server" ID="deadlineRadioButton" GroupName="date"
-                        AutoPostBack="true" Text="Event Registration Deadline"  />
+                        AutoPostBack="true" Text="Event Registration Deadline" />
                 </li>
             </ul>
         </li>
         <li class="toggle sub">
             <a href="#">Policy Areas</a>
             <span class="toggle"></span>
-            <telerik:RadPersistenceManager runat="server" ID="RadPersistenceManager1">
-                <PersistenceSettings>
-                    <telerik:PersistenceSetting ControlID="policyAreasTreeView" />
-                </PersistenceSettings>
-            </telerik:RadPersistenceManager>
-            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight"
+            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight" CheckBoxes="true"
                 EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false" ShowLineImages="false">
             </telerik:RadTreeView>
         </li>
@@ -128,7 +123,8 @@
         </footer>
     </article>
     <article>
-        <h3>Other Events Similar to this <span class="no"><asp:Literal ID="count" runat="server" /></span></h3>
+        <h3>Other Events Similar to this <span class="no">
+            <asp:Literal ID="count" runat="server" /></span></h3>
         <telerik:RadListView ID="otherEventsList" ItemPlaceholderID="EventsContainer" runat="server"
             EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
             <LayoutTemplate>
@@ -157,7 +153,10 @@
                     </header>
                     <h2>
                         <%# DataBinder.Eval(Container.DataItem,"Attributes.cdi_name") %>
-                        <span class="scheme-a"><%# DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") %></span>
+                        <span class="scheme-a">
+                            <%# DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") == null ?
+                            "Free" : DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") %>
+                        </span>
                     </h2>
                     <ul>
                         <li><span>Policy Area:</span>

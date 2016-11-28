@@ -19,6 +19,8 @@ using Telerik.Sitefinity.Web.UI;
 using Telerik.Sitefinity.Web.UI.ControlDesign;
 using Telerik.Web.UI;
 using System.Web.Caching;
+using Telerik.Sitefinity.Services;
+using ShunghamUtilities;
 
 namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 {
@@ -330,12 +332,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         {
             RouteHelper.SetUrlParametersResolved();
 
-            if (!Page.IsPostBack)
-            {
-                RadPersistenceManager.StorageProviderKey = cookieName;
-                RadPersistenceManager.StorageProvider = new CookieStorageProvider(cookieName);                
-            }
-
             this.policyAreasList = EventsControlsHelper.GetPolicyAreasList();
             this.eventList = EventsControlsHelper.GetEventsList();
 
@@ -410,16 +406,17 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         protected void SearchButton_Click(object sender, EventArgs e)
         {
-            var redirectLocation = string.Empty;
             var searchQuery = this.SearchBox.Text;
-            var currentUrl = SiteMapBase.GetActualCurrentNode().GetUrl(Thread.CurrentThread.CurrentCulture);
+            var currentUri = this.Page.Request.Url;
+            var redirectLocation = currentUri.AbsoluteUri;
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                redirectLocation = string.Format("{0}?search={1}", currentUrl, searchQuery);
+                var values = new Dictionary<string, string> { { "search", searchQuery } };
+                redirectLocation = currentUri.ExtendQuery(values).AbsoluteUri;
             }
-            if (searchQuery == string.Empty)
+            else
             {
-                redirectLocation = currentUrl;
+                redirectLocation = this.Page.Request.Url.AbsolutePath;
             }
 
             HttpContext.Current.Response.Redirect(redirectLocation);
@@ -483,34 +480,21 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.eventDateRadioButton.CheckedChanged += eventDateRadioButton_CheckedChanged;
             this.eventDeadlineRadioButton.CheckedChanged += eventDeadlineRadioButton_CheckedChanged;
 
-            LoadPersistedTreeViewState();
-
             var queryStringParams = HttpContext.Current.Request.QueryString;
 
             if (queryStringParams != null && queryStringParams.Count > 0)
             {
-                this.eventList = this.FilterCollectionBySearchTerm(queryStringParams);
+                this.FilterCollectionByPolicyAreas(queryStringParams);
+                this.FilterCollectionBySearchTerm(queryStringParams);
             }
 
-            if (this.eventList.Count > 0)
-            {
-                this.EventsList.DataSource = this.eventList;
-                this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-                this.EventsList.DataBind();
-            }
+            this.EventsList.DataSource = this.eventList;
+            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
+            this.EventsList.DataBind();
         }
 
-        private void LoadPersistedTreeViewState()
+        private void FilterCollectionBySearchTerm(NameValueCollection queryStringParams)
         {
-            if (HttpContext.Current.Request.Cookies[cookieName] != null)
-            {
-                RadPersistenceManager.LoadState();
-            }
-        }
-
-        private IList<EventModel> FilterCollectionBySearchTerm(NameValueCollection queryStringParams)
-        {
-            List<EventModel> eventMatches = new List<EventModel>();
             var searchTerm = queryStringParams["search"];
 
             if (!string.IsNullOrEmpty(searchTerm))
@@ -518,27 +502,29 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 this.SearchBox.Text = searchTerm;
                 var searchTermCleaned = searchTerm.Trim();
 
-                //add white spaces on start and end of the search query for exact phrase/word matching
-                searchTermCleaned = " " + searchTermCleaned + " ";
-
-                //search with spaces
-                eventMatches = this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTermCleaned.ToLower())).ToList();
-
                 //search by exact match in the titles
-                eventMatches.AddRange(this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList());
+                this.eventList = this.eventList.Where(e => e.Attributes.cdi_name.ToLower().Contains(searchTerm.ToLower())).ToList();
 
                 //breakup phrase and search for any match on any word
-                eventMatches.AddRange(this.eventList.Where(e => searchTerm.Split(new char[] { ' ' },
-                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
-                eventMatches.AddRange(eventList.Where(e => searchTerm.Split(new char[] { ' ' },
-                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))));
+                this.eventList = this.eventList.Where(e => searchTerm.Split(new char[] { ' ' },
+                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))).ToList();
+                this.eventList = this.eventList.Where(e => searchTerm.Split(new char[] { ' ' },
+                    StringSplitOptions.RemoveEmptyEntries).Any(w => e.Attributes.cdi_name.ToLower().Contains(w.ToLower()))).ToList();
             }
-            else
-            {
-                return this.eventList;
-            }
+        }
 
-            return eventMatches.Distinct().ToList();
+        private void FilterCollectionByPolicyAreas(NameValueCollection queryStringParams)
+        {
+            foreach (string attributeValue in queryStringParams.AllKeys)
+            {
+                var policyAreaNode = this.PolicyAreasTreeView.FindNodeByAttribute("queryStringKey", attributeValue);
+                if (policyAreaNode != null)
+                {
+                    policyAreaNode.Checked = true;
+                    this.eventList = this.eventList.Where(e => e.Attributes.policyAreaName.Value.Contains(policyAreaNode.Text))
+                        .ToList();
+                }
+            }
         }
 
         /// <summary>
@@ -563,6 +549,14 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (this.IsBackend() || this.IsPreviewMode())
             {
                 this.DisplayBackendMessage();
+            }
+
+            var queryStringParams = HttpContext.Current.Request.QueryString;
+
+            if (queryStringParams != null && queryStringParams.Count > 0)
+            {
+                this.FilterCollectionByPolicyAreas(queryStringParams);
+                this.FilterCollectionBySearchTerm(queryStringParams);
             }
 
             string itemUrl = string.Empty;
@@ -624,7 +618,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                 .ToList<PolicyArea>();
 
             policyAreas.Insert(0, new PolicyArea() { ID = "0", Name = "All Policy Areas" });
-            this.PolicyAreasTreeView.NodeClick += PolicyAreasTreeView_NodeClick;
+            this.PolicyAreasTreeView.NodeCheck += PolicyAreasTreeView_NodeCheck;
             this.PolicyAreasTreeView.DataSource = policyAreas;
             this.PolicyAreasTreeView.NodeDataBound += PolicyAreasTreeView_NodeDataBound;
             this.PolicyAreasTreeView.DataBind();
@@ -636,80 +630,67 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
             if (policyAreaItem != null)
             {
-                if (!Page.IsPostBack && policyAreaItem.Name == "All Policy Areas")
+                if (policyAreaItem.Name == "All Policy Areas")
                 {
-                    e.Node.Selected = true;
+                    if (this.Page.Request.QueryString.Count == 0 || !this.Page.Request.QueryString.AllKeys
+                        .Any(c => c.Contains("lc")))
+                    {
+                        e.Node.Checked = true;
+                    }
                 }
                 e.Node.Text = policyAreaItem.Name;
                 e.Node.Value = policyAreaItem.ID;
+                e.Node.Attributes["queryStringKey"] = "lc" + e.Node.Index;
             }
         }
 
-        protected void PolicyAreasTreeView_NodeClick(object sender, RadTreeNodeEventArgs e)
+        protected void PolicyAreasTreeView_NodeCheck(object sender, RadTreeNodeEventArgs e)
         {
-            IList<EventModel> filteredList = new List<EventModel>();
-            IList<string> selectedPolicyAreas = new List<string>();
-
-            if (e.Node.Text == "All Policy Areas")
+            if (e.Node.CheckState == TreeNodeCheckState.Checked)
             {
-                this.PolicyAreasTreeView.UnselectAllNodes();
-                e.Node.Selected = true;
-            }
+                var currentUri = this.Page.Request.Url;
 
-            selectedPolicyAreas = this.GetSelectedPolicyAreas();
+                var values = new Dictionary<string, string> { { e.Node.Attributes["queryStringKey"], "on" } };
+                var redirectLocation = currentUri.ExtendQuery(values).AbsoluteUri;
 
-            foreach (var eventItem in this.eventList)
-            {
-                if (selectedPolicyAreas.Contains("All Policy Areas"))
+                if (e.Node.Text == "All Policy Areas")
                 {
-                    filteredList = this.eventList;
+                    this.PolicyAreasTreeView.UncheckAllNodes();
+                    e.Node.Checked = true;
+                    redirectLocation = String.Format("{0}{1}{2}{3}", currentUri.Scheme, Uri.SchemeDelimiter,
+                        currentUri.Authority, currentUri.AbsolutePath);
                 }
                 else
                 {
-                    bool isEventInFilter = true;
-
-                    foreach (var selectedPolicyArea in selectedPolicyAreas)
+                    var allPolicyAreas = this.PolicyAreasTreeView.FindNodeByText("All Policy Areas");
+                    if (allPolicyAreas != null)
                     {
-                        if (eventItem.Attributes.policyAreaName.Value.Contains(selectedPolicyArea))
-                        {
-                        }
-                        else
-                        {
-                            isEventInFilter = false;
-                            break;
-                        }
-                    }
-
-                    if (isEventInFilter)
-                    {
-                        filteredList.Add(eventItem);
+                        allPolicyAreas.Checked = false;
                     }
                 }
+
+                HttpContext.Current.Response.Redirect(redirectLocation);
             }
-
-            SavePersistedTreeViewState();
-
-            this.EventsList.DataSource = filteredList;
-            this.EventsList.ItemDataBound += EventsList_ItemDataBound;
-            this.EventsList.DataBind();
-        }
-
-        private void SavePersistedTreeViewState()
-        {
-            RadPersistenceManager.SaveState();
-        }
-
-        private IList<string> GetSelectedPolicyAreas()
-        {
-            IList<string> policyAreas = new List<string>();
-            var selectedNodes = this.PolicyAreasTreeView.SelectedNodes;
-            foreach (RadTreeNode node in selectedNodes)
+            else
             {
-                policyAreas.Add(node.Text);
-                policyAreas = policyAreas.Distinct().ToList();
-            }
+                var currentUri = this.Page.Request.Url;
+                var redirectLocation = currentUri.AbsoluteUri;
+                NameValueCollection queryString = new NameValueCollection(this.Page.Request.QueryString);
+                if (queryString.Count != 0)
+                {
+                    queryString.Remove(e.Node.Attributes["queryStringKey"]);
+                    if (queryString.Count > 0)
+                    {
+                        redirectLocation = currentUri.AbsolutePath + "?" + UriExtensions.ConstructQueryString(queryString);
+                    }
+                    else
+                    {
+                        redirectLocation = currentUri.AbsolutePath;
+                    }
+                }
 
-            return policyAreas;
+                HttpContext.Current.Response.Redirect(redirectLocation);
+            }
         }
 
         /// <summary>
@@ -753,11 +734,26 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                             var urlParams = this.GetUrlParameters();
                             if (urlParams != null)
                             {
-                                if (urlParams.Count() > 2)
+                                //if url contains another detail as detail/25-years-of-media-investing-in-creativity-building-the-future
+                                if (urlParams.Count() == 1)
+                                {
+                                    eventLinkControl.NavigateUrl = string.Format("{0}/{1}", detailPageUrl,
+                                    Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
+                                }
+                                //if url contains only date filter e.g. /2016/December/
+                                else if (urlParams.Count() == 2)
                                 {
                                     var urlParamString = this.GetUrlParameterString(false);
                                     eventLinkControl.NavigateUrl = string.Format("{0}/{1}/{2}", detailPageUrl, urlParamString,
                                         Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
+                                }
+                                //if url contains both date and another detail in URL, e.g.:
+                                //detail/2016/December/25-years-of-media-investing-in-creativity-building-the-future
+                                else if (urlParams.Count() == 3)
+                                {
+                                    eventLinkControl.NavigateUrl = string.Format("{0}/{1}/{2}/{3}", detailPageUrl,
+                                        urlParams[0], urlParams[1],
+                                    Regex.Replace(eventItem.Attributes.cdi_name.ToLower(), urlRegex, hyphen));
                                 }
                             }
                             else
@@ -784,6 +780,12 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.EventDetailErrMessage.Text = sb.ToString();
         }
 
+        /// <summary>
+        /// Binds the similar events list. 
+        /// Events are considered similar if they contain any of the policy areas from the event detail
+        /// and are starting today or in the future.
+        /// </summary>
+        /// <param name="eventItem">The event item.</param>
         private void BindSimilarEventsList(EventModel eventItem)
         {
             IList<EventModel> similarEvents = new List<EventModel>();
@@ -800,6 +802,10 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
                     similarEvents.Add(item);
                 }
             }
+
+            //other events list must show only events from today or in future
+            similarEvents = similarEvents.Where(e => e.Attributes.new_eucstartdate >= DateTime.Now).ToList();
+
             this.Count.Text = similarEvents.Count().ToString();
             this.OtherEventsList.DataSource = similarEvents;
             this.OtherEventsList.ItemDataBound += EventsList_ItemDataBound;
@@ -823,7 +829,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         public static string underscore = "_";
         public static string eventsDateFormat = "MMMM yyyy";
         private string backBtnDefaultDestination = string.Empty;
-        private static readonly string cookieName = "ShunghamCookie";
 
         #endregion
     }

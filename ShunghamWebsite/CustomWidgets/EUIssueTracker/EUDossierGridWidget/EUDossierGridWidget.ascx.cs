@@ -77,12 +77,12 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
 
         private void BindDossierList()
         {
-            dossiers = EUIssueTrackerHelper.GetDossiers();
+            MemoryCacheItem.dossiers = EUIssueTrackerHelper.GetDossiers();
 
             //initially the dossiers grid must display all dossiers that were modified in the last X days
-            dossiers = dossiers.GetLatestUpdatedDossiersWithinDays(this.DaysToDisplayUpdatesWithin);
+            var initialDossiers = MemoryCacheItem.dossiers.GetLatestUpdatedDossiersWithinDays(this.DaysToDisplayUpdatesWithin);
 
-            this.dossiersList.DataSource = dossiers.RestrictDossiersByStatus();
+            this.dossiersList.DataSource = initialDossiers.RestrictDossiersByStatus();
             this.dossiersList.ItemCreated += dossiersList_ItemCreated;
             this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
             this.dossiersList.DataBind();
@@ -90,29 +90,29 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
 
         private void BindOtherUpdatesList()
         {
-            dossiers = EUIssueTrackerHelper.GetDossiers();
+            MemoryCacheItem.dossiers = EUIssueTrackerHelper.GetDossiers();
             string[] urlParams = this.GetUrlParameters();
             var dossierUpdate = EUIssueTrackerHelper.GetDossierByUrlParams(urlParams);
 
             var category = dossierUpdate.Attributes.policyCategoryName.Value;
 
             //exclude current dossier from list
-            dossiers.Remove(dossierUpdate);
+            MemoryCacheItem.dossiers.Remove(dossierUpdate);
 
             //filters dossiers by category and exclude current dossier from list
-            dossiers = dossiers.Where(a => a.Attributes.policyCategoryName.Value == category)
+            MemoryCacheItem.dossiers = MemoryCacheItem.dossiers.Where(a => a.Attributes.policyCategoryName.Value == category)
                 .ToList();
 
             //filters dossiers by status
-            dossiers = dossiers.RestrictDossiersByStatus();
+            MemoryCacheItem.dossiers = MemoryCacheItem.dossiers.RestrictDossiersByStatus();
 
             //gets dossiers count
-            if (dossiers.Count > 0)
+            if (MemoryCacheItem.dossiers.Count > 0)
             {
-                otherUpdatesCount = dossiers.Count;
+                otherUpdatesCount = MemoryCacheItem.dossiers.Count;
             }
 
-            this.dossiersList.DataSource = dossiers;
+            this.dossiersList.DataSource = MemoryCacheItem.dossiers;
             this.dossiersList.ItemCreated += dossiersList_ItemCreated;
             this.dossiersList.ItemDataBound += dossiersList_ItemDataBound;
             this.dossiersList.DataBind();
@@ -156,7 +156,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                 if (urlParams.Count() == 1)
                 {
                     statusURL = urlParams[0];
-                    filteredDossiers = FilterDossierListByStatus(dossiers, statusURL);
+                    filteredDossiers = FilterDossierListByStatus(MemoryCacheItem.dossiers, statusURL);
                     if (filteredDossiers != null)
                     {
                         filteredDossiers = filteredDossiers.RestrictDossiersByStatus();
@@ -168,7 +168,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                     //filter dossiers by policy area and policy category
                     if (urlParams.Count() > 1)
                     {
-                        filteredByPolicyCatDossiers = FilterDossierListByPolicyAreaAndCategory(dossiers);
+                        filteredByPolicyCatDossiers = FilterDossierListByPolicyAreaAndCategory(MemoryCacheItem.dossiers);
                         this.dossiersList.DataSource = filteredByPolicyCatDossiers.RestrictDossiersByStatus();
                     }
                     //filter dossiers by policy area, policy category and status
@@ -183,7 +183,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                         this.dossiersList.DataSource = filteredDossiers;
                     }
 
-                    dossiers = filteredByPolicyCatDossiers;
+                    MemoryCacheItem.dossiers = filteredByPolicyCatDossiers;
                 }
             }
 
@@ -310,7 +310,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         {
             if (statusItem != null)
             {
-                return dossiers.GetDossiersCountByStatus(statusItem.Attributes.uni_displayname);
+                return MemoryCacheItem.dossiers.GetDossiersCountByStatus(statusItem.Attributes.uni_displayname);
             }
             return 0;
         }
@@ -324,7 +324,6 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
         public static string fwdSlash = "/";
         public static string underscore = "_";
         public string statusURL = null;
-        private IList<EUDossierModel> dossiers = new List<EUDossierModel>();
         public IList<StatusItem> statuses = new List<StatusItem>();
 
         #endregion

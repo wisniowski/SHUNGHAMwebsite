@@ -34,12 +34,7 @@
         <li class="toggle sub">
             <a href="#">Policy Areas</a>
             <span class="toggle"></span>
-            <telerik:RadPersistenceManager runat="server" ID="RadPersistenceManager1">
-                <PersistenceSettings>
-                    <telerik:PersistenceSetting ControlID="policyAreasTreeView" />
-                </PersistenceSettings>
-            </telerik:RadPersistenceManager>
-            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight"
+            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight" CheckBoxes="true"
                 EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false" ShowLineImages="false">
             </telerik:RadTreeView>
         </li>
@@ -75,7 +70,10 @@
                     </header>
                     <h2>
                         <%# DataBinder.Eval(Container.DataItem,"Attributes.cdi_name") %>
-                        <span class="scheme-a"><%# DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") %></span>
+                        <span class="scheme-a">
+                            <%# DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") == null ?
+                            "Free" : DataBinder.Eval(Container.DataItem,"Attributes.new_euceventprice") %>
+                        </span>
                     </h2>
                     <ul>
                         <li><span>Policy Area:</span>
