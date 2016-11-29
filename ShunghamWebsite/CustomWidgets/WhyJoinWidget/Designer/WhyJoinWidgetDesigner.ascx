@@ -61,7 +61,7 @@
             </span>
             <div id="selectorTagFirstButtonLandingPage" runat="server" style="display: none;">
                 <sf:PagesSelector runat="server" ID="pageSelectorFirstButtonLandingPage"
-                    AllowExternalPagesSelection="false" AllowMultipleSelection="false" />
+                    AllowExternalPagesSelection="true" AllowMultipleSelection="false" />
             </div>
             <div class="sfExample"></div>
         </li>
@@ -94,7 +94,7 @@
             </span>
             <div id="selectorTagSecondButtonLandingPage" runat="server" style="display: none;">
                 <sf:PagesSelector runat="server" ID="pageSelectorSecondButtonLandingPage"
-                    AllowExternalPagesSelection="false" AllowMultipleSelection="false" />
+                    AllowExternalPagesSelection="true" AllowMultipleSelection="false" />
             </div>
             <div class="sfExample"></div>
         </li>
