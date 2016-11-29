@@ -960,10 +960,10 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     font-size: .81818181818em;
 }
 
-#aside .rtUL .rtIn {
-    display: inline-block;
-    cursor: pointer;
-}
+    #aside .rtUL .rtIn {
+        display: inline-block;
+        cursor: pointer;
+    }
 
 #aside > ul > li > ul > li {
     font-size: .81818181818em;
@@ -974,7 +974,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     }
 
     #aside > ul > li > ul > li.active > a:after,
-    #aside .rtSelected span.rtIn:after{
+    #aside .rtSelected span.rtIn:after {
         content: "\e90a";
         display: inline-block;
         top: -2px;
@@ -2287,57 +2287,57 @@ a {
         text-align: center;
     }
 
-    .link-a a:hover {
-        border-color: #c80000;
-        background: #c80000;
-    }
-
-    .link-a a + a {
-        margin-left: 8px;
-    }
-
-    .link-a a.a {
-        background: none;
-        color: #cc4646;
-    }
-
-        .link-a a.a:hover {
-            background: #cc4646;
-            color: #fff;
+        .link-a a:hover {
+            border-color: #c80000;
+            background: #c80000;
         }
 
-    .link-a a.b {
-        border-color: #0971b2;
-        background: #0971b2;
-    }
-
-        .link-a a.b:hover {
-            border-color: #165278;
-            background: #165278;
+        .link-a a + a {
+            margin-left: 8px;
         }
 
-    .link-a a.c {
-        border-color: #0971b2;
-        background: none;
-        color: #0971b2;
-    }
+        .link-a a.a {
+            background: none;
+            color: #cc4646;
+        }
 
-        .link-a a.c:hover {
+            .link-a a.a:hover {
+                background: #cc4646;
+                color: #fff;
+            }
+
+        .link-a a.b {
+            border-color: #0971b2;
             background: #0971b2;
+        }
+
+            .link-a a.b:hover {
+                border-color: #165278;
+                background: #165278;
+            }
+
+        .link-a a.c {
+            border-color: #0971b2;
+            background: none;
+            color: #0971b2;
+        }
+
+            .link-a a.c:hover {
+                background: #0971b2;
+                color: #fff;
+            }
+
+        .link-a a.d {
+            border-color: #c80000;
+            background: #c80000;
             color: #fff;
         }
 
-    .link-a a.d {
-        border-color: #c80000;
-        background: #c80000;
-        color: #fff;
-    }
-
-        .link-a a.d:hover {
-            border-color: #cc4646;
-            background: #cc4646;
-            color: #fff;
-        }
+            .link-a a.d:hover {
+                border-color: #cc4646;
+                background: #cc4646;
+                color: #fff;
+            }
 
     .link-a.a {
     }
@@ -4113,7 +4113,7 @@ svg:not(:root) {
                         height: 8px;
                         margin: -4px 0 0 -4px;
                     }
-    
+
     #aside .rtUL {
         padding: 18px 50px 18px 70px;
     }
@@ -4174,7 +4174,7 @@ svg:not(:root) {
             line-height: 30px;
         }
 
-        .checks input[type="radio"]{
+    .checks input[type="radio"] {
         top: 8px;
     }
 }
@@ -4371,7 +4371,7 @@ svg:not(:root) {
                     height: 18px;
                 }
 
-    #aside .rtUL{
+    #aside .rtUL {
         padding: 10px 50px 18px 46px;
     }
 
@@ -4639,7 +4639,7 @@ svg:not(:root) {
         transform: none;
     }
 
-    .checks input[type="radio"]{
+    .checks input[type="radio"] {
         width: 18px;
         height: 18px;
         top: 7px;
@@ -6379,7 +6379,7 @@ svg:not(:root) {
         right: inherit;
     }
 
-    .checks input[type="radio"]{
+    .checks input[type="radio"] {
         width: 16px;
         height: 16px;
         left: 34px;
@@ -6537,4 +6537,13 @@ svg:not(:root) {
     display: block;
     background-size: 15px;
     text-indent: 20px;
+}
+
+.error-element {
+    display: block;
+    padding: 5px 0 0;
+    color: #c80000;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: left;
 }
