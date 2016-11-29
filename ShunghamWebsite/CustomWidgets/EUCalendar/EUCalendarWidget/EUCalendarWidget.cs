@@ -603,7 +603,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             this.PriceControl.Text = string.IsNullOrEmpty(eventItem.Attributes.new_euceventprice) ? "Free" : eventItem.Attributes.new_euceventprice;
             this.PolicyAreaControl.Text = eventItem.Attributes.policyAreaName.Value;
             this.OrganizerControl.Text = eventItem.Attributes.organiserName.Value;
-            this.LocationControl.Text = eventItem.Attributes.new_euclocation.Name;
+            this.LocationControl.Text = eventItem.Attributes.new_euclocation == null ? "" : eventItem.Attributes.new_euclocation.Name;
             this.DeadlineControl.Text = eventItem.Attributes.new_eucregistrationdeadline == DateTime.MinValue ? "No deadline" :
             eventItem.Attributes.new_eucregistrationdeadline.ToString("dd MMMM yyyy");
             this.OrganizersEventLink.NavigateUrl = eventItem.Attributes.new_euceventlink;
