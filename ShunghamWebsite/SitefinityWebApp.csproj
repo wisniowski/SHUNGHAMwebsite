@@ -1256,6 +1256,7 @@
     <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\ShunghamEUIssueTracker.Master" />
     <Content Include="App_Data\Sitefinity\Configuration\AnalyticsConfig.config" />
     <Content Include="App_Data\UrlRewrites\rewriter.config" />
+    <Content Include="App_Data\Sitefinity\WebsiteTemplates\Shungham\App_Master\ShunghamError.Master" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShunghamUtilities\ShunghamUtilities.csproj">

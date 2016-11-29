@@ -1,0 +1,64 @@
+﻿<%@ Master Language="C#" %>
+
+<%@ Register Assembly="Telerik.Sitefinity" Namespace="Telerik.Sitefinity.Web.UI" TagPrefix="sf" %>
+
+<!DOCTYPE html>
+
+<html lang="en" class="a" xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Shungham</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, target-densitydpi=device-dpi" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" sizes="16x16" />
+
+    <sf:ResourceLinks runat="server" ID="ResourceLinks1">
+        <sf:ResourceFile JavaScriptLibrary="JQuery"></sf:ResourceFile>
+        <sf:ResourceFile JavaScriptLibrary="JQueryUI"></sf:ResourceFile>
+    </sf:ResourceLinks>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="root">
+            <header id="top">
+                <p id="logo">
+                    <a href="/home" accesskey="h"
+                        style="font-family: 'Gotham Narrow', Gotham, Arial, Helvetica, sans-serif;">Shungham</a>
+                </p>
+                <nav id="skip">
+            </header>
+            <article id="content" class="error-a text-center">
+                <asp:ContentPlaceHolder ID="ContentHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </article>
+            <footer id="footer">
+                <asp:ContentPlaceHolder ID="FooterHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </footer>
+        </div>
+        <telerik:RadCodeBlock runat="server" ID="RadCodeBlock1">
+            <script src="<%= ResolveUrl("~/CustomResources/js/head.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/scripts.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/mobile.js") %>"></script>
+            <script src="<%= ResolveUrl("~/CustomResources/js/date.js") %>"></script>
+        </telerik:RadCodeBlock>
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WVC5CC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function (w, d, s, l, i) {
+    w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+        new Date().getTime(), event: 'gtm.js'
+    }); var f = d.getElementsByTagName(s)[0],
+    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+    '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-WVC5CC');</script>
+        <!-- End Google Tag Manager -->
+    </form>
+</body>
+</html>
