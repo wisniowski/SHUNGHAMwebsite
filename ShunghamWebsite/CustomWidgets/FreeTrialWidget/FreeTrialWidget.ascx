@@ -8,12 +8,13 @@
         CssClass="text-center" Text="<%$ Resources: ShunghamResources, FreeTrialTitle %>" />
     <asp:UpdatePanel runat="server" ID="updatePanel" ChildrenAsTriggers="true" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:Panel ID="wrapper" runat="server" CssClass="double a">
+            <asp:Panel ID="wrapper" runat="server" CssClass="module-b double">
                 <header class="vcard a">
                     <h3 class="mobile-hide">
                         <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
                     <p class="fn org strong">
-                        <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: ShunghamResources, InfoLabel %>" /></p>
+                        <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: ShunghamResources, InfoLabel %>" />
+                    </p>
                     </p>
                     <ul>
                         <li class="adr">
