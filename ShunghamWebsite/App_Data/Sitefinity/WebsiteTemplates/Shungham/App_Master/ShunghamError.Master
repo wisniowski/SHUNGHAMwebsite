@@ -30,7 +30,6 @@
                     <a href="/home" accesskey="h"
                         style="font-family: 'Gotham Narrow', Gotham, Arial, Helvetica, sans-serif;">Shungham</a>
                 </p>
-                <nav id="skip">
             </header>
             <article id="content" class="error-a text-center">
                 <asp:ContentPlaceHolder ID="ContentHolder" runat="server">

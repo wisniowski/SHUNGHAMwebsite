@@ -529,7 +529,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
         background-size: cover;
     }
 
-.no-mobile #featured > figure, .no-mobile #root .module-a > figure {
+/* .no-mobile #featured > figure, */ .no-mobile #root .module-a > figure {
     background-attachment: fixed;
 }
 
@@ -613,6 +613,14 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     top: 89px;
     right: 0;
     bottom: 0;
+}
+
+#featured.sticky > *, .js #featured.regular > figure {
+    opacity: 1;
+}
+
+#featured.sticky > figure, .js #featured.regular > * {
+    opacity: 0;
 }
 
 #featured.a {
@@ -1029,6 +1037,23 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
             text-align: center;
         }
 
+        #aside > ul > li > ul > li > label.checkbox .input {
+            top: 15px;
+            width: 16px;
+            height: 16px;
+            border-radius: 0;
+            border-color: #555;
+        }
+
+        #aside > ul > li > ul > li > label.checkbox.active {
+            color: #c80000;
+        }
+
+            #aside > ul > li > ul > li > label.checkbox.active .input, #aside > ul > li > ul > li > label.checkbox .input:before {
+                border-color: #c80000;
+                background: #c80000;
+            }
+
 #footer {
     position: relative;
     z-index: 2;
@@ -1238,6 +1263,26 @@ html.a #content {
         padding: 50px 0 0;
     }
 
+html.b body {
+    background: #fff;
+}
+
+html.b #top {
+}
+
+html.b #logo {
+    margin-left: -100px;
+}
+
+    html.b #logo a:before {
+        width: 100%;
+        text-align: center;
+    }
+
+html.b #footer, html.b #footer:before {
+    background: none;
+    color: #808080;
+}
 
 /*! Columns --------- */
 .double {
@@ -1298,6 +1343,52 @@ p.double {
         }
 
 /*! Modules --------- */
+
+.error-a {
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+    .error-a h1, .error-a h2, .error-a h3, .error-a h4, .error-a h5, .error-a h6 {
+        margin-bottom: 59px;
+        font-size: 9.4em;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+        .error-a h1 span, .error-a h2 span, .error-a h3 span, .error-a h4 span, .error-a h5 span, .error-a h6 span {
+            display: block;
+            padding: 20px 0 0;
+            font-size: .67021276595em;
+            font-weight: 300;
+        }
+
+    .error-a p {
+        margin-bottom: 3px;
+        font-size: 3em;
+    }
+
+        .error-a p a {
+            display: block;
+            color: #0971b2;
+        }
+
+        .error-a p.overlay-g {
+            margin-bottom: 50px;
+            font-size: 3.843em;
+            font-weight: 700;
+            font-family: Gotham, Arial, Helvetica, sans-serif;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+            .error-a p.overlay-g span {
+                display: block;
+                margin: 0 0 1px;
+                font-size: 4.16341399948em;
+                font-weight: 400;
+            }
+
 .gallery-a {
     position: relative;
     z-index: 1;
@@ -2226,6 +2317,10 @@ sub {
 
 #root .overlay-f {
     color: #c80000;
+}
+
+#root .overlay-g {
+    color: #e3e3e3;
 }
 
 .size-a, #root .size-a {
@@ -3498,6 +3593,69 @@ input, select, textarea {
         text-align: center;
     }
 
+.error-element {
+    display: block;
+    padding: 5px 0 0;
+    color: #c80000;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: left;
+}
+
+.file-a {
+    position: relative;
+    height: 35px;
+}
+
+    .file-a label {
+        display: block;
+        left: auto;
+        height: 35px;
+        padding: 0 10px;
+        background: #dcdbdb;
+        color: #333;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 35px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+        .file-a label:hover {
+            background: #e3e3e3;
+        }
+
+    .file-a .text {
+        display: block;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 120px;
+        height: 35px;
+        padding: 0 10px;
+        border: 1px solid #333;
+        background: #fff;
+        font-size: 14px;
+        line-height: 33px;
+        text-overflow: ellipsis;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .js .file-a {
+        padding-right: 120px;
+    }
+
+        .js .file-a label {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 110px;
+        }
+
+
 .form-a {
 }
 
@@ -3548,7 +3706,7 @@ th, td {
     height: 0;
 }
 
-.hidden, [hidden], template, #nav em, .social-a span, .js #featured figure img, .list-b > li > div, .list-b header .social-b, .social-b span, .popup-a.a header:before, #featured h1.stronger:before, #featured h2.stronger:before, #featured h3.stronger:before, #featured h4.stronger:before, #featured h5.stronger:before, #featured h6.stronger:before, .js .module-a > figure.background img, #featured.a h1:before, #featured.a h2:before, #featured.a h3:before, #featured.a h4:before, #featured.a h5:before, #featured.a h6:before, html.a #logo a:before, .list-e li:last-child:before, .list-h ul li:before, #aside.a > ul > li.sub > a:after, #aside > ul > li.search label, .js #aside > ul > li > ul > li > label input, .list-h li.high h1 .scheme-a, .list-h li.high h2 .scheme-a, .list-h li.high h3 .scheme-a, .list-h li.high h4 .scheme-a, .list-h li.high h5 .scheme-a, .list-h li.high h6 .scheme-a {
+.hidden, [hidden], template, #nav em, .social-a span, .js #featured figure img, .list-b > li > div, .list-b header .social-b, .social-b span, .popup-a.a header:before, #featured h1.stronger:before, #featured h2.stronger:before, #featured h3.stronger:before, #featured h4.stronger:before, #featured h5.stronger:before, #featured h6.stronger:before, .js .module-a > figure.background img, #featured.a h1:before, #featured.a h2:before, #featured.a h3:before, #featured.a h4:before, #featured.a h5:before, #featured.a h6:before, html.a #logo a:before, .list-e li:last-child:before, .list-h ul li:before, #aside > ul > li.search label, .js #aside > ul > li > ul > li > label input, .list-h li.high h1 .scheme-a, .list-h li.high h2 .scheme-a, .list-h li.high h3 .scheme-a, .list-h li.high h4 .scheme-a, .list-h li.high h5 .scheme-a, .list-h li.high h6 .scheme-a, .file-a label input {
     position: absolute;
     left: -3000em;
     top: 0;
@@ -4043,7 +4201,7 @@ svg:not(:root) {
 }
 
 @media only screen and (min-width: 47.5em) and (max-height: 47.5em) { /* height - 760 */
-    .js #featured.regular {
+    .js #featured.regular, #featured.sticky > figure, .js #featured.regular > * {
         opacity: 1;
     }
 
@@ -4734,6 +4892,27 @@ svg:not(:root) {
         margin-left: 30px;
     }
 
+    .error-a {
+    }
+
+        .error-a h1, .error-a h2, .error-a h3, .error-a h4, .error-a h5, .error-a h6 {
+            margin-bottom: 50px;
+            font-size: 8em;
+        }
+
+            .error-a h1 span, .error-a h2 span, .error-a h3 span, .error-a h4 span, .error-a h5 span, .error-a h6 span {
+                padding: 17px 0 0;
+            }
+
+        .error-a p {
+            font-size: 2.6em;
+        }
+
+            .error-a p.overlay-g {
+                margin-bottom: 43px;
+                font-size: 3.3em;
+            }
+
     .list-b {
         margin-bottom: 11px;
     }
@@ -5011,7 +5190,7 @@ svg:not(:root) {
             top: 62px;
         }
 
-        .js #featured.regular {
+        .js #featured.regular, #featured.sticky > figure, .js #featured.regular > * {
             opacity: 1;
         }
 
@@ -5313,6 +5492,27 @@ svg:not(:root) {
     p.double > span + * {
         margin-top: 18px;
     }
+
+    .error-a {
+    }
+
+        .error-a h1, .error-a h2, .error-a h3, .error-a h4, .error-a h5, .error-a h6 {
+            margin-bottom: 26px;
+            font-size: 4.2em;
+        }
+
+            .error-a h1 span, .error-a h2 span, .error-a h3 span, .error-a h4 span, .error-a h5 span, .error-a h6 span {
+                padding: 8px 0 0;
+            }
+
+        .error-a p {
+            font-size: 1.4em;
+        }
+
+            .error-a p.overlay-g {
+                margin-bottom: 22px;
+                font-size: 2.2em;
+            }
 
     .float-left, .float-right {
         float: none;
@@ -6400,6 +6600,18 @@ svg:not(:root) {
         width: device-width;
     }
 
+    .js .file-a {
+        padding-right: 90px;
+    }
+
+        .js .file-a label {
+            width: 80px;
+        }
+
+    .file-a .text {
+        right: 90px;
+    }
+
     .module-c {
     }
 
@@ -6537,13 +6749,4 @@ svg:not(:root) {
     display: block;
     background-size: 15px;
     text-indent: 20px;
-}
-
-.error-element {
-    display: block;
-    padding: 5px 0 0;
-    color: #c80000;
-    font-weight: 400;
-    font-size: 12px;
-    text-align: left;
 }
