@@ -11,7 +11,8 @@
                 <header class="vcard a">
                     <h3 class="mobile-hide">
                         <asp:Literal runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
-                    <p class="fn org strong">Shungham Information sprl</p>
+                    <p class="fn org strong">
+                        <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: ShunghamResources, InfoLabel %>" /></p>
                     <ul>
                         <li class="adr">
                             <sf:SitefinityLabel ID="streetAddressLbl" runat="server"
