@@ -37,7 +37,7 @@
                     </asp:ContentPlaceHolder>
                 </nav>
             </header>
-            <header id="featured" class="a">
+            <header id="featured">
                 <asp:ContentPlaceHolder ID="BannerHolder" runat="server">
                 </asp:ContentPlaceHolder>
             </header>
