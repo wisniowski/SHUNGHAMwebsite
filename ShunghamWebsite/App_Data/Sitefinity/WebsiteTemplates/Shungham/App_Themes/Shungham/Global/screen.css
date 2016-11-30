@@ -1271,6 +1271,7 @@ html.b #top {
 }
 
 html.b #logo {
+    left: 50%;
     margin-left: -100px;
 }
 
