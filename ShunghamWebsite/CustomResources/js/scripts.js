@@ -44,6 +44,23 @@ eval(function (p, a, c, k, e, r) { e = function (c) { return (c < a ? '' : e(par
 */
 (function (a) { (jQuery.browser = jQuery.browser || {}).mobile = /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od|ad)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4)) })(navigator.userAgent || navigator.vendor || window.opera);
 /*!
+	matchMedia() polyfill / addListener/removeListener extension
+	Copyright	Scott Jehl
+	License		MIT
+
+	https://github.com/paulirish/matchMedia.js
+*/
+window.matchMedia || (window.matchMedia = function () { "use strict"; var styleMedia = (window.styleMedia || window.media); if (!styleMedia) { var style = document.createElement('style'), script = document.getElementsByTagName('script')[0], info = null; style.type = 'text/css'; style.id = 'matchmediajs-test'; script.parentNode.insertBefore(style, script); info = ('getComputedStyle' in window) && window.getComputedStyle(style) || style.currentStyle; styleMedia = { matchMedium: function (media) { var text = '@media ' + media + '{ #matchmediajs-test { width: 1px; } }'; if (style.styleSheet) { style.styleSheet.cssText = text } else { style.textContent = text } return info.width === '1px' } } } return function (media) { return { matches: styleMedia.matchMedium(media || 'all'), media: media || 'all' } } }()); (function () { if (window.matchMedia && window.matchMedia('all').addListener) { return false } var localMatchMedia = window.matchMedia, hasMediaQueries = localMatchMedia('only all').matches, isListening = false, timeoutID = 0, queries = [], handleChange = function (evt) { clearTimeout(timeoutID); timeoutID = setTimeout(function () { for (var i = 0, il = queries.length; i < il; i++) { var mql = queries[i].mql, listeners = queries[i].listeners || [], matches = localMatchMedia(mql.media).matches; if (matches !== mql.matches) { mql.matches = matches; for (var j = 0, jl = listeners.length; j < jl; j++) { listeners[j].call(window, mql) } } } }, 30) }; window.matchMedia = function (media) { var mql = localMatchMedia(media), listeners = [], index = 0; mql.addListener = function (listener) { if (!hasMediaQueries) { return } if (!isListening) { isListening = true; window.addEventListener('resize', handleChange, true) } if (index === 0) { index = queries.push({ mql: mql, listeners: listeners }) } listeners.push(listener) }; mql.removeListener = function (listener) { for (var i = 0, il = listeners.length; i < il; i++) { if (listeners[i] === listener) { listeners.splice(i, 1) } } }; return mql } }());
+/*!
+	enquire.js
+	Copyright	Nick Williams
+	License		MIT
+	Version		2.1.2
+
+	https://github.com/WickyNilliams/enquire.js
+*/
+!function (a, b, c) { var d = window.matchMedia; "undefined" != typeof module && module.exports ? module.exports = c(d) : "function" == typeof define && define.amd ? define(function () { return b[a] = c(d) }) : b[a] = c(d) }("enquire", this, function (a) { "use strict"; function b(a, b) { var c, d = 0, e = a.length; for (d; e > d && (c = b(a[d], d), c !== !1) ; d++); } function c(a) { return "[object Array]" === Object.prototype.toString.apply(a) } function d(a) { return "function" == typeof a } function e(a) { this.options = a, !a.deferSetup && this.setup() } function f(b, c) { this.query = b, this.isUnconditional = c, this.handlers = [], this.mql = a(b); var d = this; this.listener = function (a) { d.mql = a, d.assess() }, this.mql.addListener(this.listener) } function g() { if (!a) throw new Error("matchMedia not present, legacy browsers require a polyfill"); this.queries = {}, this.browserIsIncapable = !a("only all").matches } return e.prototype = { setup: function () { this.options.setup && this.options.setup(), this.initialised = !0 }, on: function () { !this.initialised && this.setup(), this.options.match && this.options.match() }, off: function () { this.options.unmatch && this.options.unmatch() }, destroy: function () { this.options.destroy ? this.options.destroy() : this.off() }, equals: function (a) { return this.options === a || this.options.match === a } }, f.prototype = { addHandler: function (a) { var b = new e(a); this.handlers.push(b), this.matches() && b.on() }, removeHandler: function (a) { var c = this.handlers; b(c, function (b, d) { return b.equals(a) ? (b.destroy(), !c.splice(d, 1)) : void 0 }) }, matches: function () { return this.mql.matches || this.isUnconditional }, clear: function () { b(this.handlers, function (a) { a.destroy() }), this.mql.removeListener(this.listener), this.handlers.length = 0 }, assess: function () { var a = this.matches() ? "on" : "off"; b(this.handlers, function (b) { b[a]() }) } }, g.prototype = { register: function (a, e, g) { var h = this.queries, i = g && this.browserIsIncapable; return h[a] || (h[a] = new f(a, i)), d(e) && (e = { match: e }), c(e) || (e = [e]), b(e, function (b) { d(b) && (b = { match: b }), h[a].addHandler(b) }), this }, unregister: function (a, b) { var c = this.queries[a]; return c && (b ? c.removeHandler(b) : (c.clear(), delete this.queries[a])), this } }, new g });
+/*!
  * Scripts
  */
 head.ready(function () {
@@ -182,11 +199,19 @@ head.ready(function () {
                         } else {
                             $('html').addClass('not-top');
                         }
+                        $('#featured figure').css('top', $(window).scrollTop()).css('bottom', -$(window).scrollTop());
                     });
                 }
             },
             onload: function () {
                 //$('html').addClass('run');
+            },
+            responsive: function () {
+                enquire.register('screen and (min-width: 761px)', function () {
+                    $('#aside li.has-toggle').addClass('toggle');
+                }).register('screen and (max-width: 760px)', function () {
+                    $('#aside li.has-toggle').removeClass('toggle');
+                });
             },
             offclick: function () {
                 $('html').on('click', function () {
@@ -225,6 +250,8 @@ head.ready(function () {
                 $('#aside:not(.a) :header').each(function () { $(this).html($(this).parents('#aside').find('li.active').text()); });
                 $('.module-c > .b footer .link-b').each(function () { $(this).addClass('mobile-hide').clone().removeClass('mobile-hide').addClass('mobile-only').insertAfter($(this).parents('.b').children('.double:first').children('*:first-child')); });
                 $('#nav > p:only-child').clone().addClass('back').appendTo('#top');
+                $('.file-a').append('<span class="text"></span>').find('input').on('change', function () { $(this).parents('.file-a').find('.text').text($(this).val()); }).parents('.file-a').find('.text').each(function () { $(this).text($(this).parents('.file-a').find('input').attr('data-placeholder')); });
+                $('#aside li.toggle').addClass('has-toggle');
             }
         },
         ie: {
@@ -249,6 +276,7 @@ head.ready(function () {
     Default.utils.popups();
     Default.utils.top();
     Default.utils.offclick();
+    Default.utils.responsive();
     Default.ie.css();
     Default.utils.onload();
 
