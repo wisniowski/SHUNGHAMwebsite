@@ -29,13 +29,6 @@
         </li>
 
         <li class="sfFormCtrl">
-            <asp:Label ID="Label2" runat="server" AssociatedControlID="InitialItemsCount" 
-                CssClass="sfTxtLbl">Initial Items Count</asp:Label>
-            <asp:TextBox ID="InitialItemsCount" runat="server" CssClass="sfTxt" />
-            <div class="sfExample"></div>
-        </li>
-
-        <li class="sfFormCtrl">
             <asp:Label ID="Label1" runat="server" AssociatedControlID="BackButtonDefaultDestination" 
                 CssClass="sfTxtLbl">Back link default destination</asp:Label>
             <asp:TextBox ID="BackButtonDefaultDestination" runat="server" CssClass="sfTxt" />

@@ -30,28 +30,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
     {
         #region Control Properties
 
-        /// <summary>
-        /// Gets or sets the initial items count.
-        /// </summary>
-        /// <value>
-        /// The initial items count.
-        /// </value>
-        public int InitialItemsCount
-        {
-            get
-            {
-                return this.initialItemsCount;
-            }
-            set
-            {
-                if (value == 0)
-                {
-                    value = 7; //Default value for the control
-                }
-                this.initialItemsCount = value;
-            }
-        }
-
         /// <inheritdoc />
         public override string LayoutTemplatePath
         {
@@ -459,7 +437,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         public override IEnumerable<System.Web.UI.ScriptDescriptor> GetScriptDescriptors()
         {
             ScriptControlDescriptor scriptControlDescriptor = new ScriptControlDescriptor(base.GetType().FullName, this.ClientID);
-            scriptControlDescriptor.AddProperty("initialItemsCount", this.InitialItemsCount);
             scriptControlDescriptor.AddProperty("isDetailsMode", this.IsDetailsMode);
             return new ScriptControlDescriptor[] { scriptControlDescriptor };
         }
@@ -822,7 +799,6 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
         #region Private fields and constants
 
         private bool isDetailsMode = false;
-        private int initialItemsCount = 7;
         private string layoutTemplatePath = string.Empty;
         private string layoutTemplatePathDetails = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarDetailTemplate.ascx";
         private string layoutTemplatePathMaster = "~/CustomWidgets/EUCalendar/EUCalendarWidget/EUCalendarMasterTemplate.ascx";
