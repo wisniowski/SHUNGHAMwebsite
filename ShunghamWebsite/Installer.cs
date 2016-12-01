@@ -105,6 +105,10 @@ namespace SitefinityWebApp
             //retrieve dossier updates from ms dynamics
             MemoryCacheItem.dossiers = new List<EUDossierModel>();
             MemoryCacheItem.dossiers = EUIssueTrackerHelper.GetDossiers();
+
+            //proactive caching - retrieve events from ms dynamics
+            MemoryCacheItem.events = new List<EventModel>();
+            MemoryCacheItem.events = EventsControlsHelper.GetEventsList();
         }
 
         private static void RegisterSectionInBackend(string toolboxName, string sectionName)

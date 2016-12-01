@@ -85,7 +85,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
             if (eventList != null && eventList.Count > 0)
             {
                 //TODO: extract this in a config
-                var cacheExpirationTime = 20;
+                var cacheExpirationTime = 60;
                 CacheManager.Add(
                     cacheKeywordEvents,
                     eventList,
@@ -171,7 +171,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
                     if (policyAreasList != null && policyAreasList.Count > 0)
                     {
                         //TODO: extract this in a config
-                        var cacheExpirationTime = 20;
+                        var cacheExpirationTime = 60;
                         CacheManager.Add(
                             cacheKeywordPolicyAreas,
                             policyAreasList,
