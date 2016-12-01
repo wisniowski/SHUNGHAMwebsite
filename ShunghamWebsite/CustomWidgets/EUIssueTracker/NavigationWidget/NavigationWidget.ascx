@@ -50,7 +50,7 @@
                 if ($(this).text() == preSelectedCategory)
                 {
                     $(this).parent().addClass('active');
-                    $(this).parent().parent().parent().addClass("toggle");
+                    $("a:contains(" + preSelectedArea + ")").parent().addClass("toggle");
                 }
             }
         });
