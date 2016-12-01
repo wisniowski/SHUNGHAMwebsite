@@ -99,7 +99,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
                     if (policyAreasList != null && policyAreasList.Count > 0)
                     {
                         //TODO: extract this in a config
-                        var cacheExpirationTime = 20;
+                        var cacheExpirationTime = 60;
                         CacheManager.Add(
                             cacheKeywordPAC,
                             policyAreasList,
@@ -144,7 +144,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
                     if (dossierStatusesList != null && dossierStatusesList.Count > 0)
                     {
                         //TODO: extract this in a config
-                        var cacheExpirationTime = 20;
+                        var cacheExpirationTime = 60;
                         CacheManager.Add(
                             cacheKeywordDossierStatuses,
                             dossierStatusesList,
@@ -194,7 +194,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             if (dossiersList != null && dossiersList.Count > 0)
             {
                 //TODO: extract this in a config
-                var cacheExpirationTime = 20;
+                var cacheExpirationTime = 60;
                 CacheManager.Add(
                     cacheKeywordDossiers,
                     dossiersList,
