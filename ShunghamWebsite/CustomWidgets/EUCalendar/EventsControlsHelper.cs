@@ -190,12 +190,12 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
             }
         }
 
-        public static IList<EventModel> OrderEventsCollection(this IList<EventModel> eventList, DateTime startDate)
+        public static IList<EventModel> FilterEventsByMonthAndYearCollection(this IList<EventModel> eventList, DateTime startDate)
         {
             eventList = eventList
                 .Where(ev => ev.Attributes.new_eucstartdate.ToString("MMMM yyyy") == startDate.ToString("MMMM yyyy"))
-                .OrderBy(ev => ev.Attributes.new_eucstarttime)
-                .ThenBy(ev => ev.Attributes.cdi_name).ToList();
+                .OrderBy(ev => ev.Attributes.cdi_name)
+                .ToList();
 
             return eventList;
         }

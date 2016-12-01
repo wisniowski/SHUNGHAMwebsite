@@ -11,7 +11,6 @@ using System.Web;
 using Newtonsoft.Json;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Caching;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Caching.Expirations;
-using Telerik.Microsoft.Practices.EnterpriseLibrary.Logging;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Services;
 using Telerik.Sitefinity.Web;

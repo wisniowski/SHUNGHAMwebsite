@@ -382,7 +382,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
 
         private void FilterEventsByDate(DateTime selectedDate)
         {
-            MemoryCacheItem.events = MemoryCacheItem.events.OrderEventsCollection(selectedDate);
+            MemoryCacheItem.events = MemoryCacheItem.events.FilterEventsByMonthAndYearCollection(selectedDate);
 
             this.EventsList.DataSource = MemoryCacheItem.events;
             this.EventsList.ItemDataBound += EventsList_ItemDataBound;
@@ -428,7 +428,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (eventDeadlineRadioButton.Checked && !this.IsDetailsMode)
             {
                 var currentDate = DateTime.Parse(this.Date.InnerHtml);
-                this.EventsList.DataSource = MemoryCacheItem.events.OrderEventsCollection(currentDate)
+                this.EventsList.DataSource = MemoryCacheItem.events.FilterEventsByMonthAndYearCollection(currentDate)
                     .OrderBy(a => a.Attributes.new_eucregistrationdeadline).ToList();
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
@@ -440,7 +440,7 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             if (eventDateRadioButton.Checked && !this.IsDetailsMode)
             {
                 var currentDate = DateTime.Parse(this.Date.InnerHtml);
-                this.EventsList.DataSource = MemoryCacheItem.events.OrderEventsCollection(currentDate)
+                this.EventsList.DataSource = MemoryCacheItem.events.FilterEventsByMonthAndYearCollection(currentDate)
                     .OrderBy(a => a.Attributes.new_eucstartdate).ToList();
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
