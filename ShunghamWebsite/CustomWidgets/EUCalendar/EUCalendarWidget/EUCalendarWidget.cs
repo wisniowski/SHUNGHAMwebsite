@@ -423,7 +423,9 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget
             {
                 var currentDate = DateTime.Parse(this.Date.InnerHtml);
                 this.EventsList.DataSource = MemoryCacheItem.events.FilterEventsByMonthAndYearCollection(currentDate)
-                    .OrderBy(a => a.Attributes.new_eucstartdate).ToList();
+                    .OrderBy(a => a.Attributes.new_eucstartdate)
+                    .ThenBy(a => a.Attributes.new_eucstarttime)
+                    .ToList();
                 this.EventsList.ItemDataBound += EventsList_ItemDataBound;
                 this.EventsList.DataBind();
             }
