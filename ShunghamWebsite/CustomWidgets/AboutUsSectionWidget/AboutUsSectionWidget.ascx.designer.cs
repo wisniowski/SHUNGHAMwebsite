@@ -13,13 +13,13 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget {
     public partial class AboutUsSectionWidget {
         
         /// <summary>
-        /// TitleLtl control.
+        /// divWrapper control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal TitleLtl;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divWrapper;
         
         /// <summary>
         /// contentWrapper control.
