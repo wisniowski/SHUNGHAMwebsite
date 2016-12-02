@@ -31,11 +31,11 @@
         <li>
             <p id="newWrapper" runat="server" class="label" style="display: none;">New</p>
             <h4>
-                <%# DataBinder.Eval(Container.DataItem,"Attributes.uni_shorttitle") %>
+                <%# DataBinder.Eval(Container.DataItem,"Attributes.shortTitle.Value") %>
             </h4>
             <ul>
                 <li class="text-uppercase"><span>Updated:</span>
-                    <%# DataBinder.Eval(Container.DataItem, "Attributes.uni_publishdate", "{0:dd MMM yyyy}") %></li>
+                    <%# DataBinder.Eval(Container.DataItem, "Attributes.publishDate.Value", "{0:dd MMM yyyy}") %></li>
                 <li><span>Status:</span>
                     <%# DataBinder.Eval(Container.DataItem,"Attributes.Status.Value") %>
                 </li>

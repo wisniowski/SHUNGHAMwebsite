@@ -53,22 +53,48 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         public bool Value { get; set; }
     }
 
+    public class Fulltitle
+    {
+        public string __type { get; set; }
+        public string AttributeLogicalName { get; set; }
+        public string EntityLogicalName { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class ShortTitle
+    {
+        public string __type { get; set; }
+        public string AttributeLogicalName { get; set; }
+        public string EntityLogicalName { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class PublishDate
+    {
+        public string __type { get; set; }
+        public string AttributeLogicalName { get; set; }
+        public string EntityLogicalName { get; set; }
+        public DateTime Value { get; set; }
+    }
+
     public class DossierAttributes
     {
-        public string uni_shorttitle { get; set; }
-        public string uni_fulltitle { get; set; }
-        public DateTime uni_publishdate { get; set; }
-        public UpdateId updateId { get; set; }
-        public DossierId dossierId { get; set; }
-        public DossierPolicyAreaName policyAreaName { get; set; }
-        public PolicyCategoryName policyCategoryName { get; set; }
-        public ShowOnSitefinity showOnSitefinity { get; set; }
+        public string uni_shunghamdossierid { get; set; }
         public Status status { get; set; }
+        public DossierId dossierId { get; set; }
+        public Fulltitle fulltitle { get; set; }
+        public ShortTitle shortTitle { get; set; }
+        public UpdateId updateId { get; set; }
+        public PolicyCategoryName policyCategoryName { get; set; }
+        public PublishDate publishDate { get; set; }
+        public PolicyAreaName policyAreaName { get; set; }
+        public ShowOnSitefinity showOnSitefinity { get; set; }
     }
 
     public class DossierFormattedValues
     {
-        public string uni_publishdate { get; set; }
+        public string publishDate { get; set; }
+        public string showOnSitefinity { get; set; }
     }
 
     public class EUDossierModel
