@@ -123,7 +123,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
             if (e.Item is RadListViewDataItem)
             {
                 var dataItem = ((RadListViewDataItem)e.Item).DataItem as EUDossierModel;
-                var dateUpdated = dataItem.Attributes.uni_publishdate;
+                var dateUpdated = dataItem.Attributes.publishDate != null ? dataItem.Attributes.publishDate.Value : DateTime.MinValue;
                 if (dateUpdated > DateTime.Now.AddHours(-24) && dateUpdated <= DateTime.Now)
                 {
                     HtmlGenericControl pTag = e.Item.FindControl("newWrapper") as HtmlGenericControl;
@@ -140,7 +140,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierGridWidget
                         var pageUrl = detailsPage.GetUrl(Thread.CurrentThread.CurrentCulture);
                         detailViewLinkControl.NavigateUrl =
                             string.Format("{0}/{1}/{2}", pageUrl, dataItem.Attributes.dossierId.Value,
-                            Regex.Replace(dataItem.Attributes.uni_shorttitle.ToLower(), urlRegex, hyphen));
+                            Regex.Replace(dataItem.Attributes.shortTitle.Value.ToLower(), urlRegex, hyphen));
                     }
                 }
             }

@@ -188,7 +188,8 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
             //anything that follows gets executed after all urls have finished downloading
             var dossiers = parsedJson;
             Log.Write(string.Format("Total number of dossier updates: {0}", dossiers.Count), ConfigurationPolicy.Trace);
-            dossiersList = dossiers.GetLatestUpdatedDossiersOnly();
+            //dossiersList = dossiers.GetLatestUpdatedDossiersOnly();
+            dossiersList = dossiers;
 
             if (dossiersList != null && dossiersList.Count > 0)
             {
@@ -260,7 +261,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         /// <returns></returns>
         public static IList<EUDossierModel> GetLatestUpdatedDossiersOnly(this IList<EUDossierModel> dossiersList)
         {
-            return dossiersList.OrderByDescending(d => d.Attributes.uni_publishdate)
+            return dossiersList.OrderByDescending(d => d.Attributes.publishDate.Value)
                                 .GroupBy(s => new { DossierID = s.Attributes.dossierId.Value, Status = s.Attributes.status.Value })
                                 .Select(grp => grp.FirstOrDefault())
                                 .ToList();
@@ -312,8 +313,9 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         /// <returns></returns>
         public static IList<EUDossierModel> GetLatestUpdatedDossiersWithinDays(this IList<EUDossierModel> dossiersList, int days)
         {
-            dossiersList = dossiersList.Where(d => d.Attributes.uni_publishdate > DateTime.Now.AddDays(-days) &&
-                d.Attributes.uni_publishdate <= DateTime.Now).ToList();
+            dossiersList = dossiersList.Where(d => d.Attributes.publishDate != null && 
+                d.Attributes.publishDate.Value > DateTime.Now.AddDays(-days) &&
+                d.Attributes.publishDate.Value <= DateTime.Now).ToList();
             return dossiersList;
         }
 
@@ -421,7 +423,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker
         private const string cacheKeywordDossiers = "dossiersCached";
         private const string policyAreaServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/navigation";
         private const string dossierStatusServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/ShunghamDossierStatuses";
-        private const string dossierServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/ShunghamDossiers";
+        private const string dossierServiceUrl = "http://www.shungham.com/SavedQueryService/Execute/shunghamdossierupdates";
         public static IList<NavigationItem> navItems = new List<NavigationItem>();
         public static string urlRegex = @"[^\w\-\!\$\'\(\)\=\@\d_]+";
         public static string hyphen = "-";

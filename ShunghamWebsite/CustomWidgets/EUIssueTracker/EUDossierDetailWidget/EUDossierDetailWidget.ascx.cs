@@ -40,10 +40,10 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
 
         private void BindDossierDetail(EUDossierModel dossierUpdate)
         {
-            this.dateUpdatedLtl.Text = dossierUpdate.Attributes.uni_publishdate.ToString("dd MMM yyyy");
+            this.dateUpdatedLtl.Text = dossierUpdate.Attributes.publishDate.Value.ToString("dd MMM yyyy");
             this.statusLtl.Text = dossierUpdate.Attributes.status.Value;
             this.dossierIDLtl.Text = dossierUpdate.Attributes.dossierId.Value;
-            this.fullTitleLtl.Text = dossierUpdate.Attributes.uni_fulltitle;
+            this.fullTitleLtl.Text = dossierUpdate.Attributes.fulltitle.Value;
         }
 
         private void ResolvePageMetaTags(EUDossierModel dossierUpdate)
@@ -52,13 +52,13 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
             {
                 return;
             }
-            if (!string.IsNullOrEmpty(dossierUpdate.Attributes.uni_fulltitle))
+            if (!string.IsNullOrEmpty(dossierUpdate.Attributes.fulltitle.Value))
             {
-                this.Page.MetaDescription = dossierUpdate.Attributes.uni_fulltitle;
+                this.Page.MetaDescription = dossierUpdate.Attributes.fulltitle.Value;
             }
-            if (!string.IsNullOrEmpty(dossierUpdate.Attributes.uni_shorttitle))
+            if (!string.IsNullOrEmpty(dossierUpdate.Attributes.shortTitle.Value))
             {
-                this.Page.Title = dossierUpdate.Attributes.uni_shorttitle;
+                this.Page.Title = dossierUpdate.Attributes.shortTitle.Value;
             }
         }
 
@@ -79,7 +79,7 @@ namespace SitefinityWebApp.CustomWidgets.EUIssueTracker.EUDossierDetailWidget
                 var statusUrl = "javascript:void(0)";
                 EUIssueTrackerHelper.ConstructStatusUrl(dossierUpdate.Attributes.status.Value, out statusUrl);
                 SiteMapNode dossierUpdateNode = new SiteMapNode(provider, "dossierUpdateKey", statusUrl,
-                    dossierUpdate.Attributes.status.Value, dossierUpdate.Attributes.uni_shorttitle);
+                    dossierUpdate.Attributes.status.Value, dossierUpdate.Attributes.shortTitle.Value);
                 sitemap.Add(dossierUpdateNode);
                 return sitemap;
             }
