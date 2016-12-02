@@ -964,7 +964,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
 }
 
 #aside .rtUL {
-    padding: 18px 50px 18px 120px;
+    padding: 18px 50px 18px 90px;
     font-size: .81818181818em;
 }
 
@@ -978,7 +978,7 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
 }
 
     #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label, #aside .rtUL .rtIn {
-        padding: 10px 37px;
+        padding: 10px 33px;
     }
 
     #aside > ul > li > ul > li.active > a:after,
@@ -4156,6 +4156,50 @@ svg:not(:root) {
     }
 }
 
+/*EUCalendar Policy Areas Checkboxes*/
+.RadTreeView .rtChk{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+}
+
+.RadTreeView label.checkbox .input{
+    top: 13px;
+    width: 16px;
+    height: 16px;
+    border-radius: 0;
+    border-color: #555;
+    position: absolute;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.RadTreeView label.checkbox.active{
+    color: #c80000;
+}
+
+.RadTreeView label.checkbox.active .input, 
+.RadTreeView label.checkbox .input:before {
+    border-color: #c80000;
+    background: #c80000;
+}
+
+.RadTreeView .hidden {
+    position: absolute;
+    left: -3000em;
+    top: 0;
+    right: auto;
+    bottom: auto;
+}
+
+.RadTreeView{
+    background: #fafafa;
+}
+
 /* Responsive --------- */
 @media only screen and (max-height: 900px) { /* height - 900 */
     #featured {
@@ -4261,10 +4305,8 @@ svg:not(:root) {
                 padding-left: 32px;
             }
 
-                #aside > ul > li > ul > li > label .input, #aside > ul > li > ul > li > label input {
-                    top: 13px;
-                    width: 20px;
-                    height: 20px;
+                .RadTreeView label.checkbox .input, #aside > ul > li > ul > li > label input {
+                    top: 10px;
                 }
 
                     #aside > ul > li > ul > li > label .input:before {
@@ -4274,7 +4316,7 @@ svg:not(:root) {
                     }
 
     #aside .rtUL {
-        padding: 18px 50px 18px 70px;
+        padding: 18px 50px 18px 43px;
     }
 
     html.a #root {
@@ -4513,7 +4555,8 @@ svg:not(:root) {
         }
 
             #aside > ul > li > ul > li > a, #aside > ul > li > ul > li > label, #aside .rtUL .rtIn {
-                padding: 8px 0;
+                padding: 8px 30px;
+                font-size: 1.1em;
             }
 
             #aside > ul > li > ul > li.active > a:after {
@@ -4530,8 +4573,12 @@ svg:not(:root) {
                     height: 18px;
                 }
 
+    .RadTreeView label.checkbox .input {
+        top: 8px;
+    }
+
     #aside .rtUL {
-        padding: 10px 50px 18px 46px;
+        padding: 10px 50px 18px 21px;
     }
 
     html.a {
@@ -5309,7 +5356,7 @@ svg:not(:root) {
     }
 
     #aside .rtUL {
-        padding: 10px 50px 18px 60px;
+        padding: 10px 50px 18px 33px;
     }
 
     #content {
@@ -6753,42 +6800,3 @@ svg:not(:root) {
 }
 
 
-/*EUCalendar Policy Areas Checkboxes*/
-.RadTreeView .rtChk{
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 13px;
-    width: 22px;
-    height: 22px;
-    text-align: center;
-}
-
-.RadTreeView label.checkbox .input{
-    top: 10px;
-    width: 16px;
-    height: 16px;
-    border-radius: 0;
-    border-color: #555;
-    position: absolute;
-    border: 1px solid #333;
-    cursor: pointer;
-}
-
-.RadTreeView label.checkbox.active{
-    color: #c80000;
-}
-
-.RadTreeView label.checkbox.active .input, 
-.RadTreeView label.checkbox .input:before {
-    border-color: #c80000;
-    background: #c80000;
-}
-
-.RadTreeView .hidden {
-    position: absolute;
-    left: -3000em;
-    top: 0;
-    right: auto;
-    bottom: auto;
-}

@@ -121,6 +121,13 @@
         $(".RadTreeView .rtLI label").addClass("checkbox");
         $(".RadTreeView input:checkbox").addClass("hidden");
         $("<div class='input'></div>").insertAfter(".RadTreeView span.rtIn");
+
+        $(".RadTreeView .input").click(function () {
+            var nodeText = $(this).prev().text();
+
+            var node = tree.findNodeByText(nodeText);
+            $(node.get_checkBoxElement()).click();
+        });
     }
 
     function ClientNodeClicking(sender, eventArgs) {
