@@ -958,7 +958,12 @@ article, aside, details, div, figcaption, figure, footer, header, hgroup, main, 
     background: #fafafa;
 }
 
-#aside > ul > li.toggle > ul {
+#aside > ul > li > .RadTreeView {
+    position: absolute;
+    left: -3000em;
+}
+
+#aside > ul > li.toggle > ul, #aside > ul > li.toggle > .RadTreeView {
     position: relative;
     left: 0;
 }
