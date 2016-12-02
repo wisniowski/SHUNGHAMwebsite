@@ -18,7 +18,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#textWrapper a").wrap("<p class='link-a a'></p>");
+        $("#textWrapper a").wrap("<p class='link-a'></p>");
 
         $('.header-a').html(function (i, html) {
             return html.replace(/(\w+\s)/, '<span>$1</span>');
