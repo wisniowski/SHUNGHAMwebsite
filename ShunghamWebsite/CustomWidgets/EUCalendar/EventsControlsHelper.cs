@@ -91,7 +91,8 @@ namespace SitefinityWebApp.CustomWidgets.EUCalendar
                     eventList,
                     CacheItemPriority.Normal,
                     null,
-                    new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
+                    new NeverExpired());
+                    //new SlidingTime(TimeSpan.FromMinutes(cacheExpirationTime)));
             }
             sw.Stop();
             Log.Write(string.Format("Events parallel requests took total {0}", sw.Elapsed), ConfigurationPolicy.Trace);
