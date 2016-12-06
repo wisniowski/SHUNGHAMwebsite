@@ -1,5 +1,7 @@
 ﻿using System;
 using ShunghamUtilities;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
 {
@@ -21,7 +23,8 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
         {
             if (!string.IsNullOrEmpty(this.Title))
             {
-                this.TitleLtl.Text = this.Title;
+                var titleControl = this.CreateTitle(this.Title);
+                this.divWrapper.Controls.AddAt(0, titleControl);
             }
 
             if (!string.IsNullOrEmpty(this.Content))
@@ -57,10 +60,24 @@ namespace SitefinityWebApp.CustomWidgets.AboutUsSectionWidget
             }
         }
 
+        private HtmlGenericControl CreateTitle(string title)
+        {
+            HtmlGenericControl h2 = new HtmlGenericControl("h2");
+            h2.Attributes.Add("class", headerCSSClass);
+
+            Literal titleLtl = new Literal();
+            titleLtl.Text = title;
+
+            h2.Controls.Add(titleLtl);
+
+            return h2;
+        }
+
         #region Private fields and constants
 
         private const string leftAlignmentCSSClass = "float-left";
         private const string rightAlignmentCSSClass = "float-right";
+        private const string headerCSSClass = "header-a text-center";
         private const string whiteBGRColorName = "white";
         private const string contentWrapperPaddingStyle = "60px 80px 5px";
 

@@ -7,11 +7,12 @@
         CssClass="text-center" Text="<%$ Resources: ShunghamResources, ContactTitle %>" />
     <asp:UpdatePanel runat="server" ID="updatePanel" ChildrenAsTriggers="true" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:Panel ID="wrapper" runat="server" CssClass="double a">
+            <asp:Panel ID="wrapper" runat="server" CssClass="module-b double">
                 <header class="vcard a">
                     <h3 class="mobile-hide">
                         <asp:Literal runat="server" Text="<%$ Resources: ShunghamResources, SendUsMessage %>" /></h3>
-                    <p class="fn org strong">Shungham Information sprl</p>
+                    <p class="fn org strong">
+                        <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: ShunghamResources, InfoLabel %>" /></p>
                     <ul>
                         <li class="adr">
                             <sf:SitefinityLabel ID="streetAddressLbl" runat="server"
@@ -40,15 +41,15 @@
                             <label for="faa" class="hidden">First Name</label>
                             <asp:TextBox runat="server" ID="faa" placeholder="First Name" />
                             <asp:RequiredFieldValidator ID="rfvFirstName" runat="server"
-                                ControlToValidate="faa" EnableClientScript="false"
-                                ErrorMessage="First name is required!" ValidationGroup="Submit" />
+                                ControlToValidate="faa" EnableClientScript="false" CssClass="error-element"
+                                ErrorMessage="First name is required" ValidationGroup="Submit" />
                         </span>
                         <span>
                             <label for="fab" class="hidden">Last Name</label>
                             <asp:TextBox runat="server" ID="fab" placeholder="Last Name" />
                             <asp:RequiredFieldValidator ID="rvfLastName" runat="server"
                                 ControlToValidate="fab" EnableClientScript="false"
-                                ErrorMessage="Last name is required!" ValidationGroup="Submit" />
+                                ErrorMessage="Last name is required" ValidationGroup="Submit" CssClass="error-element" />
                         </span>
                     </p>
                     <p class="double a">
@@ -57,10 +58,10 @@
                             <asp:TextBox runat="server" ID="fac" placeholder="E-mail" TextMode="Email" />
                             <asp:RequiredFieldValidator ID="rfvEmail" runat="server"
                                 ControlToValidate="fac" EnableClientScript="false"
-                                ErrorMessage="Email is required!" ValidationGroup="Submit" />
+                                ErrorMessage="Email is required" ValidationGroup="Submit" CssClass="error-element" />
                             <asp:RegularExpressionValidator ID="expEmail" runat="server"
-                                ControlToValidate="fac" ErrorMessage="Email is invalid!"
-                                ValidationGroup="Submit"
+                                ControlToValidate="fac" ErrorMessage="Email is invalid"
+                                ValidationGroup="Submit" CssClass="error-element"
                                 ValidationExpression="^([a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]){1,70}$" />
                         </span>
                         <span>
@@ -79,8 +80,8 @@
                             <label for="faf" class="hidden">Message</label>
                             <asp:TextBox runat="server" ID="faf" placeholder="Message" TextMode="MultiLine" />
                             <asp:RequiredFieldValidator ID="rfvMessage" runat="server"
-                                ControlToValidate="faf" EnableClientScript="false"
-                                ErrorMessage="Message is required!" ValidationGroup="Submit" />
+                                ControlToValidate="faf" EnableClientScript="false" CssClass="error-element"
+                                ErrorMessage="Message is required" ValidationGroup="Submit" />
                         </span>
                     </p>
                     <p>

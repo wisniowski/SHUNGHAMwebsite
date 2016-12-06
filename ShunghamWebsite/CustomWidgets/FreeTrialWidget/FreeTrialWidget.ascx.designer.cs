@@ -67,6 +67,15 @@ namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget {
         protected global::System.Web.UI.WebControls.Literal Literal1;
         
         /// <summary>
+        /// Literal3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal Literal3;
+        
+        /// <summary>
         /// streetAddressLbl control.
         /// </summary>
         /// <remarks>
@@ -119,15 +128,6 @@ namespace SitefinityWebApp.CustomWidgets.FreeTrialWidget {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal emailLtl;
-        
-        /// <summary>
-        /// Literal2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal2;
         
         /// <summary>
         /// faa control.

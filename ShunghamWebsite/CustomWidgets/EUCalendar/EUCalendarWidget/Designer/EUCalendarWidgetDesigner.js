@@ -10,9 +10,6 @@ SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer.EUCalendarWi
     this._showPageSelectorDetailsPageIdDelegate = null;
     this._pageSelectedDetailsPageIdDelegate = null;
 
-    /* Initialize InitialItemsCount fields */
-    this._initialItemsCount = null;
-
     /* Initialize BackButtonDefaultDestination fields */
     this._backButtonDefaultDestination = null;
 
@@ -91,9 +88,6 @@ SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer.EUCalendarWi
             pagesSelectorDetailsPageId.set_selectedItems([{ Id: controlData.DetailsPageId }]);
         }
 
-        /* RefreshUI InitialItemsCount */
-        jQuery(this.get_initialItemsCount()).val(controlData.InitialItemsCount);
-
         /* RefreshUI BackButtonDefaultDestination */
         jQuery(this.get_backButtonDefaultDestination()).val(controlData.BackBtnDefaultDestination);
 
@@ -109,10 +103,7 @@ SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer.EUCalendarWi
 
         /* ApplyChanges SignInPageId */
 
-        /* ApplyChanges InitialItemsCount */
-        controlData.InitialItemsCount = jQuery(this.get_initialItemsCount()).val();
-
-        /* ApplyChanges InitialItemsCount */
+        /* ApplyChanges BackBtnDefaultDestination */
         controlData.BackBtnDefaultDestination = jQuery(this.get_backButtonDefaultDestination()).val();
 
         /* ApplyChanges IsDetailsMode */
@@ -186,10 +177,6 @@ SitefinityWebApp.CustomWidgets.EUCalendar.EUCalendarWidget.Designer.EUCalendarWi
     set_selectorTagDetailsPageId: function (value) {
         this._selectorTagDetailsPageId = value;
     },
-
-    /* InitialItemsCount properties */
-    get_initialItemsCount: function () { return this._initialItemsCount; },
-    set_initialItemsCount: function (value) { this._initialItemsCount = value; },
 
     /* BackButtonDefaultDestination properties */
     get_backButtonDefaultDestination: function () { return this._backButtonDefaultDestination; },

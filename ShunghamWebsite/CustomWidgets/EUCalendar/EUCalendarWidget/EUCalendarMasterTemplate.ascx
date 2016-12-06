@@ -34,8 +34,8 @@
         <li class="toggle sub">
             <a href="#">Policy Areas</a>
             <span class="toggle"></span>
-            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" RenderMode="Lightweight" CheckBoxes="true"
-                EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false" ShowLineImages="false">
+            <telerik:RadTreeView ID="policyAreasTreeView" runat="server" CheckBoxes="true" MultipleSelect="true"
+                EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false" ShowLineImages="false" OnClientNodeClicking="ClientNodeClicking">
             </telerik:RadTreeView>
         </li>
     </ul>
@@ -117,5 +117,23 @@
         for (var i = selectedItems.length - 1; i >= 0; i--) {
             selectedItems[i].get_element().className = selectedItems[i].get_element().className + ' active';
         };
+
+        $(".RadTreeView .rtLI label").addClass("checkbox");
+        $(".RadTreeView input:checkbox").addClass("hidden");
+        $("<div class='input'></div>").insertAfter(".RadTreeView span.rtIn");
+
+        $(".RadTreeView .input").click(function () {
+            var nodeText = $(this).prev().text();
+
+            var node = tree.findNodeByText(nodeText);
+            $(node.get_checkBoxElement()).click();
+        });
+    }
+
+    function ClientNodeClicking(sender, eventArgs) {
+        sender.trackChanges();
+        var currentNode = eventArgs.get_node();
+        sender._checkNode(new Event("click"), currentNode);
+        args.set_cancel(true);
     }
 </script>

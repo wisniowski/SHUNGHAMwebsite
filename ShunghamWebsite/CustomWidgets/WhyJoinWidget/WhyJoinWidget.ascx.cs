@@ -11,9 +11,11 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
         public string Content { get; set; }
         public string FirstButtonText { get; set; }
         public Guid FirstButtonLandingPage { get; set; }
+        public string FirstButtonExternalLink { get; set; }
         public string FirstButtonBackground { get; set; }
         public string SecondButtonText { get; set; }
         public Guid SecondButtonLandingPage { get; set; }
+        public string SecondButtonExternalLink { get; set; }
         public string SecondButtonBackground { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -38,7 +40,7 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
             //Add button
             if (!string.IsNullOrEmpty(this.FirstButtonText))
             {
-                HyperLink button = AddButton(this.FirstButtonText, this.FirstButtonLandingPage, this.FirstButtonBackground);
+                HyperLink button = AddButton(this.FirstButtonText, this.FirstButtonLandingPage, this.FirstButtonExternalLink, this.FirstButtonBackground);
 
                 if (button != null)
                 {
@@ -49,7 +51,7 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
             //Add button
             if (!string.IsNullOrEmpty(this.SecondButtonText))
             {
-                HyperLink button = AddButton(this.SecondButtonText, this.SecondButtonLandingPage, this.SecondButtonBackground);
+                HyperLink button = AddButton(this.SecondButtonText, this.SecondButtonLandingPage, this.SecondButtonExternalLink, this.SecondButtonBackground);
 
                 if (button != null)
                 {
@@ -64,7 +66,7 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
         /// <param name="btnText">The button text.</param>
         /// <param name="btnLandingPage">The button landing page.</param>
         /// <param name="btnBackground">The button background color.</param>
-        private HyperLink AddButton(string btnText, Guid btnLandingPage, string btnBackground)
+        private HyperLink AddButton(string btnText, Guid btnLandingPage, string externalLink, string btnBackground)
         {
             HyperLink button = new HyperLink();
 
@@ -77,6 +79,10 @@ namespace SitefinityWebApp.CustomWidgets.WhyJoinWidget
             {
                 var pageNodeUrl = PagesUtilities.GetPageUrlById(btnLandingPage);
                 button.NavigateUrl = pageNodeUrl;
+            }
+            else if (!string.IsNullOrEmpty(externalLink))
+            {
+                button.NavigateUrl = externalLink;
             }
 
             if (!string.IsNullOrEmpty(btnBackground))
