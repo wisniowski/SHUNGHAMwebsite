@@ -229,9 +229,9 @@ head.ready(function () {
                 $('.gallery-a').each(function () { if ($(this).children().size() > 5) { $(this).addClass('slider'); } });
                 $('.list-d.slider, .gallery-a.slider').wrapInner('<div class="inner"></div>');
                 $('.list-c .more').wrapInner('<span class="inner"></span>');
-                $('.list-d.slider > .inner').each(function () { $(this).bxSlider({ pager: true, controls: false, useCSS: false, adaptiveHeight: true, auto: true, pause: 8000 }); });
-                $('.gallery-a.slider > .inner').each(function () { $(this).bxSlider({ pager: false, controls: false, useCSS: false, adaptiveHeight: true, ticker: true, speed: 100000, minSlides: 5, maxSlides: 50 }); });
-                $('.list-c li .more').parents('li').on('click', function () { if ($(this).hasClass('toggle')) { $(this).removeClass('toggle'); } else { $(this).parent().find('li').removeClass('toggle'); $(this).addClass('toggle'); } }).append('<a class="link mobile-only"><span>More</span> <span class="hidden">Less</span></a>');
+                $('.list-d.slider > .inner').each(function () { $(this).bxSlider({ pager: true, controls: false, useCSS: false, adaptiveHeight: true }); });
+                $('.gallery-a.slider > .inner').each(function () { $(this).bxSlider({ pager: false, controls: false, useCSS: false, adaptiveHeight: true, ticker: true, speed: 20000, minSlides: 5, maxSlides: 50 }); });
+                $('.list-c li').on('click', function () { if ($(this).hasClass('toggle')) { $(this).removeClass('toggle'); } else { $(this).parent().find('li').removeClass('toggle'); $(this).addClass('toggle'); } }).append('<a class="link mobile-only"><span>More</span> <span class="hidden">Less</span></a>');
                 $('.list-c a.link').on('click', function () { $(this).children().toggleClass('hidden').parents('li').toggleClass('active'); return false });
                 $('.module-a figure.mobile-only').remove();
                 $('.module-a figure.mobile-hide').removeClass('mobile-hide');

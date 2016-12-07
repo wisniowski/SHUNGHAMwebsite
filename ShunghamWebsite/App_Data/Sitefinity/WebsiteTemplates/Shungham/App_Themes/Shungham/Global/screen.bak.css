@@ -4734,7 +4734,6 @@ svg:not(:root) {
             margin-bottom: 25px;
         }
 
-
         .module-c h1, .module-c h2 {
             font-size: 3em;
         }
@@ -5423,7 +5422,6 @@ svg:not(:root) {
                     width: 50%;
                     padding: 15px 15px 0;
                 }
-				#footer nav > * > ul li:nth-last-child(2) { clear: both; }
 
                 #footer nav > * > ul li:nth-last-child(2) {
                     text-align: right;
@@ -5599,7 +5597,6 @@ svg:not(:root) {
         margin-bottom: 30px;
         padding: 0 0 20px;
     }
-
 
         .header-a:before, #featured h1:before, #featured h2:before, #featured h3:before, #featured h4:before, #featured h5:before, #featured h6:before {
             width: 60px;
